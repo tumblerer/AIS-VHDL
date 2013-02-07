@@ -5,9 +5,10 @@ package Pack is
 
 --  Variable sizes (generics?)
 constant VARS: integer := 1;
-constant ETA_SIZE: integer := 32   	-- Number of bits for Eta values
-constant STATE_SIZE: integer := 32 	-- Number of bits for state values
-constant RATIO_SIZE: integer := 32	-- Number of bits for ratio values
+constant ETA_SIZE: integer := 32;   	-- Number of bits for Eta values
+constant STATE_SIZE: integer := 32; 	-- Number of bits for state values
+constant RATIO_SIZE: integer := 32;		-- Number of bits for ratio values
+constant LPR_SIZE:	integer := 32;
 
 -- Paramaters (again, generics?)
 constant STEPS: integer := 200;
