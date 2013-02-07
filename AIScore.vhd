@@ -6,9 +6,9 @@ use work.Pack.ALL;
 entity AIScore is
     Port ( CLK : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           Initial : in  InitialArray;
-           Eta : in  STD_LOGIC;
-           Result : out  STD_LOGIC);
+           Initial : in  StateArray;
+           Eta : in  etas;
+           Result : out  AisResult);
 end AIScore;
 
 architecture Behavioral of AIScore is
