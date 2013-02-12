@@ -6,7 +6,6 @@ use work.Pack.ALL;
 
 entity LPR is
     Port ( State : in  StateArray;
-           Eta : in  STD_LOGIC_VECTOR (ETA_SIZE downto 0);
            Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0));
 end LPR;
 
