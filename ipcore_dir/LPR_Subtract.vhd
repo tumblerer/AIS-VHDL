@@ -35,6 +35,7 @@
 -- below are supported by Xilinx, Mentor Graphics and Synplicity
 -- synthesis tools. Ensure they are correct for your synthesis tool(s).
 
+-- 12 Cycles
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
