@@ -24,6 +24,8 @@ architecture Behavioral of LPR is
    signal result : std_logic_vector(63 downto 0);
 	
 	--Control Signals
+	signal  write_a : std_logic;
+	signal data_in_a : std_logic_vector(63 downto 0);
 	
 begin
 	-- Xi - Mean
@@ -47,7 +49,7 @@ begin
           a => Sub1Result,
           b => Sub1Result,
           clk => clk,
-          result => Sub1Result
+          result => Mult1Result
         );
 		  
 	-- Sigma^2(Possibly not needed)
@@ -60,20 +62,22 @@ begin
 		  
 	-- (Xi - Mean)^2 / Sigma^2	  
 	DIV1: ENTITY work.LPR_Divide PORT MAP(
-          a => ,
-          b => ,
+          a => Mult1Result,
+          b => Variance,
           clk => clk,
-          result => 
+          result => Div1Result
         );
-	BRAM1: ENTITY work.v PORT MAP(
-			 clka : IN STD_LOGIC;
-			 wea : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-			 addra : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			 dina : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-			 clkb : IN STD_LOGIC;
-			 rstb : IN STD_LOGIC;
-			 addrb : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			 doutb : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+		  
+	--Dual Port BRAM
+	BRAM1: ENTITY work.Dual_Port_BRAM PORT MAP(
+			 clka => clk,
+			 wea => write_a,
+			 addra => addr_a,
+			 dina => data_in_a,
+			 clkb => clk,
+			 rstb => reset,
+			 addrb => addr_b,
+			 doutb => data_out_b
   );
 
 	Control: PROCESS(clk)
@@ -84,9 +88,6 @@ begin
 		
 			elsif activate='1' then
 				
-		
-			a(63 downto 54)<= std_logic_vector(signed(MEAN));
-			b(63 downto 54)<= std_logic_vector(signed(VARIANCE));
 		
 		end
 end Behavioral;
