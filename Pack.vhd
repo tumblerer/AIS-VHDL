@@ -12,6 +12,8 @@ constant LPR_SIZE:	integer := 63;
 
 -- Paramaters (again, generics?)
 constant STEPS: integer := 200;
+constant MEAN: integer := 1;
+constant VARIANCE: integer := 1;
 
 type StateArray is Array (VARS-1 downto 0) of std_logic_vector(STATE_SIZE-1 downto 0);
 type etas is Array (STEPS-1 downto 0) of std_logic_vector(ETA_SIZE-1 downto 0);

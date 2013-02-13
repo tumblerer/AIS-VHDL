@@ -44,9 +44,15 @@ ENTITY floating_point_v5_0 IS
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    operation_nd : IN STD_LOGIC;
+    operation_rfd : OUT STD_LOGIC;
     clk : IN STD_LOGIC;
-    result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    sclr : IN STD_LOGIC;
+    result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+    underflow : OUT STD_LOGIC;
+    overflow : OUT STD_LOGIC;
+    invalid_op : OUT STD_LOGIC;
+    rdy : OUT STD_LOGIC
   );
 END floating_point_v5_0;
 
@@ -56,9 +62,15 @@ COMPONENT wrapped_floating_point_v5_0
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    operation_nd : IN STD_LOGIC;
+    operation_rfd : OUT STD_LOGIC;
     clk : IN STD_LOGIC;
-    result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    sclr : IN STD_LOGIC;
+    result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+    underflow : OUT STD_LOGIC;
+    overflow : OUT STD_LOGIC;
+    invalid_op : OUT STD_LOGIC;
+    rdy : OUT STD_LOGIC
   );
 END COMPONENT;
 
@@ -74,7 +86,7 @@ END COMPONENT;
       c_has_a_negate => 0,
       c_has_a_rfd => 0,
       c_has_aclr => 0,
-      c_has_add => 1,
+      c_has_add => 0,
       c_has_b_nd => 0,
       c_has_b_negate => 0,
       c_has_b_rfd => 0,
@@ -88,17 +100,17 @@ END COMPONENT;
       c_has_flt_to_fix => 0,
       c_has_flt_to_flt => 0,
       c_has_inexact => 0,
-      c_has_invalid_op => 0,
+      c_has_invalid_op => 1,
       c_has_multiply => 0,
-      c_has_operation_nd => 0,
-      c_has_operation_rfd => 0,
-      c_has_overflow => 0,
-      c_has_rdy => 0,
-      c_has_sclr => 0,
+      c_has_operation_nd => 1,
+      c_has_operation_rfd => 1,
+      c_has_overflow => 1,
+      c_has_rdy => 1,
+      c_has_sclr => 1,
       c_has_sqrt => 0,
       c_has_status => 0,
       c_has_subtract => 1,
-      c_has_underflow => 0,
+      c_has_underflow => 1,
       c_latency => 12,
       c_mult_usage => 0,
       c_optimization => 1,
@@ -107,7 +119,7 @@ END COMPONENT;
       c_result_width => 64,
       c_speed => 2,
       c_status_early => 0,
-      c_xdevicefamily => "virtex7"
+      c_xdevicefamily => "artix7"
     );
 -- synthesis translate_on
 BEGIN
@@ -116,9 +128,15 @@ U0 : wrapped_floating_point_v5_0
   PORT MAP (
     a => a,
     b => b,
-    operation => operation,
+    operation_nd => operation_nd,
+    operation_rfd => operation_rfd,
     clk => clk,
-    result => result
+    sclr => sclr,
+    result => result,
+    underflow => underflow,
+    overflow => overflow,
+    invalid_op => invalid_op,
+    rdy => rdy
   );
 -- synthesis translate_on
 

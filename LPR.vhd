@@ -5,11 +5,11 @@ use IEEE.NUMERIC_STD.ALL;
 use work.Pack.ALL;
 
 entity LPR is
-    Port (	clk : in std_logic,
-				reset : in std_logic,
-				activate: in std_logic,
+    Port (	clk : in std_logic;
+				reset : in std_logic;
+				activate: in std_logic;
 				State : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 		  
 end LPR;
@@ -65,10 +65,25 @@ begin
           clk => clk,
           result => 
         );
+	BRAM1: ENTITY work.v PORT MAP(
+			 clka : IN STD_LOGIC;
+			 wea : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+			 addra : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+			 dina : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+			 clkb : IN STD_LOGIC;
+			 rstb : IN STD_LOGIC;
+			 addrb : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+			 doutb : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+  );
 
-	C1: PROCESS()
+	Control: PROCESS(clk)
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
+			if activate ='0' OR reset='1' then
+				-- Sort out counters
+		
+			elsif activate='1' then
+				
 		
 			a(63 downto 54)<= std_logic_vector(signed(MEAN));
 			b(63 downto 54)<= std_logic_vector(signed(VARIANCE));

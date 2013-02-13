@@ -16,14 +16,13 @@ architecture Behavioral of target_density is
 	SIGNAL ce,mode,s_in,s_out	: std_logic;
 begin
 
-LPR1 : ENTITY work.LPR
-	PORT MAP(
-		State => x,
-		Eta 	=>	Eta,
-		Output=> LPROut
-);
+--LPR1 : ENTITY work.LPR
+--	PORT MAP(
+--		State => x,
+--		Eta 	=>	Eta,
+--		Output=> LPROut
+--);
 RNG : ENTITY work.rng_n1024_r32_t5_k32_s1c48_SR
-	GENERIC MAP (K => 32)
 	PORT MAP(
 		CLK => CLK,
 		ce => ce,
