@@ -12,7 +12,7 @@ end target_density;
 architecture Behavioral of target_density is
 
 	SIGNAL LPROut					: std_logic_vector(LPR_SIZE downto 0);
-	SIGNAL rngOut					: std_logic_vector(31 downto 0);
+	SIGNAL rngOut					: std_logic_vector(63 downto 0);
 	SIGNAL ce,mode,s_in,s_out	: std_logic;
 begin
 
@@ -22,7 +22,7 @@ begin
 --		Eta 	=>	Eta,
 --		Output=> LPROut
 --);
-RNG : ENTITY work.rng_n1024_r32_t5_k32_s1c48_SR
+RNG : ENTITY work.rng_n2048_r64_t5_k32_sbfbaac_SR
 	PORT MAP(
 		CLK => CLK,
 		ce => ce,
