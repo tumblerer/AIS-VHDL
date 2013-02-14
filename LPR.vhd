@@ -15,11 +15,38 @@ entity LPR is
 end LPR;
 
 architecture Behavioral of LPR is
+
+component Dual_Port_BRAM IS
+  PORT (
+    clka : IN STD_LOGIC;
+    wea : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    addra : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    dina : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+    clkb : IN STD_LOGIC;
+    rstb : IN STD_LOGIC;
+    addrb : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    doutb : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+  );
+END component;
+
+component rng_n2048_r64_t5_k32_sbfbaac is
+  port(
+    clk:in std_logic;
+    ce:in std_logic;
+    mode:in std_logic;
+    s_in:in std_logic;
+    s_out:out std_logic;
+    rng:out std_logic_vector(63 downto 0)
+  );
+end component;
+
    --Inputs
    signal a : std_logic_vector(63 downto 0) := (others => '0');
    signal b : std_logic_vector(63 downto 0) := (others => '0');
 	
 	signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Div1Result : std_logic_vector(63 downto 0) := (others => '0');
  	--Outputs
    signal result : std_logic_vector(63 downto 0);
 	
@@ -87,8 +114,9 @@ begin
 				-- Sort out counters
 		
 			elsif activate='1' then
-				
-		
-		end
+				--Incr Counters
+			end if;
+			
+		end process Control;
 end Behavioral;
 
