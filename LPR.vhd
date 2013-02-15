@@ -172,7 +172,7 @@ begin
 		State_Machine_clk: PROCESS(clk)
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
-			if reset='1' then
+			if reset='1' or activate ='0' then
 				state<= idle;
 			else
 				state<= nstate;
@@ -188,7 +188,7 @@ begin
 				when idle =>
 					nstate <= running;
 						if flag_first_run ='1' then
-							nstate<= loadrng;
+							nstate<= load_rng;
 							flag_first_run :='0';
 						end if;
 				when load_rng =>

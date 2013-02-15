@@ -94,10 +94,10 @@ BEGIN
 		wait for clka_period*20;
 		
 		addrb(7 downto 0)<= x"0F";
-		wait for clka_period*3;		
+		wait for clka_period;		
 		output <= doutb;
 		addrb(7 downto 0) <= x"FF";
-		wait for clka_period*3;
+		wait for clka_period;
 		output <= doutb;	
       -- insert stimulus here 
 
