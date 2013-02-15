@@ -8,8 +8,9 @@ entity LPR is
     Port (	clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
-				State : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+				xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+				Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0)
 	); 
 		  
 end LPR;
@@ -28,7 +29,7 @@ component Dual_Port_BRAM IS
     doutb : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END component;
-
+ 
 component rng_n2048_r64_t5_k32_sbfbaac is
   port(
     clk:in std_logic;
@@ -49,10 +50,14 @@ end component;
    signal a : std_logic_vector(63 downto 0) := (others => '0');
    signal b : std_logic_vector(63 downto 0) := (others => '0');
 	
+	signal rng: std_logic_vector(63 downto 0);
+	
 	signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Mult1Result,Mult2Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Div1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal CompResult: std_logic_vector (0 downto 0);
+	
  	--Outputs
    signal result : std_logic_vector(63 downto 0);
 	
@@ -61,16 +66,17 @@ end component;
 	signal load_rng_counter : integer range 0 to 2048 :=0;
 	--Control Signals
 	
-	signal  write_a : std_logic;
+	signal  write_a : std_logic_vector(7 DOWNTO 0);
 	signal data_in_a : std_logic_vector(63 downto 0);
+	signal rng_mode, rng_ce : std_logic;
 	signal state,nstate : state_type;
 	
 begin
 	-- Xi - Mean
 	-- 12 cycles
    SUB1: ENTITY work.LPR_Subtract PORT MAP (
-          a => a,
-          b => b,
+          a => xState,
+          b => MEAN,
           clk => clk,
           result => Sub1Result
         );
@@ -87,8 +93,8 @@ begin
 	-- (Xi - Mean)^2
 	-- 9 cycles 
 	MULT1: ENTITY work.LPR_Mult PORT MAP(
-          a => mult1_in,
-          b => mult1_in,
+          a => Sub1Result,
+          b => Sub1Result,
           clk => clk,
           result => Mult1Result
         );
@@ -97,7 +103,7 @@ begin
 	-- 9 cycles
 	MULT2: ENTITY work.LPR_Mult PORT MAP(
           a => Sub1Result,
-          b => Sub1Result,
+          b => Beta_in,
           clk => clk,
           result => Mult2Result
         );
@@ -122,13 +128,13 @@ begin
 	COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
 			clk => clk,
 		   a => Exp1Result,
-			b => rngOut,
+			b => rng,
 			result => CompResult
    );
 
 		  
 	--Dual Port BRAM
-	-- 2 cycle write, 3 cycle read
+	-- 2 cycle write, 2 cycle read
 	BRAM1: ENTITY work.Dual_Port_BRAM PORT MAP(
 			 clka => clk,
 			 wea => write_a,
@@ -151,7 +157,7 @@ begin
   );
   
 	-- Total pipeline 108
-	Control_counter: PROCESS(clk)
+	Control_counter: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
 			if activate ='0' OR reset='1' then
@@ -162,14 +168,14 @@ begin
 					sample_counter <= sample_counter + 1;
 				end if;
 
-				if state = loadrng then
+				if state = load_rng then
 					load_rng_counter <= load_rng_counter + 1 ;
 				end if;
 			end if;
 			
 		end process Control_counter;
 		
-		State_Machine_clk: PROCESS(clk)
+		State_Machine_clk: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
 			if reset='1' or activate ='0' then
