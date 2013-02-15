@@ -44,7 +44,6 @@ ENTITY LPR_Divide IS
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation_nd : IN STD_LOGIC;
     clk : IN STD_LOGIC;
     result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
@@ -56,7 +55,6 @@ COMPONENT wrapped_LPR_Divide
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation_nd : IN STD_LOGIC;
     clk : IN STD_LOGIC;
     result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
@@ -90,7 +88,7 @@ END COMPONENT;
       c_has_inexact => 0,
       c_has_invalid_op => 0,
       c_has_multiply => 0,
-      c_has_operation_nd => 1,
+      c_has_operation_nd => 0,
       c_has_operation_rfd => 0,
       c_has_overflow => 0,
       c_has_rdy => 0,
@@ -116,7 +114,6 @@ U0 : wrapped_LPR_Divide
   PORT MAP (
     a => a,
     b => b,
-    operation_nd => operation_nd,
     clk => clk,
     result => result
   );
