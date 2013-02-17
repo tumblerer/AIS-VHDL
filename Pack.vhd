@@ -16,6 +16,7 @@ constant MEAN: std_logic_vector(63 downto 0) := "001111111111" & "00000000000000
 constant VARIANCE: std_logic_vector(63 downto 0) := "001111111111" & "0000000000000000000000000000000000000000000000000000";
 
 --
+TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(63 DOWNTO 0);
 
 type StateArray is Array (VARS-1 downto 0) of std_logic_vector(STATE_SIZE-1 downto 0);
 type etas is Array (STEPS-1 downto 0) of std_logic_vector(ETA_SIZE-1 downto 0);

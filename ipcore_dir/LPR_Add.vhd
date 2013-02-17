@@ -26,8 +26,8 @@
 --    All rights reserved.                                                    --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- You must compile the wrapper file LPR_Arith.vhd when simulating
--- the core, LPR_Arith. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file LPR_Add.vhd when simulating
+-- the core, LPR_Add. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,30 +40,28 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 LIBRARY XilinxCoreLib;
 -- synthesis translate_on
-ENTITY LPR_Arith IS
+ENTITY LPR_Add IS
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
     clk : IN STD_LOGIC;
     result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
-END LPR_Arith;
+END LPR_Add;
 
-ARCHITECTURE LPR_Arith_a OF LPR_Arith IS
+ARCHITECTURE LPR_Add_a OF LPR_Add IS
 -- synthesis translate_off
-COMPONENT wrapped_LPR_Arith
+COMPONENT wrapped_LPR_Add
   PORT (
     a : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
     b : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
-    operation : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
     clk : IN STD_LOGIC;
     result : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END COMPONENT;
 
 -- Configuration specification
-  FOR ALL : wrapped_LPR_Arith USE ENTITY XilinxCoreLib.floating_point_v5_0(behavioral)
+  FOR ALL : wrapped_LPR_Add USE ENTITY XilinxCoreLib.floating_point_v5_0(behavioral)
     GENERIC MAP (
       c_a_fraction_width => 53,
       c_a_width => 64,
@@ -97,7 +95,7 @@ END COMPONENT;
       c_has_sclr => 0,
       c_has_sqrt => 0,
       c_has_status => 0,
-      c_has_subtract => 1,
+      c_has_subtract => 0,
       c_has_underflow => 0,
       c_latency => 12,
       c_mult_usage => 0,
@@ -112,14 +110,13 @@ END COMPONENT;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_LPR_Arith
+U0 : wrapped_LPR_Add
   PORT MAP (
     a => a,
     b => b,
-    operation => operation,
     clk => clk,
     result => result
   );
 -- synthesis translate_on
 
-END LPR_Arith_a;
+END LPR_Add_a;

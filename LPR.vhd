@@ -43,9 +43,10 @@ end component;
 
 	-- States
 	TYPE state_type is (idle, load_rng, running);
-
+	signal Proposed_Sample : pipeline_type(1 to 120);
+	signal Proposed_LPR : pipeline_type(1 to 50);
 	signal seed:  std_logic_vector(2047 downto 0) :="11111001100110001001100001101110011000101001101010110011001110101110110000111110000000001101101100010101100100000100110000000111100100000010000000001100011110000011001110000100100111111001001100001111010001011001001000011010111000000101011000000011100110010110110110001110000011111011110000100011110011010110010100111010110100010101110001111001110101101011010001100111011110101010011111101111101100011001110000110101000001001101001011111011000010100100001010001010000001010011000011001110101100000111000111101011010111100110010101111011011000010101001000110101000000000111011110101111101111100101011110010111001001100001110111010000011101000010011111100100100001011010101011010011101100010110000001110110100111110111001111010111000001010100000101111010100111101001111001010101011111101101101011100001111011011011100001111011110101010000111011110011010011101001100001010000110101100011001110110111001001001001101100111101010111000100010111010101100011110111101011110110111100010100000100111000101000011111110010010101110110010110110000010010111101011010111010011010000010100011100111110100110001001111011101001101101010011000011010000010010110010100111001101101101001100010111010111011100010110011111010011100110000111010010000010011111101011111100001011001000010001001010100110001001000110001001001101101011101100110111111000011010011011111101000101011100110100101000101010111011011100001110111100011100010000011000110000111111011111000011100111110011110010010110101111101110111110010000001101101101000100011110101001000000000010010000110101111100100110001011001111001111101101101011101101001111000001000100011010010011111011000100100011101000000100010000010011011110100100111001001110000100010110000001010000001011011011111011010001100010101100000000010011101111001011110011000001000001000001001110100001100100111000100110010101010011100000001110010110011111010110110011111010000010100011110101010100011101001101011011111111110101110010001011100011000010000101100000101001010101110101011100010010101001011110101110001111000110100000110101100111101";
-
+	
    --Inputs
     signal a : std_logic_vector(63 downto 0) := (others => '0');
     signal b : std_logic_vector(63 downto 0) := (others => '0');
@@ -60,7 +61,7 @@ end component;
 	signal CompResult: std_logic_vector (0 downto 0);
 	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0);
 	signal Shift_in, Shift_out : std_logic_vector(63 downto 0);
-    signal  
+   signal Proposed_LPR_output : std_logic_vector(63 downto 0);  
     
  	--Outputs
     signal result : std_logic_vector(63 downto 0);
@@ -80,6 +81,7 @@ end component;
 	
 begin
 	-- RNG + Xi
+	-- 12 cycles
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
           b => rng_out_norm,
@@ -99,7 +101,7 @@ begin
 	-- LprNew - LprOld	  
 	-- 12 cycles
 	SUB2: ENTITY work.LPR_Subtract PORT MAP (
-          a => DivResult1,
+          a => Div1Result,
           b => data_out_b,
           clk => clk,
           result => Sub1Result
@@ -134,6 +136,7 @@ begin
         
 	-- Exp ((LprNew-LprOld)*eta)
 	-- Flopoco MSB are error bits
+	-- 27 cycles
 	EXP1: ENTITY work.FPExp_11_52_400 PORT MAP(
 		 clk => clk, 
 		 rst => reset,
@@ -183,7 +186,7 @@ begin
     rng => rng_norm
   );
   
-	-- Total pipeline 108
+	-- Total pipeline 120
 	Control_sync: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
@@ -196,6 +199,15 @@ begin
                 if state = load_rng then
 					load_rng_counter <= load_rng_counter + 1 ;
 				else
+					-- Shifting of proposed value to end of pipeline
+					Shift_out <= Propose_sample(120);
+					Proposed_sample(1 to 119) <= Proposed_sample(2 to 120);
+					Proposed_sample(1) <= Shift_in;
+					-- LPR Value pipeline 
+					Proposed_LPR(1) <= Div1Result;
+					Proposed_LPR(1 to 49) <= Proposed_LPR(2 to 50);	
+					Proposed_LPR_output <= Proposed_LPR(50);
+					
 					if sample_counter < 108 then
 						sample_counter <= sample_counter + 1;
 					end if;
@@ -247,7 +259,7 @@ begin
 				when running =>
 					nstate <= running;
                     if sample_counter > X then
-                        if LPR_old_counter =  then --Must change one before value needed
+                        if LPR_old_counter =  10 then --Must change one before value needed
                             addr_b <= x"00";
                         end if;
                     end if;    
@@ -260,7 +272,7 @@ begin
                             addr_a <= x"00000000";
                             -- Pipe needs to be one step longer to allow for address change
                             data_in_a <= Shift_out;
-							Output <= Shift_out;
+							Output <= Proposed_LPR_output;
 						end if;
 					end if;
 			end case;
