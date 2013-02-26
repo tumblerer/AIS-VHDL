@@ -65,7 +65,7 @@ end component;
     
  	--Outputs
     signal result : std_logic_vector(63 downto 0);
-    signal rng_norm, rng_uni: std_logic_vector(63 downto 0);	
+
     
 	-- Counters
 	signal sample_counter : integer range 0 to 108 := 0;
@@ -76,15 +76,18 @@ end component;
 	signal  write_a : std_logic_vector(7 DOWNTO 0);
 	signal data_in_a,data_out_b : std_logic_vector(63 downto 0);
 	signal addr_a, addr_b : std_logic_vector (31 downto 0);
-	signal rng_mode_uni, rng_ce_uni, rng_mode_norm, rng_ce_norm: std_logic;
+
 	signal state,nstate : state_type;
 	
+	-- RNG Signal
+		signal rng_mode_uni, rng_ce_uni, rng_mode_norm, rng_ce_norm: std_logic;
+		signal rng_norm, rng_uni: std_logic_vector(63 downto 0);	
 begin
 	-- RNG + Xi
 	-- 12 cycles
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
-          b => rng_out_norm,
+          b => rng_norm,
           clk => clk,
           result => Add1Result
         );    
@@ -148,7 +151,7 @@ begin
 	COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
 			clk => clk,
 		    a => Exp1Result,
-			b => rng,
+			b => rng_uni,
 			result => CompResult
    );
 
@@ -195,12 +198,12 @@ begin
 				load_rng_counter <= 0;
 			elsif activate='1' then
                 -- Place output in shift register for use later
-				shift_in <= AddResult1;
-                if state = load_rng then
+				shift_in <= Add1Result;
+            if state = load_rng then
 					load_rng_counter <= load_rng_counter + 1 ;
 				else
 					-- Shifting of proposed value to end of pipeline
-					Shift_out <= Propose_sample(120);
+					Shift_out <= Proposed_sample(120);
 					Proposed_sample(1 to 119) <= Proposed_sample(2 to 120);
 					Proposed_sample(1) <= Shift_in;
 					-- LPR Value pipeline 
@@ -211,7 +214,7 @@ begin
 					if sample_counter < 108 then
 						sample_counter <= sample_counter + 1;
 					end if;
-                    if sample_counter > X then
+                    if sample_counter > 220 then
                         LPR_old_counter <= lpr_old_counter + 1;
                     end if;
                 end if;
@@ -247,20 +250,25 @@ begin
 				when load_rng =>
 					nstate <= load_rng;
 					if load_rng_counter = 1 then
-					   rng_ce <= '1';
-						rng_mode <= '1';
-						s_in <= seed(0);
+					   rng_ce_uni <= '1';
+						rng_ce_norm <= '1';
+						rng_mode_uni <= '1';
+						rng_mode_norm <= '1';
+						s_in_uni <= seed(0);
+						s_in_norm <= seed(0);
 					elsif load_rng_counter = 2048 then
-						rng_mode <= '0';
+						rng_mode_uni <= '0';
+						rng_mode_norm <= '0';
 						nstate<= running;
 					else
-						s_in <= seed(load_rng_counter);
+						s_in_uni <= seed(load_rng_counter);
+						s_in_norm <= seed(load_rng_counter);
 					end if;	
 				when running =>
 					nstate <= running;
-                    if sample_counter > X then
+                    if sample_counter > 220 then
                         if LPR_old_counter =  10 then --Must change one before value needed
-                            addr_b <= x"00";
+                            addr_b <= x"00000000";
                         end if;
                     end if;    
                     --Store sub1Result for a cycle because of memory latency
@@ -268,7 +276,7 @@ begin
 					if sample_counter = 108 then
 						if CompResult = "1" then
 						-- Save to address and forward to next LPR unit
-                            write_a <= '1';
+                            write_a <= x"11";
                             addr_a <= x"00000000";
                             -- Pipe needs to be one step longer to allow for address change
                             data_in_a <= Shift_out;
