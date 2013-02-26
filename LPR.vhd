@@ -86,9 +86,9 @@ end component;
 	
 	-- RNG Signal
 	signal rng_mode_uni, rng_ce_uni, rng_mode_norm, rng_ce_norm: std_logic;
-	signal rng_norm, rng_uni: std_logic_vector(63 downto 0);	
+	signal rng_norm, rng_uni, rng_uni_out: std_logic_vector(63 downto 0);	
 	signal s_in_uni, s_in_norm, s_out_norm, s_out_uni : std_logic;
-	
+	signal rng_norm_out: std_logic_vector(16 downto 0);
 begin
 	-- RNG + Xi
 	-- 12 cycles
@@ -183,17 +183,27 @@ begin
     mode => rng_mode_uni,
     s_in => s_in_uni,
     s_out => s_out_uni,
-    rng => rng_uni
+    rng => rng_uni_out
   );
   
-   -- 2048 cycles to load
- RNG_NORMAL: ENTITY work.rng_n2048_r64_t5_k32_sbfbaac PORT MAP(
+  RNG_UNI_CONV: ENTITY work.RNG_Uni_FixedtoFloat PORT MAP (
+    a => rng_uni_out,
     clk => clk,
-    ce => rng_ce_norm,
-    mode => rng_mode_norm,
-    s_in => s_in_norm,
-    s_out => s_out_norm,
-    rng => rng_norm
+    result => rng_uni
+  );
+  
+ RNG_NORMAL : ENTITY work.grng_pwclt8 PORT MAP(
+  iClk => clk,
+  iCE => rng_ce_norm,
+  iLoadEn => rng_mode_norm,
+  iLoadData => s_in_norm,
+  oRes => rng_norm_out
+); 
+
+RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
+    a => rng_norm_out,
+    clk => clk,
+    result => rng_norm
   );
   
 	-- Total pipeline 120
@@ -246,7 +256,7 @@ begin
 		end process State_machine_clk;	
 		
 		
-		State_machine: PROCESS(state,nstate)
+		State_machine: PROCESS(state,nstate,load_rng_counter,sample_counter)
 		variable flag_first_run: integer range 0 to 1 := 1;
 		
 		begin
@@ -269,7 +279,7 @@ begin
 						rng_mode_norm <= '1';
 						s_in_uni <= seed(0);
 						s_in_norm <= seed(0);
-					elsif load_rng_counter = 2048 then
+					elsif load_rng_counter >= 200 then
 						rng_mode_uni <= '0';
 						rng_mode_norm <= '0';
 						nstate<= running;
