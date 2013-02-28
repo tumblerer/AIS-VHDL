@@ -35,7 +35,6 @@
 -- below are supported by Xilinx, Mentor Graphics and Synplicity
 -- synthesis tools. Ensure they are correct for your synthesis tool(s).
 
--- 12 Cycles
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
@@ -98,15 +97,15 @@ END COMPONENT;
       c_has_status => 0,
       c_has_subtract => 1,
       c_has_underflow => 0,
-      c_latency => 12,
-      c_mult_usage => 0,
+      c_latency => 14,
+      c_mult_usage => 2,
       c_optimization => 1,
       c_rate => 1,
       c_result_fraction_width => 53,
       c_result_width => 64,
       c_speed => 2,
       c_status_early => 0,
-      c_xdevicefamily => "virtex7"
+      c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN

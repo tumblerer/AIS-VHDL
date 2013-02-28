@@ -97,15 +97,15 @@ END COMPONENT;
       c_has_status => 0,
       c_has_subtract => 0,
       c_has_underflow => 0,
-      c_latency => 9,
-      c_mult_usage => 0,
+      c_latency => 16,
+      c_mult_usage => 3,
       c_optimization => 1,
       c_rate => 1,
       c_result_fraction_width => 53,
       c_result_width => 64,
       c_speed => 2,
       c_status_early => 0,
-      c_xdevicefamily => "virtex7"
+      c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN

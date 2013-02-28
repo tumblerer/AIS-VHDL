@@ -1,6 +1,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-
+use work.Pack.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
@@ -60,12 +60,12 @@ BEGIN
       wait for 100 ns;	
 
       wait for clk_period*10;
-      a1(63 downto 54)<= "0010000000";
-		b(63 downto 54)<= "0001000000";
-
+      a1(63 downto 54)<= "0100000000";
+	--	b(63 downto 54)<= "0001000000";
+		b <= MEAN;
 		wait for clk_period;
-		a1(63 downto 54)<= "0001000000";
-		b(63 downto 54)<= "0000100000";
+		a1(63 downto 54)<= "0011111111";
+--		b(63 downto 54)<= "0000100000";
       wait;
    end process;
 

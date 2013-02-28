@@ -103,7 +103,7 @@ END COMPONENT;
       c_result_width => 64,
       c_speed => 2,
       c_status_early => 0,
-      c_xdevicefamily => "artix7"
+      c_xdevicefamily => "virtex6"
     );
 -- synthesis translate_on
 BEGIN

@@ -60,10 +60,13 @@
         wait for 100 ns; -- wait until global set/reset completes
 		reset<= '0';
 			wait for clk_period;
-        activate <= '0';
+        activate <= '1';
 		  xstate (63 downto 52)<= "001111111110";
+		  xstate (51 downto 0) <= (OTHERS=> '0');
 			beta(63 downto 52)<= "001111111111";
-        wait; -- will wait forever
+			beta (51 downto 0) <= (OTHERS=> '0');
+			wait for clk_period*1000;
+        wait; -- will wait forever 
      END PROCESS tb;
   --  End Test Bench 
 
