@@ -14,7 +14,7 @@ end rng_n2048_r64_t5_k32_sbfbaac;
 
 architecture RTL of rng_n2048_r64_t5_k32_sbfbaac is
 --
---component rng_n2048_r64_t5_k32_sbfbaac_SR is
+--component work.rng_n2048_r64_t5_k32_sbfbaac_SR is
 --  generic(K:integer);
 --  port(clk:in std_logic; ce:in std_logic; din:in std_logic; dout:out std_logic);
 --end component;
@@ -154,132 +154,132 @@ begin
       r_out(63)<=(mode and fifo_out(63)) or ((not mode) and ('0' xor fifo_out(1) xor fifo_out(49) xor fifo_out(20) xor fifo_out(63) xor fifo_out(2)));
     end if;
   end process;
- fifo_0 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_0 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(1), dout=>fifo_out(0));
- fifo_1 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_1 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(2), dout=>fifo_out(1));
- fifo_2 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
+ fifo_2 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
     port map(clk=>clk, ce=>ce, din=>r_out(3), dout=>fifo_out(2));
- fifo_3 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_3 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(4), dout=>fifo_out(3));
- fifo_4 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_4 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(5), dout=>fifo_out(4));
- fifo_5 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_5 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(6), dout=>fifo_out(5));
- fifo_6 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_6 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(7), dout=>fifo_out(6));
- fifo_7 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_7 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(8), dout=>fifo_out(7));
- fifo_8 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_8 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(9), dout=>fifo_out(8));
- fifo_9 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_9 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(10), dout=>fifo_out(9));
- fifo_10 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_10 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(11), dout=>fifo_out(10));
- fifo_11 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_11 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(12), dout=>fifo_out(11));
- fifo_12 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_12 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(13), dout=>fifo_out(12));
- fifo_13 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_13 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(14), dout=>fifo_out(13));
- fifo_14 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
+ fifo_14 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
     port map(clk=>clk, ce=>ce, din=>r_out(15), dout=>fifo_out(14));
- fifo_15 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_15 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(16), dout=>fifo_out(15));
- fifo_16 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_16 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(17), dout=>fifo_out(16));
- fifo_17 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
+ fifo_17 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
     port map(clk=>clk, ce=>ce, din=>r_out(18), dout=>fifo_out(17));
- fifo_18 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_18 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(19), dout=>fifo_out(18));
- fifo_19 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_19 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(20), dout=>fifo_out(19));
- fifo_20 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
+ fifo_20 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
     port map(clk=>clk, ce=>ce, din=>r_out(21), dout=>fifo_out(20));
- fifo_21 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_21 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(22), dout=>fifo_out(21));
- fifo_22 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_22 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(23), dout=>fifo_out(22));
- fifo_23 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_23 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(24), dout=>fifo_out(23));
- fifo_24 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_24 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(25), dout=>fifo_out(24));
- fifo_25 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_25 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(26), dout=>fifo_out(25));
- fifo_26 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_26 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(27), dout=>fifo_out(26));
- fifo_27 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_27 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(28), dout=>fifo_out(27));
- fifo_28 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_28 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(29), dout=>fifo_out(28));
- fifo_29 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_29 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(30), dout=>fifo_out(29));
- fifo_30 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_30 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(31), dout=>fifo_out(30));
- fifo_31 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_31 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(32), dout=>fifo_out(31));
- fifo_32 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_32 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(33), dout=>fifo_out(32));
- fifo_33 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_33 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(34), dout=>fifo_out(33));
- fifo_34 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
+ fifo_34 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
     port map(clk=>clk, ce=>ce, din=>r_out(35), dout=>fifo_out(34));
- fifo_35 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_35 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(36), dout=>fifo_out(35));
- fifo_36 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_36 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(37), dout=>fifo_out(36));
- fifo_37 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_37 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(38), dout=>fifo_out(37));
- fifo_38 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
+ fifo_38 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>29)
     port map(clk=>clk, ce=>ce, din=>r_out(39), dout=>fifo_out(38));
- fifo_39 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_39 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(40), dout=>fifo_out(39));
- fifo_40 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_40 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(41), dout=>fifo_out(40));
- fifo_41 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_41 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(42), dout=>fifo_out(41));
- fifo_42 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
+ fifo_42 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>27)
     port map(clk=>clk, ce=>ce, din=>r_out(43), dout=>fifo_out(42));
- fifo_43 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
+ fifo_43 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
     port map(clk=>clk, ce=>ce, din=>r_out(44), dout=>fifo_out(43));
- fifo_44 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_44 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(45), dout=>fifo_out(44));
- fifo_45 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
+ fifo_45 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
     port map(clk=>clk, ce=>ce, din=>r_out(46), dout=>fifo_out(45));
- fifo_46 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_46 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(47), dout=>fifo_out(46));
- fifo_47 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
+ fifo_47 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>31)
     port map(clk=>clk, ce=>ce, din=>r_out(48), dout=>fifo_out(47));
- fifo_48 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_48 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(49), dout=>fifo_out(48));
- fifo_49 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_49 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(50), dout=>fifo_out(49));
- fifo_50 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_50 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(51), dout=>fifo_out(50));
- fifo_51 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_51 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(52), dout=>fifo_out(51));
- fifo_52 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_52 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(53), dout=>fifo_out(52));
- fifo_53 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_53 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(54), dout=>fifo_out(53));
- fifo_54 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
+ fifo_54 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>28)
     port map(clk=>clk, ce=>ce, din=>r_out(55), dout=>fifo_out(54));
- fifo_55 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
+ fifo_55 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>30)
     port map(clk=>clk, ce=>ce, din=>r_out(56), dout=>fifo_out(55));
- fifo_56 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_56 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(57), dout=>fifo_out(56));
- fifo_57 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_57 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(58), dout=>fifo_out(57));
- fifo_58 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_58 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(59), dout=>fifo_out(58));
- fifo_59 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_59 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(60), dout=>fifo_out(59));
- fifo_60 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>26)
+ fifo_60 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>26)
     port map(clk=>clk, ce=>ce, din=>r_out(61), dout=>fifo_out(60));
- fifo_61 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_61 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(62), dout=>fifo_out(61));
- fifo_62 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_62 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(63), dout=>fifo_out(62));
- fifo_63 : entity rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
+ fifo_63 : entity work.rng_n2048_r64_t5_k32_sbfbaac_SR generic map (K=>32)
     port map(clk=>clk, ce=>ce, din=>r_out(0), dout=>fifo_out(63));
 end RTL;

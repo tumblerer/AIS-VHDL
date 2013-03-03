@@ -114,7 +114,7 @@ begin
           a => Div1Result,
           b => data_out_b,
           clk => clk,
-          result => Sub1Result
+          result => Sub2Result
         );
 		  
 	-- (Xi - Mean)^2
@@ -135,9 +135,9 @@ begin
           result => Mult2Result
         );
 		  
-	-- (Xi - Mean)^2 / Sigma^2
-	-- 37 cycles
-	DIV1: ENTITY work.LPR_Divide PORT MAP(
+	-- (Xi - Mean)^2 / 1/(Sigma^2)
+	-- 9 cycles
+	MULT3: ENTITY work.LPR_Mult PORT MAP(
           a => Mult1Result,
           b => Variance,
           clk => clk,
