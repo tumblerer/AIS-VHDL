@@ -1,35 +1,345 @@
 --------------------------------------------------------------------------------
---                               Compressor_2_2
+--                          SmallMultTableP3x3r6XuYu
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
--- Authors: Bogdan Popa, Illyes Kinga, 2012
+-- Authors: Florent de Dinechin (2007-2012)
 --------------------------------------------------------------------------------
--- combinatorial
-
-library ieee;
+library ieee; 
 use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
-use ieee.std_logic_unsigned.all;
-library std;
-use std.textio.all;
+use ieee.numeric_std.all;
 library work;
-
-entity Compressor_2_2 is
-   port ( X0 : in  std_logic_vector(1 downto 0);
-          R : out  std_logic_vector(1 downto 0)   );
+entity SmallMultTableP3x3r6XuYu is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(5 downto 0);
+          Y : out  std_logic_vector(5 downto 0)   );
 end entity;
 
-architecture arch of Compressor_2_2 is
-signal X :  std_logic_vector(1 downto 0);
+architecture arch of SmallMultTableP3x3r6XuYu is
 begin
-   X <=X0 ;
-   with X select R <= 
-      "00" when "00", 
-      "01" when "01", 
-      "01" when "10", 
-      "10" when "11", 
-      "--" when others;
+  with X select  Y <= 
+   "000000" when "000000",
+   "000000" when "000001",
+   "000000" when "000010",
+   "000000" when "000011",
+   "000000" when "000100",
+   "000000" when "000101",
+   "000000" when "000110",
+   "000000" when "000111",
+   "000000" when "001000",
+   "000001" when "001001",
+   "000010" when "001010",
+   "000011" when "001011",
+   "000100" when "001100",
+   "000101" when "001101",
+   "000110" when "001110",
+   "000111" when "001111",
+   "000000" when "010000",
+   "000010" when "010001",
+   "000100" when "010010",
+   "000110" when "010011",
+   "001000" when "010100",
+   "001010" when "010101",
+   "001100" when "010110",
+   "001110" when "010111",
+   "000000" when "011000",
+   "000011" when "011001",
+   "000110" when "011010",
+   "001001" when "011011",
+   "001100" when "011100",
+   "001111" when "011101",
+   "010010" when "011110",
+   "010101" when "011111",
+   "000000" when "100000",
+   "000100" when "100001",
+   "001000" when "100010",
+   "001100" when "100011",
+   "010000" when "100100",
+   "010100" when "100101",
+   "011000" when "100110",
+   "011100" when "100111",
+   "000000" when "101000",
+   "000101" when "101001",
+   "001010" when "101010",
+   "001111" when "101011",
+   "010100" when "101100",
+   "011001" when "101101",
+   "011110" when "101110",
+   "100011" when "101111",
+   "000000" when "110000",
+   "000110" when "110001",
+   "001100" when "110010",
+   "010010" when "110011",
+   "011000" when "110100",
+   "011110" when "110101",
+   "100100" when "110110",
+   "101010" when "110111",
+   "000000" when "111000",
+   "000111" when "111001",
+   "001110" when "111010",
+   "010101" when "111011",
+   "011100" when "111100",
+   "100011" when "111101",
+   "101010" when "111110",
+   "110001" when "111111",
+   "------" when others;
+end architecture;
 
+--------------------------------------------------------------------------------
+--                          SmallMultTableP3x3r6XsYu
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Florent de Dinechin (2007-2012)
+--------------------------------------------------------------------------------
+library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+entity SmallMultTableP3x3r6XsYu is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(5 downto 0);
+          Y : out  std_logic_vector(5 downto 0)   );
+end entity;
+
+architecture arch of SmallMultTableP3x3r6XsYu is
+begin
+  with X select  Y <= 
+   "000000" when "000000",
+   "000000" when "000001",
+   "000000" when "000010",
+   "000000" when "000011",
+   "000000" when "000100",
+   "000000" when "000101",
+   "000000" when "000110",
+   "000000" when "000111",
+   "000000" when "001000",
+   "000001" when "001001",
+   "000010" when "001010",
+   "000011" when "001011",
+   "111100" when "001100",
+   "111101" when "001101",
+   "111110" when "001110",
+   "111111" when "001111",
+   "000000" when "010000",
+   "000010" when "010001",
+   "000100" when "010010",
+   "000110" when "010011",
+   "111000" when "010100",
+   "111010" when "010101",
+   "111100" when "010110",
+   "111110" when "010111",
+   "000000" when "011000",
+   "000011" when "011001",
+   "000110" when "011010",
+   "001001" when "011011",
+   "110100" when "011100",
+   "110111" when "011101",
+   "111010" when "011110",
+   "111101" when "011111",
+   "000000" when "100000",
+   "000100" when "100001",
+   "001000" when "100010",
+   "001100" when "100011",
+   "110000" when "100100",
+   "110100" when "100101",
+   "111000" when "100110",
+   "111100" when "100111",
+   "000000" when "101000",
+   "000101" when "101001",
+   "001010" when "101010",
+   "001111" when "101011",
+   "101100" when "101100",
+   "110001" when "101101",
+   "110110" when "101110",
+   "111011" when "101111",
+   "000000" when "110000",
+   "000110" when "110001",
+   "001100" when "110010",
+   "010010" when "110011",
+   "101000" when "110100",
+   "101110" when "110101",
+   "110100" when "110110",
+   "111010" when "110111",
+   "000000" when "111000",
+   "000111" when "111001",
+   "001110" when "111010",
+   "010101" when "111011",
+   "100100" when "111100",
+   "101011" when "111101",
+   "110010" when "111110",
+   "111001" when "111111",
+   "------" when others;
+end architecture;
+
+--------------------------------------------------------------------------------
+--                          SmallMultTableP3x3r6XuYs
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Florent de Dinechin (2007-2012)
+--------------------------------------------------------------------------------
+library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+entity SmallMultTableP3x3r6XuYs is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(5 downto 0);
+          Y : out  std_logic_vector(5 downto 0)   );
+end entity;
+
+architecture arch of SmallMultTableP3x3r6XuYs is
+begin
+  with X select  Y <= 
+   "000000" when "000000",
+   "000000" when "000001",
+   "000000" when "000010",
+   "000000" when "000011",
+   "000000" when "000100",
+   "000000" when "000101",
+   "000000" when "000110",
+   "000000" when "000111",
+   "000000" when "001000",
+   "000001" when "001001",
+   "000010" when "001010",
+   "000011" when "001011",
+   "000100" when "001100",
+   "000101" when "001101",
+   "000110" when "001110",
+   "000111" when "001111",
+   "000000" when "010000",
+   "000010" when "010001",
+   "000100" when "010010",
+   "000110" when "010011",
+   "001000" when "010100",
+   "001010" when "010101",
+   "001100" when "010110",
+   "001110" when "010111",
+   "000000" when "011000",
+   "000011" when "011001",
+   "000110" when "011010",
+   "001001" when "011011",
+   "001100" when "011100",
+   "001111" when "011101",
+   "010010" when "011110",
+   "010101" when "011111",
+   "000000" when "100000",
+   "111100" when "100001",
+   "111000" when "100010",
+   "110100" when "100011",
+   "110000" when "100100",
+   "101100" when "100101",
+   "101000" when "100110",
+   "100100" when "100111",
+   "000000" when "101000",
+   "111101" when "101001",
+   "111010" when "101010",
+   "110111" when "101011",
+   "110100" when "101100",
+   "110001" when "101101",
+   "101110" when "101110",
+   "101011" when "101111",
+   "000000" when "110000",
+   "111110" when "110001",
+   "111100" when "110010",
+   "111010" when "110011",
+   "111000" when "110100",
+   "110110" when "110101",
+   "110100" when "110110",
+   "110010" when "110111",
+   "000000" when "111000",
+   "111111" when "111001",
+   "111110" when "111010",
+   "111101" when "111011",
+   "111100" when "111100",
+   "111011" when "111101",
+   "111010" when "111110",
+   "111001" when "111111",
+   "------" when others;
+end architecture;
+
+--------------------------------------------------------------------------------
+--                          SmallMultTableP3x3r6XsYs
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Florent de Dinechin (2007-2012)
+--------------------------------------------------------------------------------
+library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+entity SmallMultTableP3x3r6XsYs is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(5 downto 0);
+          Y : out  std_logic_vector(5 downto 0)   );
+end entity;
+
+architecture arch of SmallMultTableP3x3r6XsYs is
+begin
+  with X select  Y <= 
+   "000000" when "000000",
+   "000000" when "000001",
+   "000000" when "000010",
+   "000000" when "000011",
+   "000000" when "000100",
+   "000000" when "000101",
+   "000000" when "000110",
+   "000000" when "000111",
+   "000000" when "001000",
+   "000001" when "001001",
+   "000010" when "001010",
+   "000011" when "001011",
+   "111100" when "001100",
+   "111101" when "001101",
+   "111110" when "001110",
+   "111111" when "001111",
+   "000000" when "010000",
+   "000010" when "010001",
+   "000100" when "010010",
+   "000110" when "010011",
+   "111000" when "010100",
+   "111010" when "010101",
+   "111100" when "010110",
+   "111110" when "010111",
+   "000000" when "011000",
+   "000011" when "011001",
+   "000110" when "011010",
+   "001001" when "011011",
+   "110100" when "011100",
+   "110111" when "011101",
+   "111010" when "011110",
+   "111101" when "011111",
+   "000000" when "100000",
+   "111100" when "100001",
+   "111000" when "100010",
+   "110100" when "100011",
+   "010000" when "100100",
+   "001100" when "100101",
+   "001000" when "100110",
+   "000100" when "100111",
+   "000000" when "101000",
+   "111101" when "101001",
+   "111010" when "101010",
+   "110111" when "101011",
+   "001100" when "101100",
+   "001001" when "101101",
+   "000110" when "101110",
+   "000011" when "101111",
+   "000000" when "110000",
+   "111110" when "110001",
+   "111100" when "110010",
+   "111010" when "110011",
+   "001000" when "110100",
+   "000110" when "110101",
+   "000100" when "110110",
+   "000010" when "110111",
+   "000000" when "111000",
+   "111111" when "111001",
+   "111110" when "111010",
+   "111101" when "111011",
+   "000100" when "111100",
+   "000011" when "111101",
+   "000010" when "111110",
+   "000001" when "111111",
+   "------" when others;
 end architecture;
 
 --------------------------------------------------------------------------------
@@ -71,7 +381,7 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                              Compressor_14_3
+--                               Compressor_2_2
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Popa, Illyes Kinga, 2012
@@ -86,50 +396,21 @@ library std;
 use std.textio.all;
 library work;
 
-entity Compressor_14_3 is
-   port ( X0 : in  std_logic_vector(3 downto 0);
-          X1 : in  std_logic_vector(0 downto 0);
-          R : out  std_logic_vector(2 downto 0)   );
+entity Compressor_2_2 is
+   port ( X0 : in  std_logic_vector(1 downto 0);
+          R : out  std_logic_vector(1 downto 0)   );
 end entity;
 
-architecture arch of Compressor_14_3 is
-signal X :  std_logic_vector(4 downto 0);
+architecture arch of Compressor_2_2 is
+signal X :  std_logic_vector(1 downto 0);
 begin
-   X <=X1 & X0 ;
+   X <=X0 ;
    with X select R <= 
-      "000" when "00000", 
-      "001" when "00001", 
-      "001" when "00010", 
-      "010" when "00011", 
-      "001" when "00100", 
-      "010" when "00101", 
-      "010" when "00110", 
-      "011" when "00111", 
-      "001" when "01000", 
-      "010" when "01001", 
-      "010" when "01010", 
-      "011" when "01011", 
-      "010" when "01100", 
-      "011" when "01101", 
-      "011" when "01110", 
-      "100" when "01111", 
-      "010" when "10000", 
-      "011" when "10001", 
-      "011" when "10010", 
-      "100" when "10011", 
-      "011" when "10100", 
-      "100" when "10101", 
-      "100" when "10110", 
-      "101" when "10111", 
-      "011" when "11000", 
-      "100" when "11001", 
-      "100" when "11010", 
-      "101" when "11011", 
-      "100" when "11100", 
-      "101" when "11101", 
-      "101" when "11110", 
-      "110" when "11111", 
-      "---" when others;
+      "00" when "00", 
+      "01" when "01", 
+      "01" when "10", 
+      "10" when "11", 
+      "--" when others;
 
 end architecture;
 
@@ -197,12 +478,75 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
+--                              Compressor_14_3
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Bogdan Popa, Illyes Kinga, 2012
+--------------------------------------------------------------------------------
+-- combinatorial
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library std;
+use std.textio.all;
+library work;
+
+entity Compressor_14_3 is
+   port ( X0 : in  std_logic_vector(3 downto 0);
+          X1 : in  std_logic_vector(0 downto 0);
+          R : out  std_logic_vector(2 downto 0)   );
+end entity;
+
+architecture arch of Compressor_14_3 is
+signal X :  std_logic_vector(4 downto 0);
+begin
+   X <=X1 & X0 ;
+   with X select R <= 
+      "000" when "00000", 
+      "001" when "00001", 
+      "001" when "00010", 
+      "010" when "00011", 
+      "001" when "00100", 
+      "010" when "00101", 
+      "010" when "00110", 
+      "011" when "00111", 
+      "001" when "01000", 
+      "010" when "01001", 
+      "010" when "01010", 
+      "011" when "01011", 
+      "010" when "01100", 
+      "011" when "01101", 
+      "011" when "01110", 
+      "100" when "01111", 
+      "010" when "10000", 
+      "011" when "10001", 
+      "011" when "10010", 
+      "100" when "10011", 
+      "011" when "10100", 
+      "100" when "10101", 
+      "100" when "10110", 
+      "101" when "10111", 
+      "011" when "11000", 
+      "100" when "11001", 
+      "100" when "11010", 
+      "101" when "11011", 
+      "100" when "11100", 
+      "101" when "11101", 
+      "101" when "11110", 
+      "110" when "11111", 
+      "---" when others;
+
+end architecture;
+
+--------------------------------------------------------------------------------
 --                       LeftShifter_53_by_max_66_uid3
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2011)
 --------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
+-- Pipeline depth: 3 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -221,13 +565,13 @@ end entity;
 
 architecture arch of LeftShifter_53_by_max_66_uid3 is
 signal level0, level0_d1 :  std_logic_vector(52 downto 0);
-signal ps, ps_d1, ps_d2 :  std_logic_vector(6 downto 0);
+signal ps, ps_d1, ps_d2, ps_d3 :  std_logic_vector(6 downto 0);
 signal level1 :  std_logic_vector(53 downto 0);
 signal level2 :  std_logic_vector(55 downto 0);
-signal level3 :  std_logic_vector(59 downto 0);
+signal level3, level3_d1 :  std_logic_vector(59 downto 0);
 signal level4 :  std_logic_vector(67 downto 0);
-signal level5, level5_d1 :  std_logic_vector(83 downto 0);
-signal level6 :  std_logic_vector(115 downto 0);
+signal level5 :  std_logic_vector(83 downto 0);
+signal level6, level6_d1 :  std_logic_vector(115 downto 0);
 signal level7 :  std_logic_vector(179 downto 0);
 begin
    process(clk)
@@ -236,7 +580,9 @@ begin
             level0_d1 <=  level0;
             ps_d1 <=  ps;
             ps_d2 <=  ps_d1;
-            level5_d1 <=  level5;
+            ps_d3 <=  ps_d2;
+            level3_d1 <=  level3;
+            level6_d1 <=  level6;
          end if;
       end process;
    level0<= X;
@@ -245,11 +591,12 @@ begin
    level1<= level0_d1 & (0 downto 0 => '0') when ps_d1(0)= '1' else     (0 downto 0 => '0') & level0_d1;
    level2<= level1 & (1 downto 0 => '0') when ps_d1(1)= '1' else     (1 downto 0 => '0') & level1;
    level3<= level2 & (3 downto 0 => '0') when ps_d1(2)= '1' else     (3 downto 0 => '0') & level2;
-   level4<= level3 & (7 downto 0 => '0') when ps_d1(3)= '1' else     (7 downto 0 => '0') & level3;
-   level5<= level4 & (15 downto 0 => '0') when ps_d1(4)= '1' else     (15 downto 0 => '0') & level4;
    ----------------Synchro barrier, entering cycle 2----------------
-   level6<= level5_d1 & (31 downto 0 => '0') when ps_d2(5)= '1' else     (31 downto 0 => '0') & level5_d1;
-   level7<= level6 & (63 downto 0 => '0') when ps_d2(6)= '1' else     (63 downto 0 => '0') & level6;
+   level4<= level3_d1 & (7 downto 0 => '0') when ps_d2(3)= '1' else     (7 downto 0 => '0') & level3_d1;
+   level5<= level4 & (15 downto 0 => '0') when ps_d2(4)= '1' else     (15 downto 0 => '0') & level4;
+   level6<= level5 & (31 downto 0 => '0') when ps_d2(5)= '1' else     (31 downto 0 => '0') & level5;
+   ----------------Synchro barrier, entering cycle 3----------------
+   level7<= level6_d1 & (63 downto 0 => '0') when ps_d3(6)= '1' else     (63 downto 0 => '0') & level6_d1;
    R <= level7(118 downto 0);
 end architecture;
 
@@ -655,12 +1002,12 @@ end architecture;
 
 --------------------------------------------------------------------------------
 --                           IntAdder_67_f400_uid19
---                    (IntAdderAlternative_67_f400_uid23)
+--                     (IntAdderClassical_67_f400_uid21)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
 --------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
+-- Pipeline depth: 1 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -679,15 +1026,6 @@ entity IntAdder_67_f400_uid19 is
 end entity;
 
 architecture arch of IntAdder_67_f400_uid19 is
-signal s_sum_l0_idx0 :  std_logic_vector(42 downto 0);
-signal s_sum_l0_idx1, s_sum_l0_idx1_d1 :  std_logic_vector(25 downto 0);
-signal sum_l0_idx0, sum_l0_idx0_d1 :  std_logic_vector(41 downto 0);
-signal c_l0_idx0, c_l0_idx0_d1 :  std_logic_vector(0 downto 0);
-signal sum_l0_idx1 :  std_logic_vector(24 downto 0);
-signal c_l0_idx1 :  std_logic_vector(0 downto 0);
-signal s_sum_l1_idx1 :  std_logic_vector(25 downto 0);
-signal sum_l1_idx1 :  std_logic_vector(24 downto 0);
-signal c_l1_idx1 :  std_logic_vector(0 downto 0);
 signal X_d1 :  std_logic_vector(66 downto 0);
 signal Y_d1 :  std_logic_vector(66 downto 0);
 signal Cin_d1 : std_logic;
@@ -695,27 +1033,14 @@ begin
    process(clk)
       begin
          if clk'event and clk = '1' then
-            s_sum_l0_idx1_d1 <=  s_sum_l0_idx1;
-            sum_l0_idx0_d1 <=  sum_l0_idx0;
-            c_l0_idx0_d1 <=  c_l0_idx0;
             X_d1 <=  X;
             Y_d1 <=  Y;
             Cin_d1 <=  Cin;
          end if;
       end process;
    ----------------Synchro barrier, entering cycle 1----------------
-   --Alternative
-   s_sum_l0_idx0 <= ( "0" & X_d1(41 downto 0)) + ( "0" & Y_d1(41 downto 0)) + Cin_d1;
-   s_sum_l0_idx1 <= ( "0" & X_d1(66 downto 42)) + ( "0" & Y_d1(66 downto 42));
-   sum_l0_idx0 <= s_sum_l0_idx0(41 downto 0);
-   c_l0_idx0 <= s_sum_l0_idx0(42 downto 42);
-   sum_l0_idx1 <= s_sum_l0_idx1(24 downto 0);
-   c_l0_idx1 <= s_sum_l0_idx1(25 downto 25);
-   ----------------Synchro barrier, entering cycle 2----------------
-   s_sum_l1_idx1 <=  s_sum_l0_idx1_d1 + c_l0_idx0_d1(0 downto 0);
-   sum_l1_idx1 <= s_sum_l1_idx1(24 downto 0);
-   c_l1_idx1 <= s_sum_l1_idx1(25 downto 25);
-   R <= sum_l1_idx1(24 downto 0) & sum_l0_idx0_d1(41 downto 0);
+   --Classical
+    R <= X_d1 + Y_d1 + Cin_d1;
 end architecture;
 
 --------------------------------------------------------------------------------
@@ -724,7 +1049,7 @@ end architecture;
 -- All rights reserved 
 -- Authors: 
 --------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
+-- Pipeline depth: 1 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -792,25 +1117,25 @@ begin
                  X => d1,
                  Y => pp1);
    addOp0 <= (66 downto 62 => '0') & pp0;
-   Result_Adder: IntAdder_67_f400_uid19  -- pipelineDepth=2 maxInDelay=3.8338e-09
+   Result_Adder: IntAdder_67_f400_uid19  -- pipelineDepth=1 maxInDelay=4.008e-09
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '0',
                  R => OutRes,
                  X => addOp0,
                  Y => pp1);
-   ----------------Synchro barrier, entering cycle 2----------------
+   ----------------Synchro barrier, entering cycle 1----------------
    R <= OutRes(66 downto 0);
 end architecture;
 
 --------------------------------------------------------------------------------
---                           IntAdder_56_f484_uid27
---                     (IntAdderClassical_56_f484_uid29)
+--                           IntAdder_56_f441_uid27
+--                    (IntAdderAlternative_56_f441_uid31)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
 --------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
+-- Pipeline depth: 0 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -820,7 +1145,7 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_56_f484_uid27 is
+entity IntAdder_56_f441_uid27 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(55 downto 0);
           Y : in  std_logic_vector(55 downto 0);
@@ -828,44 +1153,15 @@ entity IntAdder_56_f484_uid27 is
           R : out  std_logic_vector(55 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_56_f484_uid27 is
-signal x0 :  std_logic_vector(17 downto 0);
-signal y0 :  std_logic_vector(17 downto 0);
-signal x1, x1_d1 :  std_logic_vector(22 downto 0);
-signal y1, y1_d1 :  std_logic_vector(22 downto 0);
-signal x2, x2_d1, x2_d2 :  std_logic_vector(14 downto 0);
-signal y2, y2_d1, y2_d2 :  std_logic_vector(14 downto 0);
-signal sum0, sum0_d1, sum0_d2 :  std_logic_vector(18 downto 0);
-signal sum1, sum1_d1 :  std_logic_vector(23 downto 0);
-signal sum2 :  std_logic_vector(15 downto 0);
+architecture arch of IntAdder_56_f441_uid27 is
 begin
    process(clk)
       begin
          if clk'event and clk = '1' then
-            x1_d1 <=  x1;
-            y1_d1 <=  y1;
-            x2_d1 <=  x2;
-            x2_d2 <=  x2_d1;
-            y2_d1 <=  y2;
-            y2_d2 <=  y2_d1;
-            sum0_d1 <=  sum0;
-            sum0_d2 <=  sum0_d1;
-            sum1_d1 <=  sum1;
          end if;
       end process;
-   --Classical
-   x0 <= X(17 downto 0);
-   y0 <= Y(17 downto 0);
-   x1 <= X(40 downto 18);
-   y1 <= Y(40 downto 18);
-   x2 <= X(55 downto 41);
-   y2 <= Y(55 downto 41);
-   sum0 <= ( "0" & x0) + ( "0" & y0)  + Cin;
-   ----------------Synchro barrier, entering cycle 1----------------
-   sum1 <= ( "0" & x1_d1) + ( "0" & y1_d1)  + sum0_d1(18);
-   ----------------Synchro barrier, entering cycle 2----------------
-   sum2 <= ( "0" & x2_d2) + ( "0" & y2_d2)  + sum1_d1(23);
-   R <= sum2(14 downto 0) & sum1_d1(22 downto 0) & sum0_d2(17 downto 0);
+   --Alternative
+    R <= X + Y + Cin;
 end architecture;
 
 --------------------------------------------------------------------------------
@@ -1971,8 +2267,8 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                           IntAdder_28_f400_uid54
---                     (IntAdderClassical_28_f400_uid56)
+--                           IntAdder_32_f400_uid79
+--                     (IntAdderClassical_32_f400_uid81)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -1987,15 +2283,15 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_28_f400_uid54 is
+entity IntAdder_32_f400_uid79 is
    port ( clk, rst : in std_logic;
-          X : in  std_logic_vector(27 downto 0);
-          Y : in  std_logic_vector(27 downto 0);
+          X : in  std_logic_vector(31 downto 0);
+          Y : in  std_logic_vector(31 downto 0);
           Cin : in std_logic;
-          R : out  std_logic_vector(27 downto 0)   );
+          R : out  std_logic_vector(31 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_28_f400_uid54 is
+architecture arch of IntAdder_32_f400_uid79 is
 begin
    process(clk)
       begin
@@ -2030,116 +2326,229 @@ entity IntMultiplier_UsingDSP_25_26_26_signed_uid41 is
 end entity;
 
 architecture arch of IntMultiplier_UsingDSP_25_26_26_signed_uid41 is
-   component IntAdder_28_f400_uid54 is
+   component Compressor_3_2 is
+      port ( X0 : in  std_logic_vector(2 downto 0);
+             R : out  std_logic_vector(1 downto 0)   );
+   end component;
+
+   component IntAdder_32_f400_uid79 is
       port ( clk, rst : in std_logic;
-             X : in  std_logic_vector(27 downto 0);
-             Y : in  std_logic_vector(27 downto 0);
+             X : in  std_logic_vector(31 downto 0);
+             Y : in  std_logic_vector(31 downto 0);
              Cin : in std_logic;
-             R : out  std_logic_vector(27 downto 0)   );
+             R : out  std_logic_vector(31 downto 0)   );
+   end component;
+
+   component SmallMultTableP3x3r6XuYs is
+      port ( clk, rst : in std_logic;
+             X : in  std_logic_vector(5 downto 0);
+             Y : out  std_logic_vector(5 downto 0)   );
+   end component;
+
+   component SmallMultTableP3x3r6XuYu is
+      port ( clk, rst : in std_logic;
+             X : in  std_logic_vector(5 downto 0);
+             Y : out  std_logic_vector(5 downto 0)   );
    end component;
 
 signal XX_m42 :  std_logic_vector(25 downto 0);
 signal YY_m42 :  std_logic_vector(24 downto 0);
-signal DSP_bh43_ch0_0 :  std_logic_vector(42 downto 0);
-signal heap_bh43_w31_0, heap_bh43_w31_0_d1, heap_bh43_w31_0_d2 : std_logic;
-signal heap_bh43_w30_0 : std_logic;
-signal heap_bh43_w29_0 : std_logic;
-signal heap_bh43_w28_0 : std_logic;
-signal heap_bh43_w27_0 : std_logic;
-signal heap_bh43_w26_0 : std_logic;
-signal heap_bh43_w25_0 : std_logic;
-signal heap_bh43_w24_0 : std_logic;
-signal heap_bh43_w23_0 : std_logic;
-signal heap_bh43_w22_0 : std_logic;
-signal heap_bh43_w21_0 : std_logic;
-signal heap_bh43_w20_0 : std_logic;
-signal heap_bh43_w19_0 : std_logic;
-signal heap_bh43_w18_0 : std_logic;
-signal heap_bh43_w17_0 : std_logic;
-signal heap_bh43_w16_0 : std_logic;
-signal heap_bh43_w15_0 : std_logic;
-signal heap_bh43_w14_0 : std_logic;
-signal heap_bh43_w13_0 : std_logic;
-signal heap_bh43_w12_0 : std_logic;
-signal heap_bh43_w11_0 : std_logic;
-signal heap_bh43_w10_0 : std_logic;
-signal heap_bh43_w9_0 : std_logic;
-signal heap_bh43_w8_0 : std_logic;
-signal heap_bh43_w7_0 : std_logic;
-signal heap_bh43_w6_0 : std_logic;
-signal heap_bh43_w5_0 : std_logic;
-signal heap_bh43_w4_0 : std_logic;
-signal heap_bh43_w3_0 : std_logic;
-signal heap_bh43_w2_0 : std_logic;
-signal heap_bh43_w1_0 : std_logic;
+signal Xp_m42b44 :  std_logic_vector(2 downto 0);
+signal Yp_m42b44 :  std_logic_vector(8 downto 0);
+signal x_m42b44_0 :  std_logic_vector(2 downto 0);
+signal y_m42b44_0 :  std_logic_vector(2 downto 0);
+signal y_m42b44_1 :  std_logic_vector(2 downto 0);
+signal y_m42b44_2 :  std_logic_vector(2 downto 0);
+signal Y0X0_44_m42 :  std_logic_vector(5 downto 0);
+signal PP44X0Y0_m42 :  std_logic_vector(5 downto 0);
 signal heap_bh43_w0_0 : std_logic;
-signal DSP_bh43_ch1_0 :  std_logic_vector(42 downto 0);
-signal heap_bh43_w14_1 : std_logic;
-signal heap_bh43_w13_1 : std_logic;
-signal heap_bh43_w12_1 : std_logic;
-signal heap_bh43_w11_1 : std_logic;
-signal heap_bh43_w10_1 : std_logic;
-signal heap_bh43_w9_1 : std_logic;
-signal heap_bh43_w8_1 : std_logic;
-signal heap_bh43_w7_1 : std_logic;
-signal heap_bh43_w6_1 : std_logic;
-signal heap_bh43_w5_1 : std_logic;
-signal heap_bh43_w4_1 : std_logic;
-signal heap_bh43_w3_1 : std_logic;
-signal heap_bh43_w2_1 : std_logic;
-signal heap_bh43_w1_1 : std_logic;
+signal heap_bh43_w1_0 : std_logic;
+signal Y1X0_44_m42 :  std_logic_vector(5 downto 0);
+signal PP44X0Y1_m42 :  std_logic_vector(5 downto 0);
 signal heap_bh43_w0_1 : std_logic;
-signal heap_bh43_w5_2 : std_logic;
-signal heap_bh43_w14_2 : std_logic;
-signal heap_bh43_w15_1 : std_logic;
-signal heap_bh43_w16_1 : std_logic;
-signal heap_bh43_w17_1 : std_logic;
-signal heap_bh43_w18_1 : std_logic;
-signal heap_bh43_w19_1 : std_logic;
-signal heap_bh43_w20_1 : std_logic;
-signal heap_bh43_w21_1 : std_logic;
-signal heap_bh43_w22_1 : std_logic;
-signal heap_bh43_w23_1 : std_logic;
-signal heap_bh43_w24_1 : std_logic;
-signal heap_bh43_w25_1 : std_logic;
-signal heap_bh43_w26_1 : std_logic;
-signal heap_bh43_w27_1 : std_logic;
-signal heap_bh43_w28_1 : std_logic;
-signal heap_bh43_w29_1 : std_logic;
-signal heap_bh43_w30_1 : std_logic;
-signal inAdder0_bh43_0, inAdder0_bh43_0_d1 :  std_logic_vector(5 downto 0);
-signal inAdder1_bh43_0, inAdder1_bh43_0_d1 :  std_logic_vector(5 downto 0);
-signal cin_bh43_0, cin_bh43_0_d1 : std_logic;
-signal outAdder_bh43_0 :  std_logic_vector(5 downto 0);
-signal heap_bh43_w0_2 : std_logic;
-signal heap_bh43_w1_2 : std_logic;
-signal heap_bh43_w2_2 : std_logic;
-signal heap_bh43_w3_2 : std_logic;
-signal heap_bh43_w4_2 : std_logic;
-signal heap_bh43_w5_3, heap_bh43_w5_3_d1 : std_logic;
-signal tempR_bh43_0, tempR_bh43_0_d1 :  std_logic_vector(4 downto 0);
-signal inAdder0_bh43_1, inAdder0_bh43_1_d1 :  std_logic_vector(9 downto 0);
-signal inAdder1_bh43_1, inAdder1_bh43_1_d1 :  std_logic_vector(9 downto 0);
-signal cin_bh43_1, cin_bh43_1_d1 : std_logic;
-signal outAdder_bh43_1 :  std_logic_vector(9 downto 0);
-signal heap_bh43_w5_4, heap_bh43_w5_4_d1 : std_logic;
-signal heap_bh43_w6_2, heap_bh43_w6_2_d1 : std_logic;
+signal heap_bh43_w1_1 : std_logic;
+signal heap_bh43_w2_0 : std_logic;
+signal heap_bh43_w3_0 : std_logic;
+signal heap_bh43_w4_0 : std_logic;
+signal Y2X0_44_m42 :  std_logic_vector(5 downto 0);
+signal PP44X0Y2_m42 :  std_logic_vector(5 downto 0);
+signal heap_bh43_w3_1 : std_logic;
+signal heap_bh43_w4_1 : std_logic;
+signal heap_bh43_w5_0 : std_logic;
+signal heap_bh43_w6_0 : std_logic;
+signal heap_bh43_w7_0 : std_logic;
+signal DSP_bh43_ch0_0 :  std_logic_vector(42 downto 0);
+signal heap_bh43_w31_0, heap_bh43_w31_0_d1 : std_logic;
+signal heap_bh43_w30_0, heap_bh43_w30_0_d1 : std_logic;
+signal heap_bh43_w29_0, heap_bh43_w29_0_d1 : std_logic;
+signal heap_bh43_w28_0, heap_bh43_w28_0_d1 : std_logic;
+signal heap_bh43_w27_0, heap_bh43_w27_0_d1 : std_logic;
+signal heap_bh43_w26_0, heap_bh43_w26_0_d1 : std_logic;
+signal heap_bh43_w25_0, heap_bh43_w25_0_d1 : std_logic;
+signal heap_bh43_w24_0, heap_bh43_w24_0_d1 : std_logic;
+signal heap_bh43_w23_0, heap_bh43_w23_0_d1 : std_logic;
+signal heap_bh43_w22_0, heap_bh43_w22_0_d1 : std_logic;
+signal heap_bh43_w21_0, heap_bh43_w21_0_d1 : std_logic;
+signal heap_bh43_w20_0, heap_bh43_w20_0_d1 : std_logic;
+signal heap_bh43_w19_0, heap_bh43_w19_0_d1 : std_logic;
+signal heap_bh43_w18_0, heap_bh43_w18_0_d1 : std_logic;
+signal heap_bh43_w17_0, heap_bh43_w17_0_d1 : std_logic;
+signal heap_bh43_w16_0, heap_bh43_w16_0_d1 : std_logic;
+signal heap_bh43_w15_0, heap_bh43_w15_0_d1 : std_logic;
+signal heap_bh43_w14_0, heap_bh43_w14_0_d1 : std_logic;
+signal heap_bh43_w13_0, heap_bh43_w13_0_d1 : std_logic;
+signal heap_bh43_w12_0, heap_bh43_w12_0_d1 : std_logic;
+signal heap_bh43_w11_0, heap_bh43_w11_0_d1 : std_logic;
+signal heap_bh43_w10_0, heap_bh43_w10_0_d1 : std_logic;
+signal heap_bh43_w9_0, heap_bh43_w9_0_d1 : std_logic;
+signal heap_bh43_w8_0, heap_bh43_w8_0_d1 : std_logic;
+signal heap_bh43_w7_1, heap_bh43_w7_1_d1 : std_logic;
+signal heap_bh43_w6_1, heap_bh43_w6_1_d1 : std_logic;
+signal heap_bh43_w5_1, heap_bh43_w5_1_d1 : std_logic;
+signal heap_bh43_w4_2, heap_bh43_w4_2_d1 : std_logic;
+signal heap_bh43_w3_2, heap_bh43_w3_2_d1 : std_logic;
+signal heap_bh43_w2_1, heap_bh43_w2_1_d1 : std_logic;
+signal heap_bh43_w1_2, heap_bh43_w1_2_d1 : std_logic;
+signal heap_bh43_w0_2, heap_bh43_w0_2_d1 : std_logic;
+signal DSP_bh43_ch1_0 :  std_logic_vector(42 downto 0);
+signal heap_bh43_w17_1, heap_bh43_w17_1_d1 : std_logic;
+signal heap_bh43_w16_1, heap_bh43_w16_1_d1 : std_logic;
+signal heap_bh43_w15_1, heap_bh43_w15_1_d1 : std_logic;
+signal heap_bh43_w14_1, heap_bh43_w14_1_d1 : std_logic;
+signal heap_bh43_w13_1, heap_bh43_w13_1_d1 : std_logic;
+signal heap_bh43_w12_1, heap_bh43_w12_1_d1 : std_logic;
+signal heap_bh43_w11_1, heap_bh43_w11_1_d1 : std_logic;
+signal heap_bh43_w10_1, heap_bh43_w10_1_d1 : std_logic;
+signal heap_bh43_w9_1, heap_bh43_w9_1_d1 : std_logic;
+signal heap_bh43_w8_1, heap_bh43_w8_1_d1 : std_logic;
 signal heap_bh43_w7_2, heap_bh43_w7_2_d1 : std_logic;
-signal heap_bh43_w8_2, heap_bh43_w8_2_d1 : std_logic;
-signal heap_bh43_w9_2, heap_bh43_w9_2_d1 : std_logic;
-signal heap_bh43_w10_2, heap_bh43_w10_2_d1 : std_logic;
-signal heap_bh43_w11_2, heap_bh43_w11_2_d1 : std_logic;
-signal heap_bh43_w12_2, heap_bh43_w12_2_d1 : std_logic;
-signal heap_bh43_w13_2, heap_bh43_w13_2_d1 : std_logic;
-signal heap_bh43_w14_3, heap_bh43_w14_3_d1 : std_logic;
-signal inAdder0_bh43_2, inAdder0_bh43_2_d1 :  std_logic_vector(17 downto 0);
-signal inAdder1_bh43_2, inAdder1_bh43_2_d1 :  std_logic_vector(17 downto 0);
-signal cin_bh43_2, cin_bh43_2_d1 : std_logic;
-signal outAdder_bh43_2 :  std_logic_vector(17 downto 0);
+signal heap_bh43_w6_2, heap_bh43_w6_2_d1 : std_logic;
+signal heap_bh43_w5_2, heap_bh43_w5_2_d1 : std_logic;
+signal heap_bh43_w4_3, heap_bh43_w4_3_d1 : std_logic;
+signal heap_bh43_w3_3, heap_bh43_w3_3_d1 : std_logic;
+signal heap_bh43_w2_2, heap_bh43_w2_2_d1 : std_logic;
+signal heap_bh43_w1_3, heap_bh43_w1_3_d1 : std_logic;
+signal heap_bh43_w0_3, heap_bh43_w0_3_d1 : std_logic;
+signal heap_bh43_w5_3 : std_logic;
+signal heap_bh43_w7_3 : std_logic;
+signal heap_bh43_w8_2 : std_logic;
+signal heap_bh43_w9_2 : std_logic;
+signal heap_bh43_w10_2 : std_logic;
+signal heap_bh43_w11_2 : std_logic;
+signal heap_bh43_w12_2 : std_logic;
+signal heap_bh43_w13_2 : std_logic;
+signal heap_bh43_w14_2 : std_logic;
+signal heap_bh43_w15_2 : std_logic;
+signal heap_bh43_w16_2 : std_logic;
+signal heap_bh43_w18_1, heap_bh43_w18_1_d1 : std_logic;
+signal heap_bh43_w19_1, heap_bh43_w19_1_d1 : std_logic;
+signal heap_bh43_w20_1, heap_bh43_w20_1_d1 : std_logic;
+signal heap_bh43_w21_1, heap_bh43_w21_1_d1 : std_logic;
+signal heap_bh43_w22_1, heap_bh43_w22_1_d1 : std_logic;
+signal heap_bh43_w23_1, heap_bh43_w23_1_d1 : std_logic;
+signal heap_bh43_w24_1, heap_bh43_w24_1_d1 : std_logic;
+signal heap_bh43_w25_1, heap_bh43_w25_1_d1 : std_logic;
+signal heap_bh43_w26_1, heap_bh43_w26_1_d1 : std_logic;
+signal heap_bh43_w27_1, heap_bh43_w27_1_d1 : std_logic;
+signal heap_bh43_w28_1, heap_bh43_w28_1_d1 : std_logic;
+signal heap_bh43_w29_1, heap_bh43_w29_1_d1 : std_logic;
+signal heap_bh43_w30_1, heap_bh43_w30_1_d1 : std_logic;
+signal heap_bh43_w31_1, heap_bh43_w31_1_d1 : std_logic;
+signal inAdder0_bh43_0, inAdder0_bh43_0_d1 :  std_logic_vector(17 downto 0);
+signal inAdder1_bh43_0, inAdder1_bh43_0_d1 :  std_logic_vector(17 downto 0);
+signal cin_bh43_0, cin_bh43_0_d1 : std_logic;
+signal outAdder_bh43_0 :  std_logic_vector(17 downto 0);
+signal heap_bh43_w0_4 : std_logic;
+signal heap_bh43_w1_4 : std_logic;
+signal heap_bh43_w2_3 : std_logic;
+signal heap_bh43_w3_4 : std_logic;
+signal heap_bh43_w4_4 : std_logic;
+signal heap_bh43_w5_4 : std_logic;
+signal heap_bh43_w6_3 : std_logic;
+signal heap_bh43_w7_4 : std_logic;
+signal heap_bh43_w8_3 : std_logic;
+signal heap_bh43_w9_3 : std_logic;
+signal heap_bh43_w10_3 : std_logic;
+signal heap_bh43_w11_3 : std_logic;
+signal heap_bh43_w12_3 : std_logic;
+signal heap_bh43_w13_3 : std_logic;
+signal heap_bh43_w14_3 : std_logic;
+signal heap_bh43_w15_3 : std_logic;
+signal heap_bh43_w16_3 : std_logic;
+signal heap_bh43_w17_2 : std_logic;
+signal CompressorIn_bh43_0_0 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_0_0 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w0_5 : std_logic;
+signal heap_bh43_w1_5, heap_bh43_w1_5_d1 : std_logic;
+signal CompressorIn_bh43_1_1 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_1_1 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w1_6, heap_bh43_w1_6_d1 : std_logic;
+signal heap_bh43_w2_4, heap_bh43_w2_4_d1 : std_logic;
+signal CompressorIn_bh43_2_2 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_2_2 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w2_5, heap_bh43_w2_5_d1 : std_logic;
+signal heap_bh43_w3_5, heap_bh43_w3_5_d1 : std_logic;
+signal CompressorIn_bh43_3_3 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_3_3 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w3_6, heap_bh43_w3_6_d1 : std_logic;
+signal heap_bh43_w4_5, heap_bh43_w4_5_d1 : std_logic;
+signal CompressorIn_bh43_4_4 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_4_4 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w4_6, heap_bh43_w4_6_d1 : std_logic;
+signal heap_bh43_w5_5, heap_bh43_w5_5_d1 : std_logic;
+signal CompressorIn_bh43_5_5 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_5_5 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w5_6, heap_bh43_w5_6_d1 : std_logic;
+signal heap_bh43_w6_4, heap_bh43_w6_4_d1 : std_logic;
+signal CompressorIn_bh43_6_6 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_6_6 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w6_5, heap_bh43_w6_5_d1 : std_logic;
+signal heap_bh43_w7_5, heap_bh43_w7_5_d1 : std_logic;
+signal CompressorIn_bh43_7_7 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_7_7 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w7_6, heap_bh43_w7_6_d1 : std_logic;
+signal heap_bh43_w8_4, heap_bh43_w8_4_d1 : std_logic;
+signal CompressorIn_bh43_8_8 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_8_8 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w8_5, heap_bh43_w8_5_d1 : std_logic;
+signal heap_bh43_w9_4, heap_bh43_w9_4_d1 : std_logic;
+signal CompressorIn_bh43_9_9 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_9_9 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w9_5, heap_bh43_w9_5_d1 : std_logic;
+signal heap_bh43_w10_4, heap_bh43_w10_4_d1 : std_logic;
+signal CompressorIn_bh43_10_10 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_10_10 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w10_5, heap_bh43_w10_5_d1 : std_logic;
+signal heap_bh43_w11_4, heap_bh43_w11_4_d1 : std_logic;
+signal CompressorIn_bh43_11_11 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_11_11 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w11_5, heap_bh43_w11_5_d1 : std_logic;
+signal heap_bh43_w12_4, heap_bh43_w12_4_d1 : std_logic;
+signal CompressorIn_bh43_12_12 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_12_12 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w12_5, heap_bh43_w12_5_d1 : std_logic;
+signal heap_bh43_w13_4, heap_bh43_w13_4_d1 : std_logic;
+signal CompressorIn_bh43_13_13 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_13_13 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w13_5, heap_bh43_w13_5_d1 : std_logic;
 signal heap_bh43_w14_4, heap_bh43_w14_4_d1 : std_logic;
-signal heap_bh43_w15_2, heap_bh43_w15_2_d1 : std_logic;
-signal heap_bh43_w16_2, heap_bh43_w16_2_d1 : std_logic;
-signal heap_bh43_w17_2, heap_bh43_w17_2_d1 : std_logic;
+signal CompressorIn_bh43_14_14 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_14_14 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w14_5, heap_bh43_w14_5_d1 : std_logic;
+signal heap_bh43_w15_4, heap_bh43_w15_4_d1 : std_logic;
+signal CompressorIn_bh43_15_15 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_15_15 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w15_5, heap_bh43_w15_5_d1 : std_logic;
+signal heap_bh43_w16_4, heap_bh43_w16_4_d1 : std_logic;
+signal CompressorIn_bh43_16_16 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh43_16_16 :  std_logic_vector(1 downto 0);
+signal heap_bh43_w16_5, heap_bh43_w16_5_d1 : std_logic;
+signal heap_bh43_w17_3, heap_bh43_w17_3_d1 : std_logic;
+signal inAdder0_bh43_1 :  std_logic_vector(15 downto 0);
+signal inAdder1_bh43_1 :  std_logic_vector(15 downto 0);
+signal cin_bh43_1 : std_logic;
+signal outAdder_bh43_1 :  std_logic_vector(15 downto 0);
+signal heap_bh43_w17_4, heap_bh43_w17_4_d1 : std_logic;
 signal heap_bh43_w18_2, heap_bh43_w18_2_d1 : std_logic;
 signal heap_bh43_w19_2, heap_bh43_w19_2_d1 : std_logic;
 signal heap_bh43_w20_2, heap_bh43_w20_2_d1 : std_logic;
@@ -2153,43 +2562,118 @@ signal heap_bh43_w27_2, heap_bh43_w27_2_d1 : std_logic;
 signal heap_bh43_w28_2, heap_bh43_w28_2_d1 : std_logic;
 signal heap_bh43_w29_2, heap_bh43_w29_2_d1 : std_logic;
 signal heap_bh43_w30_2, heap_bh43_w30_2_d1 : std_logic;
-signal heap_bh43_w31_1, heap_bh43_w31_1_d1 : std_logic;
-signal finalAdderIn0_bh43 :  std_logic_vector(27 downto 0);
-signal finalAdderIn1_bh43 :  std_logic_vector(27 downto 0);
+signal heap_bh43_w31_2, heap_bh43_w31_2_d1 : std_logic;
+signal tempR_bh43_0, tempR_bh43_0_d1 : std_logic;
+signal finalAdderIn0_bh43 :  std_logic_vector(31 downto 0);
+signal finalAdderIn1_bh43 :  std_logic_vector(31 downto 0);
 signal finalAdderCin_bh43 : std_logic;
-signal finalAdderOut_bh43 :  std_logic_vector(27 downto 0);
+signal finalAdderOut_bh43 :  std_logic_vector(31 downto 0);
 signal CompressionResult43 :  std_logic_vector(32 downto 0);
 begin
    process(clk)
       begin
          if clk'event and clk = '1' then
             heap_bh43_w31_0_d1 <=  heap_bh43_w31_0;
-            heap_bh43_w31_0_d2 <=  heap_bh43_w31_0_d1;
+            heap_bh43_w30_0_d1 <=  heap_bh43_w30_0;
+            heap_bh43_w29_0_d1 <=  heap_bh43_w29_0;
+            heap_bh43_w28_0_d1 <=  heap_bh43_w28_0;
+            heap_bh43_w27_0_d1 <=  heap_bh43_w27_0;
+            heap_bh43_w26_0_d1 <=  heap_bh43_w26_0;
+            heap_bh43_w25_0_d1 <=  heap_bh43_w25_0;
+            heap_bh43_w24_0_d1 <=  heap_bh43_w24_0;
+            heap_bh43_w23_0_d1 <=  heap_bh43_w23_0;
+            heap_bh43_w22_0_d1 <=  heap_bh43_w22_0;
+            heap_bh43_w21_0_d1 <=  heap_bh43_w21_0;
+            heap_bh43_w20_0_d1 <=  heap_bh43_w20_0;
+            heap_bh43_w19_0_d1 <=  heap_bh43_w19_0;
+            heap_bh43_w18_0_d1 <=  heap_bh43_w18_0;
+            heap_bh43_w17_0_d1 <=  heap_bh43_w17_0;
+            heap_bh43_w16_0_d1 <=  heap_bh43_w16_0;
+            heap_bh43_w15_0_d1 <=  heap_bh43_w15_0;
+            heap_bh43_w14_0_d1 <=  heap_bh43_w14_0;
+            heap_bh43_w13_0_d1 <=  heap_bh43_w13_0;
+            heap_bh43_w12_0_d1 <=  heap_bh43_w12_0;
+            heap_bh43_w11_0_d1 <=  heap_bh43_w11_0;
+            heap_bh43_w10_0_d1 <=  heap_bh43_w10_0;
+            heap_bh43_w9_0_d1 <=  heap_bh43_w9_0;
+            heap_bh43_w8_0_d1 <=  heap_bh43_w8_0;
+            heap_bh43_w7_1_d1 <=  heap_bh43_w7_1;
+            heap_bh43_w6_1_d1 <=  heap_bh43_w6_1;
+            heap_bh43_w5_1_d1 <=  heap_bh43_w5_1;
+            heap_bh43_w4_2_d1 <=  heap_bh43_w4_2;
+            heap_bh43_w3_2_d1 <=  heap_bh43_w3_2;
+            heap_bh43_w2_1_d1 <=  heap_bh43_w2_1;
+            heap_bh43_w1_2_d1 <=  heap_bh43_w1_2;
+            heap_bh43_w0_2_d1 <=  heap_bh43_w0_2;
+            heap_bh43_w17_1_d1 <=  heap_bh43_w17_1;
+            heap_bh43_w16_1_d1 <=  heap_bh43_w16_1;
+            heap_bh43_w15_1_d1 <=  heap_bh43_w15_1;
+            heap_bh43_w14_1_d1 <=  heap_bh43_w14_1;
+            heap_bh43_w13_1_d1 <=  heap_bh43_w13_1;
+            heap_bh43_w12_1_d1 <=  heap_bh43_w12_1;
+            heap_bh43_w11_1_d1 <=  heap_bh43_w11_1;
+            heap_bh43_w10_1_d1 <=  heap_bh43_w10_1;
+            heap_bh43_w9_1_d1 <=  heap_bh43_w9_1;
+            heap_bh43_w8_1_d1 <=  heap_bh43_w8_1;
+            heap_bh43_w7_2_d1 <=  heap_bh43_w7_2;
+            heap_bh43_w6_2_d1 <=  heap_bh43_w6_2;
+            heap_bh43_w5_2_d1 <=  heap_bh43_w5_2;
+            heap_bh43_w4_3_d1 <=  heap_bh43_w4_3;
+            heap_bh43_w3_3_d1 <=  heap_bh43_w3_3;
+            heap_bh43_w2_2_d1 <=  heap_bh43_w2_2;
+            heap_bh43_w1_3_d1 <=  heap_bh43_w1_3;
+            heap_bh43_w0_3_d1 <=  heap_bh43_w0_3;
+            heap_bh43_w18_1_d1 <=  heap_bh43_w18_1;
+            heap_bh43_w19_1_d1 <=  heap_bh43_w19_1;
+            heap_bh43_w20_1_d1 <=  heap_bh43_w20_1;
+            heap_bh43_w21_1_d1 <=  heap_bh43_w21_1;
+            heap_bh43_w22_1_d1 <=  heap_bh43_w22_1;
+            heap_bh43_w23_1_d1 <=  heap_bh43_w23_1;
+            heap_bh43_w24_1_d1 <=  heap_bh43_w24_1;
+            heap_bh43_w25_1_d1 <=  heap_bh43_w25_1;
+            heap_bh43_w26_1_d1 <=  heap_bh43_w26_1;
+            heap_bh43_w27_1_d1 <=  heap_bh43_w27_1;
+            heap_bh43_w28_1_d1 <=  heap_bh43_w28_1;
+            heap_bh43_w29_1_d1 <=  heap_bh43_w29_1;
+            heap_bh43_w30_1_d1 <=  heap_bh43_w30_1;
+            heap_bh43_w31_1_d1 <=  heap_bh43_w31_1;
             inAdder0_bh43_0_d1 <=  inAdder0_bh43_0;
             inAdder1_bh43_0_d1 <=  inAdder1_bh43_0;
             cin_bh43_0_d1 <=  cin_bh43_0;
-            heap_bh43_w5_3_d1 <=  heap_bh43_w5_3;
-            tempR_bh43_0_d1 <=  tempR_bh43_0;
-            inAdder0_bh43_1_d1 <=  inAdder0_bh43_1;
-            inAdder1_bh43_1_d1 <=  inAdder1_bh43_1;
-            cin_bh43_1_d1 <=  cin_bh43_1;
-            heap_bh43_w5_4_d1 <=  heap_bh43_w5_4;
-            heap_bh43_w6_2_d1 <=  heap_bh43_w6_2;
-            heap_bh43_w7_2_d1 <=  heap_bh43_w7_2;
-            heap_bh43_w8_2_d1 <=  heap_bh43_w8_2;
-            heap_bh43_w9_2_d1 <=  heap_bh43_w9_2;
-            heap_bh43_w10_2_d1 <=  heap_bh43_w10_2;
-            heap_bh43_w11_2_d1 <=  heap_bh43_w11_2;
-            heap_bh43_w12_2_d1 <=  heap_bh43_w12_2;
-            heap_bh43_w13_2_d1 <=  heap_bh43_w13_2;
-            heap_bh43_w14_3_d1 <=  heap_bh43_w14_3;
-            inAdder0_bh43_2_d1 <=  inAdder0_bh43_2;
-            inAdder1_bh43_2_d1 <=  inAdder1_bh43_2;
-            cin_bh43_2_d1 <=  cin_bh43_2;
+            heap_bh43_w1_5_d1 <=  heap_bh43_w1_5;
+            heap_bh43_w1_6_d1 <=  heap_bh43_w1_6;
+            heap_bh43_w2_4_d1 <=  heap_bh43_w2_4;
+            heap_bh43_w2_5_d1 <=  heap_bh43_w2_5;
+            heap_bh43_w3_5_d1 <=  heap_bh43_w3_5;
+            heap_bh43_w3_6_d1 <=  heap_bh43_w3_6;
+            heap_bh43_w4_5_d1 <=  heap_bh43_w4_5;
+            heap_bh43_w4_6_d1 <=  heap_bh43_w4_6;
+            heap_bh43_w5_5_d1 <=  heap_bh43_w5_5;
+            heap_bh43_w5_6_d1 <=  heap_bh43_w5_6;
+            heap_bh43_w6_4_d1 <=  heap_bh43_w6_4;
+            heap_bh43_w6_5_d1 <=  heap_bh43_w6_5;
+            heap_bh43_w7_5_d1 <=  heap_bh43_w7_5;
+            heap_bh43_w7_6_d1 <=  heap_bh43_w7_6;
+            heap_bh43_w8_4_d1 <=  heap_bh43_w8_4;
+            heap_bh43_w8_5_d1 <=  heap_bh43_w8_5;
+            heap_bh43_w9_4_d1 <=  heap_bh43_w9_4;
+            heap_bh43_w9_5_d1 <=  heap_bh43_w9_5;
+            heap_bh43_w10_4_d1 <=  heap_bh43_w10_4;
+            heap_bh43_w10_5_d1 <=  heap_bh43_w10_5;
+            heap_bh43_w11_4_d1 <=  heap_bh43_w11_4;
+            heap_bh43_w11_5_d1 <=  heap_bh43_w11_5;
+            heap_bh43_w12_4_d1 <=  heap_bh43_w12_4;
+            heap_bh43_w12_5_d1 <=  heap_bh43_w12_5;
+            heap_bh43_w13_4_d1 <=  heap_bh43_w13_4;
+            heap_bh43_w13_5_d1 <=  heap_bh43_w13_5;
             heap_bh43_w14_4_d1 <=  heap_bh43_w14_4;
-            heap_bh43_w15_2_d1 <=  heap_bh43_w15_2;
-            heap_bh43_w16_2_d1 <=  heap_bh43_w16_2;
-            heap_bh43_w17_2_d1 <=  heap_bh43_w17_2;
+            heap_bh43_w14_5_d1 <=  heap_bh43_w14_5;
+            heap_bh43_w15_4_d1 <=  heap_bh43_w15_4;
+            heap_bh43_w15_5_d1 <=  heap_bh43_w15_5;
+            heap_bh43_w16_4_d1 <=  heap_bh43_w16_4;
+            heap_bh43_w16_5_d1 <=  heap_bh43_w16_5;
+            heap_bh43_w17_3_d1 <=  heap_bh43_w17_3;
+            heap_bh43_w17_4_d1 <=  heap_bh43_w17_4;
             heap_bh43_w18_2_d1 <=  heap_bh43_w18_2;
             heap_bh43_w19_2_d1 <=  heap_bh43_w19_2;
             heap_bh43_w20_2_d1 <=  heap_bh43_w20_2;
@@ -2203,73 +2687,131 @@ begin
             heap_bh43_w28_2_d1 <=  heap_bh43_w28_2;
             heap_bh43_w29_2_d1 <=  heap_bh43_w29_2;
             heap_bh43_w30_2_d1 <=  heap_bh43_w30_2;
-            heap_bh43_w31_1_d1 <=  heap_bh43_w31_1;
+            heap_bh43_w31_2_d1 <=  heap_bh43_w31_2;
+            tempR_bh43_0_d1 <=  tempR_bh43_0;
          end if;
       end process;
    XX_m42 <= Y ;
    YY_m42 <= X ;
+   -- code generated by IntMultiplier::buildHeapLogicOnly()
+   -- buildheaplogiconly called for topX=0 topY=17 botX=2 botY=25
+   Xp_m42b44 <= XX_m42(1 downto 0) & "0";
+   Yp_m42b44 <= YY_m42(24 downto 17) & "0";
+   x_m42b44_0 <= Xp_m42b44(2 downto 0);
+   y_m42b44_0 <= Yp_m42b44(2 downto 0);
+   y_m42b44_1 <= Yp_m42b44(5 downto 3);
+   y_m42b44_2 <= Yp_m42b44(8 downto 6);
+   ----------------Synchro barrier, entering cycle 0----------------
+   -- Partial product row number 0
+   Y0X0_44_m42 <= y_m42b44_0 & x_m42b44_0;
+   PP_m42_44X0Y0_Tbl: SmallMultTableP3x3r6XuYu  -- pipelineDepth=0 maxInDelay=0
+      port map ( clk  => clk,
+                 rst  => rst,
+                 X => Y0X0_44_m42,
+                 Y => PP44X0Y0_m42);
+   -- Adding the relevant bits to the heap of bits
+   heap_bh43_w0_0 <= PP44X0Y0_m42(4); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w1_0 <= PP44X0Y0_m42(5); -- cycle= 0 cp= 3.8165e-10
+
+   -- Partial product row number 1
+   Y1X0_44_m42 <= y_m42b44_1 & x_m42b44_0;
+   PP_m42_44X0Y1_Tbl: SmallMultTableP3x3r6XuYu  -- pipelineDepth=0 maxInDelay=0
+      port map ( clk  => clk,
+                 rst  => rst,
+                 X => Y1X0_44_m42,
+                 Y => PP44X0Y1_m42);
+   -- Adding the relevant bits to the heap of bits
+   heap_bh43_w0_1 <= PP44X0Y1_m42(1); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w1_1 <= PP44X0Y1_m42(2); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w2_0 <= PP44X0Y1_m42(3); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w3_0 <= PP44X0Y1_m42(4); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w4_0 <= PP44X0Y1_m42(5); -- cycle= 0 cp= 3.8165e-10
+
+   -- Partial product row number 2
+   Y2X0_44_m42 <= y_m42b44_2 & x_m42b44_0;
+   PP_m42_44X0Y2_Tbl: SmallMultTableP3x3r6XuYs  -- pipelineDepth=0 maxInDelay=0
+      port map ( clk  => clk,
+                 rst  => rst,
+                 X => Y2X0_44_m42,
+                 Y => PP44X0Y2_m42);
+   -- Adding the relevant bits to the heap of bits
+   heap_bh43_w3_1 <= PP44X0Y2_m42(1); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w4_1 <= PP44X0Y2_m42(2); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w5_0 <= PP44X0Y2_m42(3); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w6_0 <= PP44X0Y2_m42(4); -- cycle= 0 cp= 3.8165e-10
+   heap_bh43_w7_0 <= not PP44X0Y2_m42(5); -- cycle= 0 cp= 3.8165e-10
+
    
    -- Beginning of code generated by BitHeap::generateCompressorVHDL
    -- code generated by BitHeap::generateSupertileVHDL()
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh43_ch0_0 <= ("" & XX_m42(25 downto 8) & "") * ("" & YY_m42(24 downto 0) & "");
-   heap_bh43_w31_0 <= not( DSP_bh43_ch0_0(42) ); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w30_0 <= DSP_bh43_ch0_0(41); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w29_0 <= DSP_bh43_ch0_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w28_0 <= DSP_bh43_ch0_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w27_0 <= DSP_bh43_ch0_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w26_0 <= DSP_bh43_ch0_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w25_0 <= DSP_bh43_ch0_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w24_0 <= DSP_bh43_ch0_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w23_0 <= DSP_bh43_ch0_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w22_0 <= DSP_bh43_ch0_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w21_0 <= DSP_bh43_ch0_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w20_0 <= DSP_bh43_ch0_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w19_0 <= DSP_bh43_ch0_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w18_0 <= DSP_bh43_ch0_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w17_0 <= DSP_bh43_ch0_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w16_0 <= DSP_bh43_ch0_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w15_0 <= DSP_bh43_ch0_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w14_0 <= DSP_bh43_ch0_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w13_0 <= DSP_bh43_ch0_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w12_0 <= DSP_bh43_ch0_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w11_0 <= DSP_bh43_ch0_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w10_0 <= DSP_bh43_ch0_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w9_0 <= DSP_bh43_ch0_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w8_0 <= DSP_bh43_ch0_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w7_0 <= DSP_bh43_ch0_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w6_0 <= DSP_bh43_ch0_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w5_0 <= DSP_bh43_ch0_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w4_0 <= DSP_bh43_ch0_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w3_0 <= DSP_bh43_ch0_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w2_0 <= DSP_bh43_ch0_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w1_0 <= DSP_bh43_ch0_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w0_0 <= DSP_bh43_ch0_0(11); -- cycle= 0 cp= 2.387e-09
+   DSP_bh43_ch0_0 <= ("0" & XX_m42(25 downto 2) & "") * ("0" & YY_m42(24 downto 8) & "");
+   heap_bh43_w31_0 <= DSP_bh43_ch0_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w30_0 <= DSP_bh43_ch0_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w29_0 <= DSP_bh43_ch0_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w28_0 <= DSP_bh43_ch0_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w27_0 <= DSP_bh43_ch0_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w26_0 <= DSP_bh43_ch0_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w25_0 <= DSP_bh43_ch0_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w24_0 <= DSP_bh43_ch0_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w23_0 <= DSP_bh43_ch0_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w22_0 <= DSP_bh43_ch0_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w21_0 <= DSP_bh43_ch0_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w20_0 <= DSP_bh43_ch0_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w19_0 <= DSP_bh43_ch0_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w18_0 <= DSP_bh43_ch0_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w17_0 <= DSP_bh43_ch0_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w16_0 <= DSP_bh43_ch0_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w15_0 <= DSP_bh43_ch0_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w14_0 <= DSP_bh43_ch0_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w13_0 <= DSP_bh43_ch0_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w12_0 <= DSP_bh43_ch0_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w11_0 <= DSP_bh43_ch0_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w10_0 <= DSP_bh43_ch0_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w9_0 <= DSP_bh43_ch0_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w8_0 <= DSP_bh43_ch0_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w7_1 <= DSP_bh43_ch0_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w6_1 <= DSP_bh43_ch0_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w5_1 <= DSP_bh43_ch0_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w4_2 <= DSP_bh43_ch0_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w3_2 <= DSP_bh43_ch0_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w2_1 <= DSP_bh43_ch0_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w1_2 <= DSP_bh43_ch0_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w0_2 <= DSP_bh43_ch0_0(9); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh43_ch1_0 <= ("0" & XX_m42(7 downto 0) & "000000000") * ("" & YY_m42(24 downto 0) & "");
-   heap_bh43_w14_1 <= not( DSP_bh43_ch1_0(42) ); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w13_1 <= DSP_bh43_ch1_0(41); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w12_1 <= DSP_bh43_ch1_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w11_1 <= DSP_bh43_ch1_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w10_1 <= DSP_bh43_ch1_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w9_1 <= DSP_bh43_ch1_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w8_1 <= DSP_bh43_ch1_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w7_1 <= DSP_bh43_ch1_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w6_1 <= DSP_bh43_ch1_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w5_1 <= DSP_bh43_ch1_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w4_1 <= DSP_bh43_ch1_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w3_1 <= DSP_bh43_ch1_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w2_1 <= DSP_bh43_ch1_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w1_1 <= DSP_bh43_ch1_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh43_w0_1 <= DSP_bh43_ch1_0(28); -- cycle= 0 cp= 2.387e-09
+   DSP_bh43_ch1_0 <= ("0" & XX_m42(25 downto 2) & "") * ("00" & YY_m42(7 downto 0) & "00000000");
+   heap_bh43_w17_1 <= not( DSP_bh43_ch1_0(42) ); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w16_1 <= DSP_bh43_ch1_0(41); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w15_1 <= DSP_bh43_ch1_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w14_1 <= DSP_bh43_ch1_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w13_1 <= DSP_bh43_ch1_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w12_1 <= DSP_bh43_ch1_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w11_1 <= DSP_bh43_ch1_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w10_1 <= DSP_bh43_ch1_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w9_1 <= DSP_bh43_ch1_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w8_1 <= DSP_bh43_ch1_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w7_2 <= DSP_bh43_ch1_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w6_2 <= DSP_bh43_ch1_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w5_2 <= DSP_bh43_ch1_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w4_3 <= DSP_bh43_ch1_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w3_3 <= DSP_bh43_ch1_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w2_2 <= DSP_bh43_ch1_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w1_3 <= DSP_bh43_ch1_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh43_w0_3 <= DSP_bh43_ch1_0(25); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
 
    -- Adding the constant bits
-   heap_bh43_w5_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w5_3 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w7_3 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w8_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w9_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w10_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w11_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w12_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w13_2 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w14_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh43_w15_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh43_w16_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh43_w17_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w15_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w16_2 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w18_1 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w19_1 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w20_1 <= '1'; -- cycle= 0 cp= 0
@@ -2283,73 +2825,198 @@ begin
    heap_bh43_w28_1 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w29_1 <= '1'; -- cycle= 0 cp= 0
    heap_bh43_w30_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh43_w31_1 <= '1'; -- cycle= 0 cp= 0
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 0----------------
-   inAdder0_bh43_0 <= '0' & heap_bh43_w4_1 & heap_bh43_w3_1 & heap_bh43_w2_1 & heap_bh43_w1_1 & heap_bh43_w0_1;
-   inAdder1_bh43_0 <= '0' & heap_bh43_w4_0 & heap_bh43_w3_0 & heap_bh43_w2_0 & heap_bh43_w1_0 & heap_bh43_w0_0;
+   inAdder0_bh43_0 <= '0' & heap_bh43_w16_2 & heap_bh43_w15_2 & heap_bh43_w14_2 & heap_bh43_w13_2 & heap_bh43_w12_2 & heap_bh43_w11_2 & heap_bh43_w10_2 & heap_bh43_w9_2 & heap_bh43_w8_2 & heap_bh43_w7_3 & heap_bh43_w6_0 & heap_bh43_w5_3 & heap_bh43_w4_1 & heap_bh43_w3_1 & heap_bh43_w2_0 & heap_bh43_w1_1 & heap_bh43_w0_1;
+   inAdder1_bh43_0 <= '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh43_w7_0 & '0' & heap_bh43_w5_0 & heap_bh43_w4_0 & heap_bh43_w3_0 & '0' & heap_bh43_w1_0 & heap_bh43_w0_0;
    cin_bh43_0 <= '0';
    ----------------Synchro barrier, entering cycle 1----------------
    outAdder_bh43_0 <= inAdder0_bh43_0_d1 + inAdder1_bh43_0_d1 + cin_bh43_0_d1;
-   heap_bh43_w0_2 <= outAdder_bh43_0(0); -- cycle= 1 cp= 1.25072e-09
-   heap_bh43_w1_2 <= outAdder_bh43_0(1); -- cycle= 1 cp= 1.25072e-09
-   heap_bh43_w2_2 <= outAdder_bh43_0(2); -- cycle= 1 cp= 1.25072e-09
-   heap_bh43_w3_2 <= outAdder_bh43_0(3); -- cycle= 1 cp= 1.25072e-09
-   heap_bh43_w4_2 <= outAdder_bh43_0(4); -- cycle= 1 cp= 1.25072e-09
-   heap_bh43_w5_3 <= outAdder_bh43_0(5); -- cycle= 1 cp= 1.25072e-09
+   heap_bh43_w0_4 <= outAdder_bh43_0(0); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w1_4 <= outAdder_bh43_0(1); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w2_3 <= outAdder_bh43_0(2); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w3_4 <= outAdder_bh43_0(3); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w4_4 <= outAdder_bh43_0(4); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w5_4 <= outAdder_bh43_0(5); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w6_3 <= outAdder_bh43_0(6); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w7_4 <= outAdder_bh43_0(7); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w8_3 <= outAdder_bh43_0(8); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w9_3 <= outAdder_bh43_0(9); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w10_3 <= outAdder_bh43_0(10); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w11_3 <= outAdder_bh43_0(11); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w12_3 <= outAdder_bh43_0(12); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w13_3 <= outAdder_bh43_0(13); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w14_3 <= outAdder_bh43_0(14); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w15_3 <= outAdder_bh43_0(15); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w16_3 <= outAdder_bh43_0(16); -- cycle= 1 cp= 1.03565e-09
+   heap_bh43_w17_2 <= outAdder_bh43_0(17); -- cycle= 1 cp= 1.03565e-09
+
    ----------------Synchro barrier, entering cycle 1----------------
-   tempR_bh43_0 <= heap_bh43_w4_2 & heap_bh43_w3_2 & heap_bh43_w2_2 & heap_bh43_w1_2 & heap_bh43_w0_2; -- already compressed
+   CompressorIn_bh43_0_0 <= heap_bh43_w0_3_d1 & heap_bh43_w0_2_d1 & heap_bh43_w0_4;
+   Compressor_bh43_0: Compressor_3_2
+      port map ( R => CompressorOut_bh43_0_0   ,
+                 X0 => CompressorIn_bh43_0_0);
+   heap_bh43_w0_5 <= CompressorOut_bh43_0_0(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w1_5 <= CompressorOut_bh43_0_0(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_1_1 <= heap_bh43_w1_3_d1 & heap_bh43_w1_2_d1 & heap_bh43_w1_4;
+   Compressor_bh43_1: Compressor_3_2
+      port map ( R => CompressorOut_bh43_1_1   ,
+                 X0 => CompressorIn_bh43_1_1);
+   heap_bh43_w1_6 <= CompressorOut_bh43_1_1(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w2_4 <= CompressorOut_bh43_1_1(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_2_2 <= heap_bh43_w2_2_d1 & heap_bh43_w2_1_d1 & heap_bh43_w2_3;
+   Compressor_bh43_2: Compressor_3_2
+      port map ( R => CompressorOut_bh43_2_2   ,
+                 X0 => CompressorIn_bh43_2_2);
+   heap_bh43_w2_5 <= CompressorOut_bh43_2_2(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w3_5 <= CompressorOut_bh43_2_2(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_3_3 <= heap_bh43_w3_3_d1 & heap_bh43_w3_2_d1 & heap_bh43_w3_4;
+   Compressor_bh43_3: Compressor_3_2
+      port map ( R => CompressorOut_bh43_3_3   ,
+                 X0 => CompressorIn_bh43_3_3);
+   heap_bh43_w3_6 <= CompressorOut_bh43_3_3(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w4_5 <= CompressorOut_bh43_3_3(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_4_4 <= heap_bh43_w4_3_d1 & heap_bh43_w4_2_d1 & heap_bh43_w4_4;
+   Compressor_bh43_4: Compressor_3_2
+      port map ( R => CompressorOut_bh43_4_4   ,
+                 X0 => CompressorIn_bh43_4_4);
+   heap_bh43_w4_6 <= CompressorOut_bh43_4_4(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w5_5 <= CompressorOut_bh43_4_4(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_5_5 <= heap_bh43_w5_2_d1 & heap_bh43_w5_1_d1 & heap_bh43_w5_4;
+   Compressor_bh43_5: Compressor_3_2
+      port map ( R => CompressorOut_bh43_5_5   ,
+                 X0 => CompressorIn_bh43_5_5);
+   heap_bh43_w5_6 <= CompressorOut_bh43_5_5(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w6_4 <= CompressorOut_bh43_5_5(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_6_6 <= heap_bh43_w6_2_d1 & heap_bh43_w6_1_d1 & heap_bh43_w6_3;
+   Compressor_bh43_6: Compressor_3_2
+      port map ( R => CompressorOut_bh43_6_6   ,
+                 X0 => CompressorIn_bh43_6_6);
+   heap_bh43_w6_5 <= CompressorOut_bh43_6_6(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w7_5 <= CompressorOut_bh43_6_6(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_7_7 <= heap_bh43_w7_2_d1 & heap_bh43_w7_1_d1 & heap_bh43_w7_4;
+   Compressor_bh43_7: Compressor_3_2
+      port map ( R => CompressorOut_bh43_7_7   ,
+                 X0 => CompressorIn_bh43_7_7);
+   heap_bh43_w7_6 <= CompressorOut_bh43_7_7(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w8_4 <= CompressorOut_bh43_7_7(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_8_8 <= heap_bh43_w8_1_d1 & heap_bh43_w8_0_d1 & heap_bh43_w8_3;
+   Compressor_bh43_8: Compressor_3_2
+      port map ( R => CompressorOut_bh43_8_8   ,
+                 X0 => CompressorIn_bh43_8_8);
+   heap_bh43_w8_5 <= CompressorOut_bh43_8_8(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w9_4 <= CompressorOut_bh43_8_8(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_9_9 <= heap_bh43_w9_1_d1 & heap_bh43_w9_0_d1 & heap_bh43_w9_3;
+   Compressor_bh43_9: Compressor_3_2
+      port map ( R => CompressorOut_bh43_9_9   ,
+                 X0 => CompressorIn_bh43_9_9);
+   heap_bh43_w9_5 <= CompressorOut_bh43_9_9(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w10_4 <= CompressorOut_bh43_9_9(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_10_10 <= heap_bh43_w10_1_d1 & heap_bh43_w10_0_d1 & heap_bh43_w10_3;
+   Compressor_bh43_10: Compressor_3_2
+      port map ( R => CompressorOut_bh43_10_10   ,
+                 X0 => CompressorIn_bh43_10_10);
+   heap_bh43_w10_5 <= CompressorOut_bh43_10_10(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w11_4 <= CompressorOut_bh43_10_10(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_11_11 <= heap_bh43_w11_1_d1 & heap_bh43_w11_0_d1 & heap_bh43_w11_3;
+   Compressor_bh43_11: Compressor_3_2
+      port map ( R => CompressorOut_bh43_11_11   ,
+                 X0 => CompressorIn_bh43_11_11);
+   heap_bh43_w11_5 <= CompressorOut_bh43_11_11(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w12_4 <= CompressorOut_bh43_11_11(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_12_12 <= heap_bh43_w12_1_d1 & heap_bh43_w12_0_d1 & heap_bh43_w12_3;
+   Compressor_bh43_12: Compressor_3_2
+      port map ( R => CompressorOut_bh43_12_12   ,
+                 X0 => CompressorIn_bh43_12_12);
+   heap_bh43_w12_5 <= CompressorOut_bh43_12_12(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w13_4 <= CompressorOut_bh43_12_12(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_13_13 <= heap_bh43_w13_1_d1 & heap_bh43_w13_0_d1 & heap_bh43_w13_3;
+   Compressor_bh43_13: Compressor_3_2
+      port map ( R => CompressorOut_bh43_13_13   ,
+                 X0 => CompressorIn_bh43_13_13);
+   heap_bh43_w13_5 <= CompressorOut_bh43_13_13(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w14_4 <= CompressorOut_bh43_13_13(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_14_14 <= heap_bh43_w14_1_d1 & heap_bh43_w14_0_d1 & heap_bh43_w14_3;
+   Compressor_bh43_14: Compressor_3_2
+      port map ( R => CompressorOut_bh43_14_14   ,
+                 X0 => CompressorIn_bh43_14_14);
+   heap_bh43_w14_5 <= CompressorOut_bh43_14_14(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w15_4 <= CompressorOut_bh43_14_14(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_15_15 <= heap_bh43_w15_1_d1 & heap_bh43_w15_0_d1 & heap_bh43_w15_3;
+   Compressor_bh43_15: Compressor_3_2
+      port map ( R => CompressorOut_bh43_15_15   ,
+                 X0 => CompressorIn_bh43_15_15);
+   heap_bh43_w15_5 <= CompressorOut_bh43_15_15(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w16_4 <= CompressorOut_bh43_15_15(1); -- cycle= 1 cp= 1.4173e-09
+
+   ----------------Synchro barrier, entering cycle 1----------------
+   CompressorIn_bh43_16_16 <= heap_bh43_w16_1_d1 & heap_bh43_w16_0_d1 & heap_bh43_w16_3;
+   Compressor_bh43_16: Compressor_3_2
+      port map ( R => CompressorOut_bh43_16_16   ,
+                 X0 => CompressorIn_bh43_16_16);
+   heap_bh43_w16_5 <= CompressorOut_bh43_16_16(0); -- cycle= 1 cp= 1.4173e-09
+   heap_bh43_w17_3 <= CompressorOut_bh43_16_16(1); -- cycle= 1 cp= 1.4173e-09
    ----------------Synchro barrier, entering cycle 1----------------
    ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 0----------------
-   inAdder0_bh43_1 <= '0' & heap_bh43_w13_1 & heap_bh43_w12_1 & heap_bh43_w11_1 & heap_bh43_w10_1 & heap_bh43_w9_1 & heap_bh43_w8_1 & heap_bh43_w7_1 & heap_bh43_w6_1 & heap_bh43_w5_2;
-   inAdder1_bh43_1 <= '0' & heap_bh43_w13_0 & heap_bh43_w12_0 & heap_bh43_w11_0 & heap_bh43_w10_0 & heap_bh43_w9_0 & heap_bh43_w8_0 & heap_bh43_w7_0 & heap_bh43_w6_0 & heap_bh43_w5_1;
-   cin_bh43_1 <= heap_bh43_w5_0;
    ----------------Synchro barrier, entering cycle 1----------------
-   outAdder_bh43_1 <= inAdder0_bh43_1_d1 + inAdder1_bh43_1_d1 + cin_bh43_1_d1;
-   heap_bh43_w5_4 <= outAdder_bh43_1(0); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w6_2 <= outAdder_bh43_1(1); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w7_2 <= outAdder_bh43_1(2); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w8_2 <= outAdder_bh43_1(3); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w9_2 <= outAdder_bh43_1(4); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w10_2 <= outAdder_bh43_1(5); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w11_2 <= outAdder_bh43_1(6); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w12_2 <= outAdder_bh43_1(7); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w13_2 <= outAdder_bh43_1(8); -- cycle= 1 cp= 1.34272e-09
-   heap_bh43_w14_3 <= outAdder_bh43_1(9); -- cycle= 1 cp= 1.34272e-09
+   inAdder0_bh43_1 <= '0' & heap_bh43_w31_1_d1 & heap_bh43_w30_1_d1 & heap_bh43_w29_1_d1 & heap_bh43_w28_1_d1 & heap_bh43_w27_1_d1 & heap_bh43_w26_1_d1 & heap_bh43_w25_1_d1 & heap_bh43_w24_1_d1 & heap_bh43_w23_1_d1 & heap_bh43_w22_1_d1 & heap_bh43_w21_1_d1 & heap_bh43_w20_1_d1 & heap_bh43_w19_1_d1 & heap_bh43_w18_1_d1 & heap_bh43_w17_1_d1;
+   inAdder1_bh43_1 <= '0' & heap_bh43_w31_0_d1 & heap_bh43_w30_0_d1 & heap_bh43_w29_0_d1 & heap_bh43_w28_0_d1 & heap_bh43_w27_0_d1 & heap_bh43_w26_0_d1 & heap_bh43_w25_0_d1 & heap_bh43_w24_0_d1 & heap_bh43_w23_0_d1 & heap_bh43_w22_0_d1 & heap_bh43_w21_0_d1 & heap_bh43_w20_0_d1 & heap_bh43_w19_0_d1 & heap_bh43_w18_0_d1 & heap_bh43_w17_0_d1;
+   cin_bh43_1 <= heap_bh43_w17_2;
+   outAdder_bh43_1 <= inAdder0_bh43_1 + inAdder1_bh43_1 + cin_bh43_1;
+   heap_bh43_w17_4 <= outAdder_bh43_1(0); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w18_2 <= outAdder_bh43_1(1); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w19_2 <= outAdder_bh43_1(2); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w20_2 <= outAdder_bh43_1(3); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w21_2 <= outAdder_bh43_1(4); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w22_2 <= outAdder_bh43_1(5); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w23_2 <= outAdder_bh43_1(6); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w24_2 <= outAdder_bh43_1(7); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w25_2 <= outAdder_bh43_1(8); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w26_2 <= outAdder_bh43_1(9); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w27_2 <= outAdder_bh43_1(10); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w28_2 <= outAdder_bh43_1(11); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w29_2 <= outAdder_bh43_1(12); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w30_2 <= outAdder_bh43_1(13); -- cycle= 1 cp= 2.0413e-09
+   heap_bh43_w31_2 <= outAdder_bh43_1(14); -- cycle= 1 cp= 2.0413e-09
    ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 0----------------
-   inAdder0_bh43_2 <= '0' & heap_bh43_w30_1 & heap_bh43_w29_1 & heap_bh43_w28_1 & heap_bh43_w27_1 & heap_bh43_w26_1 & heap_bh43_w25_1 & heap_bh43_w24_1 & heap_bh43_w23_1 & heap_bh43_w22_1 & heap_bh43_w21_1 & heap_bh43_w20_1 & heap_bh43_w19_1 & heap_bh43_w18_1 & heap_bh43_w17_1 & heap_bh43_w16_1 & heap_bh43_w15_1 & heap_bh43_w14_2;
-   inAdder1_bh43_2 <= '0' & heap_bh43_w30_0 & heap_bh43_w29_0 & heap_bh43_w28_0 & heap_bh43_w27_0 & heap_bh43_w26_0 & heap_bh43_w25_0 & heap_bh43_w24_0 & heap_bh43_w23_0 & heap_bh43_w22_0 & heap_bh43_w21_0 & heap_bh43_w20_0 & heap_bh43_w19_0 & heap_bh43_w18_0 & heap_bh43_w17_0 & heap_bh43_w16_0 & heap_bh43_w15_0 & heap_bh43_w14_1;
-   cin_bh43_2 <= heap_bh43_w14_0;
-   ----------------Synchro barrier, entering cycle 1----------------
-   outAdder_bh43_2 <= inAdder0_bh43_2_d1 + inAdder1_bh43_2_d1 + cin_bh43_2_d1;
-   heap_bh43_w14_4 <= outAdder_bh43_2(0); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w15_2 <= outAdder_bh43_2(1); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w16_2 <= outAdder_bh43_2(2); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w17_2 <= outAdder_bh43_2(3); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w18_2 <= outAdder_bh43_2(4); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w19_2 <= outAdder_bh43_2(5); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w20_2 <= outAdder_bh43_2(6); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w21_2 <= outAdder_bh43_2(7); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w22_2 <= outAdder_bh43_2(8); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w23_2 <= outAdder_bh43_2(9); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w24_2 <= outAdder_bh43_2(10); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w25_2 <= outAdder_bh43_2(11); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w26_2 <= outAdder_bh43_2(12); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w27_2 <= outAdder_bh43_2(13); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w28_2 <= outAdder_bh43_2(14); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w29_2 <= outAdder_bh43_2(15); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w30_2 <= outAdder_bh43_2(16); -- cycle= 1 cp= 1.52672e-09
-   heap_bh43_w31_1 <= outAdder_bh43_2(17); -- cycle= 1 cp= 1.52672e-09
+   tempR_bh43_0 <= heap_bh43_w0_5; -- already compressed
    ----------------Synchro barrier, entering cycle 1----------------
    ----------------Synchro barrier, entering cycle 2----------------
-   finalAdderIn0_bh43 <= "0" & heap_bh43_w31_0_d2 & heap_bh43_w30_2_d1 & heap_bh43_w29_2_d1 & heap_bh43_w28_2_d1 & heap_bh43_w27_2_d1 & heap_bh43_w26_2_d1 & heap_bh43_w25_2_d1 & heap_bh43_w24_2_d1 & heap_bh43_w23_2_d1 & heap_bh43_w22_2_d1 & heap_bh43_w21_2_d1 & heap_bh43_w20_2_d1 & heap_bh43_w19_2_d1 & heap_bh43_w18_2_d1 & heap_bh43_w17_2_d1 & heap_bh43_w16_2_d1 & heap_bh43_w15_2_d1 & heap_bh43_w14_3_d1 & heap_bh43_w13_2_d1 & heap_bh43_w12_2_d1 & heap_bh43_w11_2_d1 & heap_bh43_w10_2_d1 & heap_bh43_w9_2_d1 & heap_bh43_w8_2_d1 & heap_bh43_w7_2_d1 & heap_bh43_w6_2_d1 & heap_bh43_w5_3_d1;
-   finalAdderIn1_bh43 <= "0" & heap_bh43_w31_1_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh43_w14_4_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh43_w5_4_d1;
+   finalAdderIn0_bh43 <= "0" & heap_bh43_w31_2_d1 & heap_bh43_w30_2_d1 & heap_bh43_w29_2_d1 & heap_bh43_w28_2_d1 & heap_bh43_w27_2_d1 & heap_bh43_w26_2_d1 & heap_bh43_w25_2_d1 & heap_bh43_w24_2_d1 & heap_bh43_w23_2_d1 & heap_bh43_w22_2_d1 & heap_bh43_w21_2_d1 & heap_bh43_w20_2_d1 & heap_bh43_w19_2_d1 & heap_bh43_w18_2_d1 & heap_bh43_w17_3_d1 & heap_bh43_w16_5_d1 & heap_bh43_w15_5_d1 & heap_bh43_w14_5_d1 & heap_bh43_w13_5_d1 & heap_bh43_w12_5_d1 & heap_bh43_w11_5_d1 & heap_bh43_w10_5_d1 & heap_bh43_w9_5_d1 & heap_bh43_w8_5_d1 & heap_bh43_w7_6_d1 & heap_bh43_w6_5_d1 & heap_bh43_w5_6_d1 & heap_bh43_w4_6_d1 & heap_bh43_w3_6_d1 & heap_bh43_w2_5_d1 & heap_bh43_w1_6_d1;
+   finalAdderIn1_bh43 <= "0" & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh43_w17_4_d1 & heap_bh43_w16_4_d1 & heap_bh43_w15_4_d1 & heap_bh43_w14_4_d1 & heap_bh43_w13_4_d1 & heap_bh43_w12_4_d1 & heap_bh43_w11_4_d1 & heap_bh43_w10_4_d1 & heap_bh43_w9_4_d1 & heap_bh43_w8_4_d1 & heap_bh43_w7_5_d1 & heap_bh43_w6_4_d1 & heap_bh43_w5_5_d1 & heap_bh43_w4_5_d1 & heap_bh43_w3_5_d1 & heap_bh43_w2_4_d1 & heap_bh43_w1_5_d1;
    finalAdderCin_bh43 <= '0';
-   Adder_final43_3: IntAdder_28_f400_uid54  -- pipelineDepth=0 maxInDelay=0
+   Adder_final43_2: IntAdder_32_f400_uid79  -- pipelineDepth=0 maxInDelay=0
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => finalAdderCin_bh43,
@@ -2363,8 +3030,8 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                           IntAdder_35_f400_uid62
---                     (IntAdderClassical_35_f400_uid64)
+--                           IntAdder_35_f400_uid87
+--                     (IntAdderClassical_35_f400_uid89)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -2379,7 +3046,7 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_35_f400_uid62 is
+entity IntAdder_35_f400_uid87 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(34 downto 0);
           Y : in  std_logic_vector(34 downto 0);
@@ -2387,7 +3054,7 @@ entity IntAdder_35_f400_uid62 is
           R : out  std_logic_vector(34 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_35_f400_uid62 is
+architecture arch of IntAdder_35_f400_uid87 is
 begin
    process(clk)
       begin
@@ -2399,8 +3066,8 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                           IntAdder_37_f400_uid94
---                     (IntAdderClassical_37_f400_uid96)
+--                          IntAdder_37_f400_uid120
+--                     (IntAdderClassical_37_f400_uid122)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -2415,7 +3082,7 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_37_f400_uid94 is
+entity IntAdder_37_f400_uid120 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(36 downto 0);
           Y : in  std_logic_vector(36 downto 0);
@@ -2423,7 +3090,7 @@ entity IntAdder_37_f400_uid94 is
           R : out  std_logic_vector(36 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_37_f400_uid94 is
+architecture arch of IntAdder_37_f400_uid120 is
 begin
    process(clk)
       begin
@@ -2435,7 +3102,7 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                IntMultiplier_UsingDSP_30_35_35_signed_uid69
+--                IntMultiplier_UsingDSP_30_35_35_signed_uid94
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Florent de Dinechin, Kinga Illyes, Bogdan Popa, Bogdan Pasca, 2012
@@ -2450,27 +3117,21 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntMultiplier_UsingDSP_30_35_35_signed_uid69 is
+entity IntMultiplier_UsingDSP_30_35_35_signed_uid94 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(29 downto 0);
           Y : in  std_logic_vector(34 downto 0);
           R : out  std_logic_vector(34 downto 0)   );
 end entity;
 
-architecture arch of IntMultiplier_UsingDSP_30_35_35_signed_uid69 is
-   component Compressor_14_3 is
-      port ( X0 : in  std_logic_vector(3 downto 0);
-             X1 : in  std_logic_vector(0 downto 0);
-             R : out  std_logic_vector(2 downto 0)   );
-   end component;
-
+architecture arch of IntMultiplier_UsingDSP_30_35_35_signed_uid94 is
    component Compressor_23_3 is
       port ( X0 : in  std_logic_vector(2 downto 0);
              X1 : in  std_logic_vector(1 downto 0);
              R : out  std_logic_vector(2 downto 0)   );
    end component;
 
-   component IntAdder_37_f400_uid94 is
+   component IntAdder_37_f400_uid120 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(36 downto 0);
              Y : in  std_logic_vector(36 downto 0);
@@ -2478,764 +3139,687 @@ architecture arch of IntMultiplier_UsingDSP_30_35_35_signed_uid69 is
              R : out  std_logic_vector(36 downto 0)   );
    end component;
 
-signal XX_m70 :  std_logic_vector(34 downto 0);
-signal YY_m70 :  std_logic_vector(29 downto 0);
-signal DSP_bh71_ch0_0 :  std_logic_vector(42 downto 0);
-signal heap_bh71_w40_0, heap_bh71_w40_0_d1, heap_bh71_w40_0_d2 : std_logic;
-signal heap_bh71_w39_0, heap_bh71_w39_0_d1 : std_logic;
-signal heap_bh71_w38_0, heap_bh71_w38_0_d1 : std_logic;
-signal heap_bh71_w37_0, heap_bh71_w37_0_d1 : std_logic;
-signal heap_bh71_w36_0, heap_bh71_w36_0_d1 : std_logic;
-signal heap_bh71_w35_0, heap_bh71_w35_0_d1 : std_logic;
-signal heap_bh71_w34_0, heap_bh71_w34_0_d1 : std_logic;
-signal heap_bh71_w33_0, heap_bh71_w33_0_d1 : std_logic;
-signal heap_bh71_w32_0, heap_bh71_w32_0_d1 : std_logic;
-signal heap_bh71_w31_0, heap_bh71_w31_0_d1 : std_logic;
-signal heap_bh71_w30_0, heap_bh71_w30_0_d1 : std_logic;
-signal heap_bh71_w29_0, heap_bh71_w29_0_d1 : std_logic;
-signal heap_bh71_w28_0, heap_bh71_w28_0_d1 : std_logic;
-signal heap_bh71_w27_0, heap_bh71_w27_0_d1 : std_logic;
-signal heap_bh71_w26_0, heap_bh71_w26_0_d1 : std_logic;
-signal heap_bh71_w25_0, heap_bh71_w25_0_d1 : std_logic;
-signal heap_bh71_w24_0, heap_bh71_w24_0_d1 : std_logic;
-signal heap_bh71_w23_0, heap_bh71_w23_0_d1 : std_logic;
-signal heap_bh71_w22_0, heap_bh71_w22_0_d1 : std_logic;
-signal heap_bh71_w21_0, heap_bh71_w21_0_d1 : std_logic;
-signal heap_bh71_w20_0, heap_bh71_w20_0_d1 : std_logic;
-signal heap_bh71_w19_0, heap_bh71_w19_0_d1 : std_logic;
-signal heap_bh71_w18_0, heap_bh71_w18_0_d1 : std_logic;
-signal heap_bh71_w17_0, heap_bh71_w17_0_d1 : std_logic;
-signal heap_bh71_w16_0, heap_bh71_w16_0_d1 : std_logic;
-signal heap_bh71_w15_0, heap_bh71_w15_0_d1 : std_logic;
-signal heap_bh71_w14_0, heap_bh71_w14_0_d1 : std_logic;
-signal heap_bh71_w13_0, heap_bh71_w13_0_d1 : std_logic;
-signal heap_bh71_w12_0, heap_bh71_w12_0_d1 : std_logic;
-signal heap_bh71_w11_0, heap_bh71_w11_0_d1 : std_logic;
-signal heap_bh71_w10_0, heap_bh71_w10_0_d1 : std_logic;
-signal heap_bh71_w9_0, heap_bh71_w9_0_d1 : std_logic;
-signal heap_bh71_w8_0, heap_bh71_w8_0_d1 : std_logic;
-signal heap_bh71_w7_0, heap_bh71_w7_0_d1 : std_logic;
-signal heap_bh71_w6_0, heap_bh71_w6_0_d1 : std_logic;
-signal heap_bh71_w5_0, heap_bh71_w5_0_d1 : std_logic;
-signal heap_bh71_w4_0, heap_bh71_w4_0_d1 : std_logic;
-signal heap_bh71_w3_0, heap_bh71_w3_0_d1 : std_logic;
-signal heap_bh71_w2_0, heap_bh71_w2_0_d1 : std_logic;
-signal heap_bh71_w1_0, heap_bh71_w1_0_d1 : std_logic;
-signal heap_bh71_w0_0, heap_bh71_w0_0_d1 : std_logic;
-signal DSP_bh71_ch1_0 :  std_logic_vector(42 downto 0);
-signal heap_bh71_w16_1, heap_bh71_w16_1_d1 : std_logic;
-signal heap_bh71_w15_1, heap_bh71_w15_1_d1 : std_logic;
-signal heap_bh71_w14_1, heap_bh71_w14_1_d1 : std_logic;
-signal heap_bh71_w13_1, heap_bh71_w13_1_d1 : std_logic;
-signal heap_bh71_w12_1, heap_bh71_w12_1_d1 : std_logic;
-signal heap_bh71_w11_1, heap_bh71_w11_1_d1 : std_logic;
-signal heap_bh71_w10_1, heap_bh71_w10_1_d1 : std_logic;
-signal heap_bh71_w9_1, heap_bh71_w9_1_d1 : std_logic;
-signal heap_bh71_w8_1, heap_bh71_w8_1_d1 : std_logic;
-signal heap_bh71_w7_1, heap_bh71_w7_1_d1 : std_logic;
-signal heap_bh71_w6_1, heap_bh71_w6_1_d1 : std_logic;
-signal heap_bh71_w5_1, heap_bh71_w5_1_d1 : std_logic;
-signal heap_bh71_w4_1, heap_bh71_w4_1_d1 : std_logic;
-signal heap_bh71_w3_1, heap_bh71_w3_1_d1 : std_logic;
-signal heap_bh71_w2_1, heap_bh71_w2_1_d1 : std_logic;
-signal heap_bh71_w1_1, heap_bh71_w1_1_d1 : std_logic;
-signal heap_bh71_w0_1, heap_bh71_w0_1_d1 : std_logic;
-signal DSP_bh71_ch2_0 :  std_logic_vector(42 downto 0);
-signal heap_bh71_w23_1, heap_bh71_w23_1_d1 : std_logic;
-signal heap_bh71_w22_1, heap_bh71_w22_1_d1 : std_logic;
-signal heap_bh71_w21_1, heap_bh71_w21_1_d1 : std_logic;
-signal heap_bh71_w20_1, heap_bh71_w20_1_d1 : std_logic;
-signal heap_bh71_w19_1, heap_bh71_w19_1_d1 : std_logic;
-signal heap_bh71_w18_1, heap_bh71_w18_1_d1 : std_logic;
-signal heap_bh71_w17_1, heap_bh71_w17_1_d1 : std_logic;
-signal heap_bh71_w16_2, heap_bh71_w16_2_d1 : std_logic;
-signal heap_bh71_w15_2, heap_bh71_w15_2_d1 : std_logic;
-signal heap_bh71_w14_2, heap_bh71_w14_2_d1 : std_logic;
-signal heap_bh71_w13_2, heap_bh71_w13_2_d1 : std_logic;
-signal heap_bh71_w12_2, heap_bh71_w12_2_d1 : std_logic;
-signal heap_bh71_w11_2, heap_bh71_w11_2_d1 : std_logic;
-signal heap_bh71_w10_2, heap_bh71_w10_2_d1 : std_logic;
-signal heap_bh71_w9_2, heap_bh71_w9_2_d1 : std_logic;
-signal heap_bh71_w8_2, heap_bh71_w8_2_d1 : std_logic;
-signal heap_bh71_w7_2, heap_bh71_w7_2_d1 : std_logic;
-signal heap_bh71_w6_2, heap_bh71_w6_2_d1 : std_logic;
-signal heap_bh71_w5_2, heap_bh71_w5_2_d1 : std_logic;
-signal heap_bh71_w4_2, heap_bh71_w4_2_d1 : std_logic;
-signal heap_bh71_w3_2, heap_bh71_w3_2_d1 : std_logic;
-signal heap_bh71_w2_2, heap_bh71_w2_2_d1 : std_logic;
-signal heap_bh71_w1_2, heap_bh71_w1_2_d1 : std_logic;
-signal heap_bh71_w0_2, heap_bh71_w0_2_d1 : std_logic;
-signal heap_bh71_w5_3, heap_bh71_w5_3_d1 : std_logic;
-signal heap_bh71_w16_3, heap_bh71_w16_3_d1 : std_logic;
-signal heap_bh71_w17_2, heap_bh71_w17_2_d1 : std_logic;
-signal heap_bh71_w18_2, heap_bh71_w18_2_d1 : std_logic;
-signal heap_bh71_w19_2, heap_bh71_w19_2_d1 : std_logic;
-signal heap_bh71_w20_2, heap_bh71_w20_2_d1 : std_logic;
-signal heap_bh71_w21_2, heap_bh71_w21_2_d1 : std_logic;
-signal heap_bh71_w22_2, heap_bh71_w22_2_d1 : std_logic;
-signal heap_bh71_w24_1, heap_bh71_w24_1_d1 : std_logic;
-signal heap_bh71_w25_1, heap_bh71_w25_1_d1 : std_logic;
-signal heap_bh71_w26_1, heap_bh71_w26_1_d1 : std_logic;
-signal heap_bh71_w27_1, heap_bh71_w27_1_d1 : std_logic;
-signal heap_bh71_w28_1, heap_bh71_w28_1_d1 : std_logic;
-signal heap_bh71_w29_1, heap_bh71_w29_1_d1 : std_logic;
-signal heap_bh71_w30_1, heap_bh71_w30_1_d1 : std_logic;
-signal heap_bh71_w31_1, heap_bh71_w31_1_d1 : std_logic;
-signal heap_bh71_w32_1, heap_bh71_w32_1_d1 : std_logic;
-signal heap_bh71_w33_1, heap_bh71_w33_1_d1 : std_logic;
-signal heap_bh71_w34_1, heap_bh71_w34_1_d1 : std_logic;
-signal heap_bh71_w35_1, heap_bh71_w35_1_d1 : std_logic;
-signal heap_bh71_w36_1, heap_bh71_w36_1_d1 : std_logic;
-signal heap_bh71_w37_1, heap_bh71_w37_1_d1 : std_logic;
-signal heap_bh71_w38_1, heap_bh71_w38_1_d1 : std_logic;
-signal heap_bh71_w39_1, heap_bh71_w39_1_d1 : std_logic;
-signal CompressorIn_bh71_0_0 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_0_1 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_0_0 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w0_3 : std_logic;
-signal heap_bh71_w1_3 : std_logic;
-signal heap_bh71_w2_3 : std_logic;
-signal CompressorIn_bh71_1_2 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_1_3 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_1_1 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w2_4 : std_logic;
-signal heap_bh71_w3_3 : std_logic;
-signal heap_bh71_w4_3 : std_logic;
-signal CompressorIn_bh71_2_4 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_2_5 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_2_2 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w4_4 : std_logic;
-signal heap_bh71_w5_4 : std_logic;
-signal heap_bh71_w6_3 : std_logic;
-signal CompressorIn_bh71_3_6 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_3_7 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_3_3 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w6_4 : std_logic;
-signal heap_bh71_w7_3 : std_logic;
-signal heap_bh71_w8_3 : std_logic;
-signal CompressorIn_bh71_4_8 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_4_9 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_4_4 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w8_4 : std_logic;
-signal heap_bh71_w9_3 : std_logic;
-signal heap_bh71_w10_3 : std_logic;
-signal CompressorIn_bh71_5_10 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_5_11 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_5_5 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w10_4 : std_logic;
-signal heap_bh71_w11_3 : std_logic;
-signal heap_bh71_w12_3 : std_logic;
-signal CompressorIn_bh71_6_12 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_6_13 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_6_6 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w12_4 : std_logic;
-signal heap_bh71_w13_3 : std_logic;
-signal heap_bh71_w14_3 : std_logic;
-signal CompressorIn_bh71_7_14 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_7_15 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_7_7 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w14_4 : std_logic;
-signal heap_bh71_w15_3 : std_logic;
-signal heap_bh71_w16_4 : std_logic;
-signal CompressorIn_bh71_8_16 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh71_8_17 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh71_8_8 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w16_5 : std_logic;
-signal heap_bh71_w17_3 : std_logic;
-signal heap_bh71_w18_3 : std_logic;
-signal CompressorIn_bh71_9_18 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_9_19 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_9_9 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w18_4 : std_logic;
-signal heap_bh71_w19_3 : std_logic;
-signal heap_bh71_w20_3 : std_logic;
-signal CompressorIn_bh71_10_20 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_10_21 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_10_10 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w20_4 : std_logic;
-signal heap_bh71_w21_3 : std_logic;
-signal heap_bh71_w22_3 : std_logic;
-signal CompressorIn_bh71_11_22 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh71_11_23 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh71_11_11 :  std_logic_vector(2 downto 0);
-signal heap_bh71_w22_4 : std_logic;
-signal heap_bh71_w23_2, heap_bh71_w23_2_d1 : std_logic;
-signal heap_bh71_w24_2 : std_logic;
-signal inAdder0_bh71_0 :  std_logic_vector(5 downto 0);
-signal inAdder1_bh71_0 :  std_logic_vector(5 downto 0);
-signal cin_bh71_0 : std_logic;
-signal outAdder_bh71_0 :  std_logic_vector(5 downto 0);
-signal heap_bh71_w0_4 : std_logic;
-signal heap_bh71_w1_4 : std_logic;
-signal heap_bh71_w2_5 : std_logic;
-signal heap_bh71_w3_4 : std_logic;
-signal heap_bh71_w4_5 : std_logic;
-signal heap_bh71_w5_5, heap_bh71_w5_5_d1 : std_logic;
-signal tempR_bh71_0, tempR_bh71_0_d1 :  std_logic_vector(4 downto 0);
-signal inAdder0_bh71_1 :  std_logic_vector(12 downto 0);
-signal inAdder1_bh71_1 :  std_logic_vector(12 downto 0);
-signal cin_bh71_1 : std_logic;
-signal outAdder_bh71_1 :  std_logic_vector(12 downto 0);
-signal heap_bh71_w5_6, heap_bh71_w5_6_d1 : std_logic;
-signal heap_bh71_w6_5, heap_bh71_w6_5_d1 : std_logic;
-signal heap_bh71_w7_4, heap_bh71_w7_4_d1 : std_logic;
-signal heap_bh71_w8_5, heap_bh71_w8_5_d1 : std_logic;
-signal heap_bh71_w9_4, heap_bh71_w9_4_d1 : std_logic;
-signal heap_bh71_w10_5, heap_bh71_w10_5_d1 : std_logic;
-signal heap_bh71_w11_4, heap_bh71_w11_4_d1 : std_logic;
-signal heap_bh71_w12_5, heap_bh71_w12_5_d1 : std_logic;
-signal heap_bh71_w13_4, heap_bh71_w13_4_d1 : std_logic;
-signal heap_bh71_w14_5, heap_bh71_w14_5_d1 : std_logic;
-signal heap_bh71_w15_4, heap_bh71_w15_4_d1 : std_logic;
-signal heap_bh71_w16_6, heap_bh71_w16_6_d1 : std_logic;
-signal heap_bh71_w17_4, heap_bh71_w17_4_d1 : std_logic;
-signal inAdder0_bh71_2 :  std_logic_vector(6 downto 0);
-signal inAdder1_bh71_2 :  std_logic_vector(6 downto 0);
-signal cin_bh71_2 : std_logic;
-signal outAdder_bh71_2 :  std_logic_vector(6 downto 0);
-signal heap_bh71_w17_5, heap_bh71_w17_5_d1 : std_logic;
-signal heap_bh71_w18_5, heap_bh71_w18_5_d1 : std_logic;
-signal heap_bh71_w19_4, heap_bh71_w19_4_d1 : std_logic;
-signal heap_bh71_w20_5, heap_bh71_w20_5_d1 : std_logic;
-signal heap_bh71_w21_4, heap_bh71_w21_4_d1 : std_logic;
-signal heap_bh71_w22_5, heap_bh71_w22_5_d1 : std_logic;
-signal heap_bh71_w23_3, heap_bh71_w23_3_d1 : std_logic;
-signal inAdder0_bh71_3 :  std_logic_vector(16 downto 0);
-signal inAdder1_bh71_3 :  std_logic_vector(16 downto 0);
-signal cin_bh71_3 : std_logic;
-signal outAdder_bh71_3 :  std_logic_vector(16 downto 0);
-signal heap_bh71_w24_3, heap_bh71_w24_3_d1 : std_logic;
-signal heap_bh71_w25_2, heap_bh71_w25_2_d1 : std_logic;
-signal heap_bh71_w26_2, heap_bh71_w26_2_d1 : std_logic;
-signal heap_bh71_w27_2, heap_bh71_w27_2_d1 : std_logic;
-signal heap_bh71_w28_2, heap_bh71_w28_2_d1 : std_logic;
-signal heap_bh71_w29_2, heap_bh71_w29_2_d1 : std_logic;
-signal heap_bh71_w30_2, heap_bh71_w30_2_d1 : std_logic;
-signal heap_bh71_w31_2, heap_bh71_w31_2_d1 : std_logic;
-signal heap_bh71_w32_2, heap_bh71_w32_2_d1 : std_logic;
-signal heap_bh71_w33_2, heap_bh71_w33_2_d1 : std_logic;
-signal heap_bh71_w34_2, heap_bh71_w34_2_d1 : std_logic;
-signal heap_bh71_w35_2, heap_bh71_w35_2_d1 : std_logic;
-signal heap_bh71_w36_2, heap_bh71_w36_2_d1 : std_logic;
-signal heap_bh71_w37_2, heap_bh71_w37_2_d1 : std_logic;
-signal heap_bh71_w38_2, heap_bh71_w38_2_d1 : std_logic;
-signal heap_bh71_w39_2, heap_bh71_w39_2_d1 : std_logic;
-signal heap_bh71_w40_1, heap_bh71_w40_1_d1 : std_logic;
-signal finalAdderIn0_bh71 :  std_logic_vector(36 downto 0);
-signal finalAdderIn1_bh71 :  std_logic_vector(36 downto 0);
-signal finalAdderCin_bh71 : std_logic;
-signal finalAdderOut_bh71 :  std_logic_vector(36 downto 0);
-signal CompressionResult71 :  std_logic_vector(41 downto 0);
+signal XX_m95 :  std_logic_vector(34 downto 0);
+signal YY_m95 :  std_logic_vector(29 downto 0);
+signal DSP_bh96_ch0_0 :  std_logic_vector(42 downto 0);
+signal heap_bh96_w40_0 : std_logic;
+signal heap_bh96_w39_0 : std_logic;
+signal heap_bh96_w38_0 : std_logic;
+signal heap_bh96_w37_0 : std_logic;
+signal heap_bh96_w36_0 : std_logic;
+signal heap_bh96_w35_0 : std_logic;
+signal heap_bh96_w34_0 : std_logic;
+signal heap_bh96_w33_0 : std_logic;
+signal heap_bh96_w32_0 : std_logic;
+signal heap_bh96_w31_0 : std_logic;
+signal heap_bh96_w30_0 : std_logic;
+signal heap_bh96_w29_0 : std_logic;
+signal heap_bh96_w28_0 : std_logic;
+signal heap_bh96_w27_0 : std_logic;
+signal heap_bh96_w26_0 : std_logic;
+signal heap_bh96_w25_0 : std_logic;
+signal heap_bh96_w24_0 : std_logic;
+signal heap_bh96_w23_0 : std_logic;
+signal heap_bh96_w22_0 : std_logic;
+signal heap_bh96_w21_0 : std_logic;
+signal heap_bh96_w20_0 : std_logic;
+signal heap_bh96_w19_0 : std_logic;
+signal heap_bh96_w18_0 : std_logic;
+signal heap_bh96_w17_0 : std_logic;
+signal heap_bh96_w16_0 : std_logic;
+signal heap_bh96_w15_0 : std_logic;
+signal heap_bh96_w14_0 : std_logic;
+signal heap_bh96_w13_0 : std_logic;
+signal heap_bh96_w12_0 : std_logic;
+signal heap_bh96_w11_0 : std_logic;
+signal heap_bh96_w10_0 : std_logic;
+signal heap_bh96_w9_0 : std_logic;
+signal heap_bh96_w8_0 : std_logic;
+signal heap_bh96_w7_0 : std_logic;
+signal heap_bh96_w6_0 : std_logic;
+signal heap_bh96_w5_0 : std_logic;
+signal heap_bh96_w4_0 : std_logic;
+signal heap_bh96_w3_0 : std_logic;
+signal heap_bh96_w2_0 : std_logic;
+signal heap_bh96_w1_0 : std_logic;
+signal heap_bh96_w0_0 : std_logic;
+signal DSP_bh96_ch1_0 :  std_logic_vector(42 downto 0);
+signal heap_bh96_w19_1 : std_logic;
+signal heap_bh96_w18_1 : std_logic;
+signal heap_bh96_w17_1 : std_logic;
+signal heap_bh96_w16_1 : std_logic;
+signal heap_bh96_w15_1 : std_logic;
+signal heap_bh96_w14_1 : std_logic;
+signal heap_bh96_w13_1 : std_logic;
+signal heap_bh96_w12_1 : std_logic;
+signal heap_bh96_w11_1 : std_logic;
+signal heap_bh96_w10_1 : std_logic;
+signal heap_bh96_w9_1 : std_logic;
+signal heap_bh96_w8_1 : std_logic;
+signal heap_bh96_w7_1 : std_logic;
+signal heap_bh96_w6_1 : std_logic;
+signal heap_bh96_w5_1 : std_logic;
+signal heap_bh96_w4_1 : std_logic;
+signal heap_bh96_w3_1 : std_logic;
+signal heap_bh96_w2_1 : std_logic;
+signal heap_bh96_w1_1 : std_logic;
+signal heap_bh96_w0_1 : std_logic;
+signal DSP_bh96_ch2_0 :  std_logic_vector(42 downto 0);
+signal heap_bh96_w26_1 : std_logic;
+signal heap_bh96_w25_1 : std_logic;
+signal heap_bh96_w24_1 : std_logic;
+signal heap_bh96_w23_1 : std_logic;
+signal heap_bh96_w22_1 : std_logic;
+signal heap_bh96_w21_1 : std_logic;
+signal heap_bh96_w20_1 : std_logic;
+signal heap_bh96_w19_2 : std_logic;
+signal heap_bh96_w18_2 : std_logic;
+signal heap_bh96_w17_2 : std_logic;
+signal heap_bh96_w16_2 : std_logic;
+signal heap_bh96_w15_2 : std_logic;
+signal heap_bh96_w14_2 : std_logic;
+signal heap_bh96_w13_2 : std_logic;
+signal heap_bh96_w12_2 : std_logic;
+signal heap_bh96_w11_2 : std_logic;
+signal heap_bh96_w10_2 : std_logic;
+signal heap_bh96_w9_2 : std_logic;
+signal heap_bh96_w8_2 : std_logic;
+signal heap_bh96_w7_2 : std_logic;
+signal heap_bh96_w6_2 : std_logic;
+signal heap_bh96_w5_2 : std_logic;
+signal heap_bh96_w4_2 : std_logic;
+signal heap_bh96_w3_2 : std_logic;
+signal heap_bh96_w2_2 : std_logic;
+signal heap_bh96_w1_2 : std_logic;
+signal heap_bh96_w0_2 : std_logic;
+signal heap_bh96_w5_3 : std_logic;
+signal heap_bh96_w19_3 : std_logic;
+signal heap_bh96_w20_2 : std_logic;
+signal heap_bh96_w21_2 : std_logic;
+signal heap_bh96_w22_2 : std_logic;
+signal heap_bh96_w23_2 : std_logic;
+signal heap_bh96_w24_2 : std_logic;
+signal heap_bh96_w25_2 : std_logic;
+signal heap_bh96_w27_1 : std_logic;
+signal heap_bh96_w28_1 : std_logic;
+signal heap_bh96_w29_1 : std_logic;
+signal heap_bh96_w30_1 : std_logic;
+signal heap_bh96_w31_1 : std_logic;
+signal heap_bh96_w32_1 : std_logic;
+signal heap_bh96_w33_1 : std_logic;
+signal heap_bh96_w34_1 : std_logic;
+signal heap_bh96_w35_1 : std_logic;
+signal heap_bh96_w36_1 : std_logic;
+signal heap_bh96_w37_1 : std_logic;
+signal heap_bh96_w38_1 : std_logic;
+signal heap_bh96_w39_1 : std_logic;
+signal heap_bh96_w40_1 : std_logic;
+signal CompressorIn_bh96_0_0 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_0_1 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_0_0 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w0_3 : std_logic;
+signal heap_bh96_w1_3 : std_logic;
+signal heap_bh96_w2_3 : std_logic;
+signal CompressorIn_bh96_1_2 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_1_3 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_1_1 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w2_4 : std_logic;
+signal heap_bh96_w3_3 : std_logic;
+signal heap_bh96_w4_3 : std_logic;
+signal CompressorIn_bh96_2_4 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_2_5 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_2_2 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w4_4 : std_logic;
+signal heap_bh96_w5_4 : std_logic;
+signal heap_bh96_w6_3 : std_logic;
+signal CompressorIn_bh96_3_6 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_3_7 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_3_3 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w6_4 : std_logic;
+signal heap_bh96_w7_3 : std_logic;
+signal heap_bh96_w8_3 : std_logic;
+signal CompressorIn_bh96_4_8 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_4_9 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_4_4 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w8_4 : std_logic;
+signal heap_bh96_w9_3 : std_logic;
+signal heap_bh96_w10_3 : std_logic;
+signal CompressorIn_bh96_5_10 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_5_11 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_5_5 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w10_4 : std_logic;
+signal heap_bh96_w11_3 : std_logic;
+signal heap_bh96_w12_3 : std_logic;
+signal CompressorIn_bh96_6_12 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_6_13 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_6_6 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w12_4 : std_logic;
+signal heap_bh96_w13_3 : std_logic;
+signal heap_bh96_w14_3 : std_logic;
+signal CompressorIn_bh96_7_14 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_7_15 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_7_7 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w14_4 : std_logic;
+signal heap_bh96_w15_3 : std_logic;
+signal heap_bh96_w16_3 : std_logic;
+signal CompressorIn_bh96_8_16 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_8_17 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_8_8 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w16_4 : std_logic;
+signal heap_bh96_w17_3 : std_logic;
+signal heap_bh96_w18_3 : std_logic;
+signal CompressorIn_bh96_9_18 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_9_19 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_9_9 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w18_4 : std_logic;
+signal heap_bh96_w19_4 : std_logic;
+signal heap_bh96_w20_3 : std_logic;
+signal CompressorIn_bh96_10_20 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_10_21 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_10_10 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w20_4 : std_logic;
+signal heap_bh96_w21_3 : std_logic;
+signal heap_bh96_w22_3 : std_logic;
+signal CompressorIn_bh96_11_22 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_11_23 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_11_11 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w22_4 : std_logic;
+signal heap_bh96_w23_3 : std_logic;
+signal heap_bh96_w24_3 : std_logic;
+signal CompressorIn_bh96_12_24 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh96_12_25 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh96_12_12 :  std_logic_vector(2 downto 0);
+signal heap_bh96_w24_4 : std_logic;
+signal heap_bh96_w25_3 : std_logic;
+signal heap_bh96_w26_2 : std_logic;
+signal inAdder0_bh96_0, inAdder0_bh96_0_d1 :  std_logic_vector(5 downto 0);
+signal inAdder1_bh96_0, inAdder1_bh96_0_d1 :  std_logic_vector(5 downto 0);
+signal cin_bh96_0, cin_bh96_0_d1 : std_logic;
+signal outAdder_bh96_0 :  std_logic_vector(5 downto 0);
+signal heap_bh96_w0_4 : std_logic;
+signal heap_bh96_w1_4 : std_logic;
+signal heap_bh96_w2_5 : std_logic;
+signal heap_bh96_w3_4 : std_logic;
+signal heap_bh96_w4_5 : std_logic;
+signal heap_bh96_w5_5, heap_bh96_w5_5_d1 : std_logic;
+signal tempR_bh96_0, tempR_bh96_0_d1 :  std_logic_vector(4 downto 0);
+signal inAdder0_bh96_1, inAdder0_bh96_1_d1 :  std_logic_vector(14 downto 0);
+signal inAdder1_bh96_1, inAdder1_bh96_1_d1 :  std_logic_vector(14 downto 0);
+signal cin_bh96_1, cin_bh96_1_d1 : std_logic;
+signal outAdder_bh96_1 :  std_logic_vector(14 downto 0);
+signal heap_bh96_w5_6, heap_bh96_w5_6_d1 : std_logic;
+signal heap_bh96_w6_5, heap_bh96_w6_5_d1 : std_logic;
+signal heap_bh96_w7_4, heap_bh96_w7_4_d1 : std_logic;
+signal heap_bh96_w8_5, heap_bh96_w8_5_d1 : std_logic;
+signal heap_bh96_w9_4, heap_bh96_w9_4_d1 : std_logic;
+signal heap_bh96_w10_5, heap_bh96_w10_5_d1 : std_logic;
+signal heap_bh96_w11_4, heap_bh96_w11_4_d1 : std_logic;
+signal heap_bh96_w12_5, heap_bh96_w12_5_d1 : std_logic;
+signal heap_bh96_w13_4, heap_bh96_w13_4_d1 : std_logic;
+signal heap_bh96_w14_5, heap_bh96_w14_5_d1 : std_logic;
+signal heap_bh96_w15_4, heap_bh96_w15_4_d1 : std_logic;
+signal heap_bh96_w16_5, heap_bh96_w16_5_d1 : std_logic;
+signal heap_bh96_w17_4, heap_bh96_w17_4_d1 : std_logic;
+signal heap_bh96_w18_5, heap_bh96_w18_5_d1 : std_logic;
+signal heap_bh96_w19_5, heap_bh96_w19_5_d1 : std_logic;
+signal inAdder0_bh96_2, inAdder0_bh96_2_d1 :  std_logic_vector(7 downto 0);
+signal inAdder1_bh96_2, inAdder1_bh96_2_d1 :  std_logic_vector(7 downto 0);
+signal cin_bh96_2, cin_bh96_2_d1 : std_logic;
+signal outAdder_bh96_2 :  std_logic_vector(7 downto 0);
+signal heap_bh96_w19_6, heap_bh96_w19_6_d1 : std_logic;
+signal heap_bh96_w20_5, heap_bh96_w20_5_d1 : std_logic;
+signal heap_bh96_w21_4, heap_bh96_w21_4_d1 : std_logic;
+signal heap_bh96_w22_5, heap_bh96_w22_5_d1 : std_logic;
+signal heap_bh96_w23_4, heap_bh96_w23_4_d1 : std_logic;
+signal heap_bh96_w24_5, heap_bh96_w24_5_d1 : std_logic;
+signal heap_bh96_w25_4, heap_bh96_w25_4_d1 : std_logic;
+signal heap_bh96_w26_3, heap_bh96_w26_3_d1 : std_logic;
+signal inAdder0_bh96_3, inAdder0_bh96_3_d1 :  std_logic_vector(15 downto 0);
+signal inAdder1_bh96_3, inAdder1_bh96_3_d1 :  std_logic_vector(15 downto 0);
+signal cin_bh96_3, cin_bh96_3_d1 : std_logic;
+signal outAdder_bh96_3 :  std_logic_vector(15 downto 0);
+signal heap_bh96_w26_4, heap_bh96_w26_4_d1 : std_logic;
+signal heap_bh96_w27_2, heap_bh96_w27_2_d1 : std_logic;
+signal heap_bh96_w28_2, heap_bh96_w28_2_d1 : std_logic;
+signal heap_bh96_w29_2, heap_bh96_w29_2_d1 : std_logic;
+signal heap_bh96_w30_2, heap_bh96_w30_2_d1 : std_logic;
+signal heap_bh96_w31_2, heap_bh96_w31_2_d1 : std_logic;
+signal heap_bh96_w32_2, heap_bh96_w32_2_d1 : std_logic;
+signal heap_bh96_w33_2, heap_bh96_w33_2_d1 : std_logic;
+signal heap_bh96_w34_2, heap_bh96_w34_2_d1 : std_logic;
+signal heap_bh96_w35_2, heap_bh96_w35_2_d1 : std_logic;
+signal heap_bh96_w36_2, heap_bh96_w36_2_d1 : std_logic;
+signal heap_bh96_w37_2, heap_bh96_w37_2_d1 : std_logic;
+signal heap_bh96_w38_2, heap_bh96_w38_2_d1 : std_logic;
+signal heap_bh96_w39_2, heap_bh96_w39_2_d1 : std_logic;
+signal heap_bh96_w40_2, heap_bh96_w40_2_d1 : std_logic;
+signal finalAdderIn0_bh96 :  std_logic_vector(36 downto 0);
+signal finalAdderIn1_bh96 :  std_logic_vector(36 downto 0);
+signal finalAdderCin_bh96 : std_logic;
+signal finalAdderOut_bh96 :  std_logic_vector(36 downto 0);
+signal CompressionResult96 :  std_logic_vector(41 downto 0);
 begin
    process(clk)
       begin
          if clk'event and clk = '1' then
-            heap_bh71_w40_0_d1 <=  heap_bh71_w40_0;
-            heap_bh71_w40_0_d2 <=  heap_bh71_w40_0_d1;
-            heap_bh71_w39_0_d1 <=  heap_bh71_w39_0;
-            heap_bh71_w38_0_d1 <=  heap_bh71_w38_0;
-            heap_bh71_w37_0_d1 <=  heap_bh71_w37_0;
-            heap_bh71_w36_0_d1 <=  heap_bh71_w36_0;
-            heap_bh71_w35_0_d1 <=  heap_bh71_w35_0;
-            heap_bh71_w34_0_d1 <=  heap_bh71_w34_0;
-            heap_bh71_w33_0_d1 <=  heap_bh71_w33_0;
-            heap_bh71_w32_0_d1 <=  heap_bh71_w32_0;
-            heap_bh71_w31_0_d1 <=  heap_bh71_w31_0;
-            heap_bh71_w30_0_d1 <=  heap_bh71_w30_0;
-            heap_bh71_w29_0_d1 <=  heap_bh71_w29_0;
-            heap_bh71_w28_0_d1 <=  heap_bh71_w28_0;
-            heap_bh71_w27_0_d1 <=  heap_bh71_w27_0;
-            heap_bh71_w26_0_d1 <=  heap_bh71_w26_0;
-            heap_bh71_w25_0_d1 <=  heap_bh71_w25_0;
-            heap_bh71_w24_0_d1 <=  heap_bh71_w24_0;
-            heap_bh71_w23_0_d1 <=  heap_bh71_w23_0;
-            heap_bh71_w22_0_d1 <=  heap_bh71_w22_0;
-            heap_bh71_w21_0_d1 <=  heap_bh71_w21_0;
-            heap_bh71_w20_0_d1 <=  heap_bh71_w20_0;
-            heap_bh71_w19_0_d1 <=  heap_bh71_w19_0;
-            heap_bh71_w18_0_d1 <=  heap_bh71_w18_0;
-            heap_bh71_w17_0_d1 <=  heap_bh71_w17_0;
-            heap_bh71_w16_0_d1 <=  heap_bh71_w16_0;
-            heap_bh71_w15_0_d1 <=  heap_bh71_w15_0;
-            heap_bh71_w14_0_d1 <=  heap_bh71_w14_0;
-            heap_bh71_w13_0_d1 <=  heap_bh71_w13_0;
-            heap_bh71_w12_0_d1 <=  heap_bh71_w12_0;
-            heap_bh71_w11_0_d1 <=  heap_bh71_w11_0;
-            heap_bh71_w10_0_d1 <=  heap_bh71_w10_0;
-            heap_bh71_w9_0_d1 <=  heap_bh71_w9_0;
-            heap_bh71_w8_0_d1 <=  heap_bh71_w8_0;
-            heap_bh71_w7_0_d1 <=  heap_bh71_w7_0;
-            heap_bh71_w6_0_d1 <=  heap_bh71_w6_0;
-            heap_bh71_w5_0_d1 <=  heap_bh71_w5_0;
-            heap_bh71_w4_0_d1 <=  heap_bh71_w4_0;
-            heap_bh71_w3_0_d1 <=  heap_bh71_w3_0;
-            heap_bh71_w2_0_d1 <=  heap_bh71_w2_0;
-            heap_bh71_w1_0_d1 <=  heap_bh71_w1_0;
-            heap_bh71_w0_0_d1 <=  heap_bh71_w0_0;
-            heap_bh71_w16_1_d1 <=  heap_bh71_w16_1;
-            heap_bh71_w15_1_d1 <=  heap_bh71_w15_1;
-            heap_bh71_w14_1_d1 <=  heap_bh71_w14_1;
-            heap_bh71_w13_1_d1 <=  heap_bh71_w13_1;
-            heap_bh71_w12_1_d1 <=  heap_bh71_w12_1;
-            heap_bh71_w11_1_d1 <=  heap_bh71_w11_1;
-            heap_bh71_w10_1_d1 <=  heap_bh71_w10_1;
-            heap_bh71_w9_1_d1 <=  heap_bh71_w9_1;
-            heap_bh71_w8_1_d1 <=  heap_bh71_w8_1;
-            heap_bh71_w7_1_d1 <=  heap_bh71_w7_1;
-            heap_bh71_w6_1_d1 <=  heap_bh71_w6_1;
-            heap_bh71_w5_1_d1 <=  heap_bh71_w5_1;
-            heap_bh71_w4_1_d1 <=  heap_bh71_w4_1;
-            heap_bh71_w3_1_d1 <=  heap_bh71_w3_1;
-            heap_bh71_w2_1_d1 <=  heap_bh71_w2_1;
-            heap_bh71_w1_1_d1 <=  heap_bh71_w1_1;
-            heap_bh71_w0_1_d1 <=  heap_bh71_w0_1;
-            heap_bh71_w23_1_d1 <=  heap_bh71_w23_1;
-            heap_bh71_w22_1_d1 <=  heap_bh71_w22_1;
-            heap_bh71_w21_1_d1 <=  heap_bh71_w21_1;
-            heap_bh71_w20_1_d1 <=  heap_bh71_w20_1;
-            heap_bh71_w19_1_d1 <=  heap_bh71_w19_1;
-            heap_bh71_w18_1_d1 <=  heap_bh71_w18_1;
-            heap_bh71_w17_1_d1 <=  heap_bh71_w17_1;
-            heap_bh71_w16_2_d1 <=  heap_bh71_w16_2;
-            heap_bh71_w15_2_d1 <=  heap_bh71_w15_2;
-            heap_bh71_w14_2_d1 <=  heap_bh71_w14_2;
-            heap_bh71_w13_2_d1 <=  heap_bh71_w13_2;
-            heap_bh71_w12_2_d1 <=  heap_bh71_w12_2;
-            heap_bh71_w11_2_d1 <=  heap_bh71_w11_2;
-            heap_bh71_w10_2_d1 <=  heap_bh71_w10_2;
-            heap_bh71_w9_2_d1 <=  heap_bh71_w9_2;
-            heap_bh71_w8_2_d1 <=  heap_bh71_w8_2;
-            heap_bh71_w7_2_d1 <=  heap_bh71_w7_2;
-            heap_bh71_w6_2_d1 <=  heap_bh71_w6_2;
-            heap_bh71_w5_2_d1 <=  heap_bh71_w5_2;
-            heap_bh71_w4_2_d1 <=  heap_bh71_w4_2;
-            heap_bh71_w3_2_d1 <=  heap_bh71_w3_2;
-            heap_bh71_w2_2_d1 <=  heap_bh71_w2_2;
-            heap_bh71_w1_2_d1 <=  heap_bh71_w1_2;
-            heap_bh71_w0_2_d1 <=  heap_bh71_w0_2;
-            heap_bh71_w5_3_d1 <=  heap_bh71_w5_3;
-            heap_bh71_w16_3_d1 <=  heap_bh71_w16_3;
-            heap_bh71_w17_2_d1 <=  heap_bh71_w17_2;
-            heap_bh71_w18_2_d1 <=  heap_bh71_w18_2;
-            heap_bh71_w19_2_d1 <=  heap_bh71_w19_2;
-            heap_bh71_w20_2_d1 <=  heap_bh71_w20_2;
-            heap_bh71_w21_2_d1 <=  heap_bh71_w21_2;
-            heap_bh71_w22_2_d1 <=  heap_bh71_w22_2;
-            heap_bh71_w24_1_d1 <=  heap_bh71_w24_1;
-            heap_bh71_w25_1_d1 <=  heap_bh71_w25_1;
-            heap_bh71_w26_1_d1 <=  heap_bh71_w26_1;
-            heap_bh71_w27_1_d1 <=  heap_bh71_w27_1;
-            heap_bh71_w28_1_d1 <=  heap_bh71_w28_1;
-            heap_bh71_w29_1_d1 <=  heap_bh71_w29_1;
-            heap_bh71_w30_1_d1 <=  heap_bh71_w30_1;
-            heap_bh71_w31_1_d1 <=  heap_bh71_w31_1;
-            heap_bh71_w32_1_d1 <=  heap_bh71_w32_1;
-            heap_bh71_w33_1_d1 <=  heap_bh71_w33_1;
-            heap_bh71_w34_1_d1 <=  heap_bh71_w34_1;
-            heap_bh71_w35_1_d1 <=  heap_bh71_w35_1;
-            heap_bh71_w36_1_d1 <=  heap_bh71_w36_1;
-            heap_bh71_w37_1_d1 <=  heap_bh71_w37_1;
-            heap_bh71_w38_1_d1 <=  heap_bh71_w38_1;
-            heap_bh71_w39_1_d1 <=  heap_bh71_w39_1;
-            heap_bh71_w23_2_d1 <=  heap_bh71_w23_2;
-            heap_bh71_w5_5_d1 <=  heap_bh71_w5_5;
-            tempR_bh71_0_d1 <=  tempR_bh71_0;
-            heap_bh71_w5_6_d1 <=  heap_bh71_w5_6;
-            heap_bh71_w6_5_d1 <=  heap_bh71_w6_5;
-            heap_bh71_w7_4_d1 <=  heap_bh71_w7_4;
-            heap_bh71_w8_5_d1 <=  heap_bh71_w8_5;
-            heap_bh71_w9_4_d1 <=  heap_bh71_w9_4;
-            heap_bh71_w10_5_d1 <=  heap_bh71_w10_5;
-            heap_bh71_w11_4_d1 <=  heap_bh71_w11_4;
-            heap_bh71_w12_5_d1 <=  heap_bh71_w12_5;
-            heap_bh71_w13_4_d1 <=  heap_bh71_w13_4;
-            heap_bh71_w14_5_d1 <=  heap_bh71_w14_5;
-            heap_bh71_w15_4_d1 <=  heap_bh71_w15_4;
-            heap_bh71_w16_6_d1 <=  heap_bh71_w16_6;
-            heap_bh71_w17_4_d1 <=  heap_bh71_w17_4;
-            heap_bh71_w17_5_d1 <=  heap_bh71_w17_5;
-            heap_bh71_w18_5_d1 <=  heap_bh71_w18_5;
-            heap_bh71_w19_4_d1 <=  heap_bh71_w19_4;
-            heap_bh71_w20_5_d1 <=  heap_bh71_w20_5;
-            heap_bh71_w21_4_d1 <=  heap_bh71_w21_4;
-            heap_bh71_w22_5_d1 <=  heap_bh71_w22_5;
-            heap_bh71_w23_3_d1 <=  heap_bh71_w23_3;
-            heap_bh71_w24_3_d1 <=  heap_bh71_w24_3;
-            heap_bh71_w25_2_d1 <=  heap_bh71_w25_2;
-            heap_bh71_w26_2_d1 <=  heap_bh71_w26_2;
-            heap_bh71_w27_2_d1 <=  heap_bh71_w27_2;
-            heap_bh71_w28_2_d1 <=  heap_bh71_w28_2;
-            heap_bh71_w29_2_d1 <=  heap_bh71_w29_2;
-            heap_bh71_w30_2_d1 <=  heap_bh71_w30_2;
-            heap_bh71_w31_2_d1 <=  heap_bh71_w31_2;
-            heap_bh71_w32_2_d1 <=  heap_bh71_w32_2;
-            heap_bh71_w33_2_d1 <=  heap_bh71_w33_2;
-            heap_bh71_w34_2_d1 <=  heap_bh71_w34_2;
-            heap_bh71_w35_2_d1 <=  heap_bh71_w35_2;
-            heap_bh71_w36_2_d1 <=  heap_bh71_w36_2;
-            heap_bh71_w37_2_d1 <=  heap_bh71_w37_2;
-            heap_bh71_w38_2_d1 <=  heap_bh71_w38_2;
-            heap_bh71_w39_2_d1 <=  heap_bh71_w39_2;
-            heap_bh71_w40_1_d1 <=  heap_bh71_w40_1;
+            inAdder0_bh96_0_d1 <=  inAdder0_bh96_0;
+            inAdder1_bh96_0_d1 <=  inAdder1_bh96_0;
+            cin_bh96_0_d1 <=  cin_bh96_0;
+            heap_bh96_w5_5_d1 <=  heap_bh96_w5_5;
+            tempR_bh96_0_d1 <=  tempR_bh96_0;
+            inAdder0_bh96_1_d1 <=  inAdder0_bh96_1;
+            inAdder1_bh96_1_d1 <=  inAdder1_bh96_1;
+            cin_bh96_1_d1 <=  cin_bh96_1;
+            heap_bh96_w5_6_d1 <=  heap_bh96_w5_6;
+            heap_bh96_w6_5_d1 <=  heap_bh96_w6_5;
+            heap_bh96_w7_4_d1 <=  heap_bh96_w7_4;
+            heap_bh96_w8_5_d1 <=  heap_bh96_w8_5;
+            heap_bh96_w9_4_d1 <=  heap_bh96_w9_4;
+            heap_bh96_w10_5_d1 <=  heap_bh96_w10_5;
+            heap_bh96_w11_4_d1 <=  heap_bh96_w11_4;
+            heap_bh96_w12_5_d1 <=  heap_bh96_w12_5;
+            heap_bh96_w13_4_d1 <=  heap_bh96_w13_4;
+            heap_bh96_w14_5_d1 <=  heap_bh96_w14_5;
+            heap_bh96_w15_4_d1 <=  heap_bh96_w15_4;
+            heap_bh96_w16_5_d1 <=  heap_bh96_w16_5;
+            heap_bh96_w17_4_d1 <=  heap_bh96_w17_4;
+            heap_bh96_w18_5_d1 <=  heap_bh96_w18_5;
+            heap_bh96_w19_5_d1 <=  heap_bh96_w19_5;
+            inAdder0_bh96_2_d1 <=  inAdder0_bh96_2;
+            inAdder1_bh96_2_d1 <=  inAdder1_bh96_2;
+            cin_bh96_2_d1 <=  cin_bh96_2;
+            heap_bh96_w19_6_d1 <=  heap_bh96_w19_6;
+            heap_bh96_w20_5_d1 <=  heap_bh96_w20_5;
+            heap_bh96_w21_4_d1 <=  heap_bh96_w21_4;
+            heap_bh96_w22_5_d1 <=  heap_bh96_w22_5;
+            heap_bh96_w23_4_d1 <=  heap_bh96_w23_4;
+            heap_bh96_w24_5_d1 <=  heap_bh96_w24_5;
+            heap_bh96_w25_4_d1 <=  heap_bh96_w25_4;
+            heap_bh96_w26_3_d1 <=  heap_bh96_w26_3;
+            inAdder0_bh96_3_d1 <=  inAdder0_bh96_3;
+            inAdder1_bh96_3_d1 <=  inAdder1_bh96_3;
+            cin_bh96_3_d1 <=  cin_bh96_3;
+            heap_bh96_w26_4_d1 <=  heap_bh96_w26_4;
+            heap_bh96_w27_2_d1 <=  heap_bh96_w27_2;
+            heap_bh96_w28_2_d1 <=  heap_bh96_w28_2;
+            heap_bh96_w29_2_d1 <=  heap_bh96_w29_2;
+            heap_bh96_w30_2_d1 <=  heap_bh96_w30_2;
+            heap_bh96_w31_2_d1 <=  heap_bh96_w31_2;
+            heap_bh96_w32_2_d1 <=  heap_bh96_w32_2;
+            heap_bh96_w33_2_d1 <=  heap_bh96_w33_2;
+            heap_bh96_w34_2_d1 <=  heap_bh96_w34_2;
+            heap_bh96_w35_2_d1 <=  heap_bh96_w35_2;
+            heap_bh96_w36_2_d1 <=  heap_bh96_w36_2;
+            heap_bh96_w37_2_d1 <=  heap_bh96_w37_2;
+            heap_bh96_w38_2_d1 <=  heap_bh96_w38_2;
+            heap_bh96_w39_2_d1 <=  heap_bh96_w39_2;
+            heap_bh96_w40_2_d1 <=  heap_bh96_w40_2;
          end if;
       end process;
-   XX_m70 <= Y ;
-   YY_m70 <= X ;
+   XX_m95 <= Y ;
+   YY_m95 <= X ;
    
    -- Beginning of code generated by BitHeap::generateCompressorVHDL
    -- code generated by BitHeap::generateSupertileVHDL()
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh71_ch0_0 <= ("" & XX_m70(34 downto 10) & "") * ("" & YY_m70(29 downto 12) & "");
-   heap_bh71_w40_0 <= not( DSP_bh71_ch0_0(42) ); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w39_0 <= DSP_bh71_ch0_0(41); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w38_0 <= DSP_bh71_ch0_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w37_0 <= DSP_bh71_ch0_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w36_0 <= DSP_bh71_ch0_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w35_0 <= DSP_bh71_ch0_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w34_0 <= DSP_bh71_ch0_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w33_0 <= DSP_bh71_ch0_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w32_0 <= DSP_bh71_ch0_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w31_0 <= DSP_bh71_ch0_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w30_0 <= DSP_bh71_ch0_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w29_0 <= DSP_bh71_ch0_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w28_0 <= DSP_bh71_ch0_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w27_0 <= DSP_bh71_ch0_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w26_0 <= DSP_bh71_ch0_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w25_0 <= DSP_bh71_ch0_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w24_0 <= DSP_bh71_ch0_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w23_0 <= DSP_bh71_ch0_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w22_0 <= DSP_bh71_ch0_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w21_0 <= DSP_bh71_ch0_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w20_0 <= DSP_bh71_ch0_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w19_0 <= DSP_bh71_ch0_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w18_0 <= DSP_bh71_ch0_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w17_0 <= DSP_bh71_ch0_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w16_0 <= DSP_bh71_ch0_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w15_0 <= DSP_bh71_ch0_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w14_0 <= DSP_bh71_ch0_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w13_0 <= DSP_bh71_ch0_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w12_0 <= DSP_bh71_ch0_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w11_0 <= DSP_bh71_ch0_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w10_0 <= DSP_bh71_ch0_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w9_0 <= DSP_bh71_ch0_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w8_0 <= DSP_bh71_ch0_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w7_0 <= DSP_bh71_ch0_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w6_0 <= DSP_bh71_ch0_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w5_0 <= DSP_bh71_ch0_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w4_0 <= DSP_bh71_ch0_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w3_0 <= DSP_bh71_ch0_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w2_0 <= DSP_bh71_ch0_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w1_0 <= DSP_bh71_ch0_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w0_0 <= DSP_bh71_ch0_0(2); -- cycle= 0 cp= 2.387e-09
+   DSP_bh96_ch0_0 <= ("0" & XX_m95(34 downto 11) & "") * ("0" & YY_m95(29 downto 13) & "");
+   heap_bh96_w40_0 <= DSP_bh96_ch0_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w39_0 <= DSP_bh96_ch0_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w38_0 <= DSP_bh96_ch0_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w37_0 <= DSP_bh96_ch0_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w36_0 <= DSP_bh96_ch0_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w35_0 <= DSP_bh96_ch0_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w34_0 <= DSP_bh96_ch0_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w33_0 <= DSP_bh96_ch0_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w32_0 <= DSP_bh96_ch0_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w31_0 <= DSP_bh96_ch0_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w30_0 <= DSP_bh96_ch0_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w29_0 <= DSP_bh96_ch0_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w28_0 <= DSP_bh96_ch0_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w27_0 <= DSP_bh96_ch0_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w26_0 <= DSP_bh96_ch0_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w25_0 <= DSP_bh96_ch0_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w24_0 <= DSP_bh96_ch0_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w23_0 <= DSP_bh96_ch0_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w22_0 <= DSP_bh96_ch0_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w21_0 <= DSP_bh96_ch0_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w20_0 <= DSP_bh96_ch0_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w19_0 <= DSP_bh96_ch0_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w18_0 <= DSP_bh96_ch0_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w17_0 <= DSP_bh96_ch0_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w16_0 <= DSP_bh96_ch0_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w15_0 <= DSP_bh96_ch0_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w14_0 <= DSP_bh96_ch0_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w13_0 <= DSP_bh96_ch0_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w12_0 <= DSP_bh96_ch0_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w11_0 <= DSP_bh96_ch0_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w10_0 <= DSP_bh96_ch0_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w9_0 <= DSP_bh96_ch0_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w8_0 <= DSP_bh96_ch0_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w7_0 <= DSP_bh96_ch0_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w6_0 <= DSP_bh96_ch0_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w5_0 <= DSP_bh96_ch0_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w4_0 <= DSP_bh96_ch0_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w3_0 <= DSP_bh96_ch0_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w2_0 <= DSP_bh96_ch0_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w1_0 <= DSP_bh96_ch0_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w0_0 <= DSP_bh96_ch0_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh71_ch1_0 <= ("0" & XX_m70(9 downto 0) & "00000000000000") * ("" & YY_m70(29 downto 12) & "");
-   heap_bh71_w16_1 <= not( DSP_bh71_ch1_0(42) ); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w15_1 <= DSP_bh71_ch1_0(41); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w14_1 <= DSP_bh71_ch1_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w13_1 <= DSP_bh71_ch1_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w12_1 <= DSP_bh71_ch1_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w11_1 <= DSP_bh71_ch1_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w10_1 <= DSP_bh71_ch1_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w9_1 <= DSP_bh71_ch1_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w8_1 <= DSP_bh71_ch1_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w7_1 <= DSP_bh71_ch1_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w6_1 <= DSP_bh71_ch1_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w5_1 <= DSP_bh71_ch1_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w4_1 <= DSP_bh71_ch1_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w3_1 <= DSP_bh71_ch1_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w2_1 <= DSP_bh71_ch1_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w1_1 <= DSP_bh71_ch1_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w0_1 <= DSP_bh71_ch1_0(26); -- cycle= 0 cp= 2.387e-09
+   DSP_bh96_ch1_0 <= ("00" & XX_m95(10 downto 0) & "000000000000") * ("0" & YY_m95(29 downto 13) & "");
+   heap_bh96_w19_1 <= not( DSP_bh96_ch1_0(42) ); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w18_1 <= DSP_bh96_ch1_0(41); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w17_1 <= DSP_bh96_ch1_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w16_1 <= DSP_bh96_ch1_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w15_1 <= DSP_bh96_ch1_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w14_1 <= DSP_bh96_ch1_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w13_1 <= DSP_bh96_ch1_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w12_1 <= DSP_bh96_ch1_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w11_1 <= DSP_bh96_ch1_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w10_1 <= DSP_bh96_ch1_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w9_1 <= DSP_bh96_ch1_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w8_1 <= DSP_bh96_ch1_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w7_1 <= DSP_bh96_ch1_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w6_1 <= DSP_bh96_ch1_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w5_1 <= DSP_bh96_ch1_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w4_1 <= DSP_bh96_ch1_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w3_1 <= DSP_bh96_ch1_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w2_1 <= DSP_bh96_ch1_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w1_1 <= DSP_bh96_ch1_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w0_1 <= DSP_bh96_ch1_0(23); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh71_ch2_0 <= ("" & XX_m70(34 downto 10) & "") * ("0" & YY_m70(11 downto 0) & "00000");
-   heap_bh71_w23_1 <= not( DSP_bh71_ch2_0(42) ); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w22_1 <= DSP_bh71_ch2_0(41); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w21_1 <= DSP_bh71_ch2_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w20_1 <= DSP_bh71_ch2_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w19_1 <= DSP_bh71_ch2_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w18_1 <= DSP_bh71_ch2_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w17_1 <= DSP_bh71_ch2_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w16_2 <= DSP_bh71_ch2_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w15_2 <= DSP_bh71_ch2_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w14_2 <= DSP_bh71_ch2_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w13_2 <= DSP_bh71_ch2_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w12_2 <= DSP_bh71_ch2_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w11_2 <= DSP_bh71_ch2_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w10_2 <= DSP_bh71_ch2_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w9_2 <= DSP_bh71_ch2_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w8_2 <= DSP_bh71_ch2_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w7_2 <= DSP_bh71_ch2_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w6_2 <= DSP_bh71_ch2_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w5_2 <= DSP_bh71_ch2_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w4_2 <= DSP_bh71_ch2_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w3_2 <= DSP_bh71_ch2_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w2_2 <= DSP_bh71_ch2_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w1_2 <= DSP_bh71_ch2_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh71_w0_2 <= DSP_bh71_ch2_0(19); -- cycle= 0 cp= 2.387e-09
+   DSP_bh96_ch2_0 <= ("0" & XX_m95(34 downto 11) & "") * ("00" & YY_m95(12 downto 0) & "000");
+   heap_bh96_w26_1 <= not( DSP_bh96_ch2_0(42) ); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w25_1 <= DSP_bh96_ch2_0(41); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w24_1 <= DSP_bh96_ch2_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w23_1 <= DSP_bh96_ch2_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w22_1 <= DSP_bh96_ch2_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w21_1 <= DSP_bh96_ch2_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w20_1 <= DSP_bh96_ch2_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w19_2 <= DSP_bh96_ch2_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w18_2 <= DSP_bh96_ch2_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w17_2 <= DSP_bh96_ch2_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w16_2 <= DSP_bh96_ch2_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w15_2 <= DSP_bh96_ch2_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w14_2 <= DSP_bh96_ch2_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w13_2 <= DSP_bh96_ch2_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w12_2 <= DSP_bh96_ch2_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w11_2 <= DSP_bh96_ch2_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w10_2 <= DSP_bh96_ch2_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w9_2 <= DSP_bh96_ch2_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w8_2 <= DSP_bh96_ch2_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w7_2 <= DSP_bh96_ch2_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w6_2 <= DSP_bh96_ch2_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w5_2 <= DSP_bh96_ch2_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w4_2 <= DSP_bh96_ch2_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w3_2 <= DSP_bh96_ch2_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w2_2 <= DSP_bh96_ch2_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w1_2 <= DSP_bh96_ch2_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh96_w0_2 <= DSP_bh96_ch2_0(16); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
 
    -- Adding the constant bits
-   heap_bh71_w5_3 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w16_3 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w17_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w18_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w19_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w20_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w21_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w22_2 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w24_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w25_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w26_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w27_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w28_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w29_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w30_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w31_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w32_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w33_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w34_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w35_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w36_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w37_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w38_1 <= '1'; -- cycle= 0 cp= 0
-   heap_bh71_w39_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w5_3 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w19_3 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w20_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w21_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w22_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w23_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w24_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w25_2 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w27_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w28_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w29_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w30_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w31_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w32_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w33_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w34_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w35_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w36_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w37_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w38_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w39_1 <= '1'; -- cycle= 0 cp= 0
+   heap_bh96_w40_1 <= '1'; -- cycle= 0 cp= 0
    ----------------Synchro barrier, entering cycle 0----------------
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_0_0 <= heap_bh71_w0_2_d1 & heap_bh71_w0_1_d1 & heap_bh71_w0_0_d1;
-   CompressorIn_bh71_0_1 <= heap_bh71_w1_2_d1 & heap_bh71_w1_1_d1;
-   Compressor_bh71_0: Compressor_23_3
-      port map ( R => CompressorOut_bh71_0_0   ,
-                 X0 => CompressorIn_bh71_0_0,
-                 X1 => CompressorIn_bh71_0_1);
-   heap_bh71_w0_3 <= CompressorOut_bh71_0_0(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w1_3 <= CompressorOut_bh71_0_0(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w2_3 <= CompressorOut_bh71_0_0(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_0_0 <= heap_bh96_w0_2 & heap_bh96_w0_1 & heap_bh96_w0_0;
+   CompressorIn_bh96_0_1 <= heap_bh96_w1_2 & heap_bh96_w1_1;
+   Compressor_bh96_0: Compressor_23_3
+      port map ( R => CompressorOut_bh96_0_0   ,
+                 X0 => CompressorIn_bh96_0_0,
+                 X1 => CompressorIn_bh96_0_1);
+   heap_bh96_w0_3 <= CompressorOut_bh96_0_0(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w1_3 <= CompressorOut_bh96_0_0(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w2_3 <= CompressorOut_bh96_0_0(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_1_2 <= heap_bh71_w2_2_d1 & heap_bh71_w2_1_d1 & heap_bh71_w2_0_d1;
-   CompressorIn_bh71_1_3 <= heap_bh71_w3_2_d1 & heap_bh71_w3_1_d1;
-   Compressor_bh71_1: Compressor_23_3
-      port map ( R => CompressorOut_bh71_1_1   ,
-                 X0 => CompressorIn_bh71_1_2,
-                 X1 => CompressorIn_bh71_1_3);
-   heap_bh71_w2_4 <= CompressorOut_bh71_1_1(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w3_3 <= CompressorOut_bh71_1_1(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w4_3 <= CompressorOut_bh71_1_1(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_1_2 <= heap_bh96_w2_2 & heap_bh96_w2_1 & heap_bh96_w2_0;
+   CompressorIn_bh96_1_3 <= heap_bh96_w3_2 & heap_bh96_w3_1;
+   Compressor_bh96_1: Compressor_23_3
+      port map ( R => CompressorOut_bh96_1_1   ,
+                 X0 => CompressorIn_bh96_1_2,
+                 X1 => CompressorIn_bh96_1_3);
+   heap_bh96_w2_4 <= CompressorOut_bh96_1_1(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w3_3 <= CompressorOut_bh96_1_1(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w4_3 <= CompressorOut_bh96_1_1(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_2_4 <= heap_bh71_w4_2_d1 & heap_bh71_w4_1_d1 & heap_bh71_w4_0_d1;
-   CompressorIn_bh71_2_5 <= heap_bh71_w5_3_d1 & heap_bh71_w5_2_d1;
-   Compressor_bh71_2: Compressor_23_3
-      port map ( R => CompressorOut_bh71_2_2   ,
-                 X0 => CompressorIn_bh71_2_4,
-                 X1 => CompressorIn_bh71_2_5);
-   heap_bh71_w4_4 <= CompressorOut_bh71_2_2(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w5_4 <= CompressorOut_bh71_2_2(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w6_3 <= CompressorOut_bh71_2_2(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_2_4 <= heap_bh96_w4_2 & heap_bh96_w4_1 & heap_bh96_w4_0;
+   CompressorIn_bh96_2_5 <= heap_bh96_w5_3 & heap_bh96_w5_2;
+   Compressor_bh96_2: Compressor_23_3
+      port map ( R => CompressorOut_bh96_2_2   ,
+                 X0 => CompressorIn_bh96_2_4,
+                 X1 => CompressorIn_bh96_2_5);
+   heap_bh96_w4_4 <= CompressorOut_bh96_2_2(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w5_4 <= CompressorOut_bh96_2_2(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w6_3 <= CompressorOut_bh96_2_2(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_3_6 <= heap_bh71_w6_2_d1 & heap_bh71_w6_1_d1 & heap_bh71_w6_0_d1;
-   CompressorIn_bh71_3_7 <= heap_bh71_w7_2_d1 & heap_bh71_w7_1_d1;
-   Compressor_bh71_3: Compressor_23_3
-      port map ( R => CompressorOut_bh71_3_3   ,
-                 X0 => CompressorIn_bh71_3_6,
-                 X1 => CompressorIn_bh71_3_7);
-   heap_bh71_w6_4 <= CompressorOut_bh71_3_3(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w7_3 <= CompressorOut_bh71_3_3(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w8_3 <= CompressorOut_bh71_3_3(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_3_6 <= heap_bh96_w6_2 & heap_bh96_w6_1 & heap_bh96_w6_0;
+   CompressorIn_bh96_3_7 <= heap_bh96_w7_2 & heap_bh96_w7_1;
+   Compressor_bh96_3: Compressor_23_3
+      port map ( R => CompressorOut_bh96_3_3   ,
+                 X0 => CompressorIn_bh96_3_6,
+                 X1 => CompressorIn_bh96_3_7);
+   heap_bh96_w6_4 <= CompressorOut_bh96_3_3(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w7_3 <= CompressorOut_bh96_3_3(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w8_3 <= CompressorOut_bh96_3_3(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_4_8 <= heap_bh71_w8_2_d1 & heap_bh71_w8_1_d1 & heap_bh71_w8_0_d1;
-   CompressorIn_bh71_4_9 <= heap_bh71_w9_2_d1 & heap_bh71_w9_1_d1;
-   Compressor_bh71_4: Compressor_23_3
-      port map ( R => CompressorOut_bh71_4_4   ,
-                 X0 => CompressorIn_bh71_4_8,
-                 X1 => CompressorIn_bh71_4_9);
-   heap_bh71_w8_4 <= CompressorOut_bh71_4_4(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w9_3 <= CompressorOut_bh71_4_4(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w10_3 <= CompressorOut_bh71_4_4(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_4_8 <= heap_bh96_w8_2 & heap_bh96_w8_1 & heap_bh96_w8_0;
+   CompressorIn_bh96_4_9 <= heap_bh96_w9_2 & heap_bh96_w9_1;
+   Compressor_bh96_4: Compressor_23_3
+      port map ( R => CompressorOut_bh96_4_4   ,
+                 X0 => CompressorIn_bh96_4_8,
+                 X1 => CompressorIn_bh96_4_9);
+   heap_bh96_w8_4 <= CompressorOut_bh96_4_4(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w9_3 <= CompressorOut_bh96_4_4(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w10_3 <= CompressorOut_bh96_4_4(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_5_10 <= heap_bh71_w10_2_d1 & heap_bh71_w10_1_d1 & heap_bh71_w10_0_d1;
-   CompressorIn_bh71_5_11 <= heap_bh71_w11_2_d1 & heap_bh71_w11_1_d1;
-   Compressor_bh71_5: Compressor_23_3
-      port map ( R => CompressorOut_bh71_5_5   ,
-                 X0 => CompressorIn_bh71_5_10,
-                 X1 => CompressorIn_bh71_5_11);
-   heap_bh71_w10_4 <= CompressorOut_bh71_5_5(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w11_3 <= CompressorOut_bh71_5_5(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w12_3 <= CompressorOut_bh71_5_5(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_5_10 <= heap_bh96_w10_2 & heap_bh96_w10_1 & heap_bh96_w10_0;
+   CompressorIn_bh96_5_11 <= heap_bh96_w11_2 & heap_bh96_w11_1;
+   Compressor_bh96_5: Compressor_23_3
+      port map ( R => CompressorOut_bh96_5_5   ,
+                 X0 => CompressorIn_bh96_5_10,
+                 X1 => CompressorIn_bh96_5_11);
+   heap_bh96_w10_4 <= CompressorOut_bh96_5_5(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w11_3 <= CompressorOut_bh96_5_5(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w12_3 <= CompressorOut_bh96_5_5(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_6_12 <= heap_bh71_w12_2_d1 & heap_bh71_w12_1_d1 & heap_bh71_w12_0_d1;
-   CompressorIn_bh71_6_13 <= heap_bh71_w13_2_d1 & heap_bh71_w13_1_d1;
-   Compressor_bh71_6: Compressor_23_3
-      port map ( R => CompressorOut_bh71_6_6   ,
-                 X0 => CompressorIn_bh71_6_12,
-                 X1 => CompressorIn_bh71_6_13);
-   heap_bh71_w12_4 <= CompressorOut_bh71_6_6(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w13_3 <= CompressorOut_bh71_6_6(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w14_3 <= CompressorOut_bh71_6_6(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_6_12 <= heap_bh96_w12_2 & heap_bh96_w12_1 & heap_bh96_w12_0;
+   CompressorIn_bh96_6_13 <= heap_bh96_w13_2 & heap_bh96_w13_1;
+   Compressor_bh96_6: Compressor_23_3
+      port map ( R => CompressorOut_bh96_6_6   ,
+                 X0 => CompressorIn_bh96_6_12,
+                 X1 => CompressorIn_bh96_6_13);
+   heap_bh96_w12_4 <= CompressorOut_bh96_6_6(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w13_3 <= CompressorOut_bh96_6_6(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w14_3 <= CompressorOut_bh96_6_6(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_7_14 <= heap_bh71_w14_2_d1 & heap_bh71_w14_1_d1 & heap_bh71_w14_0_d1;
-   CompressorIn_bh71_7_15 <= heap_bh71_w15_2_d1 & heap_bh71_w15_1_d1;
-   Compressor_bh71_7: Compressor_23_3
-      port map ( R => CompressorOut_bh71_7_7   ,
-                 X0 => CompressorIn_bh71_7_14,
-                 X1 => CompressorIn_bh71_7_15);
-   heap_bh71_w14_4 <= CompressorOut_bh71_7_7(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w15_3 <= CompressorOut_bh71_7_7(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w16_4 <= CompressorOut_bh71_7_7(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_7_14 <= heap_bh96_w14_2 & heap_bh96_w14_1 & heap_bh96_w14_0;
+   CompressorIn_bh96_7_15 <= heap_bh96_w15_2 & heap_bh96_w15_1;
+   Compressor_bh96_7: Compressor_23_3
+      port map ( R => CompressorOut_bh96_7_7   ,
+                 X0 => CompressorIn_bh96_7_14,
+                 X1 => CompressorIn_bh96_7_15);
+   heap_bh96_w14_4 <= CompressorOut_bh96_7_7(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w15_3 <= CompressorOut_bh96_7_7(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w16_3 <= CompressorOut_bh96_7_7(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_8_16 <= heap_bh71_w16_3_d1 & heap_bh71_w16_2_d1 & heap_bh71_w16_1_d1 & heap_bh71_w16_0_d1;
-   CompressorIn_bh71_8_17(0) <= heap_bh71_w17_2_d1;
-   Compressor_bh71_8: Compressor_14_3
-      port map ( R => CompressorOut_bh71_8_8   ,
-                 X0 => CompressorIn_bh71_8_16,
-                 X1 => CompressorIn_bh71_8_17);
-   heap_bh71_w16_5 <= CompressorOut_bh71_8_8(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w17_3 <= CompressorOut_bh71_8_8(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w18_3 <= CompressorOut_bh71_8_8(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_8_16 <= heap_bh96_w16_2 & heap_bh96_w16_1 & heap_bh96_w16_0;
+   CompressorIn_bh96_8_17 <= heap_bh96_w17_2 & heap_bh96_w17_1;
+   Compressor_bh96_8: Compressor_23_3
+      port map ( R => CompressorOut_bh96_8_8   ,
+                 X0 => CompressorIn_bh96_8_16,
+                 X1 => CompressorIn_bh96_8_17);
+   heap_bh96_w16_4 <= CompressorOut_bh96_8_8(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w17_3 <= CompressorOut_bh96_8_8(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w18_3 <= CompressorOut_bh96_8_8(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_9_18 <= heap_bh71_w18_2_d1 & heap_bh71_w18_1_d1 & heap_bh71_w18_0_d1;
-   CompressorIn_bh71_9_19 <= heap_bh71_w19_2_d1 & heap_bh71_w19_1_d1;
-   Compressor_bh71_9: Compressor_23_3
-      port map ( R => CompressorOut_bh71_9_9   ,
-                 X0 => CompressorIn_bh71_9_18,
-                 X1 => CompressorIn_bh71_9_19);
-   heap_bh71_w18_4 <= CompressorOut_bh71_9_9(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w19_3 <= CompressorOut_bh71_9_9(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w20_3 <= CompressorOut_bh71_9_9(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_9_18 <= heap_bh96_w18_2 & heap_bh96_w18_1 & heap_bh96_w18_0;
+   CompressorIn_bh96_9_19 <= heap_bh96_w19_3 & heap_bh96_w19_2;
+   Compressor_bh96_9: Compressor_23_3
+      port map ( R => CompressorOut_bh96_9_9   ,
+                 X0 => CompressorIn_bh96_9_18,
+                 X1 => CompressorIn_bh96_9_19);
+   heap_bh96_w18_4 <= CompressorOut_bh96_9_9(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w19_4 <= CompressorOut_bh96_9_9(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w20_3 <= CompressorOut_bh96_9_9(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_10_20 <= heap_bh71_w20_2_d1 & heap_bh71_w20_1_d1 & heap_bh71_w20_0_d1;
-   CompressorIn_bh71_10_21 <= heap_bh71_w21_2_d1 & heap_bh71_w21_1_d1;
-   Compressor_bh71_10: Compressor_23_3
-      port map ( R => CompressorOut_bh71_10_10   ,
-                 X0 => CompressorIn_bh71_10_20,
-                 X1 => CompressorIn_bh71_10_21);
-   heap_bh71_w20_4 <= CompressorOut_bh71_10_10(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w21_3 <= CompressorOut_bh71_10_10(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w22_3 <= CompressorOut_bh71_10_10(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh96_10_20 <= heap_bh96_w20_2 & heap_bh96_w20_1 & heap_bh96_w20_0;
+   CompressorIn_bh96_10_21 <= heap_bh96_w21_2 & heap_bh96_w21_1;
+   Compressor_bh96_10: Compressor_23_3
+      port map ( R => CompressorOut_bh96_10_10   ,
+                 X0 => CompressorIn_bh96_10_20,
+                 X1 => CompressorIn_bh96_10_21);
+   heap_bh96_w20_4 <= CompressorOut_bh96_10_10(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w21_3 <= CompressorOut_bh96_10_10(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w22_3 <= CompressorOut_bh96_10_10(2); -- cycle= 0 cp= 2.01965e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh96_11_22 <= heap_bh96_w22_2 & heap_bh96_w22_1 & heap_bh96_w22_0;
+   CompressorIn_bh96_11_23 <= heap_bh96_w23_2 & heap_bh96_w23_1;
+   Compressor_bh96_11: Compressor_23_3
+      port map ( R => CompressorOut_bh96_11_11   ,
+                 X0 => CompressorIn_bh96_11_22,
+                 X1 => CompressorIn_bh96_11_23);
+   heap_bh96_w22_4 <= CompressorOut_bh96_11_11(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w23_3 <= CompressorOut_bh96_11_11(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w24_3 <= CompressorOut_bh96_11_11(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh96_12_24 <= heap_bh96_w24_2 & heap_bh96_w24_1 & heap_bh96_w24_0;
+   CompressorIn_bh96_12_25 <= heap_bh96_w25_2 & heap_bh96_w25_1;
+   Compressor_bh96_12: Compressor_23_3
+      port map ( R => CompressorOut_bh96_12_12   ,
+                 X0 => CompressorIn_bh96_12_24,
+                 X1 => CompressorIn_bh96_12_25);
+   heap_bh96_w24_4 <= CompressorOut_bh96_12_12(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w25_3 <= CompressorOut_bh96_12_12(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh96_w26_2 <= CompressorOut_bh96_12_12(2); -- cycle= 0 cp= 2.01965e-09
+   ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh71_11_22 <= heap_bh71_w22_2_d1 & heap_bh71_w22_1_d1 & heap_bh71_w22_0_d1;
-   CompressorIn_bh71_11_23 <= heap_bh71_w23_1_d1 & heap_bh71_w23_0_d1;
-   Compressor_bh71_11: Compressor_23_3
-      port map ( R => CompressorOut_bh71_11_11   ,
-                 X0 => CompressorIn_bh71_11_22,
-                 X1 => CompressorIn_bh71_11_23);
-   heap_bh71_w22_4 <= CompressorOut_bh71_11_11(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w23_2 <= CompressorOut_bh71_11_11(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh71_w24_2 <= CompressorOut_bh71_11_11(2); -- cycle= 1 cp= 5.3072e-10
+   ----------------Synchro barrier, entering cycle 0----------------
+   inAdder0_bh96_0 <= '0' & heap_bh96_w4_4 & heap_bh96_w3_0 & heap_bh96_w2_4 & heap_bh96_w1_0 & heap_bh96_w0_3;
+   inAdder1_bh96_0 <= '0' & heap_bh96_w4_3 & heap_bh96_w3_3 & heap_bh96_w2_3 & heap_bh96_w1_3 & '0';
+   cin_bh96_0 <= '0';
    ----------------Synchro barrier, entering cycle 1----------------
+   outAdder_bh96_0 <= inAdder0_bh96_0_d1 + inAdder1_bh96_0_d1 + cin_bh96_0_d1;
+   heap_bh96_w0_4 <= outAdder_bh96_0(0); -- cycle= 1 cp= 8.5565e-10
+   heap_bh96_w1_4 <= outAdder_bh96_0(1); -- cycle= 1 cp= 8.5565e-10
+   heap_bh96_w2_5 <= outAdder_bh96_0(2); -- cycle= 1 cp= 8.5565e-10
+   heap_bh96_w3_4 <= outAdder_bh96_0(3); -- cycle= 1 cp= 8.5565e-10
+   heap_bh96_w4_5 <= outAdder_bh96_0(4); -- cycle= 1 cp= 8.5565e-10
+   heap_bh96_w5_5 <= outAdder_bh96_0(5); -- cycle= 1 cp= 8.5565e-10
    ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh71_0 <= '0' & heap_bh71_w4_4 & heap_bh71_w3_0_d1 & heap_bh71_w2_4 & heap_bh71_w1_0_d1 & heap_bh71_w0_3;
-   inAdder1_bh71_0 <= '0' & heap_bh71_w4_3 & heap_bh71_w3_3 & heap_bh71_w2_3 & heap_bh71_w1_3 & '0';
-   cin_bh71_0 <= '0';
-   outAdder_bh71_0 <= inAdder0_bh71_0 + inAdder1_bh71_0 + cin_bh71_0;
-   heap_bh71_w0_4 <= outAdder_bh71_0(0); -- cycle= 1 cp= 1.78144e-09
-   heap_bh71_w1_4 <= outAdder_bh71_0(1); -- cycle= 1 cp= 1.78144e-09
-   heap_bh71_w2_5 <= outAdder_bh71_0(2); -- cycle= 1 cp= 1.78144e-09
-   heap_bh71_w3_4 <= outAdder_bh71_0(3); -- cycle= 1 cp= 1.78144e-09
-   heap_bh71_w4_5 <= outAdder_bh71_0(4); -- cycle= 1 cp= 1.78144e-09
-   heap_bh71_w5_5 <= outAdder_bh71_0(5); -- cycle= 1 cp= 1.78144e-09
+   tempR_bh96_0 <= heap_bh96_w4_5 & heap_bh96_w3_4 & heap_bh96_w2_5 & heap_bh96_w1_4 & heap_bh96_w0_4; -- already compressed
    ----------------Synchro barrier, entering cycle 1----------------
-   tempR_bh71_0 <= heap_bh71_w4_5 & heap_bh71_w3_4 & heap_bh71_w2_5 & heap_bh71_w1_4 & heap_bh71_w0_4; -- already compressed
+   ----------------Synchro barrier, entering cycle 0----------------
+   inAdder0_bh96_1 <= '0' & heap_bh96_w18_4 & heap_bh96_w17_0 & heap_bh96_w16_4 & heap_bh96_w15_0 & heap_bh96_w14_4 & heap_bh96_w13_0 & heap_bh96_w12_4 & heap_bh96_w11_0 & heap_bh96_w10_4 & heap_bh96_w9_0 & heap_bh96_w8_4 & heap_bh96_w7_0 & heap_bh96_w6_4 & heap_bh96_w5_1;
+   inAdder1_bh96_1 <= '0' & heap_bh96_w18_3 & heap_bh96_w17_3 & heap_bh96_w16_3 & heap_bh96_w15_3 & heap_bh96_w14_3 & heap_bh96_w13_3 & heap_bh96_w12_3 & heap_bh96_w11_3 & heap_bh96_w10_3 & heap_bh96_w9_3 & heap_bh96_w8_3 & heap_bh96_w7_3 & heap_bh96_w6_3 & heap_bh96_w5_0;
+   cin_bh96_1 <= heap_bh96_w5_4;
+   ----------------Synchro barrier, entering cycle 1----------------
+   outAdder_bh96_1 <= inAdder0_bh96_1_d1 + inAdder1_bh96_1_d1 + cin_bh96_1_d1;
+   heap_bh96_w5_6 <= outAdder_bh96_1(0); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w6_5 <= outAdder_bh96_1(1); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w7_4 <= outAdder_bh96_1(2); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w8_5 <= outAdder_bh96_1(3); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w9_4 <= outAdder_bh96_1(4); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w10_5 <= outAdder_bh96_1(5); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w11_4 <= outAdder_bh96_1(6); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w12_5 <= outAdder_bh96_1(7); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w13_4 <= outAdder_bh96_1(8); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w14_5 <= outAdder_bh96_1(9); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w15_4 <= outAdder_bh96_1(10); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w16_5 <= outAdder_bh96_1(11); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w17_4 <= outAdder_bh96_1(12); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w18_5 <= outAdder_bh96_1(13); -- cycle= 1 cp= 9.9065e-10
+   heap_bh96_w19_5 <= outAdder_bh96_1(14); -- cycle= 1 cp= 9.9065e-10
+   ----------------Synchro barrier, entering cycle 1----------------
+   ----------------Synchro barrier, entering cycle 0----------------
+   inAdder0_bh96_2 <= '0' & heap_bh96_w25_0 & heap_bh96_w24_4 & heap_bh96_w23_0 & heap_bh96_w22_4 & heap_bh96_w21_0 & heap_bh96_w20_4 & heap_bh96_w19_1;
+   inAdder1_bh96_2 <= '0' & heap_bh96_w25_3 & heap_bh96_w24_3 & heap_bh96_w23_3 & heap_bh96_w22_3 & heap_bh96_w21_3 & heap_bh96_w20_3 & heap_bh96_w19_0;
+   cin_bh96_2 <= heap_bh96_w19_4;
+   ----------------Synchro barrier, entering cycle 1----------------
+   outAdder_bh96_2 <= inAdder0_bh96_2_d1 + inAdder1_bh96_2_d1 + cin_bh96_2_d1;
+   heap_bh96_w19_6 <= outAdder_bh96_2(0); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w20_5 <= outAdder_bh96_2(1); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w21_4 <= outAdder_bh96_2(2); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w22_5 <= outAdder_bh96_2(3); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w23_4 <= outAdder_bh96_2(4); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w24_5 <= outAdder_bh96_2(5); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w25_4 <= outAdder_bh96_2(6); -- cycle= 1 cp= 8.8565e-10
+   heap_bh96_w26_3 <= outAdder_bh96_2(7); -- cycle= 1 cp= 8.8565e-10
+   ----------------Synchro barrier, entering cycle 1----------------
+   ----------------Synchro barrier, entering cycle 0----------------
+   inAdder0_bh96_3 <= '0' & heap_bh96_w40_1 & heap_bh96_w39_1 & heap_bh96_w38_1 & heap_bh96_w37_1 & heap_bh96_w36_1 & heap_bh96_w35_1 & heap_bh96_w34_1 & heap_bh96_w33_1 & heap_bh96_w32_1 & heap_bh96_w31_1 & heap_bh96_w30_1 & heap_bh96_w29_1 & heap_bh96_w28_1 & heap_bh96_w27_1 & heap_bh96_w26_1;
+   inAdder1_bh96_3 <= '0' & heap_bh96_w40_0 & heap_bh96_w39_0 & heap_bh96_w38_0 & heap_bh96_w37_0 & heap_bh96_w36_0 & heap_bh96_w35_0 & heap_bh96_w34_0 & heap_bh96_w33_0 & heap_bh96_w32_0 & heap_bh96_w31_0 & heap_bh96_w30_0 & heap_bh96_w29_0 & heap_bh96_w28_0 & heap_bh96_w27_0 & heap_bh96_w26_0;
+   cin_bh96_3 <= heap_bh96_w26_2;
+   ----------------Synchro barrier, entering cycle 1----------------
+   outAdder_bh96_3 <= inAdder0_bh96_3_d1 + inAdder1_bh96_3_d1 + cin_bh96_3_d1;
+   heap_bh96_w26_4 <= outAdder_bh96_3(0); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w27_2 <= outAdder_bh96_3(1); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w28_2 <= outAdder_bh96_3(2); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w29_2 <= outAdder_bh96_3(3); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w30_2 <= outAdder_bh96_3(4); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w31_2 <= outAdder_bh96_3(5); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w32_2 <= outAdder_bh96_3(6); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w33_2 <= outAdder_bh96_3(7); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w34_2 <= outAdder_bh96_3(8); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w35_2 <= outAdder_bh96_3(9); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w36_2 <= outAdder_bh96_3(10); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w37_2 <= outAdder_bh96_3(11); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w38_2 <= outAdder_bh96_3(12); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w39_2 <= outAdder_bh96_3(13); -- cycle= 1 cp= 1.00565e-09
+   heap_bh96_w40_2 <= outAdder_bh96_3(14); -- cycle= 1 cp= 1.00565e-09
    ----------------Synchro barrier, entering cycle 1----------------
    ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh71_1 <= '0' & heap_bh71_w16_5 & heap_bh71_w15_0_d1 & heap_bh71_w14_4 & heap_bh71_w13_0_d1 & heap_bh71_w12_4 & heap_bh71_w11_0_d1 & heap_bh71_w10_4 & heap_bh71_w9_0_d1 & heap_bh71_w8_4 & heap_bh71_w7_0_d1 & heap_bh71_w6_4 & heap_bh71_w5_1_d1;
-   inAdder1_bh71_1 <= '0' & heap_bh71_w16_4 & heap_bh71_w15_3 & heap_bh71_w14_3 & heap_bh71_w13_3 & heap_bh71_w12_3 & heap_bh71_w11_3 & heap_bh71_w10_3 & heap_bh71_w9_3 & heap_bh71_w8_3 & heap_bh71_w7_3 & heap_bh71_w6_3 & heap_bh71_w5_0_d1;
-   cin_bh71_1 <= heap_bh71_w5_4;
-   outAdder_bh71_1 <= inAdder0_bh71_1 + inAdder1_bh71_1 + cin_bh71_1;
-   heap_bh71_w5_6 <= outAdder_bh71_1(0); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w6_5 <= outAdder_bh71_1(1); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w7_4 <= outAdder_bh71_1(2); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w8_5 <= outAdder_bh71_1(3); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w9_4 <= outAdder_bh71_1(4); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w10_5 <= outAdder_bh71_1(5); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w11_4 <= outAdder_bh71_1(6); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w12_5 <= outAdder_bh71_1(7); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w13_4 <= outAdder_bh71_1(8); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w14_5 <= outAdder_bh71_1(9); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w15_4 <= outAdder_bh71_1(10); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w16_6 <= outAdder_bh71_1(11); -- cycle= 1 cp= 1.94244e-09
-   heap_bh71_w17_4 <= outAdder_bh71_1(12); -- cycle= 1 cp= 1.94244e-09
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh71_2 <= '0' & heap_bh71_w22_4 & heap_bh71_w21_0_d1 & heap_bh71_w20_4 & heap_bh71_w19_0_d1 & heap_bh71_w18_4 & heap_bh71_w17_1_d1;
-   inAdder1_bh71_2 <= '0' & heap_bh71_w22_3 & heap_bh71_w21_3 & heap_bh71_w20_3 & heap_bh71_w19_3 & heap_bh71_w18_3 & heap_bh71_w17_0_d1;
-   cin_bh71_2 <= heap_bh71_w17_3;
-   outAdder_bh71_2 <= inAdder0_bh71_2 + inAdder1_bh71_2 + cin_bh71_2;
-   heap_bh71_w17_5 <= outAdder_bh71_2(0); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w18_5 <= outAdder_bh71_2(1); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w19_4 <= outAdder_bh71_2(2); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w20_5 <= outAdder_bh71_2(3); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w21_4 <= outAdder_bh71_2(4); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w22_5 <= outAdder_bh71_2(5); -- cycle= 1 cp= 1.80444e-09
-   heap_bh71_w23_3 <= outAdder_bh71_2(6); -- cycle= 1 cp= 1.80444e-09
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh71_3 <= '0' & heap_bh71_w39_1_d1 & heap_bh71_w38_1_d1 & heap_bh71_w37_1_d1 & heap_bh71_w36_1_d1 & heap_bh71_w35_1_d1 & heap_bh71_w34_1_d1 & heap_bh71_w33_1_d1 & heap_bh71_w32_1_d1 & heap_bh71_w31_1_d1 & heap_bh71_w30_1_d1 & heap_bh71_w29_1_d1 & heap_bh71_w28_1_d1 & heap_bh71_w27_1_d1 & heap_bh71_w26_1_d1 & heap_bh71_w25_1_d1 & heap_bh71_w24_1_d1;
-   inAdder1_bh71_3 <= '0' & heap_bh71_w39_0_d1 & heap_bh71_w38_0_d1 & heap_bh71_w37_0_d1 & heap_bh71_w36_0_d1 & heap_bh71_w35_0_d1 & heap_bh71_w34_0_d1 & heap_bh71_w33_0_d1 & heap_bh71_w32_0_d1 & heap_bh71_w31_0_d1 & heap_bh71_w30_0_d1 & heap_bh71_w29_0_d1 & heap_bh71_w28_0_d1 & heap_bh71_w27_0_d1 & heap_bh71_w26_0_d1 & heap_bh71_w25_0_d1 & heap_bh71_w24_0_d1;
-   cin_bh71_3 <= heap_bh71_w24_2;
-   outAdder_bh71_3 <= inAdder0_bh71_3 + inAdder1_bh71_3 + cin_bh71_3;
-   heap_bh71_w24_3 <= outAdder_bh71_3(0); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w25_2 <= outAdder_bh71_3(1); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w26_2 <= outAdder_bh71_3(2); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w27_2 <= outAdder_bh71_3(3); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w28_2 <= outAdder_bh71_3(4); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w29_2 <= outAdder_bh71_3(5); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w30_2 <= outAdder_bh71_3(6); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w31_2 <= outAdder_bh71_3(7); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w32_2 <= outAdder_bh71_3(8); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w33_2 <= outAdder_bh71_3(9); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w34_2 <= outAdder_bh71_3(10); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w35_2 <= outAdder_bh71_3(11); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w36_2 <= outAdder_bh71_3(12); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w37_2 <= outAdder_bh71_3(13); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w38_2 <= outAdder_bh71_3(14); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w39_2 <= outAdder_bh71_3(15); -- cycle= 1 cp= 2.03444e-09
-   heap_bh71_w40_1 <= outAdder_bh71_3(16); -- cycle= 1 cp= 2.03444e-09
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   finalAdderIn0_bh71 <= "0" & heap_bh71_w40_0_d2 & heap_bh71_w39_2_d1 & heap_bh71_w38_2_d1 & heap_bh71_w37_2_d1 & heap_bh71_w36_2_d1 & heap_bh71_w35_2_d1 & heap_bh71_w34_2_d1 & heap_bh71_w33_2_d1 & heap_bh71_w32_2_d1 & heap_bh71_w31_2_d1 & heap_bh71_w30_2_d1 & heap_bh71_w29_2_d1 & heap_bh71_w28_2_d1 & heap_bh71_w27_2_d1 & heap_bh71_w26_2_d1 & heap_bh71_w25_2_d1 & heap_bh71_w24_3_d1 & heap_bh71_w23_2_d1 & heap_bh71_w22_5_d1 & heap_bh71_w21_4_d1 & heap_bh71_w20_5_d1 & heap_bh71_w19_4_d1 & heap_bh71_w18_5_d1 & heap_bh71_w17_5_d1 & heap_bh71_w16_6_d1 & heap_bh71_w15_4_d1 & heap_bh71_w14_5_d1 & heap_bh71_w13_4_d1 & heap_bh71_w12_5_d1 & heap_bh71_w11_4_d1 & heap_bh71_w10_5_d1 & heap_bh71_w9_4_d1 & heap_bh71_w8_5_d1 & heap_bh71_w7_4_d1 & heap_bh71_w6_5_d1 & heap_bh71_w5_5_d1;
-   finalAdderIn1_bh71 <= "0" & heap_bh71_w40_1_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh71_w23_3_d1 & '0' & '0' & '0' & '0' & '0' & heap_bh71_w17_4_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh71_w5_6_d1;
-   finalAdderCin_bh71 <= '0';
-   Adder_final71_4: IntAdder_37_f400_uid94  -- pipelineDepth=0 maxInDelay=0
+   finalAdderIn0_bh96 <= "0" & heap_bh96_w40_2_d1 & heap_bh96_w39_2_d1 & heap_bh96_w38_2_d1 & heap_bh96_w37_2_d1 & heap_bh96_w36_2_d1 & heap_bh96_w35_2_d1 & heap_bh96_w34_2_d1 & heap_bh96_w33_2_d1 & heap_bh96_w32_2_d1 & heap_bh96_w31_2_d1 & heap_bh96_w30_2_d1 & heap_bh96_w29_2_d1 & heap_bh96_w28_2_d1 & heap_bh96_w27_2_d1 & heap_bh96_w26_3_d1 & heap_bh96_w25_4_d1 & heap_bh96_w24_5_d1 & heap_bh96_w23_4_d1 & heap_bh96_w22_5_d1 & heap_bh96_w21_4_d1 & heap_bh96_w20_5_d1 & heap_bh96_w19_6_d1 & heap_bh96_w18_5_d1 & heap_bh96_w17_4_d1 & heap_bh96_w16_5_d1 & heap_bh96_w15_4_d1 & heap_bh96_w14_5_d1 & heap_bh96_w13_4_d1 & heap_bh96_w12_5_d1 & heap_bh96_w11_4_d1 & heap_bh96_w10_5_d1 & heap_bh96_w9_4_d1 & heap_bh96_w8_5_d1 & heap_bh96_w7_4_d1 & heap_bh96_w6_5_d1 & heap_bh96_w5_5_d1;
+   finalAdderIn1_bh96 <= "0" & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh96_w26_4_d1 & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh96_w19_5_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh96_w5_6_d1;
+   finalAdderCin_bh96 <= '0';
+   Adder_final96_4: IntAdder_37_f400_uid120  -- pipelineDepth=0 maxInDelay=0
       port map ( clk  => clk,
                  rst  => rst,
-                 Cin => finalAdderCin_bh71,
-                 R => finalAdderOut_bh71   ,
-                 X => finalAdderIn0_bh71,
-                 Y => finalAdderIn1_bh71);
+                 Cin => finalAdderCin_bh96,
+                 R => finalAdderOut_bh96   ,
+                 X => finalAdderIn0_bh96,
+                 Y => finalAdderIn1_bh96);
    -- concatenate all the compressed chunks
-   CompressionResult71 <= finalAdderOut_bh71 & tempR_bh71_0_d1;
+   CompressionResult96 <= finalAdderOut_bh96 & tempR_bh96_0_d1;
    -- End of code generated by BitHeap::generateCompressorVHDL
-   R <= CompressionResult71(40 downto 6);
+   R <= CompressionResult96(40 downto 6);
 end architecture;
 
 --------------------------------------------------------------------------------
---                          IntAdder_42_f400_uid102
---                     (IntAdderClassical_42_f400_uid104)
+--                          IntAdder_42_f400_uid128
+--                     (IntAdderClassical_42_f400_uid130)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -3250,7 +3834,7 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_42_f400_uid102 is
+entity IntAdder_42_f400_uid128 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(41 downto 0);
           Y : in  std_logic_vector(41 downto 0);
@@ -3258,7 +3842,7 @@ entity IntAdder_42_f400_uid102 is
           R : out  std_logic_vector(41 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_42_f400_uid102 is
+architecture arch of IntAdder_42_f400_uid128 is
 begin
    process(clk)
       begin
@@ -3295,7 +3879,7 @@ entity PolynomialEvaluator_degree2_uid39 is
 end entity;
 
 architecture arch of PolynomialEvaluator_degree2_uid39 is
-   component IntAdder_35_f400_uid62 is
+   component IntAdder_35_f400_uid87 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(34 downto 0);
              Y : in  std_logic_vector(34 downto 0);
@@ -3303,7 +3887,7 @@ architecture arch of PolynomialEvaluator_degree2_uid39 is
              R : out  std_logic_vector(34 downto 0)   );
    end component;
 
-   component IntAdder_42_f400_uid102 is
+   component IntAdder_42_f400_uid128 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(41 downto 0);
              Y : in  std_logic_vector(41 downto 0);
@@ -3318,7 +3902,7 @@ architecture arch of PolynomialEvaluator_degree2_uid39 is
              R : out  std_logic_vector(25 downto 0)   );
    end component;
 
-   component IntMultiplier_UsingDSP_30_35_35_signed_uid69 is
+   component IntMultiplier_UsingDSP_30_35_35_signed_uid94 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(29 downto 0);
              Y : in  std_logic_vector(34 downto 0);
@@ -3373,7 +3957,7 @@ begin
    ----------------Synchro barrier, entering cycle 3----------------
    op1_1 <= ((0 downto 0 => a1_d3(33)) & a1_d3 & "");
    op2_1 <= ((9 downto 0 => piPT1(24)) & piPT1(24 downto 0) & "");
-   Sum1: IntAdder_35_f400_uid62  -- pipelineDepth=0 maxInDelay=0
+   Sum1: IntAdder_35_f400_uid87  -- pipelineDepth=0 maxInDelay=0
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '1',
@@ -3383,7 +3967,7 @@ begin
    -- weight of yT2 is=-9 size=30
    yT2 <= "0" & Y_d3(28 downto 0);
    -- weight of piP2 is=-8 size=65
-   Product_2: IntMultiplier_UsingDSP_30_35_35_signed_uid69  -- pipelineDepth=2 maxInDelay=0
+   Product_2: IntMultiplier_UsingDSP_30_35_35_signed_uid94  -- pipelineDepth=2 maxInDelay=0
       port map ( clk  => clk,
                  rst  => rst,
                  R => piP2,
@@ -3393,7 +3977,7 @@ begin
    -- the delay at the output of the multiplier is : 0
    op1_2 <= (7 downto 0 => piP2(34)) & piP2(33 downto 0);
    op2_2 <= (0 downto 0 => a0_d5(40)) & a0_d5;
-   Sum2: IntAdder_42_f400_uid102  -- pipelineDepth=0 maxInDelay=4.4472e-10
+   Sum2: IntAdder_42_f400_uid128  -- pipelineDepth=0 maxInDelay=3.2865e-10
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '1',
@@ -3484,126 +4068,8 @@ begin
 end architecture;
 
 --------------------------------------------------------------------------------
---                          IntAdder_48_f400_uid112
---                     (IntAdderClassical_48_f400_uid114)
--- This operator is part of the Infinite Virtual Library FloPoCoLib
--- All rights reserved 
--- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
---------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
-use ieee.std_logic_unsigned.all;
-library std;
-use std.textio.all;
-library work;
-
-entity IntAdder_48_f400_uid112 is
-   port ( clk, rst : in std_logic;
-          X : in  std_logic_vector(47 downto 0);
-          Y : in  std_logic_vector(47 downto 0);
-          Cin : in std_logic;
-          R : out  std_logic_vector(47 downto 0)   );
-end entity;
-
-architecture arch of IntAdder_48_f400_uid112 is
-signal x0 :  std_logic_vector(41 downto 0);
-signal y0 :  std_logic_vector(41 downto 0);
-signal x1, x1_d1 :  std_logic_vector(5 downto 0);
-signal y1, y1_d1 :  std_logic_vector(5 downto 0);
-signal sum0, sum0_d1 :  std_logic_vector(42 downto 0);
-signal sum1 :  std_logic_vector(6 downto 0);
-signal X_d1 :  std_logic_vector(47 downto 0);
-signal Y_d1 :  std_logic_vector(47 downto 0);
-signal Cin_d1 : std_logic;
-begin
-   process(clk)
-      begin
-         if clk'event and clk = '1' then
-            x1_d1 <=  x1;
-            y1_d1 <=  y1;
-            sum0_d1 <=  sum0;
-            X_d1 <=  X;
-            Y_d1 <=  Y;
-            Cin_d1 <=  Cin;
-         end if;
-      end process;
-   --Classical
-   ----------------Synchro barrier, entering cycle 1----------------
-   x0 <= X_d1(41 downto 0);
-   y0 <= Y_d1(41 downto 0);
-   x1 <= X_d1(47 downto 42);
-   y1 <= Y_d1(47 downto 42);
-   sum0 <= ( "0" & x0) + ( "0" & y0)  + Cin_d1;
-   ----------------Synchro barrier, entering cycle 2----------------
-   sum1 <= ( "0" & x1_d1) + ( "0" & y1_d1)  + sum0_d1(42);
-   R <= sum1(5 downto 0) & sum0_d1(41 downto 0);
-end architecture;
-
---------------------------------------------------------------------------------
---                          IntAdder_48_f400_uid119
---                     (IntAdderClassical_48_f400_uid121)
--- This operator is part of the Infinite Virtual Library FloPoCoLib
--- All rights reserved 
--- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
---------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
-use ieee.std_logic_unsigned.all;
-library std;
-use std.textio.all;
-library work;
-
-entity IntAdder_48_f400_uid119 is
-   port ( clk, rst : in std_logic;
-          X : in  std_logic_vector(47 downto 0);
-          Y : in  std_logic_vector(47 downto 0);
-          Cin : in std_logic;
-          R : out  std_logic_vector(47 downto 0)   );
-end entity;
-
-architecture arch of IntAdder_48_f400_uid119 is
-signal x0 :  std_logic_vector(41 downto 0);
-signal y0 :  std_logic_vector(41 downto 0);
-signal x1, x1_d1 :  std_logic_vector(5 downto 0);
-signal y1, y1_d1 :  std_logic_vector(5 downto 0);
-signal sum0, sum0_d1 :  std_logic_vector(42 downto 0);
-signal sum1 :  std_logic_vector(6 downto 0);
-signal X_d1 :  std_logic_vector(47 downto 0);
-signal Y_d1 :  std_logic_vector(47 downto 0);
-signal Cin_d1 : std_logic;
-begin
-   process(clk)
-      begin
-         if clk'event and clk = '1' then
-            x1_d1 <=  x1;
-            y1_d1 <=  y1;
-            sum0_d1 <=  sum0;
-            X_d1 <=  X;
-            Y_d1 <=  Y;
-            Cin_d1 <=  Cin;
-         end if;
-      end process;
-   --Classical
-   ----------------Synchro barrier, entering cycle 1----------------
-   x0 <= X_d1(41 downto 0);
-   y0 <= Y_d1(41 downto 0);
-   x1 <= X_d1(47 downto 42);
-   y1 <= Y_d1(47 downto 42);
-   sum0 <= ( "0" & x0) + ( "0" & y0)  + Cin_d1;
-   ----------------Synchro barrier, entering cycle 2----------------
-   sum1 <= ( "0" & x1_d1) + ( "0" & y1_d1)  + sum0_d1(42);
-   R <= sum1(5 downto 0) & sum0_d1(41 downto 0);
-end architecture;
-
---------------------------------------------------------------------------------
---                          IntAdder_72_f400_uid191
---                    (IntAdderAlternative_72_f400_uid195)
+--                          IntAdder_48_f400_uid138
+--                    (IntAdderAlternative_48_f400_uid142)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -3618,23 +4084,23 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_72_f400_uid191 is
+entity IntAdder_48_f400_uid138 is
    port ( clk, rst : in std_logic;
-          X : in  std_logic_vector(71 downto 0);
-          Y : in  std_logic_vector(71 downto 0);
+          X : in  std_logic_vector(47 downto 0);
+          Y : in  std_logic_vector(47 downto 0);
           Cin : in std_logic;
-          R : out  std_logic_vector(71 downto 0)   );
+          R : out  std_logic_vector(47 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_72_f400_uid191 is
-signal s_sum_l0_idx0 :  std_logic_vector(42 downto 0);
-signal s_sum_l0_idx1, s_sum_l0_idx1_d1 :  std_logic_vector(30 downto 0);
-signal sum_l0_idx0, sum_l0_idx0_d1 :  std_logic_vector(41 downto 0);
+architecture arch of IntAdder_48_f400_uid138 is
+signal s_sum_l0_idx0 :  std_logic_vector(44 downto 0);
+signal s_sum_l0_idx1, s_sum_l0_idx1_d1 :  std_logic_vector(4 downto 0);
+signal sum_l0_idx0, sum_l0_idx0_d1 :  std_logic_vector(43 downto 0);
 signal c_l0_idx0, c_l0_idx0_d1 :  std_logic_vector(0 downto 0);
-signal sum_l0_idx1 :  std_logic_vector(29 downto 0);
+signal sum_l0_idx1 :  std_logic_vector(3 downto 0);
 signal c_l0_idx1 :  std_logic_vector(0 downto 0);
-signal s_sum_l1_idx1 :  std_logic_vector(30 downto 0);
-signal sum_l1_idx1 :  std_logic_vector(29 downto 0);
+signal s_sum_l1_idx1 :  std_logic_vector(4 downto 0);
+signal sum_l1_idx1 :  std_logic_vector(3 downto 0);
 signal c_l1_idx1 :  std_logic_vector(0 downto 0);
 begin
    process(clk)
@@ -3646,26 +4112,105 @@ begin
          end if;
       end process;
    --Alternative
-   s_sum_l0_idx0 <= ( "0" & X(41 downto 0)) + ( "0" & Y(41 downto 0)) + Cin;
-   s_sum_l0_idx1 <= ( "0" & X(71 downto 42)) + ( "0" & Y(71 downto 42));
-   sum_l0_idx0 <= s_sum_l0_idx0(41 downto 0);
-   c_l0_idx0 <= s_sum_l0_idx0(42 downto 42);
-   sum_l0_idx1 <= s_sum_l0_idx1(29 downto 0);
-   c_l0_idx1 <= s_sum_l0_idx1(30 downto 30);
+   s_sum_l0_idx0 <= ( "0" & X(43 downto 0)) + ( "0" & Y(43 downto 0)) + Cin;
+   s_sum_l0_idx1 <= ( "0" & X(47 downto 44)) + ( "0" & Y(47 downto 44));
+   sum_l0_idx0 <= s_sum_l0_idx0(43 downto 0);
+   c_l0_idx0 <= s_sum_l0_idx0(44 downto 44);
+   sum_l0_idx1 <= s_sum_l0_idx1(3 downto 0);
+   c_l0_idx1 <= s_sum_l0_idx1(4 downto 4);
    ----------------Synchro barrier, entering cycle 1----------------
    s_sum_l1_idx1 <=  s_sum_l0_idx1_d1 + c_l0_idx0_d1(0 downto 0);
-   sum_l1_idx1 <= s_sum_l1_idx1(29 downto 0);
-   c_l1_idx1 <= s_sum_l1_idx1(30 downto 30);
-   R <= sum_l1_idx1(29 downto 0) & sum_l0_idx0_d1(41 downto 0);
+   sum_l1_idx1 <= s_sum_l1_idx1(3 downto 0);
+   c_l1_idx1 <= s_sum_l1_idx1(4 downto 4);
+   R <= sum_l1_idx1(3 downto 0) & sum_l0_idx0_d1(43 downto 0);
 end architecture;
 
 --------------------------------------------------------------------------------
---               IntMultiplier_UsingDSP_47_48_0_unsigned_uid126
+--                          IntAdder_48_f400_uid145
+--                     (IntAdderClassical_48_f400_uid147)
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
+--------------------------------------------------------------------------------
+-- Pipeline depth: 1 cycles
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library std;
+use std.textio.all;
+library work;
+
+entity IntAdder_48_f400_uid145 is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(47 downto 0);
+          Y : in  std_logic_vector(47 downto 0);
+          Cin : in std_logic;
+          R : out  std_logic_vector(47 downto 0)   );
+end entity;
+
+architecture arch of IntAdder_48_f400_uid145 is
+signal X_d1 :  std_logic_vector(47 downto 0);
+signal Y_d1 :  std_logic_vector(47 downto 0);
+signal Cin_d1 : std_logic;
+begin
+   process(clk)
+      begin
+         if clk'event and clk = '1' then
+            X_d1 <=  X;
+            Y_d1 <=  Y;
+            Cin_d1 <=  Cin;
+         end if;
+      end process;
+   --Classical
+   ----------------Synchro barrier, entering cycle 1----------------
+    R <= X_d1 + Y_d1 + Cin_d1;
+end architecture;
+
+--------------------------------------------------------------------------------
+--                          IntAdder_62_f400_uid217
+--                     (IntAdderClassical_62_f400_uid219)
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
+--------------------------------------------------------------------------------
+-- Pipeline depth: 0 cycles
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library std;
+use std.textio.all;
+library work;
+
+entity IntAdder_62_f400_uid217 is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(61 downto 0);
+          Y : in  std_logic_vector(61 downto 0);
+          Cin : in std_logic;
+          R : out  std_logic_vector(61 downto 0)   );
+end entity;
+
+architecture arch of IntAdder_62_f400_uid217 is
+begin
+   process(clk)
+      begin
+         if clk'event and clk = '1' then
+         end if;
+      end process;
+   --Classical
+    R <= X + Y + Cin;
+end architecture;
+
+--------------------------------------------------------------------------------
+--               IntMultiplier_UsingDSP_47_48_0_unsigned_uid152
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Florent de Dinechin, Kinga Illyes, Bogdan Popa, Bogdan Pasca, 2012
 --------------------------------------------------------------------------------
--- Pipeline depth: 5 cycles
+-- Pipeline depth: 3 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -3675,14 +4220,14 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntMultiplier_UsingDSP_47_48_0_unsigned_uid126 is
+entity IntMultiplier_UsingDSP_47_48_0_unsigned_uid152 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(46 downto 0);
           Y : in  std_logic_vector(47 downto 0);
           R : out  std_logic_vector(94 downto 0)   );
 end entity;
 
-architecture arch of IntMultiplier_UsingDSP_47_48_0_unsigned_uid126 is
+architecture arch of IntMultiplier_UsingDSP_47_48_0_unsigned_uid152 is
    component Compressor_14_3 is
       port ( X0 : in  std_logic_vector(3 downto 0);
              X1 : in  std_logic_vector(0 downto 0);
@@ -3700,2101 +4245,1936 @@ architecture arch of IntMultiplier_UsingDSP_47_48_0_unsigned_uid126 is
              R : out  std_logic_vector(1 downto 0)   );
    end component;
 
-   component IntAdder_72_f400_uid191 is
+   component IntAdder_62_f400_uid217 is
       port ( clk, rst : in std_logic;
-             X : in  std_logic_vector(71 downto 0);
-             Y : in  std_logic_vector(71 downto 0);
+             X : in  std_logic_vector(61 downto 0);
+             Y : in  std_logic_vector(61 downto 0);
              Cin : in std_logic;
-             R : out  std_logic_vector(71 downto 0)   );
+             R : out  std_logic_vector(61 downto 0)   );
    end component;
 
-signal XX_m127 :  std_logic_vector(47 downto 0);
-signal YY_m127 :  std_logic_vector(46 downto 0);
-signal DSP_bh128_ch0_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w94_0, heap_bh128_w94_0_d1, heap_bh128_w94_0_d2, heap_bh128_w94_0_d3, heap_bh128_w94_0_d4 : std_logic;
-signal heap_bh128_w93_0, heap_bh128_w93_0_d1, heap_bh128_w93_0_d2, heap_bh128_w93_0_d3, heap_bh128_w93_0_d4 : std_logic;
-signal heap_bh128_w92_0, heap_bh128_w92_0_d1, heap_bh128_w92_0_d2, heap_bh128_w92_0_d3, heap_bh128_w92_0_d4 : std_logic;
-signal heap_bh128_w91_0, heap_bh128_w91_0_d1, heap_bh128_w91_0_d2, heap_bh128_w91_0_d3, heap_bh128_w91_0_d4 : std_logic;
-signal heap_bh128_w90_0, heap_bh128_w90_0_d1, heap_bh128_w90_0_d2, heap_bh128_w90_0_d3, heap_bh128_w90_0_d4 : std_logic;
-signal heap_bh128_w89_0, heap_bh128_w89_0_d1, heap_bh128_w89_0_d2, heap_bh128_w89_0_d3, heap_bh128_w89_0_d4 : std_logic;
-signal heap_bh128_w88_0, heap_bh128_w88_0_d1, heap_bh128_w88_0_d2, heap_bh128_w88_0_d3, heap_bh128_w88_0_d4 : std_logic;
-signal heap_bh128_w87_0, heap_bh128_w87_0_d1, heap_bh128_w87_0_d2, heap_bh128_w87_0_d3, heap_bh128_w87_0_d4 : std_logic;
-signal heap_bh128_w86_0, heap_bh128_w86_0_d1, heap_bh128_w86_0_d2, heap_bh128_w86_0_d3, heap_bh128_w86_0_d4 : std_logic;
-signal heap_bh128_w85_0, heap_bh128_w85_0_d1, heap_bh128_w85_0_d2, heap_bh128_w85_0_d3, heap_bh128_w85_0_d4 : std_logic;
-signal heap_bh128_w84_0, heap_bh128_w84_0_d1, heap_bh128_w84_0_d2, heap_bh128_w84_0_d3, heap_bh128_w84_0_d4 : std_logic;
-signal heap_bh128_w83_0, heap_bh128_w83_0_d1, heap_bh128_w83_0_d2, heap_bh128_w83_0_d3, heap_bh128_w83_0_d4 : std_logic;
-signal heap_bh128_w82_0, heap_bh128_w82_0_d1, heap_bh128_w82_0_d2, heap_bh128_w82_0_d3, heap_bh128_w82_0_d4 : std_logic;
-signal heap_bh128_w81_0, heap_bh128_w81_0_d1, heap_bh128_w81_0_d2, heap_bh128_w81_0_d3, heap_bh128_w81_0_d4 : std_logic;
-signal heap_bh128_w80_0, heap_bh128_w80_0_d1, heap_bh128_w80_0_d2, heap_bh128_w80_0_d3, heap_bh128_w80_0_d4 : std_logic;
-signal heap_bh128_w79_0, heap_bh128_w79_0_d1, heap_bh128_w79_0_d2, heap_bh128_w79_0_d3, heap_bh128_w79_0_d4 : std_logic;
-signal heap_bh128_w78_0, heap_bh128_w78_0_d1, heap_bh128_w78_0_d2, heap_bh128_w78_0_d3, heap_bh128_w78_0_d4 : std_logic;
-signal heap_bh128_w77_0, heap_bh128_w77_0_d1 : std_logic;
-signal heap_bh128_w76_0, heap_bh128_w76_0_d1 : std_logic;
-signal heap_bh128_w75_0, heap_bh128_w75_0_d1 : std_logic;
-signal heap_bh128_w74_0, heap_bh128_w74_0_d1 : std_logic;
-signal heap_bh128_w73_0, heap_bh128_w73_0_d1 : std_logic;
-signal heap_bh128_w72_0, heap_bh128_w72_0_d1 : std_logic;
-signal heap_bh128_w71_0, heap_bh128_w71_0_d1 : std_logic;
-signal heap_bh128_w70_0, heap_bh128_w70_0_d1 : std_logic;
-signal heap_bh128_w69_0, heap_bh128_w69_0_d1 : std_logic;
-signal heap_bh128_w68_0, heap_bh128_w68_0_d1 : std_logic;
-signal heap_bh128_w67_0, heap_bh128_w67_0_d1 : std_logic;
-signal heap_bh128_w66_0, heap_bh128_w66_0_d1 : std_logic;
-signal heap_bh128_w65_0, heap_bh128_w65_0_d1 : std_logic;
-signal heap_bh128_w64_0, heap_bh128_w64_0_d1 : std_logic;
-signal heap_bh128_w63_0, heap_bh128_w63_0_d1 : std_logic;
-signal heap_bh128_w62_0, heap_bh128_w62_0_d1 : std_logic;
-signal heap_bh128_w61_0, heap_bh128_w61_0_d1 : std_logic;
-signal heap_bh128_w60_0, heap_bh128_w60_0_d1 : std_logic;
-signal heap_bh128_w59_0, heap_bh128_w59_0_d1 : std_logic;
-signal heap_bh128_w58_0, heap_bh128_w58_0_d1 : std_logic;
-signal heap_bh128_w57_0, heap_bh128_w57_0_d1 : std_logic;
-signal heap_bh128_w56_0, heap_bh128_w56_0_d1 : std_logic;
-signal heap_bh128_w55_0, heap_bh128_w55_0_d1 : std_logic;
-signal heap_bh128_w54_0, heap_bh128_w54_0_d1 : std_logic;
-signal DSP_bh128_ch1_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w70_1, heap_bh128_w70_1_d1 : std_logic;
-signal heap_bh128_w69_1, heap_bh128_w69_1_d1 : std_logic;
-signal heap_bh128_w68_1, heap_bh128_w68_1_d1 : std_logic;
-signal heap_bh128_w67_1, heap_bh128_w67_1_d1 : std_logic;
-signal heap_bh128_w66_1, heap_bh128_w66_1_d1 : std_logic;
-signal heap_bh128_w65_1, heap_bh128_w65_1_d1 : std_logic;
-signal heap_bh128_w64_1, heap_bh128_w64_1_d1 : std_logic;
-signal heap_bh128_w63_1, heap_bh128_w63_1_d1 : std_logic;
-signal heap_bh128_w62_1, heap_bh128_w62_1_d1 : std_logic;
-signal heap_bh128_w61_1, heap_bh128_w61_1_d1 : std_logic;
-signal heap_bh128_w60_1, heap_bh128_w60_1_d1 : std_logic;
-signal heap_bh128_w59_1, heap_bh128_w59_1_d1 : std_logic;
-signal heap_bh128_w58_1, heap_bh128_w58_1_d1 : std_logic;
-signal heap_bh128_w57_1, heap_bh128_w57_1_d1 : std_logic;
-signal heap_bh128_w56_1, heap_bh128_w56_1_d1 : std_logic;
-signal heap_bh128_w55_1, heap_bh128_w55_1_d1 : std_logic;
-signal heap_bh128_w54_1, heap_bh128_w54_1_d1 : std_logic;
-signal heap_bh128_w53_0, heap_bh128_w53_0_d1 : std_logic;
-signal heap_bh128_w52_0, heap_bh128_w52_0_d1 : std_logic;
-signal heap_bh128_w51_0, heap_bh128_w51_0_d1 : std_logic;
-signal heap_bh128_w50_0, heap_bh128_w50_0_d1 : std_logic;
-signal heap_bh128_w49_0, heap_bh128_w49_0_d1 : std_logic;
-signal heap_bh128_w48_0, heap_bh128_w48_0_d1 : std_logic;
-signal heap_bh128_w47_0, heap_bh128_w47_0_d1 : std_logic;
-signal heap_bh128_w46_0, heap_bh128_w46_0_d1 : std_logic;
-signal heap_bh128_w45_0, heap_bh128_w45_0_d1 : std_logic;
-signal heap_bh128_w44_0, heap_bh128_w44_0_d1 : std_logic;
-signal heap_bh128_w43_0, heap_bh128_w43_0_d1 : std_logic;
-signal heap_bh128_w42_0, heap_bh128_w42_0_d1 : std_logic;
-signal heap_bh128_w41_0, heap_bh128_w41_0_d1 : std_logic;
-signal heap_bh128_w40_0, heap_bh128_w40_0_d1 : std_logic;
-signal heap_bh128_w39_0, heap_bh128_w39_0_d1 : std_logic;
-signal heap_bh128_w38_0, heap_bh128_w38_0_d1 : std_logic;
-signal heap_bh128_w37_0, heap_bh128_w37_0_d1 : std_logic;
-signal heap_bh128_w36_0, heap_bh128_w36_0_d1 : std_logic;
-signal heap_bh128_w35_0, heap_bh128_w35_0_d1 : std_logic;
-signal heap_bh128_w34_0, heap_bh128_w34_0_d1 : std_logic;
-signal heap_bh128_w33_0, heap_bh128_w33_0_d1 : std_logic;
-signal heap_bh128_w32_0, heap_bh128_w32_0_d1 : std_logic;
-signal heap_bh128_w31_0, heap_bh128_w31_0_d1 : std_logic;
-signal heap_bh128_w30_0, heap_bh128_w30_0_d1 : std_logic;
-signal DSP_bh128_ch2_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w77_1, heap_bh128_w77_1_d1 : std_logic;
-signal heap_bh128_w76_1, heap_bh128_w76_1_d1 : std_logic;
-signal heap_bh128_w75_1, heap_bh128_w75_1_d1 : std_logic;
-signal heap_bh128_w74_1, heap_bh128_w74_1_d1 : std_logic;
-signal heap_bh128_w73_1, heap_bh128_w73_1_d1 : std_logic;
-signal heap_bh128_w72_1, heap_bh128_w72_1_d1 : std_logic;
-signal heap_bh128_w71_1, heap_bh128_w71_1_d1 : std_logic;
-signal heap_bh128_w70_2, heap_bh128_w70_2_d1 : std_logic;
-signal heap_bh128_w69_2, heap_bh128_w69_2_d1 : std_logic;
-signal heap_bh128_w68_2, heap_bh128_w68_2_d1 : std_logic;
-signal heap_bh128_w67_2, heap_bh128_w67_2_d1 : std_logic;
-signal heap_bh128_w66_2, heap_bh128_w66_2_d1 : std_logic;
-signal heap_bh128_w65_2, heap_bh128_w65_2_d1 : std_logic;
-signal heap_bh128_w64_2, heap_bh128_w64_2_d1 : std_logic;
-signal heap_bh128_w63_2, heap_bh128_w63_2_d1 : std_logic;
-signal heap_bh128_w62_2, heap_bh128_w62_2_d1 : std_logic;
-signal heap_bh128_w61_2, heap_bh128_w61_2_d1 : std_logic;
-signal heap_bh128_w60_2, heap_bh128_w60_2_d1 : std_logic;
-signal heap_bh128_w59_2, heap_bh128_w59_2_d1 : std_logic;
-signal heap_bh128_w58_2, heap_bh128_w58_2_d1 : std_logic;
-signal heap_bh128_w57_2, heap_bh128_w57_2_d1 : std_logic;
-signal heap_bh128_w56_2, heap_bh128_w56_2_d1 : std_logic;
-signal heap_bh128_w55_2, heap_bh128_w55_2_d1 : std_logic;
-signal heap_bh128_w54_2, heap_bh128_w54_2_d1 : std_logic;
-signal heap_bh128_w53_1, heap_bh128_w53_1_d1 : std_logic;
-signal heap_bh128_w52_1, heap_bh128_w52_1_d1 : std_logic;
-signal heap_bh128_w51_1, heap_bh128_w51_1_d1 : std_logic;
-signal heap_bh128_w50_1, heap_bh128_w50_1_d1 : std_logic;
-signal heap_bh128_w49_1, heap_bh128_w49_1_d1 : std_logic;
-signal heap_bh128_w48_1, heap_bh128_w48_1_d1 : std_logic;
-signal heap_bh128_w47_1, heap_bh128_w47_1_d1 : std_logic;
-signal heap_bh128_w46_1, heap_bh128_w46_1_d1 : std_logic;
-signal heap_bh128_w45_1, heap_bh128_w45_1_d1 : std_logic;
-signal heap_bh128_w44_1, heap_bh128_w44_1_d1 : std_logic;
-signal heap_bh128_w43_1, heap_bh128_w43_1_d1 : std_logic;
-signal heap_bh128_w42_1, heap_bh128_w42_1_d1 : std_logic;
-signal heap_bh128_w41_1, heap_bh128_w41_1_d1 : std_logic;
-signal heap_bh128_w40_1, heap_bh128_w40_1_d1 : std_logic;
-signal heap_bh128_w39_1, heap_bh128_w39_1_d1 : std_logic;
-signal heap_bh128_w38_1, heap_bh128_w38_1_d1 : std_logic;
-signal heap_bh128_w37_1, heap_bh128_w37_1_d1 : std_logic;
-signal DSP_bh128_ch3_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w53_2, heap_bh128_w53_2_d1 : std_logic;
-signal heap_bh128_w52_2, heap_bh128_w52_2_d1 : std_logic;
-signal heap_bh128_w51_2, heap_bh128_w51_2_d1 : std_logic;
-signal heap_bh128_w50_2, heap_bh128_w50_2_d1 : std_logic;
-signal heap_bh128_w49_2, heap_bh128_w49_2_d1 : std_logic;
-signal heap_bh128_w48_2, heap_bh128_w48_2_d1 : std_logic;
-signal heap_bh128_w47_2, heap_bh128_w47_2_d1 : std_logic;
-signal heap_bh128_w46_2, heap_bh128_w46_2_d1 : std_logic;
-signal heap_bh128_w45_2, heap_bh128_w45_2_d1 : std_logic;
-signal heap_bh128_w44_2, heap_bh128_w44_2_d1 : std_logic;
-signal heap_bh128_w43_2, heap_bh128_w43_2_d1 : std_logic;
-signal heap_bh128_w42_2, heap_bh128_w42_2_d1 : std_logic;
-signal heap_bh128_w41_2, heap_bh128_w41_2_d1 : std_logic;
-signal heap_bh128_w40_2, heap_bh128_w40_2_d1 : std_logic;
-signal heap_bh128_w39_2, heap_bh128_w39_2_d1 : std_logic;
-signal heap_bh128_w38_2, heap_bh128_w38_2_d1 : std_logic;
-signal heap_bh128_w37_2, heap_bh128_w37_2_d1 : std_logic;
-signal heap_bh128_w36_1, heap_bh128_w36_1_d1 : std_logic;
-signal heap_bh128_w35_1, heap_bh128_w35_1_d1 : std_logic;
-signal heap_bh128_w34_1, heap_bh128_w34_1_d1 : std_logic;
-signal heap_bh128_w33_1, heap_bh128_w33_1_d1 : std_logic;
-signal heap_bh128_w32_1, heap_bh128_w32_1_d1 : std_logic;
-signal heap_bh128_w31_1, heap_bh128_w31_1_d1 : std_logic;
-signal heap_bh128_w30_1, heap_bh128_w30_1_d1 : std_logic;
-signal heap_bh128_w29_0, heap_bh128_w29_0_d1, heap_bh128_w29_0_d2 : std_logic;
-signal heap_bh128_w28_0, heap_bh128_w28_0_d1 : std_logic;
-signal heap_bh128_w27_0, heap_bh128_w27_0_d1, heap_bh128_w27_0_d2 : std_logic;
-signal heap_bh128_w26_0, heap_bh128_w26_0_d1 : std_logic;
-signal heap_bh128_w25_0, heap_bh128_w25_0_d1, heap_bh128_w25_0_d2 : std_logic;
-signal heap_bh128_w24_0, heap_bh128_w24_0_d1 : std_logic;
-signal heap_bh128_w23_0, heap_bh128_w23_0_d1 : std_logic;
-signal heap_bh128_w22_0, heap_bh128_w22_0_d1 : std_logic;
-signal heap_bh128_w21_0, heap_bh128_w21_0_d1 : std_logic;
-signal heap_bh128_w20_0, heap_bh128_w20_0_d1 : std_logic;
-signal heap_bh128_w19_0 : std_logic;
-signal heap_bh128_w18_0 : std_logic;
-signal heap_bh128_w17_0 : std_logic;
-signal heap_bh128_w16_0 : std_logic;
-signal heap_bh128_w15_0 : std_logic;
-signal heap_bh128_w14_0 : std_logic;
-signal heap_bh128_w13_0 : std_logic;
-signal DSP_bh128_ch4_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w60_3, heap_bh128_w60_3_d1 : std_logic;
-signal heap_bh128_w59_3, heap_bh128_w59_3_d1 : std_logic;
-signal heap_bh128_w58_3, heap_bh128_w58_3_d1 : std_logic;
-signal heap_bh128_w57_3, heap_bh128_w57_3_d1 : std_logic;
-signal heap_bh128_w56_3, heap_bh128_w56_3_d1 : std_logic;
-signal heap_bh128_w55_3, heap_bh128_w55_3_d1 : std_logic;
-signal heap_bh128_w54_3, heap_bh128_w54_3_d1 : std_logic;
-signal heap_bh128_w53_3, heap_bh128_w53_3_d1 : std_logic;
-signal heap_bh128_w52_3, heap_bh128_w52_3_d1 : std_logic;
-signal heap_bh128_w51_3, heap_bh128_w51_3_d1 : std_logic;
-signal heap_bh128_w50_3, heap_bh128_w50_3_d1 : std_logic;
-signal heap_bh128_w49_3, heap_bh128_w49_3_d1 : std_logic;
-signal heap_bh128_w48_3, heap_bh128_w48_3_d1 : std_logic;
-signal heap_bh128_w47_3, heap_bh128_w47_3_d1 : std_logic;
-signal heap_bh128_w46_3, heap_bh128_w46_3_d1 : std_logic;
-signal heap_bh128_w45_3, heap_bh128_w45_3_d1 : std_logic;
-signal heap_bh128_w44_3, heap_bh128_w44_3_d1 : std_logic;
-signal heap_bh128_w43_3, heap_bh128_w43_3_d1 : std_logic;
-signal heap_bh128_w42_3, heap_bh128_w42_3_d1 : std_logic;
-signal heap_bh128_w41_3, heap_bh128_w41_3_d1 : std_logic;
-signal heap_bh128_w40_3, heap_bh128_w40_3_d1 : std_logic;
-signal heap_bh128_w39_3, heap_bh128_w39_3_d1 : std_logic;
-signal heap_bh128_w38_3, heap_bh128_w38_3_d1 : std_logic;
-signal heap_bh128_w37_3, heap_bh128_w37_3_d1 : std_logic;
-signal heap_bh128_w36_2, heap_bh128_w36_2_d1 : std_logic;
-signal heap_bh128_w35_2, heap_bh128_w35_2_d1 : std_logic;
-signal heap_bh128_w34_2, heap_bh128_w34_2_d1 : std_logic;
-signal heap_bh128_w33_2, heap_bh128_w33_2_d1 : std_logic;
-signal heap_bh128_w32_2, heap_bh128_w32_2_d1 : std_logic;
-signal heap_bh128_w31_2, heap_bh128_w31_2_d1 : std_logic;
-signal heap_bh128_w30_2, heap_bh128_w30_2_d1 : std_logic;
-signal heap_bh128_w29_1, heap_bh128_w29_1_d1 : std_logic;
-signal heap_bh128_w28_1, heap_bh128_w28_1_d1 : std_logic;
-signal heap_bh128_w27_1, heap_bh128_w27_1_d1 : std_logic;
-signal heap_bh128_w26_1, heap_bh128_w26_1_d1 : std_logic;
-signal heap_bh128_w25_1, heap_bh128_w25_1_d1 : std_logic;
-signal heap_bh128_w24_1, heap_bh128_w24_1_d1 : std_logic;
-signal heap_bh128_w23_1, heap_bh128_w23_1_d1 : std_logic;
-signal heap_bh128_w22_1, heap_bh128_w22_1_d1 : std_logic;
-signal heap_bh128_w21_1, heap_bh128_w21_1_d1 : std_logic;
-signal heap_bh128_w20_1, heap_bh128_w20_1_d1 : std_logic;
-signal DSP_bh128_ch5_0 :  std_logic_vector(40 downto 0);
-signal heap_bh128_w36_3, heap_bh128_w36_3_d1 : std_logic;
-signal heap_bh128_w35_3, heap_bh128_w35_3_d1 : std_logic;
-signal heap_bh128_w34_3, heap_bh128_w34_3_d1 : std_logic;
-signal heap_bh128_w33_3, heap_bh128_w33_3_d1 : std_logic;
-signal heap_bh128_w32_3, heap_bh128_w32_3_d1 : std_logic;
-signal heap_bh128_w31_3, heap_bh128_w31_3_d1 : std_logic;
-signal heap_bh128_w30_3, heap_bh128_w30_3_d1 : std_logic;
-signal heap_bh128_w29_2, heap_bh128_w29_2_d1 : std_logic;
-signal heap_bh128_w28_2, heap_bh128_w28_2_d1 : std_logic;
-signal heap_bh128_w27_2, heap_bh128_w27_2_d1 : std_logic;
-signal heap_bh128_w26_2, heap_bh128_w26_2_d1 : std_logic;
-signal heap_bh128_w25_2, heap_bh128_w25_2_d1 : std_logic;
-signal heap_bh128_w24_2, heap_bh128_w24_2_d1 : std_logic;
-signal heap_bh128_w23_2, heap_bh128_w23_2_d1 : std_logic;
-signal heap_bh128_w22_2, heap_bh128_w22_2_d1 : std_logic;
-signal heap_bh128_w21_2, heap_bh128_w21_2_d1 : std_logic;
-signal heap_bh128_w20_2, heap_bh128_w20_2_d1 : std_logic;
-signal heap_bh128_w19_1 : std_logic;
-signal heap_bh128_w18_1 : std_logic;
-signal heap_bh128_w17_1 : std_logic;
-signal heap_bh128_w16_1 : std_logic;
-signal heap_bh128_w15_1 : std_logic;
-signal heap_bh128_w14_1 : std_logic;
-signal heap_bh128_w13_1 : std_logic;
-signal heap_bh128_w12_0 : std_logic;
-signal heap_bh128_w11_0 : std_logic;
-signal heap_bh128_w10_0 : std_logic;
-signal heap_bh128_w9_0 : std_logic;
-signal heap_bh128_w8_0 : std_logic;
-signal heap_bh128_w7_0 : std_logic;
-signal heap_bh128_w6_0 : std_logic;
-signal heap_bh128_w5_0 : std_logic;
-signal heap_bh128_w4_0 : std_logic;
-signal heap_bh128_w3_0 : std_logic;
-signal heap_bh128_w2_0 : std_logic;
-signal heap_bh128_w1_0 : std_logic;
-signal heap_bh128_w0_0 : std_logic;
-signal tempR_bh128_0, tempR_bh128_0_d1, tempR_bh128_0_d2, tempR_bh128_0_d3, tempR_bh128_0_d4, tempR_bh128_0_d5 :  std_logic_vector(12 downto 0);
-signal inAdder0_bh128_0, inAdder0_bh128_0_d1 :  std_logic_vector(7 downto 0);
-signal inAdder1_bh128_0, inAdder1_bh128_0_d1 :  std_logic_vector(7 downto 0);
-signal cin_bh128_0, cin_bh128_0_d1 : std_logic;
-signal outAdder_bh128_0 :  std_logic_vector(7 downto 0);
-signal heap_bh128_w13_2 : std_logic;
-signal heap_bh128_w14_2 : std_logic;
-signal heap_bh128_w15_2 : std_logic;
-signal heap_bh128_w16_2 : std_logic;
-signal heap_bh128_w17_2 : std_logic;
-signal heap_bh128_w18_2 : std_logic;
-signal heap_bh128_w19_2 : std_logic;
-signal heap_bh128_w20_3, heap_bh128_w20_3_d1 : std_logic;
-signal CompressorIn_bh128_0_0 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_0_1 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_0_0 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w20_4 : std_logic;
-signal heap_bh128_w21_3 : std_logic;
-signal heap_bh128_w22_3 : std_logic;
-signal CompressorIn_bh128_1_2 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_1_3 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_1_1 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w22_4 : std_logic;
-signal heap_bh128_w23_3 : std_logic;
-signal heap_bh128_w24_3, heap_bh128_w24_3_d1 : std_logic;
-signal CompressorIn_bh128_2_4 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_2_5 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_2_2 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w24_4, heap_bh128_w24_4_d1 : std_logic;
-signal heap_bh128_w25_3, heap_bh128_w25_3_d1 : std_logic;
-signal heap_bh128_w26_3, heap_bh128_w26_3_d1 : std_logic;
-signal CompressorIn_bh128_3_6 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_3_7 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_3_3 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w26_4, heap_bh128_w26_4_d1 : std_logic;
-signal heap_bh128_w27_3, heap_bh128_w27_3_d1 : std_logic;
-signal heap_bh128_w28_3, heap_bh128_w28_3_d1 : std_logic;
-signal CompressorIn_bh128_4_8 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_4_9 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_4_4 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w28_4, heap_bh128_w28_4_d1 : std_logic;
-signal heap_bh128_w29_3, heap_bh128_w29_3_d1 : std_logic;
-signal heap_bh128_w30_4, heap_bh128_w30_4_d1 : std_logic;
-signal CompressorIn_bh128_5_10 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_5_11 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_5_5 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w30_5, heap_bh128_w30_5_d1 : std_logic;
-signal heap_bh128_w31_4, heap_bh128_w31_4_d1 : std_logic;
-signal heap_bh128_w32_4 : std_logic;
-signal CompressorIn_bh128_6_12 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_6_13 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_6_6 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w31_5, heap_bh128_w31_5_d1 : std_logic;
-signal heap_bh128_w32_5 : std_logic;
-signal heap_bh128_w33_4, heap_bh128_w33_4_d1, heap_bh128_w33_4_d2, heap_bh128_w33_4_d3 : std_logic;
-signal CompressorIn_bh128_7_14 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_7_15 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_7_7 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w33_5 : std_logic;
-signal heap_bh128_w34_4 : std_logic;
-signal heap_bh128_w35_4 : std_logic;
-signal CompressorIn_bh128_8_16 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_8_17 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_8_8 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w34_5 : std_logic;
-signal heap_bh128_w35_5 : std_logic;
-signal heap_bh128_w36_4, heap_bh128_w36_4_d1, heap_bh128_w36_4_d2, heap_bh128_w36_4_d3 : std_logic;
-signal CompressorIn_bh128_9_18 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_9_19 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_9_9 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w36_5 : std_logic;
-signal heap_bh128_w37_4 : std_logic;
-signal heap_bh128_w38_4 : std_logic;
-signal CompressorIn_bh128_10_20 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_10_21 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_10_10 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w37_5 : std_logic;
-signal heap_bh128_w38_5 : std_logic;
-signal heap_bh128_w39_4, heap_bh128_w39_4_d1, heap_bh128_w39_4_d2, heap_bh128_w39_4_d3 : std_logic;
-signal CompressorIn_bh128_11_22 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_11_23 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_11_11 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w39_5 : std_logic;
-signal heap_bh128_w40_4 : std_logic;
-signal heap_bh128_w41_4 : std_logic;
-signal CompressorIn_bh128_12_24 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_12_25 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_12_12 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w40_5 : std_logic;
-signal heap_bh128_w41_5 : std_logic;
-signal heap_bh128_w42_4, heap_bh128_w42_4_d1, heap_bh128_w42_4_d2, heap_bh128_w42_4_d3 : std_logic;
-signal CompressorIn_bh128_13_26 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_13_27 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_13_13 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w42_5 : std_logic;
-signal heap_bh128_w43_4 : std_logic;
-signal heap_bh128_w44_4 : std_logic;
-signal CompressorIn_bh128_14_28 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_14_29 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_14_14 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w43_5 : std_logic;
-signal heap_bh128_w44_5 : std_logic;
-signal heap_bh128_w45_4, heap_bh128_w45_4_d1, heap_bh128_w45_4_d2, heap_bh128_w45_4_d3 : std_logic;
-signal CompressorIn_bh128_15_30 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_15_31 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_15_15 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w45_5 : std_logic;
-signal heap_bh128_w46_4 : std_logic;
-signal heap_bh128_w47_4 : std_logic;
-signal CompressorIn_bh128_16_32 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_16_33 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_16_16 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w46_5 : std_logic;
-signal heap_bh128_w47_5 : std_logic;
-signal heap_bh128_w48_4, heap_bh128_w48_4_d1, heap_bh128_w48_4_d2, heap_bh128_w48_4_d3 : std_logic;
-signal CompressorIn_bh128_17_34 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_17_35 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_17_17 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w48_5 : std_logic;
-signal heap_bh128_w49_4 : std_logic;
-signal heap_bh128_w50_4 : std_logic;
-signal CompressorIn_bh128_18_36 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_18_37 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_18_18 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w49_5 : std_logic;
-signal heap_bh128_w50_5 : std_logic;
-signal heap_bh128_w51_4, heap_bh128_w51_4_d1, heap_bh128_w51_4_d2, heap_bh128_w51_4_d3 : std_logic;
-signal CompressorIn_bh128_19_38 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_19_39 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_19_19 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w51_5 : std_logic;
-signal heap_bh128_w52_4 : std_logic;
-signal heap_bh128_w53_4 : std_logic;
-signal CompressorIn_bh128_20_40 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_20_41 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_20_20 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w52_5 : std_logic;
-signal heap_bh128_w53_5 : std_logic;
-signal heap_bh128_w54_4, heap_bh128_w54_4_d1, heap_bh128_w54_4_d2, heap_bh128_w54_4_d3 : std_logic;
-signal CompressorIn_bh128_21_42 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_21_43 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_21_21 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w54_5 : std_logic;
-signal heap_bh128_w55_4 : std_logic;
-signal heap_bh128_w56_4 : std_logic;
-signal CompressorIn_bh128_22_44 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_22_45 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_22_22 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w55_5 : std_logic;
-signal heap_bh128_w56_5 : std_logic;
-signal heap_bh128_w57_4, heap_bh128_w57_4_d1, heap_bh128_w57_4_d2, heap_bh128_w57_4_d3 : std_logic;
-signal CompressorIn_bh128_23_46 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_23_47 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_23_23 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w57_5 : std_logic;
-signal heap_bh128_w58_4 : std_logic;
-signal heap_bh128_w59_4 : std_logic;
-signal CompressorIn_bh128_24_48 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_24_49 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_24_24 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w58_5 : std_logic;
-signal heap_bh128_w59_5 : std_logic;
-signal heap_bh128_w60_4, heap_bh128_w60_4_d1, heap_bh128_w60_4_d2, heap_bh128_w60_4_d3 : std_logic;
-signal CompressorIn_bh128_25_50 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_25_51 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_25_25 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w60_5 : std_logic;
-signal heap_bh128_w61_3 : std_logic;
-signal heap_bh128_w62_3 : std_logic;
-signal CompressorIn_bh128_26_52 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_26_53 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_26_26 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w62_4 : std_logic;
-signal heap_bh128_w63_3 : std_logic;
-signal heap_bh128_w64_3 : std_logic;
-signal CompressorIn_bh128_27_54 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_27_55 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_27_27 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w64_4 : std_logic;
-signal heap_bh128_w65_3 : std_logic;
-signal heap_bh128_w66_3 : std_logic;
-signal CompressorIn_bh128_28_56 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_28_57 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_28_28 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w66_4 : std_logic;
-signal heap_bh128_w67_3 : std_logic;
-signal heap_bh128_w68_3 : std_logic;
-signal CompressorIn_bh128_29_58 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_29_59 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_29_29 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w68_4 : std_logic;
-signal heap_bh128_w69_3 : std_logic;
-signal heap_bh128_w70_3 : std_logic;
-signal CompressorIn_bh128_30_60 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_30_61 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_30_30 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w70_4 : std_logic;
-signal heap_bh128_w71_2, heap_bh128_w71_2_d1, heap_bh128_w71_2_d2, heap_bh128_w71_2_d3 : std_logic;
-signal heap_bh128_w72_2 : std_logic;
-signal tempR_bh128_1, tempR_bh128_1_d1, tempR_bh128_1_d2, tempR_bh128_1_d3, tempR_bh128_1_d4 :  std_logic_vector(6 downto 0);
-signal inAdder0_bh128_1, inAdder0_bh128_1_d1 :  std_logic_vector(4 downto 0);
-signal inAdder1_bh128_1, inAdder1_bh128_1_d1 :  std_logic_vector(4 downto 0);
-signal cin_bh128_1, cin_bh128_1_d1 : std_logic;
-signal outAdder_bh128_1 :  std_logic_vector(4 downto 0);
-signal heap_bh128_w20_5 : std_logic;
-signal heap_bh128_w21_4 : std_logic;
-signal heap_bh128_w22_5 : std_logic;
-signal heap_bh128_w23_4 : std_logic;
-signal heap_bh128_w24_5 : std_logic;
-signal CompressorIn_bh128_31_62 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_31_63 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_31_31 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w32_6, heap_bh128_w32_6_d1, heap_bh128_w32_6_d2, heap_bh128_w32_6_d3 : std_logic;
-signal heap_bh128_w33_6, heap_bh128_w33_6_d1, heap_bh128_w33_6_d2, heap_bh128_w33_6_d3 : std_logic;
-signal heap_bh128_w34_6 : std_logic;
-signal CompressorIn_bh128_32_64 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_32_65 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_32_32 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w35_6, heap_bh128_w35_6_d1, heap_bh128_w35_6_d2, heap_bh128_w35_6_d3 : std_logic;
-signal heap_bh128_w36_6, heap_bh128_w36_6_d1, heap_bh128_w36_6_d2, heap_bh128_w36_6_d3 : std_logic;
-signal heap_bh128_w37_6 : std_logic;
-signal CompressorIn_bh128_33_66 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_33_67 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_33_33 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w38_6, heap_bh128_w38_6_d1, heap_bh128_w38_6_d2, heap_bh128_w38_6_d3 : std_logic;
-signal heap_bh128_w39_6, heap_bh128_w39_6_d1, heap_bh128_w39_6_d2, heap_bh128_w39_6_d3 : std_logic;
-signal heap_bh128_w40_6 : std_logic;
-signal CompressorIn_bh128_34_68 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_34_69 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_34_34 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w41_6, heap_bh128_w41_6_d1, heap_bh128_w41_6_d2, heap_bh128_w41_6_d3 : std_logic;
-signal heap_bh128_w42_6, heap_bh128_w42_6_d1, heap_bh128_w42_6_d2, heap_bh128_w42_6_d3 : std_logic;
-signal heap_bh128_w43_6 : std_logic;
-signal CompressorIn_bh128_35_70 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_35_71 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_35_35 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w44_6, heap_bh128_w44_6_d1, heap_bh128_w44_6_d2, heap_bh128_w44_6_d3 : std_logic;
-signal heap_bh128_w45_6, heap_bh128_w45_6_d1, heap_bh128_w45_6_d2, heap_bh128_w45_6_d3 : std_logic;
-signal heap_bh128_w46_6 : std_logic;
-signal CompressorIn_bh128_36_72 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_36_73 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_36_36 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w47_6, heap_bh128_w47_6_d1, heap_bh128_w47_6_d2, heap_bh128_w47_6_d3 : std_logic;
-signal heap_bh128_w48_6, heap_bh128_w48_6_d1, heap_bh128_w48_6_d2, heap_bh128_w48_6_d3 : std_logic;
-signal heap_bh128_w49_6 : std_logic;
-signal CompressorIn_bh128_37_74 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_37_75 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_37_37 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w50_6, heap_bh128_w50_6_d1, heap_bh128_w50_6_d2, heap_bh128_w50_6_d3 : std_logic;
-signal heap_bh128_w51_6, heap_bh128_w51_6_d1, heap_bh128_w51_6_d2, heap_bh128_w51_6_d3 : std_logic;
-signal heap_bh128_w52_6 : std_logic;
-signal CompressorIn_bh128_38_76 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_38_77 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_38_38 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w53_6, heap_bh128_w53_6_d1, heap_bh128_w53_6_d2, heap_bh128_w53_6_d3 : std_logic;
-signal heap_bh128_w54_6, heap_bh128_w54_6_d1, heap_bh128_w54_6_d2, heap_bh128_w54_6_d3 : std_logic;
-signal heap_bh128_w55_6 : std_logic;
-signal CompressorIn_bh128_39_78 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_39_79 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_39_39 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w56_6, heap_bh128_w56_6_d1, heap_bh128_w56_6_d2, heap_bh128_w56_6_d3 : std_logic;
-signal heap_bh128_w57_6, heap_bh128_w57_6_d1, heap_bh128_w57_6_d2, heap_bh128_w57_6_d3 : std_logic;
-signal heap_bh128_w58_6 : std_logic;
-signal CompressorIn_bh128_40_80 :  std_logic_vector(3 downto 0);
-signal CompressorIn_bh128_40_81 :  std_logic_vector(0 downto 0);
-signal CompressorOut_bh128_40_40 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w59_6, heap_bh128_w59_6_d1, heap_bh128_w59_6_d2, heap_bh128_w59_6_d3 : std_logic;
-signal heap_bh128_w60_6, heap_bh128_w60_6_d1, heap_bh128_w60_6_d2, heap_bh128_w60_6_d3 : std_logic;
-signal heap_bh128_w61_4, heap_bh128_w61_4_d1, heap_bh128_w61_4_d2, heap_bh128_w61_4_d3 : std_logic;
-signal CompressorIn_bh128_41_82 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_41_83 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_41_41 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w61_5, heap_bh128_w61_5_d1, heap_bh128_w61_5_d2, heap_bh128_w61_5_d3 : std_logic;
-signal heap_bh128_w62_5, heap_bh128_w62_5_d1, heap_bh128_w62_5_d2, heap_bh128_w62_5_d3 : std_logic;
-signal heap_bh128_w63_4 : std_logic;
-signal CompressorIn_bh128_42_84 :  std_logic_vector(2 downto 0);
-signal CompressorIn_bh128_42_85 :  std_logic_vector(1 downto 0);
-signal CompressorOut_bh128_42_42 :  std_logic_vector(2 downto 0);
-signal heap_bh128_w72_3, heap_bh128_w72_3_d1, heap_bh128_w72_3_d2, heap_bh128_w72_3_d3 : std_logic;
-signal heap_bh128_w73_2, heap_bh128_w73_2_d1, heap_bh128_w73_2_d2, heap_bh128_w73_2_d3 : std_logic;
-signal heap_bh128_w74_2 : std_logic;
-signal inAdder0_bh128_2, inAdder0_bh128_2_d1 :  std_logic_vector(4 downto 0);
-signal inAdder1_bh128_2, inAdder1_bh128_2_d1 :  std_logic_vector(4 downto 0);
-signal cin_bh128_2, cin_bh128_2_d1 : std_logic;
-signal outAdder_bh128_2 :  std_logic_vector(4 downto 0);
-signal heap_bh128_w20_6 : std_logic;
-signal heap_bh128_w21_5 : std_logic;
-signal heap_bh128_w22_6 : std_logic;
-signal heap_bh128_w23_5 : std_logic;
-signal heap_bh128_w24_6, heap_bh128_w24_6_d1 : std_logic;
-signal tempR_bh128_2, tempR_bh128_2_d1, tempR_bh128_2_d2 :  std_logic_vector(3 downto 0);
-signal inAdder0_bh128_3, inAdder0_bh128_3_d1 :  std_logic_vector(8 downto 0);
-signal inAdder1_bh128_3, inAdder1_bh128_3_d1 :  std_logic_vector(8 downto 0);
-signal cin_bh128_3, cin_bh128_3_d1 : std_logic;
-signal outAdder_bh128_3 :  std_logic_vector(8 downto 0);
-signal heap_bh128_w24_7, heap_bh128_w24_7_d1 : std_logic;
-signal heap_bh128_w25_4, heap_bh128_w25_4_d1 : std_logic;
-signal heap_bh128_w26_5, heap_bh128_w26_5_d1 : std_logic;
-signal heap_bh128_w27_4, heap_bh128_w27_4_d1 : std_logic;
-signal heap_bh128_w28_5, heap_bh128_w28_5_d1 : std_logic;
-signal heap_bh128_w29_4, heap_bh128_w29_4_d1 : std_logic;
-signal heap_bh128_w30_6, heap_bh128_w30_6_d1 : std_logic;
-signal heap_bh128_w31_6, heap_bh128_w31_6_d1 : std_logic;
-signal heap_bh128_w32_7, heap_bh128_w32_7_d1 : std_logic;
-signal CompressorIn_bh128_43_86 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_43_43 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w34_7, heap_bh128_w34_7_d1, heap_bh128_w34_7_d2, heap_bh128_w34_7_d3 : std_logic;
-signal heap_bh128_w35_7, heap_bh128_w35_7_d1, heap_bh128_w35_7_d2, heap_bh128_w35_7_d3 : std_logic;
-signal CompressorIn_bh128_44_87 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_44_44 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w37_7, heap_bh128_w37_7_d1, heap_bh128_w37_7_d2, heap_bh128_w37_7_d3 : std_logic;
-signal heap_bh128_w38_7, heap_bh128_w38_7_d1, heap_bh128_w38_7_d2, heap_bh128_w38_7_d3 : std_logic;
-signal CompressorIn_bh128_45_88 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_45_45 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w40_7, heap_bh128_w40_7_d1, heap_bh128_w40_7_d2, heap_bh128_w40_7_d3 : std_logic;
-signal heap_bh128_w41_7, heap_bh128_w41_7_d1, heap_bh128_w41_7_d2, heap_bh128_w41_7_d3 : std_logic;
-signal CompressorIn_bh128_46_89 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_46_46 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w43_7, heap_bh128_w43_7_d1, heap_bh128_w43_7_d2, heap_bh128_w43_7_d3 : std_logic;
-signal heap_bh128_w44_7, heap_bh128_w44_7_d1, heap_bh128_w44_7_d2, heap_bh128_w44_7_d3 : std_logic;
-signal CompressorIn_bh128_47_90 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_47_47 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w46_7, heap_bh128_w46_7_d1, heap_bh128_w46_7_d2, heap_bh128_w46_7_d3 : std_logic;
-signal heap_bh128_w47_7, heap_bh128_w47_7_d1, heap_bh128_w47_7_d2, heap_bh128_w47_7_d3 : std_logic;
-signal CompressorIn_bh128_48_91 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_48_48 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w49_7, heap_bh128_w49_7_d1, heap_bh128_w49_7_d2, heap_bh128_w49_7_d3 : std_logic;
-signal heap_bh128_w50_7, heap_bh128_w50_7_d1, heap_bh128_w50_7_d2, heap_bh128_w50_7_d3 : std_logic;
-signal CompressorIn_bh128_49_92 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_49_49 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w52_7, heap_bh128_w52_7_d1, heap_bh128_w52_7_d2, heap_bh128_w52_7_d3 : std_logic;
-signal heap_bh128_w53_7, heap_bh128_w53_7_d1, heap_bh128_w53_7_d2, heap_bh128_w53_7_d3 : std_logic;
-signal CompressorIn_bh128_50_93 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_50_50 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w55_7, heap_bh128_w55_7_d1, heap_bh128_w55_7_d2, heap_bh128_w55_7_d3 : std_logic;
-signal heap_bh128_w56_7, heap_bh128_w56_7_d1, heap_bh128_w56_7_d2, heap_bh128_w56_7_d3 : std_logic;
-signal CompressorIn_bh128_51_94 :  std_logic_vector(2 downto 0);
-signal CompressorOut_bh128_51_51 :  std_logic_vector(1 downto 0);
-signal heap_bh128_w58_7, heap_bh128_w58_7_d1, heap_bh128_w58_7_d2, heap_bh128_w58_7_d3 : std_logic;
-signal heap_bh128_w59_7, heap_bh128_w59_7_d1, heap_bh128_w59_7_d2, heap_bh128_w59_7_d3 : std_logic;
-signal inAdder0_bh128_4, inAdder0_bh128_4_d1 :  std_logic_vector(8 downto 0);
-signal inAdder1_bh128_4, inAdder1_bh128_4_d1 :  std_logic_vector(8 downto 0);
-signal cin_bh128_4, cin_bh128_4_d1 : std_logic;
-signal outAdder_bh128_4 :  std_logic_vector(8 downto 0);
-signal heap_bh128_w63_5, heap_bh128_w63_5_d1, heap_bh128_w63_5_d2 : std_logic;
-signal heap_bh128_w64_5, heap_bh128_w64_5_d1, heap_bh128_w64_5_d2 : std_logic;
-signal heap_bh128_w65_4, heap_bh128_w65_4_d1, heap_bh128_w65_4_d2 : std_logic;
-signal heap_bh128_w66_5, heap_bh128_w66_5_d1, heap_bh128_w66_5_d2 : std_logic;
-signal heap_bh128_w67_4, heap_bh128_w67_4_d1, heap_bh128_w67_4_d2 : std_logic;
-signal heap_bh128_w68_5, heap_bh128_w68_5_d1, heap_bh128_w68_5_d2 : std_logic;
-signal heap_bh128_w69_4, heap_bh128_w69_4_d1, heap_bh128_w69_4_d2 : std_logic;
-signal heap_bh128_w70_5, heap_bh128_w70_5_d1, heap_bh128_w70_5_d2 : std_logic;
-signal heap_bh128_w71_3, heap_bh128_w71_3_d1, heap_bh128_w71_3_d2 : std_logic;
-signal inAdder0_bh128_5, inAdder0_bh128_5_d1 :  std_logic_vector(4 downto 0);
-signal inAdder1_bh128_5, inAdder1_bh128_5_d1 :  std_logic_vector(4 downto 0);
-signal cin_bh128_5, cin_bh128_5_d1 : std_logic;
-signal outAdder_bh128_5 :  std_logic_vector(4 downto 0);
-signal heap_bh128_w74_3, heap_bh128_w74_3_d1, heap_bh128_w74_3_d2 : std_logic;
-signal heap_bh128_w75_2, heap_bh128_w75_2_d1, heap_bh128_w75_2_d2 : std_logic;
-signal heap_bh128_w76_2, heap_bh128_w76_2_d1, heap_bh128_w76_2_d2 : std_logic;
-signal heap_bh128_w77_2, heap_bh128_w77_2_d1, heap_bh128_w77_2_d2 : std_logic;
-signal heap_bh128_w78_1, heap_bh128_w78_1_d1, heap_bh128_w78_1_d2 : std_logic;
-signal finalAdderIn0_bh128 :  std_logic_vector(71 downto 0);
-signal finalAdderIn1_bh128 :  std_logic_vector(71 downto 0);
-signal finalAdderCin_bh128 : std_logic;
-signal finalAdderOut_bh128 :  std_logic_vector(71 downto 0);
-signal CompressionResult128 :  std_logic_vector(95 downto 0);
+signal XX_m153 :  std_logic_vector(47 downto 0);
+signal YY_m153 :  std_logic_vector(46 downto 0);
+signal DSP_bh154_ch0_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w94_0, heap_bh154_w94_0_d1, heap_bh154_w94_0_d2, heap_bh154_w94_0_d3 : std_logic;
+signal heap_bh154_w93_0, heap_bh154_w93_0_d1, heap_bh154_w93_0_d2, heap_bh154_w93_0_d3 : std_logic;
+signal heap_bh154_w92_0, heap_bh154_w92_0_d1, heap_bh154_w92_0_d2, heap_bh154_w92_0_d3 : std_logic;
+signal heap_bh154_w91_0, heap_bh154_w91_0_d1, heap_bh154_w91_0_d2, heap_bh154_w91_0_d3 : std_logic;
+signal heap_bh154_w90_0, heap_bh154_w90_0_d1, heap_bh154_w90_0_d2, heap_bh154_w90_0_d3 : std_logic;
+signal heap_bh154_w89_0, heap_bh154_w89_0_d1, heap_bh154_w89_0_d2, heap_bh154_w89_0_d3 : std_logic;
+signal heap_bh154_w88_0, heap_bh154_w88_0_d1, heap_bh154_w88_0_d2, heap_bh154_w88_0_d3 : std_logic;
+signal heap_bh154_w87_0, heap_bh154_w87_0_d1, heap_bh154_w87_0_d2, heap_bh154_w87_0_d3 : std_logic;
+signal heap_bh154_w86_0, heap_bh154_w86_0_d1, heap_bh154_w86_0_d2, heap_bh154_w86_0_d3 : std_logic;
+signal heap_bh154_w85_0, heap_bh154_w85_0_d1, heap_bh154_w85_0_d2, heap_bh154_w85_0_d3 : std_logic;
+signal heap_bh154_w84_0, heap_bh154_w84_0_d1, heap_bh154_w84_0_d2, heap_bh154_w84_0_d3 : std_logic;
+signal heap_bh154_w83_0, heap_bh154_w83_0_d1, heap_bh154_w83_0_d2, heap_bh154_w83_0_d3 : std_logic;
+signal heap_bh154_w82_0, heap_bh154_w82_0_d1, heap_bh154_w82_0_d2, heap_bh154_w82_0_d3 : std_logic;
+signal heap_bh154_w81_0, heap_bh154_w81_0_d1, heap_bh154_w81_0_d2, heap_bh154_w81_0_d3 : std_logic;
+signal heap_bh154_w80_0, heap_bh154_w80_0_d1, heap_bh154_w80_0_d2, heap_bh154_w80_0_d3 : std_logic;
+signal heap_bh154_w79_0, heap_bh154_w79_0_d1, heap_bh154_w79_0_d2, heap_bh154_w79_0_d3 : std_logic;
+signal heap_bh154_w78_0, heap_bh154_w78_0_d1, heap_bh154_w78_0_d2, heap_bh154_w78_0_d3 : std_logic;
+signal heap_bh154_w77_0, heap_bh154_w77_0_d1 : std_logic;
+signal heap_bh154_w76_0, heap_bh154_w76_0_d1 : std_logic;
+signal heap_bh154_w75_0, heap_bh154_w75_0_d1 : std_logic;
+signal heap_bh154_w74_0, heap_bh154_w74_0_d1 : std_logic;
+signal heap_bh154_w73_0, heap_bh154_w73_0_d1 : std_logic;
+signal heap_bh154_w72_0, heap_bh154_w72_0_d1 : std_logic;
+signal heap_bh154_w71_0 : std_logic;
+signal heap_bh154_w70_0 : std_logic;
+signal heap_bh154_w69_0, heap_bh154_w69_0_d1 : std_logic;
+signal heap_bh154_w68_0 : std_logic;
+signal heap_bh154_w67_0, heap_bh154_w67_0_d1 : std_logic;
+signal heap_bh154_w66_0 : std_logic;
+signal heap_bh154_w65_0, heap_bh154_w65_0_d1 : std_logic;
+signal heap_bh154_w64_0 : std_logic;
+signal heap_bh154_w63_0, heap_bh154_w63_0_d1 : std_logic;
+signal heap_bh154_w62_0 : std_logic;
+signal heap_bh154_w61_0, heap_bh154_w61_0_d1 : std_logic;
+signal heap_bh154_w60_0 : std_logic;
+signal heap_bh154_w59_0, heap_bh154_w59_0_d1 : std_logic;
+signal heap_bh154_w58_0 : std_logic;
+signal heap_bh154_w57_0 : std_logic;
+signal heap_bh154_w56_0, heap_bh154_w56_0_d1 : std_logic;
+signal heap_bh154_w55_0 : std_logic;
+signal heap_bh154_w54_0 : std_logic;
+signal DSP_bh154_ch1_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w70_1 : std_logic;
+signal heap_bh154_w69_1 : std_logic;
+signal heap_bh154_w68_1 : std_logic;
+signal heap_bh154_w67_1 : std_logic;
+signal heap_bh154_w66_1 : std_logic;
+signal heap_bh154_w65_1 : std_logic;
+signal heap_bh154_w64_1 : std_logic;
+signal heap_bh154_w63_1 : std_logic;
+signal heap_bh154_w62_1 : std_logic;
+signal heap_bh154_w61_1, heap_bh154_w61_1_d1 : std_logic;
+signal heap_bh154_w60_1 : std_logic;
+signal heap_bh154_w59_1, heap_bh154_w59_1_d1 : std_logic;
+signal heap_bh154_w58_1 : std_logic;
+signal heap_bh154_w57_1 : std_logic;
+signal heap_bh154_w56_1, heap_bh154_w56_1_d1 : std_logic;
+signal heap_bh154_w55_1 : std_logic;
+signal heap_bh154_w54_1 : std_logic;
+signal heap_bh154_w53_0, heap_bh154_w53_0_d1 : std_logic;
+signal heap_bh154_w52_0 : std_logic;
+signal heap_bh154_w51_0 : std_logic;
+signal heap_bh154_w50_0, heap_bh154_w50_0_d1 : std_logic;
+signal heap_bh154_w49_0 : std_logic;
+signal heap_bh154_w48_0 : std_logic;
+signal heap_bh154_w47_0, heap_bh154_w47_0_d1 : std_logic;
+signal heap_bh154_w46_0 : std_logic;
+signal heap_bh154_w45_0 : std_logic;
+signal heap_bh154_w44_0, heap_bh154_w44_0_d1 : std_logic;
+signal heap_bh154_w43_0 : std_logic;
+signal heap_bh154_w42_0 : std_logic;
+signal heap_bh154_w41_0, heap_bh154_w41_0_d1 : std_logic;
+signal heap_bh154_w40_0 : std_logic;
+signal heap_bh154_w39_0 : std_logic;
+signal heap_bh154_w38_0, heap_bh154_w38_0_d1 : std_logic;
+signal heap_bh154_w37_0 : std_logic;
+signal heap_bh154_w36_0 : std_logic;
+signal heap_bh154_w35_0, heap_bh154_w35_0_d1 : std_logic;
+signal heap_bh154_w34_0 : std_logic;
+signal heap_bh154_w33_0 : std_logic;
+signal heap_bh154_w32_0, heap_bh154_w32_0_d1 : std_logic;
+signal heap_bh154_w31_0 : std_logic;
+signal heap_bh154_w30_0 : std_logic;
+signal DSP_bh154_ch2_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w77_1, heap_bh154_w77_1_d1 : std_logic;
+signal heap_bh154_w76_1, heap_bh154_w76_1_d1 : std_logic;
+signal heap_bh154_w75_1, heap_bh154_w75_1_d1 : std_logic;
+signal heap_bh154_w74_1, heap_bh154_w74_1_d1 : std_logic;
+signal heap_bh154_w73_1, heap_bh154_w73_1_d1 : std_logic;
+signal heap_bh154_w72_1, heap_bh154_w72_1_d1 : std_logic;
+signal heap_bh154_w71_1 : std_logic;
+signal heap_bh154_w70_2 : std_logic;
+signal heap_bh154_w69_2 : std_logic;
+signal heap_bh154_w68_2 : std_logic;
+signal heap_bh154_w67_2 : std_logic;
+signal heap_bh154_w66_2 : std_logic;
+signal heap_bh154_w65_2 : std_logic;
+signal heap_bh154_w64_2 : std_logic;
+signal heap_bh154_w63_2 : std_logic;
+signal heap_bh154_w62_2 : std_logic;
+signal heap_bh154_w61_2 : std_logic;
+signal heap_bh154_w60_2 : std_logic;
+signal heap_bh154_w59_2 : std_logic;
+signal heap_bh154_w58_2 : std_logic;
+signal heap_bh154_w57_2 : std_logic;
+signal heap_bh154_w56_2 : std_logic;
+signal heap_bh154_w55_2 : std_logic;
+signal heap_bh154_w54_2 : std_logic;
+signal heap_bh154_w53_1, heap_bh154_w53_1_d1 : std_logic;
+signal heap_bh154_w52_1 : std_logic;
+signal heap_bh154_w51_1 : std_logic;
+signal heap_bh154_w50_1, heap_bh154_w50_1_d1 : std_logic;
+signal heap_bh154_w49_1 : std_logic;
+signal heap_bh154_w48_1 : std_logic;
+signal heap_bh154_w47_1, heap_bh154_w47_1_d1 : std_logic;
+signal heap_bh154_w46_1 : std_logic;
+signal heap_bh154_w45_1 : std_logic;
+signal heap_bh154_w44_1, heap_bh154_w44_1_d1 : std_logic;
+signal heap_bh154_w43_1 : std_logic;
+signal heap_bh154_w42_1 : std_logic;
+signal heap_bh154_w41_1, heap_bh154_w41_1_d1 : std_logic;
+signal heap_bh154_w40_1 : std_logic;
+signal heap_bh154_w39_1 : std_logic;
+signal heap_bh154_w38_1, heap_bh154_w38_1_d1 : std_logic;
+signal heap_bh154_w37_1 : std_logic;
+signal DSP_bh154_ch3_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w53_2 : std_logic;
+signal heap_bh154_w52_2 : std_logic;
+signal heap_bh154_w51_2 : std_logic;
+signal heap_bh154_w50_2 : std_logic;
+signal heap_bh154_w49_2 : std_logic;
+signal heap_bh154_w48_2 : std_logic;
+signal heap_bh154_w47_2 : std_logic;
+signal heap_bh154_w46_2 : std_logic;
+signal heap_bh154_w45_2 : std_logic;
+signal heap_bh154_w44_2 : std_logic;
+signal heap_bh154_w43_2 : std_logic;
+signal heap_bh154_w42_2 : std_logic;
+signal heap_bh154_w41_2 : std_logic;
+signal heap_bh154_w40_2 : std_logic;
+signal heap_bh154_w39_2 : std_logic;
+signal heap_bh154_w38_2 : std_logic;
+signal heap_bh154_w37_2 : std_logic;
+signal heap_bh154_w36_1 : std_logic;
+signal heap_bh154_w35_1, heap_bh154_w35_1_d1 : std_logic;
+signal heap_bh154_w34_1 : std_logic;
+signal heap_bh154_w33_1 : std_logic;
+signal heap_bh154_w32_1, heap_bh154_w32_1_d1 : std_logic;
+signal heap_bh154_w31_1 : std_logic;
+signal heap_bh154_w30_1 : std_logic;
+signal heap_bh154_w29_0, heap_bh154_w29_0_d1 : std_logic;
+signal heap_bh154_w28_0 : std_logic;
+signal heap_bh154_w27_0, heap_bh154_w27_0_d1 : std_logic;
+signal heap_bh154_w26_0 : std_logic;
+signal heap_bh154_w25_0, heap_bh154_w25_0_d1 : std_logic;
+signal heap_bh154_w24_0 : std_logic;
+signal heap_bh154_w23_0, heap_bh154_w23_0_d1 : std_logic;
+signal heap_bh154_w22_0 : std_logic;
+signal heap_bh154_w21_0, heap_bh154_w21_0_d1 : std_logic;
+signal heap_bh154_w20_0 : std_logic;
+signal heap_bh154_w19_0 : std_logic;
+signal heap_bh154_w18_0 : std_logic;
+signal heap_bh154_w17_0 : std_logic;
+signal heap_bh154_w16_0 : std_logic;
+signal heap_bh154_w15_0 : std_logic;
+signal heap_bh154_w14_0 : std_logic;
+signal heap_bh154_w13_0 : std_logic;
+signal DSP_bh154_ch4_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w60_3 : std_logic;
+signal heap_bh154_w59_3 : std_logic;
+signal heap_bh154_w58_3 : std_logic;
+signal heap_bh154_w57_3 : std_logic;
+signal heap_bh154_w56_3 : std_logic;
+signal heap_bh154_w55_3 : std_logic;
+signal heap_bh154_w54_3 : std_logic;
+signal heap_bh154_w53_3 : std_logic;
+signal heap_bh154_w52_3 : std_logic;
+signal heap_bh154_w51_3 : std_logic;
+signal heap_bh154_w50_3 : std_logic;
+signal heap_bh154_w49_3 : std_logic;
+signal heap_bh154_w48_3 : std_logic;
+signal heap_bh154_w47_3 : std_logic;
+signal heap_bh154_w46_3 : std_logic;
+signal heap_bh154_w45_3 : std_logic;
+signal heap_bh154_w44_3 : std_logic;
+signal heap_bh154_w43_3 : std_logic;
+signal heap_bh154_w42_3 : std_logic;
+signal heap_bh154_w41_3 : std_logic;
+signal heap_bh154_w40_3 : std_logic;
+signal heap_bh154_w39_3 : std_logic;
+signal heap_bh154_w38_3 : std_logic;
+signal heap_bh154_w37_3 : std_logic;
+signal heap_bh154_w36_2 : std_logic;
+signal heap_bh154_w35_2 : std_logic;
+signal heap_bh154_w34_2 : std_logic;
+signal heap_bh154_w33_2 : std_logic;
+signal heap_bh154_w32_2 : std_logic;
+signal heap_bh154_w31_2 : std_logic;
+signal heap_bh154_w30_2 : std_logic;
+signal heap_bh154_w29_1 : std_logic;
+signal heap_bh154_w28_1 : std_logic;
+signal heap_bh154_w27_1 : std_logic;
+signal heap_bh154_w26_1 : std_logic;
+signal heap_bh154_w25_1 : std_logic;
+signal heap_bh154_w24_1 : std_logic;
+signal heap_bh154_w23_1 : std_logic;
+signal heap_bh154_w22_1 : std_logic;
+signal heap_bh154_w21_1 : std_logic;
+signal heap_bh154_w20_1 : std_logic;
+signal DSP_bh154_ch5_0 :  std_logic_vector(40 downto 0);
+signal heap_bh154_w36_3 : std_logic;
+signal heap_bh154_w35_3 : std_logic;
+signal heap_bh154_w34_3 : std_logic;
+signal heap_bh154_w33_3 : std_logic;
+signal heap_bh154_w32_3 : std_logic;
+signal heap_bh154_w31_3 : std_logic;
+signal heap_bh154_w30_3 : std_logic;
+signal heap_bh154_w29_2 : std_logic;
+signal heap_bh154_w28_2 : std_logic;
+signal heap_bh154_w27_2 : std_logic;
+signal heap_bh154_w26_2 : std_logic;
+signal heap_bh154_w25_2 : std_logic;
+signal heap_bh154_w24_2 : std_logic;
+signal heap_bh154_w23_2 : std_logic;
+signal heap_bh154_w22_2 : std_logic;
+signal heap_bh154_w21_2 : std_logic;
+signal heap_bh154_w20_2 : std_logic;
+signal heap_bh154_w19_1 : std_logic;
+signal heap_bh154_w18_1 : std_logic;
+signal heap_bh154_w17_1 : std_logic;
+signal heap_bh154_w16_1 : std_logic;
+signal heap_bh154_w15_1 : std_logic;
+signal heap_bh154_w14_1 : std_logic;
+signal heap_bh154_w13_1 : std_logic;
+signal heap_bh154_w12_0 : std_logic;
+signal heap_bh154_w11_0 : std_logic;
+signal heap_bh154_w10_0 : std_logic;
+signal heap_bh154_w9_0 : std_logic;
+signal heap_bh154_w8_0 : std_logic;
+signal heap_bh154_w7_0 : std_logic;
+signal heap_bh154_w6_0 : std_logic;
+signal heap_bh154_w5_0 : std_logic;
+signal heap_bh154_w4_0 : std_logic;
+signal heap_bh154_w3_0 : std_logic;
+signal heap_bh154_w2_0 : std_logic;
+signal heap_bh154_w1_0 : std_logic;
+signal heap_bh154_w0_0 : std_logic;
+signal tempR_bh154_0, tempR_bh154_0_d1, tempR_bh154_0_d2, tempR_bh154_0_d3 :  std_logic_vector(12 downto 0);
+signal inAdder0_bh154_0, inAdder0_bh154_0_d1 :  std_logic_vector(7 downto 0);
+signal inAdder1_bh154_0, inAdder1_bh154_0_d1 :  std_logic_vector(7 downto 0);
+signal cin_bh154_0, cin_bh154_0_d1 : std_logic;
+signal outAdder_bh154_0 :  std_logic_vector(7 downto 0);
+signal heap_bh154_w13_2 : std_logic;
+signal heap_bh154_w14_2 : std_logic;
+signal heap_bh154_w15_2 : std_logic;
+signal heap_bh154_w16_2 : std_logic;
+signal heap_bh154_w17_2 : std_logic;
+signal heap_bh154_w18_2 : std_logic;
+signal heap_bh154_w19_2 : std_logic;
+signal heap_bh154_w20_3 : std_logic;
+signal CompressorIn_bh154_0_0 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_0_1 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_0_0 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w20_4, heap_bh154_w20_4_d1 : std_logic;
+signal heap_bh154_w21_3, heap_bh154_w21_3_d1 : std_logic;
+signal heap_bh154_w22_3, heap_bh154_w22_3_d1 : std_logic;
+signal CompressorIn_bh154_1_2 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_1_3 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_1_1 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w22_4, heap_bh154_w22_4_d1 : std_logic;
+signal heap_bh154_w23_3, heap_bh154_w23_3_d1 : std_logic;
+signal heap_bh154_w24_3, heap_bh154_w24_3_d1 : std_logic;
+signal CompressorIn_bh154_2_4 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_2_5 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_2_2 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w24_4, heap_bh154_w24_4_d1 : std_logic;
+signal heap_bh154_w25_3, heap_bh154_w25_3_d1 : std_logic;
+signal heap_bh154_w26_3, heap_bh154_w26_3_d1 : std_logic;
+signal CompressorIn_bh154_3_6 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_3_7 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_3_3 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w26_4, heap_bh154_w26_4_d1 : std_logic;
+signal heap_bh154_w27_3, heap_bh154_w27_3_d1 : std_logic;
+signal heap_bh154_w28_3, heap_bh154_w28_3_d1 : std_logic;
+signal CompressorIn_bh154_4_8 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_4_9 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_4_4 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w28_4, heap_bh154_w28_4_d1 : std_logic;
+signal heap_bh154_w29_3, heap_bh154_w29_3_d1 : std_logic;
+signal heap_bh154_w30_4, heap_bh154_w30_4_d1 : std_logic;
+signal CompressorIn_bh154_5_10 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_5_11 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_5_5 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w30_5, heap_bh154_w30_5_d1 : std_logic;
+signal heap_bh154_w31_4, heap_bh154_w31_4_d1 : std_logic;
+signal heap_bh154_w32_4, heap_bh154_w32_4_d1 : std_logic;
+signal CompressorIn_bh154_6_12 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_6_13 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_6_6 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w31_5, heap_bh154_w31_5_d1 : std_logic;
+signal heap_bh154_w32_5, heap_bh154_w32_5_d1 : std_logic;
+signal heap_bh154_w33_4, heap_bh154_w33_4_d1 : std_logic;
+signal CompressorIn_bh154_7_14 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_7_15 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_7_7 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w33_5, heap_bh154_w33_5_d1 : std_logic;
+signal heap_bh154_w34_4, heap_bh154_w34_4_d1 : std_logic;
+signal heap_bh154_w35_4, heap_bh154_w35_4_d1 : std_logic;
+signal CompressorIn_bh154_8_16 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_8_17 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_8_8 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w34_5, heap_bh154_w34_5_d1 : std_logic;
+signal heap_bh154_w35_5, heap_bh154_w35_5_d1 : std_logic;
+signal heap_bh154_w36_4, heap_bh154_w36_4_d1, heap_bh154_w36_4_d2, heap_bh154_w36_4_d3 : std_logic;
+signal CompressorIn_bh154_9_18 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_9_19 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_9_9 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w36_5, heap_bh154_w36_5_d1 : std_logic;
+signal heap_bh154_w37_4, heap_bh154_w37_4_d1 : std_logic;
+signal heap_bh154_w38_4, heap_bh154_w38_4_d1 : std_logic;
+signal CompressorIn_bh154_10_20 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_10_21 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_10_10 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w37_5, heap_bh154_w37_5_d1 : std_logic;
+signal heap_bh154_w38_5, heap_bh154_w38_5_d1 : std_logic;
+signal heap_bh154_w39_4, heap_bh154_w39_4_d1, heap_bh154_w39_4_d2, heap_bh154_w39_4_d3 : std_logic;
+signal CompressorIn_bh154_11_22 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_11_23 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_11_11 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w39_5, heap_bh154_w39_5_d1 : std_logic;
+signal heap_bh154_w40_4, heap_bh154_w40_4_d1 : std_logic;
+signal heap_bh154_w41_4, heap_bh154_w41_4_d1 : std_logic;
+signal CompressorIn_bh154_12_24 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_12_25 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_12_12 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w40_5, heap_bh154_w40_5_d1 : std_logic;
+signal heap_bh154_w41_5, heap_bh154_w41_5_d1 : std_logic;
+signal heap_bh154_w42_4, heap_bh154_w42_4_d1, heap_bh154_w42_4_d2, heap_bh154_w42_4_d3 : std_logic;
+signal CompressorIn_bh154_13_26 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_13_27 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_13_13 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w42_5, heap_bh154_w42_5_d1 : std_logic;
+signal heap_bh154_w43_4, heap_bh154_w43_4_d1 : std_logic;
+signal heap_bh154_w44_4, heap_bh154_w44_4_d1 : std_logic;
+signal CompressorIn_bh154_14_28 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_14_29 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_14_14 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w43_5, heap_bh154_w43_5_d1 : std_logic;
+signal heap_bh154_w44_5, heap_bh154_w44_5_d1 : std_logic;
+signal heap_bh154_w45_4, heap_bh154_w45_4_d1, heap_bh154_w45_4_d2, heap_bh154_w45_4_d3 : std_logic;
+signal CompressorIn_bh154_15_30 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_15_31 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_15_15 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w45_5, heap_bh154_w45_5_d1 : std_logic;
+signal heap_bh154_w46_4, heap_bh154_w46_4_d1 : std_logic;
+signal heap_bh154_w47_4, heap_bh154_w47_4_d1 : std_logic;
+signal CompressorIn_bh154_16_32 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_16_33 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_16_16 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w46_5, heap_bh154_w46_5_d1 : std_logic;
+signal heap_bh154_w47_5, heap_bh154_w47_5_d1 : std_logic;
+signal heap_bh154_w48_4, heap_bh154_w48_4_d1, heap_bh154_w48_4_d2, heap_bh154_w48_4_d3 : std_logic;
+signal CompressorIn_bh154_17_34 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_17_35 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_17_17 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w48_5, heap_bh154_w48_5_d1 : std_logic;
+signal heap_bh154_w49_4, heap_bh154_w49_4_d1 : std_logic;
+signal heap_bh154_w50_4, heap_bh154_w50_4_d1 : std_logic;
+signal CompressorIn_bh154_18_36 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_18_37 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_18_18 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w49_5, heap_bh154_w49_5_d1 : std_logic;
+signal heap_bh154_w50_5, heap_bh154_w50_5_d1 : std_logic;
+signal heap_bh154_w51_4, heap_bh154_w51_4_d1, heap_bh154_w51_4_d2, heap_bh154_w51_4_d3 : std_logic;
+signal CompressorIn_bh154_19_38 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_19_39 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_19_19 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w51_5, heap_bh154_w51_5_d1 : std_logic;
+signal heap_bh154_w52_4, heap_bh154_w52_4_d1 : std_logic;
+signal heap_bh154_w53_4, heap_bh154_w53_4_d1 : std_logic;
+signal CompressorIn_bh154_20_40 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_20_41 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_20_20 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w52_5, heap_bh154_w52_5_d1 : std_logic;
+signal heap_bh154_w53_5, heap_bh154_w53_5_d1 : std_logic;
+signal heap_bh154_w54_4, heap_bh154_w54_4_d1, heap_bh154_w54_4_d2, heap_bh154_w54_4_d3 : std_logic;
+signal CompressorIn_bh154_21_42 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_21_43 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_21_21 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w54_5, heap_bh154_w54_5_d1 : std_logic;
+signal heap_bh154_w55_4, heap_bh154_w55_4_d1 : std_logic;
+signal heap_bh154_w56_4, heap_bh154_w56_4_d1 : std_logic;
+signal CompressorIn_bh154_22_44 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_22_45 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_22_22 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w55_5, heap_bh154_w55_5_d1 : std_logic;
+signal heap_bh154_w56_5, heap_bh154_w56_5_d1 : std_logic;
+signal heap_bh154_w57_4, heap_bh154_w57_4_d1, heap_bh154_w57_4_d2, heap_bh154_w57_4_d3 : std_logic;
+signal CompressorIn_bh154_23_46 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_23_47 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_23_23 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w57_5, heap_bh154_w57_5_d1 : std_logic;
+signal heap_bh154_w58_4, heap_bh154_w58_4_d1 : std_logic;
+signal heap_bh154_w59_4, heap_bh154_w59_4_d1 : std_logic;
+signal CompressorIn_bh154_24_48 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_24_49 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_24_24 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w58_5, heap_bh154_w58_5_d1 : std_logic;
+signal heap_bh154_w59_5, heap_bh154_w59_5_d1 : std_logic;
+signal heap_bh154_w60_4, heap_bh154_w60_4_d1, heap_bh154_w60_4_d2, heap_bh154_w60_4_d3 : std_logic;
+signal CompressorIn_bh154_25_50 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_25_51 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_25_25 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w60_5, heap_bh154_w60_5_d1 : std_logic;
+signal heap_bh154_w61_3, heap_bh154_w61_3_d1 : std_logic;
+signal heap_bh154_w62_3, heap_bh154_w62_3_d1 : std_logic;
+signal CompressorIn_bh154_26_52 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_26_53 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_26_26 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w62_4, heap_bh154_w62_4_d1 : std_logic;
+signal heap_bh154_w63_3, heap_bh154_w63_3_d1 : std_logic;
+signal heap_bh154_w64_3, heap_bh154_w64_3_d1 : std_logic;
+signal CompressorIn_bh154_27_54 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_27_55 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_27_27 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w64_4, heap_bh154_w64_4_d1 : std_logic;
+signal heap_bh154_w65_3, heap_bh154_w65_3_d1 : std_logic;
+signal heap_bh154_w66_3, heap_bh154_w66_3_d1 : std_logic;
+signal CompressorIn_bh154_28_56 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_28_57 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_28_28 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w66_4, heap_bh154_w66_4_d1 : std_logic;
+signal heap_bh154_w67_3, heap_bh154_w67_3_d1 : std_logic;
+signal heap_bh154_w68_3, heap_bh154_w68_3_d1 : std_logic;
+signal CompressorIn_bh154_29_58 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_29_59 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_29_29 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w68_4, heap_bh154_w68_4_d1 : std_logic;
+signal heap_bh154_w69_3, heap_bh154_w69_3_d1 : std_logic;
+signal heap_bh154_w70_3, heap_bh154_w70_3_d1 : std_logic;
+signal CompressorIn_bh154_30_60 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_30_61 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_30_30 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w70_4, heap_bh154_w70_4_d1 : std_logic;
+signal heap_bh154_w71_2, heap_bh154_w71_2_d1, heap_bh154_w71_2_d2, heap_bh154_w71_2_d3 : std_logic;
+signal heap_bh154_w72_2, heap_bh154_w72_2_d1 : std_logic;
+signal tempR_bh154_1, tempR_bh154_1_d1, tempR_bh154_1_d2 :  std_logic_vector(6 downto 0);
+signal inAdder0_bh154_1 :  std_logic_vector(12 downto 0);
+signal inAdder1_bh154_1 :  std_logic_vector(12 downto 0);
+signal cin_bh154_1 : std_logic;
+signal outAdder_bh154_1 :  std_logic_vector(12 downto 0);
+signal heap_bh154_w20_5 : std_logic;
+signal heap_bh154_w21_4 : std_logic;
+signal heap_bh154_w22_5 : std_logic;
+signal heap_bh154_w23_4 : std_logic;
+signal heap_bh154_w24_5 : std_logic;
+signal heap_bh154_w25_4 : std_logic;
+signal heap_bh154_w26_5 : std_logic;
+signal heap_bh154_w27_4 : std_logic;
+signal heap_bh154_w28_5 : std_logic;
+signal heap_bh154_w29_4 : std_logic;
+signal heap_bh154_w30_6 : std_logic;
+signal heap_bh154_w31_6 : std_logic;
+signal heap_bh154_w32_6 : std_logic;
+signal CompressorIn_bh154_31_62 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_31_63 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_31_31 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w32_7 : std_logic;
+signal heap_bh154_w33_6 : std_logic;
+signal heap_bh154_w34_6 : std_logic;
+signal CompressorIn_bh154_32_64 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_32_65 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_32_32 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w35_6, heap_bh154_w35_6_d1, heap_bh154_w35_6_d2 : std_logic;
+signal heap_bh154_w36_6, heap_bh154_w36_6_d1, heap_bh154_w36_6_d2 : std_logic;
+signal heap_bh154_w37_6 : std_logic;
+signal CompressorIn_bh154_33_66 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_33_67 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_33_33 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w38_6, heap_bh154_w38_6_d1, heap_bh154_w38_6_d2 : std_logic;
+signal heap_bh154_w39_6, heap_bh154_w39_6_d1, heap_bh154_w39_6_d2 : std_logic;
+signal heap_bh154_w40_6 : std_logic;
+signal CompressorIn_bh154_34_68 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_34_69 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_34_34 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w41_6, heap_bh154_w41_6_d1, heap_bh154_w41_6_d2 : std_logic;
+signal heap_bh154_w42_6, heap_bh154_w42_6_d1, heap_bh154_w42_6_d2 : std_logic;
+signal heap_bh154_w43_6 : std_logic;
+signal CompressorIn_bh154_35_70 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_35_71 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_35_35 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w44_6, heap_bh154_w44_6_d1, heap_bh154_w44_6_d2 : std_logic;
+signal heap_bh154_w45_6, heap_bh154_w45_6_d1, heap_bh154_w45_6_d2 : std_logic;
+signal heap_bh154_w46_6 : std_logic;
+signal CompressorIn_bh154_36_72 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_36_73 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_36_36 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w47_6, heap_bh154_w47_6_d1, heap_bh154_w47_6_d2 : std_logic;
+signal heap_bh154_w48_6, heap_bh154_w48_6_d1, heap_bh154_w48_6_d2 : std_logic;
+signal heap_bh154_w49_6 : std_logic;
+signal CompressorIn_bh154_37_74 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_37_75 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_37_37 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w50_6, heap_bh154_w50_6_d1, heap_bh154_w50_6_d2 : std_logic;
+signal heap_bh154_w51_6, heap_bh154_w51_6_d1, heap_bh154_w51_6_d2 : std_logic;
+signal heap_bh154_w52_6 : std_logic;
+signal CompressorIn_bh154_38_76 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_38_77 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_38_38 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w53_6, heap_bh154_w53_6_d1, heap_bh154_w53_6_d2 : std_logic;
+signal heap_bh154_w54_6, heap_bh154_w54_6_d1, heap_bh154_w54_6_d2 : std_logic;
+signal heap_bh154_w55_6 : std_logic;
+signal CompressorIn_bh154_39_78 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_39_79 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_39_39 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w56_6, heap_bh154_w56_6_d1, heap_bh154_w56_6_d2 : std_logic;
+signal heap_bh154_w57_6, heap_bh154_w57_6_d1, heap_bh154_w57_6_d2 : std_logic;
+signal heap_bh154_w58_6 : std_logic;
+signal CompressorIn_bh154_40_80 :  std_logic_vector(3 downto 0);
+signal CompressorIn_bh154_40_81 :  std_logic_vector(0 downto 0);
+signal CompressorOut_bh154_40_40 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w59_6, heap_bh154_w59_6_d1, heap_bh154_w59_6_d2 : std_logic;
+signal heap_bh154_w60_6, heap_bh154_w60_6_d1, heap_bh154_w60_6_d2 : std_logic;
+signal heap_bh154_w61_4, heap_bh154_w61_4_d1, heap_bh154_w61_4_d2 : std_logic;
+signal CompressorIn_bh154_41_82 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_41_83 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_41_41 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w61_5, heap_bh154_w61_5_d1, heap_bh154_w61_5_d2 : std_logic;
+signal heap_bh154_w62_5, heap_bh154_w62_5_d1, heap_bh154_w62_5_d2 : std_logic;
+signal heap_bh154_w63_4 : std_logic;
+signal CompressorIn_bh154_42_84 :  std_logic_vector(2 downto 0);
+signal CompressorIn_bh154_42_85 :  std_logic_vector(1 downto 0);
+signal CompressorOut_bh154_42_42 :  std_logic_vector(2 downto 0);
+signal heap_bh154_w72_3, heap_bh154_w72_3_d1, heap_bh154_w72_3_d2 : std_logic;
+signal heap_bh154_w73_2, heap_bh154_w73_2_d1, heap_bh154_w73_2_d2 : std_logic;
+signal heap_bh154_w74_2 : std_logic;
+signal inAdder0_bh154_2, inAdder0_bh154_2_d1 :  std_logic_vector(14 downto 0);
+signal inAdder1_bh154_2, inAdder1_bh154_2_d1 :  std_logic_vector(14 downto 0);
+signal cin_bh154_2, cin_bh154_2_d1 : std_logic;
+signal outAdder_bh154_2 :  std_logic_vector(14 downto 0);
+signal heap_bh154_w20_6 : std_logic;
+signal heap_bh154_w21_5 : std_logic;
+signal heap_bh154_w22_6 : std_logic;
+signal heap_bh154_w23_5 : std_logic;
+signal heap_bh154_w24_6 : std_logic;
+signal heap_bh154_w25_5 : std_logic;
+signal heap_bh154_w26_6 : std_logic;
+signal heap_bh154_w27_5 : std_logic;
+signal heap_bh154_w28_6 : std_logic;
+signal heap_bh154_w29_5 : std_logic;
+signal heap_bh154_w30_7 : std_logic;
+signal heap_bh154_w31_7 : std_logic;
+signal heap_bh154_w32_8 : std_logic;
+signal heap_bh154_w33_7 : std_logic;
+signal heap_bh154_w34_7, heap_bh154_w34_7_d1 : std_logic;
+signal tempR_bh154_2, tempR_bh154_2_d1 :  std_logic_vector(13 downto 0);
+signal CompressorIn_bh154_43_86 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_43_43 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w34_8, heap_bh154_w34_8_d1, heap_bh154_w34_8_d2 : std_logic;
+signal heap_bh154_w35_7, heap_bh154_w35_7_d1, heap_bh154_w35_7_d2 : std_logic;
+signal CompressorIn_bh154_44_87 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_44_44 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w37_7, heap_bh154_w37_7_d1, heap_bh154_w37_7_d2 : std_logic;
+signal heap_bh154_w38_7, heap_bh154_w38_7_d1, heap_bh154_w38_7_d2 : std_logic;
+signal CompressorIn_bh154_45_88 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_45_45 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w40_7, heap_bh154_w40_7_d1, heap_bh154_w40_7_d2 : std_logic;
+signal heap_bh154_w41_7, heap_bh154_w41_7_d1, heap_bh154_w41_7_d2 : std_logic;
+signal CompressorIn_bh154_46_89 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_46_46 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w43_7, heap_bh154_w43_7_d1, heap_bh154_w43_7_d2 : std_logic;
+signal heap_bh154_w44_7, heap_bh154_w44_7_d1, heap_bh154_w44_7_d2 : std_logic;
+signal CompressorIn_bh154_47_90 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_47_47 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w46_7, heap_bh154_w46_7_d1, heap_bh154_w46_7_d2 : std_logic;
+signal heap_bh154_w47_7, heap_bh154_w47_7_d1, heap_bh154_w47_7_d2 : std_logic;
+signal CompressorIn_bh154_48_91 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_48_48 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w49_7, heap_bh154_w49_7_d1, heap_bh154_w49_7_d2 : std_logic;
+signal heap_bh154_w50_7, heap_bh154_w50_7_d1, heap_bh154_w50_7_d2 : std_logic;
+signal CompressorIn_bh154_49_92 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_49_49 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w52_7, heap_bh154_w52_7_d1, heap_bh154_w52_7_d2 : std_logic;
+signal heap_bh154_w53_7, heap_bh154_w53_7_d1, heap_bh154_w53_7_d2 : std_logic;
+signal CompressorIn_bh154_50_93 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_50_50 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w55_7, heap_bh154_w55_7_d1, heap_bh154_w55_7_d2 : std_logic;
+signal heap_bh154_w56_7, heap_bh154_w56_7_d1, heap_bh154_w56_7_d2 : std_logic;
+signal CompressorIn_bh154_51_94 :  std_logic_vector(2 downto 0);
+signal CompressorOut_bh154_51_51 :  std_logic_vector(1 downto 0);
+signal heap_bh154_w58_7, heap_bh154_w58_7_d1, heap_bh154_w58_7_d2 : std_logic;
+signal heap_bh154_w59_7, heap_bh154_w59_7_d1, heap_bh154_w59_7_d2 : std_logic;
+signal inAdder0_bh154_3 :  std_logic_vector(8 downto 0);
+signal inAdder1_bh154_3 :  std_logic_vector(8 downto 0);
+signal cin_bh154_3 : std_logic;
+signal outAdder_bh154_3 :  std_logic_vector(8 downto 0);
+signal heap_bh154_w63_5, heap_bh154_w63_5_d1, heap_bh154_w63_5_d2 : std_logic;
+signal heap_bh154_w64_5, heap_bh154_w64_5_d1, heap_bh154_w64_5_d2 : std_logic;
+signal heap_bh154_w65_4, heap_bh154_w65_4_d1, heap_bh154_w65_4_d2 : std_logic;
+signal heap_bh154_w66_5, heap_bh154_w66_5_d1, heap_bh154_w66_5_d2 : std_logic;
+signal heap_bh154_w67_4, heap_bh154_w67_4_d1, heap_bh154_w67_4_d2 : std_logic;
+signal heap_bh154_w68_5, heap_bh154_w68_5_d1, heap_bh154_w68_5_d2 : std_logic;
+signal heap_bh154_w69_4, heap_bh154_w69_4_d1, heap_bh154_w69_4_d2 : std_logic;
+signal heap_bh154_w70_5, heap_bh154_w70_5_d1, heap_bh154_w70_5_d2 : std_logic;
+signal heap_bh154_w71_3, heap_bh154_w71_3_d1, heap_bh154_w71_3_d2 : std_logic;
+signal inAdder0_bh154_4 :  std_logic_vector(4 downto 0);
+signal inAdder1_bh154_4 :  std_logic_vector(4 downto 0);
+signal cin_bh154_4 : std_logic;
+signal outAdder_bh154_4 :  std_logic_vector(4 downto 0);
+signal heap_bh154_w74_3, heap_bh154_w74_3_d1, heap_bh154_w74_3_d2 : std_logic;
+signal heap_bh154_w75_2, heap_bh154_w75_2_d1, heap_bh154_w75_2_d2 : std_logic;
+signal heap_bh154_w76_2, heap_bh154_w76_2_d1, heap_bh154_w76_2_d2 : std_logic;
+signal heap_bh154_w77_2, heap_bh154_w77_2_d1, heap_bh154_w77_2_d2 : std_logic;
+signal heap_bh154_w78_1, heap_bh154_w78_1_d1, heap_bh154_w78_1_d2 : std_logic;
+signal finalAdderIn0_bh154 :  std_logic_vector(61 downto 0);
+signal finalAdderIn1_bh154 :  std_logic_vector(61 downto 0);
+signal finalAdderCin_bh154 : std_logic;
+signal finalAdderOut_bh154 :  std_logic_vector(61 downto 0);
+signal CompressionResult154 :  std_logic_vector(95 downto 0);
 begin
    process(clk)
       begin
          if clk'event and clk = '1' then
-            heap_bh128_w94_0_d1 <=  heap_bh128_w94_0;
-            heap_bh128_w94_0_d2 <=  heap_bh128_w94_0_d1;
-            heap_bh128_w94_0_d3 <=  heap_bh128_w94_0_d2;
-            heap_bh128_w94_0_d4 <=  heap_bh128_w94_0_d3;
-            heap_bh128_w93_0_d1 <=  heap_bh128_w93_0;
-            heap_bh128_w93_0_d2 <=  heap_bh128_w93_0_d1;
-            heap_bh128_w93_0_d3 <=  heap_bh128_w93_0_d2;
-            heap_bh128_w93_0_d4 <=  heap_bh128_w93_0_d3;
-            heap_bh128_w92_0_d1 <=  heap_bh128_w92_0;
-            heap_bh128_w92_0_d2 <=  heap_bh128_w92_0_d1;
-            heap_bh128_w92_0_d3 <=  heap_bh128_w92_0_d2;
-            heap_bh128_w92_0_d4 <=  heap_bh128_w92_0_d3;
-            heap_bh128_w91_0_d1 <=  heap_bh128_w91_0;
-            heap_bh128_w91_0_d2 <=  heap_bh128_w91_0_d1;
-            heap_bh128_w91_0_d3 <=  heap_bh128_w91_0_d2;
-            heap_bh128_w91_0_d4 <=  heap_bh128_w91_0_d3;
-            heap_bh128_w90_0_d1 <=  heap_bh128_w90_0;
-            heap_bh128_w90_0_d2 <=  heap_bh128_w90_0_d1;
-            heap_bh128_w90_0_d3 <=  heap_bh128_w90_0_d2;
-            heap_bh128_w90_0_d4 <=  heap_bh128_w90_0_d3;
-            heap_bh128_w89_0_d1 <=  heap_bh128_w89_0;
-            heap_bh128_w89_0_d2 <=  heap_bh128_w89_0_d1;
-            heap_bh128_w89_0_d3 <=  heap_bh128_w89_0_d2;
-            heap_bh128_w89_0_d4 <=  heap_bh128_w89_0_d3;
-            heap_bh128_w88_0_d1 <=  heap_bh128_w88_0;
-            heap_bh128_w88_0_d2 <=  heap_bh128_w88_0_d1;
-            heap_bh128_w88_0_d3 <=  heap_bh128_w88_0_d2;
-            heap_bh128_w88_0_d4 <=  heap_bh128_w88_0_d3;
-            heap_bh128_w87_0_d1 <=  heap_bh128_w87_0;
-            heap_bh128_w87_0_d2 <=  heap_bh128_w87_0_d1;
-            heap_bh128_w87_0_d3 <=  heap_bh128_w87_0_d2;
-            heap_bh128_w87_0_d4 <=  heap_bh128_w87_0_d3;
-            heap_bh128_w86_0_d1 <=  heap_bh128_w86_0;
-            heap_bh128_w86_0_d2 <=  heap_bh128_w86_0_d1;
-            heap_bh128_w86_0_d3 <=  heap_bh128_w86_0_d2;
-            heap_bh128_w86_0_d4 <=  heap_bh128_w86_0_d3;
-            heap_bh128_w85_0_d1 <=  heap_bh128_w85_0;
-            heap_bh128_w85_0_d2 <=  heap_bh128_w85_0_d1;
-            heap_bh128_w85_0_d3 <=  heap_bh128_w85_0_d2;
-            heap_bh128_w85_0_d4 <=  heap_bh128_w85_0_d3;
-            heap_bh128_w84_0_d1 <=  heap_bh128_w84_0;
-            heap_bh128_w84_0_d2 <=  heap_bh128_w84_0_d1;
-            heap_bh128_w84_0_d3 <=  heap_bh128_w84_0_d2;
-            heap_bh128_w84_0_d4 <=  heap_bh128_w84_0_d3;
-            heap_bh128_w83_0_d1 <=  heap_bh128_w83_0;
-            heap_bh128_w83_0_d2 <=  heap_bh128_w83_0_d1;
-            heap_bh128_w83_0_d3 <=  heap_bh128_w83_0_d2;
-            heap_bh128_w83_0_d4 <=  heap_bh128_w83_0_d3;
-            heap_bh128_w82_0_d1 <=  heap_bh128_w82_0;
-            heap_bh128_w82_0_d2 <=  heap_bh128_w82_0_d1;
-            heap_bh128_w82_0_d3 <=  heap_bh128_w82_0_d2;
-            heap_bh128_w82_0_d4 <=  heap_bh128_w82_0_d3;
-            heap_bh128_w81_0_d1 <=  heap_bh128_w81_0;
-            heap_bh128_w81_0_d2 <=  heap_bh128_w81_0_d1;
-            heap_bh128_w81_0_d3 <=  heap_bh128_w81_0_d2;
-            heap_bh128_w81_0_d4 <=  heap_bh128_w81_0_d3;
-            heap_bh128_w80_0_d1 <=  heap_bh128_w80_0;
-            heap_bh128_w80_0_d2 <=  heap_bh128_w80_0_d1;
-            heap_bh128_w80_0_d3 <=  heap_bh128_w80_0_d2;
-            heap_bh128_w80_0_d4 <=  heap_bh128_w80_0_d3;
-            heap_bh128_w79_0_d1 <=  heap_bh128_w79_0;
-            heap_bh128_w79_0_d2 <=  heap_bh128_w79_0_d1;
-            heap_bh128_w79_0_d3 <=  heap_bh128_w79_0_d2;
-            heap_bh128_w79_0_d4 <=  heap_bh128_w79_0_d3;
-            heap_bh128_w78_0_d1 <=  heap_bh128_w78_0;
-            heap_bh128_w78_0_d2 <=  heap_bh128_w78_0_d1;
-            heap_bh128_w78_0_d3 <=  heap_bh128_w78_0_d2;
-            heap_bh128_w78_0_d4 <=  heap_bh128_w78_0_d3;
-            heap_bh128_w77_0_d1 <=  heap_bh128_w77_0;
-            heap_bh128_w76_0_d1 <=  heap_bh128_w76_0;
-            heap_bh128_w75_0_d1 <=  heap_bh128_w75_0;
-            heap_bh128_w74_0_d1 <=  heap_bh128_w74_0;
-            heap_bh128_w73_0_d1 <=  heap_bh128_w73_0;
-            heap_bh128_w72_0_d1 <=  heap_bh128_w72_0;
-            heap_bh128_w71_0_d1 <=  heap_bh128_w71_0;
-            heap_bh128_w70_0_d1 <=  heap_bh128_w70_0;
-            heap_bh128_w69_0_d1 <=  heap_bh128_w69_0;
-            heap_bh128_w68_0_d1 <=  heap_bh128_w68_0;
-            heap_bh128_w67_0_d1 <=  heap_bh128_w67_0;
-            heap_bh128_w66_0_d1 <=  heap_bh128_w66_0;
-            heap_bh128_w65_0_d1 <=  heap_bh128_w65_0;
-            heap_bh128_w64_0_d1 <=  heap_bh128_w64_0;
-            heap_bh128_w63_0_d1 <=  heap_bh128_w63_0;
-            heap_bh128_w62_0_d1 <=  heap_bh128_w62_0;
-            heap_bh128_w61_0_d1 <=  heap_bh128_w61_0;
-            heap_bh128_w60_0_d1 <=  heap_bh128_w60_0;
-            heap_bh128_w59_0_d1 <=  heap_bh128_w59_0;
-            heap_bh128_w58_0_d1 <=  heap_bh128_w58_0;
-            heap_bh128_w57_0_d1 <=  heap_bh128_w57_0;
-            heap_bh128_w56_0_d1 <=  heap_bh128_w56_0;
-            heap_bh128_w55_0_d1 <=  heap_bh128_w55_0;
-            heap_bh128_w54_0_d1 <=  heap_bh128_w54_0;
-            heap_bh128_w70_1_d1 <=  heap_bh128_w70_1;
-            heap_bh128_w69_1_d1 <=  heap_bh128_w69_1;
-            heap_bh128_w68_1_d1 <=  heap_bh128_w68_1;
-            heap_bh128_w67_1_d1 <=  heap_bh128_w67_1;
-            heap_bh128_w66_1_d1 <=  heap_bh128_w66_1;
-            heap_bh128_w65_1_d1 <=  heap_bh128_w65_1;
-            heap_bh128_w64_1_d1 <=  heap_bh128_w64_1;
-            heap_bh128_w63_1_d1 <=  heap_bh128_w63_1;
-            heap_bh128_w62_1_d1 <=  heap_bh128_w62_1;
-            heap_bh128_w61_1_d1 <=  heap_bh128_w61_1;
-            heap_bh128_w60_1_d1 <=  heap_bh128_w60_1;
-            heap_bh128_w59_1_d1 <=  heap_bh128_w59_1;
-            heap_bh128_w58_1_d1 <=  heap_bh128_w58_1;
-            heap_bh128_w57_1_d1 <=  heap_bh128_w57_1;
-            heap_bh128_w56_1_d1 <=  heap_bh128_w56_1;
-            heap_bh128_w55_1_d1 <=  heap_bh128_w55_1;
-            heap_bh128_w54_1_d1 <=  heap_bh128_w54_1;
-            heap_bh128_w53_0_d1 <=  heap_bh128_w53_0;
-            heap_bh128_w52_0_d1 <=  heap_bh128_w52_0;
-            heap_bh128_w51_0_d1 <=  heap_bh128_w51_0;
-            heap_bh128_w50_0_d1 <=  heap_bh128_w50_0;
-            heap_bh128_w49_0_d1 <=  heap_bh128_w49_0;
-            heap_bh128_w48_0_d1 <=  heap_bh128_w48_0;
-            heap_bh128_w47_0_d1 <=  heap_bh128_w47_0;
-            heap_bh128_w46_0_d1 <=  heap_bh128_w46_0;
-            heap_bh128_w45_0_d1 <=  heap_bh128_w45_0;
-            heap_bh128_w44_0_d1 <=  heap_bh128_w44_0;
-            heap_bh128_w43_0_d1 <=  heap_bh128_w43_0;
-            heap_bh128_w42_0_d1 <=  heap_bh128_w42_0;
-            heap_bh128_w41_0_d1 <=  heap_bh128_w41_0;
-            heap_bh128_w40_0_d1 <=  heap_bh128_w40_0;
-            heap_bh128_w39_0_d1 <=  heap_bh128_w39_0;
-            heap_bh128_w38_0_d1 <=  heap_bh128_w38_0;
-            heap_bh128_w37_0_d1 <=  heap_bh128_w37_0;
-            heap_bh128_w36_0_d1 <=  heap_bh128_w36_0;
-            heap_bh128_w35_0_d1 <=  heap_bh128_w35_0;
-            heap_bh128_w34_0_d1 <=  heap_bh128_w34_0;
-            heap_bh128_w33_0_d1 <=  heap_bh128_w33_0;
-            heap_bh128_w32_0_d1 <=  heap_bh128_w32_0;
-            heap_bh128_w31_0_d1 <=  heap_bh128_w31_0;
-            heap_bh128_w30_0_d1 <=  heap_bh128_w30_0;
-            heap_bh128_w77_1_d1 <=  heap_bh128_w77_1;
-            heap_bh128_w76_1_d1 <=  heap_bh128_w76_1;
-            heap_bh128_w75_1_d1 <=  heap_bh128_w75_1;
-            heap_bh128_w74_1_d1 <=  heap_bh128_w74_1;
-            heap_bh128_w73_1_d1 <=  heap_bh128_w73_1;
-            heap_bh128_w72_1_d1 <=  heap_bh128_w72_1;
-            heap_bh128_w71_1_d1 <=  heap_bh128_w71_1;
-            heap_bh128_w70_2_d1 <=  heap_bh128_w70_2;
-            heap_bh128_w69_2_d1 <=  heap_bh128_w69_2;
-            heap_bh128_w68_2_d1 <=  heap_bh128_w68_2;
-            heap_bh128_w67_2_d1 <=  heap_bh128_w67_2;
-            heap_bh128_w66_2_d1 <=  heap_bh128_w66_2;
-            heap_bh128_w65_2_d1 <=  heap_bh128_w65_2;
-            heap_bh128_w64_2_d1 <=  heap_bh128_w64_2;
-            heap_bh128_w63_2_d1 <=  heap_bh128_w63_2;
-            heap_bh128_w62_2_d1 <=  heap_bh128_w62_2;
-            heap_bh128_w61_2_d1 <=  heap_bh128_w61_2;
-            heap_bh128_w60_2_d1 <=  heap_bh128_w60_2;
-            heap_bh128_w59_2_d1 <=  heap_bh128_w59_2;
-            heap_bh128_w58_2_d1 <=  heap_bh128_w58_2;
-            heap_bh128_w57_2_d1 <=  heap_bh128_w57_2;
-            heap_bh128_w56_2_d1 <=  heap_bh128_w56_2;
-            heap_bh128_w55_2_d1 <=  heap_bh128_w55_2;
-            heap_bh128_w54_2_d1 <=  heap_bh128_w54_2;
-            heap_bh128_w53_1_d1 <=  heap_bh128_w53_1;
-            heap_bh128_w52_1_d1 <=  heap_bh128_w52_1;
-            heap_bh128_w51_1_d1 <=  heap_bh128_w51_1;
-            heap_bh128_w50_1_d1 <=  heap_bh128_w50_1;
-            heap_bh128_w49_1_d1 <=  heap_bh128_w49_1;
-            heap_bh128_w48_1_d1 <=  heap_bh128_w48_1;
-            heap_bh128_w47_1_d1 <=  heap_bh128_w47_1;
-            heap_bh128_w46_1_d1 <=  heap_bh128_w46_1;
-            heap_bh128_w45_1_d1 <=  heap_bh128_w45_1;
-            heap_bh128_w44_1_d1 <=  heap_bh128_w44_1;
-            heap_bh128_w43_1_d1 <=  heap_bh128_w43_1;
-            heap_bh128_w42_1_d1 <=  heap_bh128_w42_1;
-            heap_bh128_w41_1_d1 <=  heap_bh128_w41_1;
-            heap_bh128_w40_1_d1 <=  heap_bh128_w40_1;
-            heap_bh128_w39_1_d1 <=  heap_bh128_w39_1;
-            heap_bh128_w38_1_d1 <=  heap_bh128_w38_1;
-            heap_bh128_w37_1_d1 <=  heap_bh128_w37_1;
-            heap_bh128_w53_2_d1 <=  heap_bh128_w53_2;
-            heap_bh128_w52_2_d1 <=  heap_bh128_w52_2;
-            heap_bh128_w51_2_d1 <=  heap_bh128_w51_2;
-            heap_bh128_w50_2_d1 <=  heap_bh128_w50_2;
-            heap_bh128_w49_2_d1 <=  heap_bh128_w49_2;
-            heap_bh128_w48_2_d1 <=  heap_bh128_w48_2;
-            heap_bh128_w47_2_d1 <=  heap_bh128_w47_2;
-            heap_bh128_w46_2_d1 <=  heap_bh128_w46_2;
-            heap_bh128_w45_2_d1 <=  heap_bh128_w45_2;
-            heap_bh128_w44_2_d1 <=  heap_bh128_w44_2;
-            heap_bh128_w43_2_d1 <=  heap_bh128_w43_2;
-            heap_bh128_w42_2_d1 <=  heap_bh128_w42_2;
-            heap_bh128_w41_2_d1 <=  heap_bh128_w41_2;
-            heap_bh128_w40_2_d1 <=  heap_bh128_w40_2;
-            heap_bh128_w39_2_d1 <=  heap_bh128_w39_2;
-            heap_bh128_w38_2_d1 <=  heap_bh128_w38_2;
-            heap_bh128_w37_2_d1 <=  heap_bh128_w37_2;
-            heap_bh128_w36_1_d1 <=  heap_bh128_w36_1;
-            heap_bh128_w35_1_d1 <=  heap_bh128_w35_1;
-            heap_bh128_w34_1_d1 <=  heap_bh128_w34_1;
-            heap_bh128_w33_1_d1 <=  heap_bh128_w33_1;
-            heap_bh128_w32_1_d1 <=  heap_bh128_w32_1;
-            heap_bh128_w31_1_d1 <=  heap_bh128_w31_1;
-            heap_bh128_w30_1_d1 <=  heap_bh128_w30_1;
-            heap_bh128_w29_0_d1 <=  heap_bh128_w29_0;
-            heap_bh128_w29_0_d2 <=  heap_bh128_w29_0_d1;
-            heap_bh128_w28_0_d1 <=  heap_bh128_w28_0;
-            heap_bh128_w27_0_d1 <=  heap_bh128_w27_0;
-            heap_bh128_w27_0_d2 <=  heap_bh128_w27_0_d1;
-            heap_bh128_w26_0_d1 <=  heap_bh128_w26_0;
-            heap_bh128_w25_0_d1 <=  heap_bh128_w25_0;
-            heap_bh128_w25_0_d2 <=  heap_bh128_w25_0_d1;
-            heap_bh128_w24_0_d1 <=  heap_bh128_w24_0;
-            heap_bh128_w23_0_d1 <=  heap_bh128_w23_0;
-            heap_bh128_w22_0_d1 <=  heap_bh128_w22_0;
-            heap_bh128_w21_0_d1 <=  heap_bh128_w21_0;
-            heap_bh128_w20_0_d1 <=  heap_bh128_w20_0;
-            heap_bh128_w60_3_d1 <=  heap_bh128_w60_3;
-            heap_bh128_w59_3_d1 <=  heap_bh128_w59_3;
-            heap_bh128_w58_3_d1 <=  heap_bh128_w58_3;
-            heap_bh128_w57_3_d1 <=  heap_bh128_w57_3;
-            heap_bh128_w56_3_d1 <=  heap_bh128_w56_3;
-            heap_bh128_w55_3_d1 <=  heap_bh128_w55_3;
-            heap_bh128_w54_3_d1 <=  heap_bh128_w54_3;
-            heap_bh128_w53_3_d1 <=  heap_bh128_w53_3;
-            heap_bh128_w52_3_d1 <=  heap_bh128_w52_3;
-            heap_bh128_w51_3_d1 <=  heap_bh128_w51_3;
-            heap_bh128_w50_3_d1 <=  heap_bh128_w50_3;
-            heap_bh128_w49_3_d1 <=  heap_bh128_w49_3;
-            heap_bh128_w48_3_d1 <=  heap_bh128_w48_3;
-            heap_bh128_w47_3_d1 <=  heap_bh128_w47_3;
-            heap_bh128_w46_3_d1 <=  heap_bh128_w46_3;
-            heap_bh128_w45_3_d1 <=  heap_bh128_w45_3;
-            heap_bh128_w44_3_d1 <=  heap_bh128_w44_3;
-            heap_bh128_w43_3_d1 <=  heap_bh128_w43_3;
-            heap_bh128_w42_3_d1 <=  heap_bh128_w42_3;
-            heap_bh128_w41_3_d1 <=  heap_bh128_w41_3;
-            heap_bh128_w40_3_d1 <=  heap_bh128_w40_3;
-            heap_bh128_w39_3_d1 <=  heap_bh128_w39_3;
-            heap_bh128_w38_3_d1 <=  heap_bh128_w38_3;
-            heap_bh128_w37_3_d1 <=  heap_bh128_w37_3;
-            heap_bh128_w36_2_d1 <=  heap_bh128_w36_2;
-            heap_bh128_w35_2_d1 <=  heap_bh128_w35_2;
-            heap_bh128_w34_2_d1 <=  heap_bh128_w34_2;
-            heap_bh128_w33_2_d1 <=  heap_bh128_w33_2;
-            heap_bh128_w32_2_d1 <=  heap_bh128_w32_2;
-            heap_bh128_w31_2_d1 <=  heap_bh128_w31_2;
-            heap_bh128_w30_2_d1 <=  heap_bh128_w30_2;
-            heap_bh128_w29_1_d1 <=  heap_bh128_w29_1;
-            heap_bh128_w28_1_d1 <=  heap_bh128_w28_1;
-            heap_bh128_w27_1_d1 <=  heap_bh128_w27_1;
-            heap_bh128_w26_1_d1 <=  heap_bh128_w26_1;
-            heap_bh128_w25_1_d1 <=  heap_bh128_w25_1;
-            heap_bh128_w24_1_d1 <=  heap_bh128_w24_1;
-            heap_bh128_w23_1_d1 <=  heap_bh128_w23_1;
-            heap_bh128_w22_1_d1 <=  heap_bh128_w22_1;
-            heap_bh128_w21_1_d1 <=  heap_bh128_w21_1;
-            heap_bh128_w20_1_d1 <=  heap_bh128_w20_1;
-            heap_bh128_w36_3_d1 <=  heap_bh128_w36_3;
-            heap_bh128_w35_3_d1 <=  heap_bh128_w35_3;
-            heap_bh128_w34_3_d1 <=  heap_bh128_w34_3;
-            heap_bh128_w33_3_d1 <=  heap_bh128_w33_3;
-            heap_bh128_w32_3_d1 <=  heap_bh128_w32_3;
-            heap_bh128_w31_3_d1 <=  heap_bh128_w31_3;
-            heap_bh128_w30_3_d1 <=  heap_bh128_w30_3;
-            heap_bh128_w29_2_d1 <=  heap_bh128_w29_2;
-            heap_bh128_w28_2_d1 <=  heap_bh128_w28_2;
-            heap_bh128_w27_2_d1 <=  heap_bh128_w27_2;
-            heap_bh128_w26_2_d1 <=  heap_bh128_w26_2;
-            heap_bh128_w25_2_d1 <=  heap_bh128_w25_2;
-            heap_bh128_w24_2_d1 <=  heap_bh128_w24_2;
-            heap_bh128_w23_2_d1 <=  heap_bh128_w23_2;
-            heap_bh128_w22_2_d1 <=  heap_bh128_w22_2;
-            heap_bh128_w21_2_d1 <=  heap_bh128_w21_2;
-            heap_bh128_w20_2_d1 <=  heap_bh128_w20_2;
-            tempR_bh128_0_d1 <=  tempR_bh128_0;
-            tempR_bh128_0_d2 <=  tempR_bh128_0_d1;
-            tempR_bh128_0_d3 <=  tempR_bh128_0_d2;
-            tempR_bh128_0_d4 <=  tempR_bh128_0_d3;
-            tempR_bh128_0_d5 <=  tempR_bh128_0_d4;
-            inAdder0_bh128_0_d1 <=  inAdder0_bh128_0;
-            inAdder1_bh128_0_d1 <=  inAdder1_bh128_0;
-            cin_bh128_0_d1 <=  cin_bh128_0;
-            heap_bh128_w20_3_d1 <=  heap_bh128_w20_3;
-            heap_bh128_w24_3_d1 <=  heap_bh128_w24_3;
-            heap_bh128_w24_4_d1 <=  heap_bh128_w24_4;
-            heap_bh128_w25_3_d1 <=  heap_bh128_w25_3;
-            heap_bh128_w26_3_d1 <=  heap_bh128_w26_3;
-            heap_bh128_w26_4_d1 <=  heap_bh128_w26_4;
-            heap_bh128_w27_3_d1 <=  heap_bh128_w27_3;
-            heap_bh128_w28_3_d1 <=  heap_bh128_w28_3;
-            heap_bh128_w28_4_d1 <=  heap_bh128_w28_4;
-            heap_bh128_w29_3_d1 <=  heap_bh128_w29_3;
-            heap_bh128_w30_4_d1 <=  heap_bh128_w30_4;
-            heap_bh128_w30_5_d1 <=  heap_bh128_w30_5;
-            heap_bh128_w31_4_d1 <=  heap_bh128_w31_4;
-            heap_bh128_w31_5_d1 <=  heap_bh128_w31_5;
-            heap_bh128_w33_4_d1 <=  heap_bh128_w33_4;
-            heap_bh128_w33_4_d2 <=  heap_bh128_w33_4_d1;
-            heap_bh128_w33_4_d3 <=  heap_bh128_w33_4_d2;
-            heap_bh128_w36_4_d1 <=  heap_bh128_w36_4;
-            heap_bh128_w36_4_d2 <=  heap_bh128_w36_4_d1;
-            heap_bh128_w36_4_d3 <=  heap_bh128_w36_4_d2;
-            heap_bh128_w39_4_d1 <=  heap_bh128_w39_4;
-            heap_bh128_w39_4_d2 <=  heap_bh128_w39_4_d1;
-            heap_bh128_w39_4_d3 <=  heap_bh128_w39_4_d2;
-            heap_bh128_w42_4_d1 <=  heap_bh128_w42_4;
-            heap_bh128_w42_4_d2 <=  heap_bh128_w42_4_d1;
-            heap_bh128_w42_4_d3 <=  heap_bh128_w42_4_d2;
-            heap_bh128_w45_4_d1 <=  heap_bh128_w45_4;
-            heap_bh128_w45_4_d2 <=  heap_bh128_w45_4_d1;
-            heap_bh128_w45_4_d3 <=  heap_bh128_w45_4_d2;
-            heap_bh128_w48_4_d1 <=  heap_bh128_w48_4;
-            heap_bh128_w48_4_d2 <=  heap_bh128_w48_4_d1;
-            heap_bh128_w48_4_d3 <=  heap_bh128_w48_4_d2;
-            heap_bh128_w51_4_d1 <=  heap_bh128_w51_4;
-            heap_bh128_w51_4_d2 <=  heap_bh128_w51_4_d1;
-            heap_bh128_w51_4_d3 <=  heap_bh128_w51_4_d2;
-            heap_bh128_w54_4_d1 <=  heap_bh128_w54_4;
-            heap_bh128_w54_4_d2 <=  heap_bh128_w54_4_d1;
-            heap_bh128_w54_4_d3 <=  heap_bh128_w54_4_d2;
-            heap_bh128_w57_4_d1 <=  heap_bh128_w57_4;
-            heap_bh128_w57_4_d2 <=  heap_bh128_w57_4_d1;
-            heap_bh128_w57_4_d3 <=  heap_bh128_w57_4_d2;
-            heap_bh128_w60_4_d1 <=  heap_bh128_w60_4;
-            heap_bh128_w60_4_d2 <=  heap_bh128_w60_4_d1;
-            heap_bh128_w60_4_d3 <=  heap_bh128_w60_4_d2;
-            heap_bh128_w71_2_d1 <=  heap_bh128_w71_2;
-            heap_bh128_w71_2_d2 <=  heap_bh128_w71_2_d1;
-            heap_bh128_w71_2_d3 <=  heap_bh128_w71_2_d2;
-            tempR_bh128_1_d1 <=  tempR_bh128_1;
-            tempR_bh128_1_d2 <=  tempR_bh128_1_d1;
-            tempR_bh128_1_d3 <=  tempR_bh128_1_d2;
-            tempR_bh128_1_d4 <=  tempR_bh128_1_d3;
-            inAdder0_bh128_1_d1 <=  inAdder0_bh128_1;
-            inAdder1_bh128_1_d1 <=  inAdder1_bh128_1;
-            cin_bh128_1_d1 <=  cin_bh128_1;
-            heap_bh128_w32_6_d1 <=  heap_bh128_w32_6;
-            heap_bh128_w32_6_d2 <=  heap_bh128_w32_6_d1;
-            heap_bh128_w32_6_d3 <=  heap_bh128_w32_6_d2;
-            heap_bh128_w33_6_d1 <=  heap_bh128_w33_6;
-            heap_bh128_w33_6_d2 <=  heap_bh128_w33_6_d1;
-            heap_bh128_w33_6_d3 <=  heap_bh128_w33_6_d2;
-            heap_bh128_w35_6_d1 <=  heap_bh128_w35_6;
-            heap_bh128_w35_6_d2 <=  heap_bh128_w35_6_d1;
-            heap_bh128_w35_6_d3 <=  heap_bh128_w35_6_d2;
-            heap_bh128_w36_6_d1 <=  heap_bh128_w36_6;
-            heap_bh128_w36_6_d2 <=  heap_bh128_w36_6_d1;
-            heap_bh128_w36_6_d3 <=  heap_bh128_w36_6_d2;
-            heap_bh128_w38_6_d1 <=  heap_bh128_w38_6;
-            heap_bh128_w38_6_d2 <=  heap_bh128_w38_6_d1;
-            heap_bh128_w38_6_d3 <=  heap_bh128_w38_6_d2;
-            heap_bh128_w39_6_d1 <=  heap_bh128_w39_6;
-            heap_bh128_w39_6_d2 <=  heap_bh128_w39_6_d1;
-            heap_bh128_w39_6_d3 <=  heap_bh128_w39_6_d2;
-            heap_bh128_w41_6_d1 <=  heap_bh128_w41_6;
-            heap_bh128_w41_6_d2 <=  heap_bh128_w41_6_d1;
-            heap_bh128_w41_6_d3 <=  heap_bh128_w41_6_d2;
-            heap_bh128_w42_6_d1 <=  heap_bh128_w42_6;
-            heap_bh128_w42_6_d2 <=  heap_bh128_w42_6_d1;
-            heap_bh128_w42_6_d3 <=  heap_bh128_w42_6_d2;
-            heap_bh128_w44_6_d1 <=  heap_bh128_w44_6;
-            heap_bh128_w44_6_d2 <=  heap_bh128_w44_6_d1;
-            heap_bh128_w44_6_d3 <=  heap_bh128_w44_6_d2;
-            heap_bh128_w45_6_d1 <=  heap_bh128_w45_6;
-            heap_bh128_w45_6_d2 <=  heap_bh128_w45_6_d1;
-            heap_bh128_w45_6_d3 <=  heap_bh128_w45_6_d2;
-            heap_bh128_w47_6_d1 <=  heap_bh128_w47_6;
-            heap_bh128_w47_6_d2 <=  heap_bh128_w47_6_d1;
-            heap_bh128_w47_6_d3 <=  heap_bh128_w47_6_d2;
-            heap_bh128_w48_6_d1 <=  heap_bh128_w48_6;
-            heap_bh128_w48_6_d2 <=  heap_bh128_w48_6_d1;
-            heap_bh128_w48_6_d3 <=  heap_bh128_w48_6_d2;
-            heap_bh128_w50_6_d1 <=  heap_bh128_w50_6;
-            heap_bh128_w50_6_d2 <=  heap_bh128_w50_6_d1;
-            heap_bh128_w50_6_d3 <=  heap_bh128_w50_6_d2;
-            heap_bh128_w51_6_d1 <=  heap_bh128_w51_6;
-            heap_bh128_w51_6_d2 <=  heap_bh128_w51_6_d1;
-            heap_bh128_w51_6_d3 <=  heap_bh128_w51_6_d2;
-            heap_bh128_w53_6_d1 <=  heap_bh128_w53_6;
-            heap_bh128_w53_6_d2 <=  heap_bh128_w53_6_d1;
-            heap_bh128_w53_6_d3 <=  heap_bh128_w53_6_d2;
-            heap_bh128_w54_6_d1 <=  heap_bh128_w54_6;
-            heap_bh128_w54_6_d2 <=  heap_bh128_w54_6_d1;
-            heap_bh128_w54_6_d3 <=  heap_bh128_w54_6_d2;
-            heap_bh128_w56_6_d1 <=  heap_bh128_w56_6;
-            heap_bh128_w56_6_d2 <=  heap_bh128_w56_6_d1;
-            heap_bh128_w56_6_d3 <=  heap_bh128_w56_6_d2;
-            heap_bh128_w57_6_d1 <=  heap_bh128_w57_6;
-            heap_bh128_w57_6_d2 <=  heap_bh128_w57_6_d1;
-            heap_bh128_w57_6_d3 <=  heap_bh128_w57_6_d2;
-            heap_bh128_w59_6_d1 <=  heap_bh128_w59_6;
-            heap_bh128_w59_6_d2 <=  heap_bh128_w59_6_d1;
-            heap_bh128_w59_6_d3 <=  heap_bh128_w59_6_d2;
-            heap_bh128_w60_6_d1 <=  heap_bh128_w60_6;
-            heap_bh128_w60_6_d2 <=  heap_bh128_w60_6_d1;
-            heap_bh128_w60_6_d3 <=  heap_bh128_w60_6_d2;
-            heap_bh128_w61_4_d1 <=  heap_bh128_w61_4;
-            heap_bh128_w61_4_d2 <=  heap_bh128_w61_4_d1;
-            heap_bh128_w61_4_d3 <=  heap_bh128_w61_4_d2;
-            heap_bh128_w61_5_d1 <=  heap_bh128_w61_5;
-            heap_bh128_w61_5_d2 <=  heap_bh128_w61_5_d1;
-            heap_bh128_w61_5_d3 <=  heap_bh128_w61_5_d2;
-            heap_bh128_w62_5_d1 <=  heap_bh128_w62_5;
-            heap_bh128_w62_5_d2 <=  heap_bh128_w62_5_d1;
-            heap_bh128_w62_5_d3 <=  heap_bh128_w62_5_d2;
-            heap_bh128_w72_3_d1 <=  heap_bh128_w72_3;
-            heap_bh128_w72_3_d2 <=  heap_bh128_w72_3_d1;
-            heap_bh128_w72_3_d3 <=  heap_bh128_w72_3_d2;
-            heap_bh128_w73_2_d1 <=  heap_bh128_w73_2;
-            heap_bh128_w73_2_d2 <=  heap_bh128_w73_2_d1;
-            heap_bh128_w73_2_d3 <=  heap_bh128_w73_2_d2;
-            inAdder0_bh128_2_d1 <=  inAdder0_bh128_2;
-            inAdder1_bh128_2_d1 <=  inAdder1_bh128_2;
-            cin_bh128_2_d1 <=  cin_bh128_2;
-            heap_bh128_w24_6_d1 <=  heap_bh128_w24_6;
-            tempR_bh128_2_d1 <=  tempR_bh128_2;
-            tempR_bh128_2_d2 <=  tempR_bh128_2_d1;
-            inAdder0_bh128_3_d1 <=  inAdder0_bh128_3;
-            inAdder1_bh128_3_d1 <=  inAdder1_bh128_3;
-            cin_bh128_3_d1 <=  cin_bh128_3;
-            heap_bh128_w24_7_d1 <=  heap_bh128_w24_7;
-            heap_bh128_w25_4_d1 <=  heap_bh128_w25_4;
-            heap_bh128_w26_5_d1 <=  heap_bh128_w26_5;
-            heap_bh128_w27_4_d1 <=  heap_bh128_w27_4;
-            heap_bh128_w28_5_d1 <=  heap_bh128_w28_5;
-            heap_bh128_w29_4_d1 <=  heap_bh128_w29_4;
-            heap_bh128_w30_6_d1 <=  heap_bh128_w30_6;
-            heap_bh128_w31_6_d1 <=  heap_bh128_w31_6;
-            heap_bh128_w32_7_d1 <=  heap_bh128_w32_7;
-            heap_bh128_w34_7_d1 <=  heap_bh128_w34_7;
-            heap_bh128_w34_7_d2 <=  heap_bh128_w34_7_d1;
-            heap_bh128_w34_7_d3 <=  heap_bh128_w34_7_d2;
-            heap_bh128_w35_7_d1 <=  heap_bh128_w35_7;
-            heap_bh128_w35_7_d2 <=  heap_bh128_w35_7_d1;
-            heap_bh128_w35_7_d3 <=  heap_bh128_w35_7_d2;
-            heap_bh128_w37_7_d1 <=  heap_bh128_w37_7;
-            heap_bh128_w37_7_d2 <=  heap_bh128_w37_7_d1;
-            heap_bh128_w37_7_d3 <=  heap_bh128_w37_7_d2;
-            heap_bh128_w38_7_d1 <=  heap_bh128_w38_7;
-            heap_bh128_w38_7_d2 <=  heap_bh128_w38_7_d1;
-            heap_bh128_w38_7_d3 <=  heap_bh128_w38_7_d2;
-            heap_bh128_w40_7_d1 <=  heap_bh128_w40_7;
-            heap_bh128_w40_7_d2 <=  heap_bh128_w40_7_d1;
-            heap_bh128_w40_7_d3 <=  heap_bh128_w40_7_d2;
-            heap_bh128_w41_7_d1 <=  heap_bh128_w41_7;
-            heap_bh128_w41_7_d2 <=  heap_bh128_w41_7_d1;
-            heap_bh128_w41_7_d3 <=  heap_bh128_w41_7_d2;
-            heap_bh128_w43_7_d1 <=  heap_bh128_w43_7;
-            heap_bh128_w43_7_d2 <=  heap_bh128_w43_7_d1;
-            heap_bh128_w43_7_d3 <=  heap_bh128_w43_7_d2;
-            heap_bh128_w44_7_d1 <=  heap_bh128_w44_7;
-            heap_bh128_w44_7_d2 <=  heap_bh128_w44_7_d1;
-            heap_bh128_w44_7_d3 <=  heap_bh128_w44_7_d2;
-            heap_bh128_w46_7_d1 <=  heap_bh128_w46_7;
-            heap_bh128_w46_7_d2 <=  heap_bh128_w46_7_d1;
-            heap_bh128_w46_7_d3 <=  heap_bh128_w46_7_d2;
-            heap_bh128_w47_7_d1 <=  heap_bh128_w47_7;
-            heap_bh128_w47_7_d2 <=  heap_bh128_w47_7_d1;
-            heap_bh128_w47_7_d3 <=  heap_bh128_w47_7_d2;
-            heap_bh128_w49_7_d1 <=  heap_bh128_w49_7;
-            heap_bh128_w49_7_d2 <=  heap_bh128_w49_7_d1;
-            heap_bh128_w49_7_d3 <=  heap_bh128_w49_7_d2;
-            heap_bh128_w50_7_d1 <=  heap_bh128_w50_7;
-            heap_bh128_w50_7_d2 <=  heap_bh128_w50_7_d1;
-            heap_bh128_w50_7_d3 <=  heap_bh128_w50_7_d2;
-            heap_bh128_w52_7_d1 <=  heap_bh128_w52_7;
-            heap_bh128_w52_7_d2 <=  heap_bh128_w52_7_d1;
-            heap_bh128_w52_7_d3 <=  heap_bh128_w52_7_d2;
-            heap_bh128_w53_7_d1 <=  heap_bh128_w53_7;
-            heap_bh128_w53_7_d2 <=  heap_bh128_w53_7_d1;
-            heap_bh128_w53_7_d3 <=  heap_bh128_w53_7_d2;
-            heap_bh128_w55_7_d1 <=  heap_bh128_w55_7;
-            heap_bh128_w55_7_d2 <=  heap_bh128_w55_7_d1;
-            heap_bh128_w55_7_d3 <=  heap_bh128_w55_7_d2;
-            heap_bh128_w56_7_d1 <=  heap_bh128_w56_7;
-            heap_bh128_w56_7_d2 <=  heap_bh128_w56_7_d1;
-            heap_bh128_w56_7_d3 <=  heap_bh128_w56_7_d2;
-            heap_bh128_w58_7_d1 <=  heap_bh128_w58_7;
-            heap_bh128_w58_7_d2 <=  heap_bh128_w58_7_d1;
-            heap_bh128_w58_7_d3 <=  heap_bh128_w58_7_d2;
-            heap_bh128_w59_7_d1 <=  heap_bh128_w59_7;
-            heap_bh128_w59_7_d2 <=  heap_bh128_w59_7_d1;
-            heap_bh128_w59_7_d3 <=  heap_bh128_w59_7_d2;
-            inAdder0_bh128_4_d1 <=  inAdder0_bh128_4;
-            inAdder1_bh128_4_d1 <=  inAdder1_bh128_4;
-            cin_bh128_4_d1 <=  cin_bh128_4;
-            heap_bh128_w63_5_d1 <=  heap_bh128_w63_5;
-            heap_bh128_w63_5_d2 <=  heap_bh128_w63_5_d1;
-            heap_bh128_w64_5_d1 <=  heap_bh128_w64_5;
-            heap_bh128_w64_5_d2 <=  heap_bh128_w64_5_d1;
-            heap_bh128_w65_4_d1 <=  heap_bh128_w65_4;
-            heap_bh128_w65_4_d2 <=  heap_bh128_w65_4_d1;
-            heap_bh128_w66_5_d1 <=  heap_bh128_w66_5;
-            heap_bh128_w66_5_d2 <=  heap_bh128_w66_5_d1;
-            heap_bh128_w67_4_d1 <=  heap_bh128_w67_4;
-            heap_bh128_w67_4_d2 <=  heap_bh128_w67_4_d1;
-            heap_bh128_w68_5_d1 <=  heap_bh128_w68_5;
-            heap_bh128_w68_5_d2 <=  heap_bh128_w68_5_d1;
-            heap_bh128_w69_4_d1 <=  heap_bh128_w69_4;
-            heap_bh128_w69_4_d2 <=  heap_bh128_w69_4_d1;
-            heap_bh128_w70_5_d1 <=  heap_bh128_w70_5;
-            heap_bh128_w70_5_d2 <=  heap_bh128_w70_5_d1;
-            heap_bh128_w71_3_d1 <=  heap_bh128_w71_3;
-            heap_bh128_w71_3_d2 <=  heap_bh128_w71_3_d1;
-            inAdder0_bh128_5_d1 <=  inAdder0_bh128_5;
-            inAdder1_bh128_5_d1 <=  inAdder1_bh128_5;
-            cin_bh128_5_d1 <=  cin_bh128_5;
-            heap_bh128_w74_3_d1 <=  heap_bh128_w74_3;
-            heap_bh128_w74_3_d2 <=  heap_bh128_w74_3_d1;
-            heap_bh128_w75_2_d1 <=  heap_bh128_w75_2;
-            heap_bh128_w75_2_d2 <=  heap_bh128_w75_2_d1;
-            heap_bh128_w76_2_d1 <=  heap_bh128_w76_2;
-            heap_bh128_w76_2_d2 <=  heap_bh128_w76_2_d1;
-            heap_bh128_w77_2_d1 <=  heap_bh128_w77_2;
-            heap_bh128_w77_2_d2 <=  heap_bh128_w77_2_d1;
-            heap_bh128_w78_1_d1 <=  heap_bh128_w78_1;
-            heap_bh128_w78_1_d2 <=  heap_bh128_w78_1_d1;
+            heap_bh154_w94_0_d1 <=  heap_bh154_w94_0;
+            heap_bh154_w94_0_d2 <=  heap_bh154_w94_0_d1;
+            heap_bh154_w94_0_d3 <=  heap_bh154_w94_0_d2;
+            heap_bh154_w93_0_d1 <=  heap_bh154_w93_0;
+            heap_bh154_w93_0_d2 <=  heap_bh154_w93_0_d1;
+            heap_bh154_w93_0_d3 <=  heap_bh154_w93_0_d2;
+            heap_bh154_w92_0_d1 <=  heap_bh154_w92_0;
+            heap_bh154_w92_0_d2 <=  heap_bh154_w92_0_d1;
+            heap_bh154_w92_0_d3 <=  heap_bh154_w92_0_d2;
+            heap_bh154_w91_0_d1 <=  heap_bh154_w91_0;
+            heap_bh154_w91_0_d2 <=  heap_bh154_w91_0_d1;
+            heap_bh154_w91_0_d3 <=  heap_bh154_w91_0_d2;
+            heap_bh154_w90_0_d1 <=  heap_bh154_w90_0;
+            heap_bh154_w90_0_d2 <=  heap_bh154_w90_0_d1;
+            heap_bh154_w90_0_d3 <=  heap_bh154_w90_0_d2;
+            heap_bh154_w89_0_d1 <=  heap_bh154_w89_0;
+            heap_bh154_w89_0_d2 <=  heap_bh154_w89_0_d1;
+            heap_bh154_w89_0_d3 <=  heap_bh154_w89_0_d2;
+            heap_bh154_w88_0_d1 <=  heap_bh154_w88_0;
+            heap_bh154_w88_0_d2 <=  heap_bh154_w88_0_d1;
+            heap_bh154_w88_0_d3 <=  heap_bh154_w88_0_d2;
+            heap_bh154_w87_0_d1 <=  heap_bh154_w87_0;
+            heap_bh154_w87_0_d2 <=  heap_bh154_w87_0_d1;
+            heap_bh154_w87_0_d3 <=  heap_bh154_w87_0_d2;
+            heap_bh154_w86_0_d1 <=  heap_bh154_w86_0;
+            heap_bh154_w86_0_d2 <=  heap_bh154_w86_0_d1;
+            heap_bh154_w86_0_d3 <=  heap_bh154_w86_0_d2;
+            heap_bh154_w85_0_d1 <=  heap_bh154_w85_0;
+            heap_bh154_w85_0_d2 <=  heap_bh154_w85_0_d1;
+            heap_bh154_w85_0_d3 <=  heap_bh154_w85_0_d2;
+            heap_bh154_w84_0_d1 <=  heap_bh154_w84_0;
+            heap_bh154_w84_0_d2 <=  heap_bh154_w84_0_d1;
+            heap_bh154_w84_0_d3 <=  heap_bh154_w84_0_d2;
+            heap_bh154_w83_0_d1 <=  heap_bh154_w83_0;
+            heap_bh154_w83_0_d2 <=  heap_bh154_w83_0_d1;
+            heap_bh154_w83_0_d3 <=  heap_bh154_w83_0_d2;
+            heap_bh154_w82_0_d1 <=  heap_bh154_w82_0;
+            heap_bh154_w82_0_d2 <=  heap_bh154_w82_0_d1;
+            heap_bh154_w82_0_d3 <=  heap_bh154_w82_0_d2;
+            heap_bh154_w81_0_d1 <=  heap_bh154_w81_0;
+            heap_bh154_w81_0_d2 <=  heap_bh154_w81_0_d1;
+            heap_bh154_w81_0_d3 <=  heap_bh154_w81_0_d2;
+            heap_bh154_w80_0_d1 <=  heap_bh154_w80_0;
+            heap_bh154_w80_0_d2 <=  heap_bh154_w80_0_d1;
+            heap_bh154_w80_0_d3 <=  heap_bh154_w80_0_d2;
+            heap_bh154_w79_0_d1 <=  heap_bh154_w79_0;
+            heap_bh154_w79_0_d2 <=  heap_bh154_w79_0_d1;
+            heap_bh154_w79_0_d3 <=  heap_bh154_w79_0_d2;
+            heap_bh154_w78_0_d1 <=  heap_bh154_w78_0;
+            heap_bh154_w78_0_d2 <=  heap_bh154_w78_0_d1;
+            heap_bh154_w78_0_d3 <=  heap_bh154_w78_0_d2;
+            heap_bh154_w77_0_d1 <=  heap_bh154_w77_0;
+            heap_bh154_w76_0_d1 <=  heap_bh154_w76_0;
+            heap_bh154_w75_0_d1 <=  heap_bh154_w75_0;
+            heap_bh154_w74_0_d1 <=  heap_bh154_w74_0;
+            heap_bh154_w73_0_d1 <=  heap_bh154_w73_0;
+            heap_bh154_w72_0_d1 <=  heap_bh154_w72_0;
+            heap_bh154_w69_0_d1 <=  heap_bh154_w69_0;
+            heap_bh154_w67_0_d1 <=  heap_bh154_w67_0;
+            heap_bh154_w65_0_d1 <=  heap_bh154_w65_0;
+            heap_bh154_w63_0_d1 <=  heap_bh154_w63_0;
+            heap_bh154_w61_0_d1 <=  heap_bh154_w61_0;
+            heap_bh154_w59_0_d1 <=  heap_bh154_w59_0;
+            heap_bh154_w56_0_d1 <=  heap_bh154_w56_0;
+            heap_bh154_w61_1_d1 <=  heap_bh154_w61_1;
+            heap_bh154_w59_1_d1 <=  heap_bh154_w59_1;
+            heap_bh154_w56_1_d1 <=  heap_bh154_w56_1;
+            heap_bh154_w53_0_d1 <=  heap_bh154_w53_0;
+            heap_bh154_w50_0_d1 <=  heap_bh154_w50_0;
+            heap_bh154_w47_0_d1 <=  heap_bh154_w47_0;
+            heap_bh154_w44_0_d1 <=  heap_bh154_w44_0;
+            heap_bh154_w41_0_d1 <=  heap_bh154_w41_0;
+            heap_bh154_w38_0_d1 <=  heap_bh154_w38_0;
+            heap_bh154_w35_0_d1 <=  heap_bh154_w35_0;
+            heap_bh154_w32_0_d1 <=  heap_bh154_w32_0;
+            heap_bh154_w77_1_d1 <=  heap_bh154_w77_1;
+            heap_bh154_w76_1_d1 <=  heap_bh154_w76_1;
+            heap_bh154_w75_1_d1 <=  heap_bh154_w75_1;
+            heap_bh154_w74_1_d1 <=  heap_bh154_w74_1;
+            heap_bh154_w73_1_d1 <=  heap_bh154_w73_1;
+            heap_bh154_w72_1_d1 <=  heap_bh154_w72_1;
+            heap_bh154_w53_1_d1 <=  heap_bh154_w53_1;
+            heap_bh154_w50_1_d1 <=  heap_bh154_w50_1;
+            heap_bh154_w47_1_d1 <=  heap_bh154_w47_1;
+            heap_bh154_w44_1_d1 <=  heap_bh154_w44_1;
+            heap_bh154_w41_1_d1 <=  heap_bh154_w41_1;
+            heap_bh154_w38_1_d1 <=  heap_bh154_w38_1;
+            heap_bh154_w35_1_d1 <=  heap_bh154_w35_1;
+            heap_bh154_w32_1_d1 <=  heap_bh154_w32_1;
+            heap_bh154_w29_0_d1 <=  heap_bh154_w29_0;
+            heap_bh154_w27_0_d1 <=  heap_bh154_w27_0;
+            heap_bh154_w25_0_d1 <=  heap_bh154_w25_0;
+            heap_bh154_w23_0_d1 <=  heap_bh154_w23_0;
+            heap_bh154_w21_0_d1 <=  heap_bh154_w21_0;
+            tempR_bh154_0_d1 <=  tempR_bh154_0;
+            tempR_bh154_0_d2 <=  tempR_bh154_0_d1;
+            tempR_bh154_0_d3 <=  tempR_bh154_0_d2;
+            inAdder0_bh154_0_d1 <=  inAdder0_bh154_0;
+            inAdder1_bh154_0_d1 <=  inAdder1_bh154_0;
+            cin_bh154_0_d1 <=  cin_bh154_0;
+            heap_bh154_w20_4_d1 <=  heap_bh154_w20_4;
+            heap_bh154_w21_3_d1 <=  heap_bh154_w21_3;
+            heap_bh154_w22_3_d1 <=  heap_bh154_w22_3;
+            heap_bh154_w22_4_d1 <=  heap_bh154_w22_4;
+            heap_bh154_w23_3_d1 <=  heap_bh154_w23_3;
+            heap_bh154_w24_3_d1 <=  heap_bh154_w24_3;
+            heap_bh154_w24_4_d1 <=  heap_bh154_w24_4;
+            heap_bh154_w25_3_d1 <=  heap_bh154_w25_3;
+            heap_bh154_w26_3_d1 <=  heap_bh154_w26_3;
+            heap_bh154_w26_4_d1 <=  heap_bh154_w26_4;
+            heap_bh154_w27_3_d1 <=  heap_bh154_w27_3;
+            heap_bh154_w28_3_d1 <=  heap_bh154_w28_3;
+            heap_bh154_w28_4_d1 <=  heap_bh154_w28_4;
+            heap_bh154_w29_3_d1 <=  heap_bh154_w29_3;
+            heap_bh154_w30_4_d1 <=  heap_bh154_w30_4;
+            heap_bh154_w30_5_d1 <=  heap_bh154_w30_5;
+            heap_bh154_w31_4_d1 <=  heap_bh154_w31_4;
+            heap_bh154_w32_4_d1 <=  heap_bh154_w32_4;
+            heap_bh154_w31_5_d1 <=  heap_bh154_w31_5;
+            heap_bh154_w32_5_d1 <=  heap_bh154_w32_5;
+            heap_bh154_w33_4_d1 <=  heap_bh154_w33_4;
+            heap_bh154_w33_5_d1 <=  heap_bh154_w33_5;
+            heap_bh154_w34_4_d1 <=  heap_bh154_w34_4;
+            heap_bh154_w35_4_d1 <=  heap_bh154_w35_4;
+            heap_bh154_w34_5_d1 <=  heap_bh154_w34_5;
+            heap_bh154_w35_5_d1 <=  heap_bh154_w35_5;
+            heap_bh154_w36_4_d1 <=  heap_bh154_w36_4;
+            heap_bh154_w36_4_d2 <=  heap_bh154_w36_4_d1;
+            heap_bh154_w36_4_d3 <=  heap_bh154_w36_4_d2;
+            heap_bh154_w36_5_d1 <=  heap_bh154_w36_5;
+            heap_bh154_w37_4_d1 <=  heap_bh154_w37_4;
+            heap_bh154_w38_4_d1 <=  heap_bh154_w38_4;
+            heap_bh154_w37_5_d1 <=  heap_bh154_w37_5;
+            heap_bh154_w38_5_d1 <=  heap_bh154_w38_5;
+            heap_bh154_w39_4_d1 <=  heap_bh154_w39_4;
+            heap_bh154_w39_4_d2 <=  heap_bh154_w39_4_d1;
+            heap_bh154_w39_4_d3 <=  heap_bh154_w39_4_d2;
+            heap_bh154_w39_5_d1 <=  heap_bh154_w39_5;
+            heap_bh154_w40_4_d1 <=  heap_bh154_w40_4;
+            heap_bh154_w41_4_d1 <=  heap_bh154_w41_4;
+            heap_bh154_w40_5_d1 <=  heap_bh154_w40_5;
+            heap_bh154_w41_5_d1 <=  heap_bh154_w41_5;
+            heap_bh154_w42_4_d1 <=  heap_bh154_w42_4;
+            heap_bh154_w42_4_d2 <=  heap_bh154_w42_4_d1;
+            heap_bh154_w42_4_d3 <=  heap_bh154_w42_4_d2;
+            heap_bh154_w42_5_d1 <=  heap_bh154_w42_5;
+            heap_bh154_w43_4_d1 <=  heap_bh154_w43_4;
+            heap_bh154_w44_4_d1 <=  heap_bh154_w44_4;
+            heap_bh154_w43_5_d1 <=  heap_bh154_w43_5;
+            heap_bh154_w44_5_d1 <=  heap_bh154_w44_5;
+            heap_bh154_w45_4_d1 <=  heap_bh154_w45_4;
+            heap_bh154_w45_4_d2 <=  heap_bh154_w45_4_d1;
+            heap_bh154_w45_4_d3 <=  heap_bh154_w45_4_d2;
+            heap_bh154_w45_5_d1 <=  heap_bh154_w45_5;
+            heap_bh154_w46_4_d1 <=  heap_bh154_w46_4;
+            heap_bh154_w47_4_d1 <=  heap_bh154_w47_4;
+            heap_bh154_w46_5_d1 <=  heap_bh154_w46_5;
+            heap_bh154_w47_5_d1 <=  heap_bh154_w47_5;
+            heap_bh154_w48_4_d1 <=  heap_bh154_w48_4;
+            heap_bh154_w48_4_d2 <=  heap_bh154_w48_4_d1;
+            heap_bh154_w48_4_d3 <=  heap_bh154_w48_4_d2;
+            heap_bh154_w48_5_d1 <=  heap_bh154_w48_5;
+            heap_bh154_w49_4_d1 <=  heap_bh154_w49_4;
+            heap_bh154_w50_4_d1 <=  heap_bh154_w50_4;
+            heap_bh154_w49_5_d1 <=  heap_bh154_w49_5;
+            heap_bh154_w50_5_d1 <=  heap_bh154_w50_5;
+            heap_bh154_w51_4_d1 <=  heap_bh154_w51_4;
+            heap_bh154_w51_4_d2 <=  heap_bh154_w51_4_d1;
+            heap_bh154_w51_4_d3 <=  heap_bh154_w51_4_d2;
+            heap_bh154_w51_5_d1 <=  heap_bh154_w51_5;
+            heap_bh154_w52_4_d1 <=  heap_bh154_w52_4;
+            heap_bh154_w53_4_d1 <=  heap_bh154_w53_4;
+            heap_bh154_w52_5_d1 <=  heap_bh154_w52_5;
+            heap_bh154_w53_5_d1 <=  heap_bh154_w53_5;
+            heap_bh154_w54_4_d1 <=  heap_bh154_w54_4;
+            heap_bh154_w54_4_d2 <=  heap_bh154_w54_4_d1;
+            heap_bh154_w54_4_d3 <=  heap_bh154_w54_4_d2;
+            heap_bh154_w54_5_d1 <=  heap_bh154_w54_5;
+            heap_bh154_w55_4_d1 <=  heap_bh154_w55_4;
+            heap_bh154_w56_4_d1 <=  heap_bh154_w56_4;
+            heap_bh154_w55_5_d1 <=  heap_bh154_w55_5;
+            heap_bh154_w56_5_d1 <=  heap_bh154_w56_5;
+            heap_bh154_w57_4_d1 <=  heap_bh154_w57_4;
+            heap_bh154_w57_4_d2 <=  heap_bh154_w57_4_d1;
+            heap_bh154_w57_4_d3 <=  heap_bh154_w57_4_d2;
+            heap_bh154_w57_5_d1 <=  heap_bh154_w57_5;
+            heap_bh154_w58_4_d1 <=  heap_bh154_w58_4;
+            heap_bh154_w59_4_d1 <=  heap_bh154_w59_4;
+            heap_bh154_w58_5_d1 <=  heap_bh154_w58_5;
+            heap_bh154_w59_5_d1 <=  heap_bh154_w59_5;
+            heap_bh154_w60_4_d1 <=  heap_bh154_w60_4;
+            heap_bh154_w60_4_d2 <=  heap_bh154_w60_4_d1;
+            heap_bh154_w60_4_d3 <=  heap_bh154_w60_4_d2;
+            heap_bh154_w60_5_d1 <=  heap_bh154_w60_5;
+            heap_bh154_w61_3_d1 <=  heap_bh154_w61_3;
+            heap_bh154_w62_3_d1 <=  heap_bh154_w62_3;
+            heap_bh154_w62_4_d1 <=  heap_bh154_w62_4;
+            heap_bh154_w63_3_d1 <=  heap_bh154_w63_3;
+            heap_bh154_w64_3_d1 <=  heap_bh154_w64_3;
+            heap_bh154_w64_4_d1 <=  heap_bh154_w64_4;
+            heap_bh154_w65_3_d1 <=  heap_bh154_w65_3;
+            heap_bh154_w66_3_d1 <=  heap_bh154_w66_3;
+            heap_bh154_w66_4_d1 <=  heap_bh154_w66_4;
+            heap_bh154_w67_3_d1 <=  heap_bh154_w67_3;
+            heap_bh154_w68_3_d1 <=  heap_bh154_w68_3;
+            heap_bh154_w68_4_d1 <=  heap_bh154_w68_4;
+            heap_bh154_w69_3_d1 <=  heap_bh154_w69_3;
+            heap_bh154_w70_3_d1 <=  heap_bh154_w70_3;
+            heap_bh154_w70_4_d1 <=  heap_bh154_w70_4;
+            heap_bh154_w71_2_d1 <=  heap_bh154_w71_2;
+            heap_bh154_w71_2_d2 <=  heap_bh154_w71_2_d1;
+            heap_bh154_w71_2_d3 <=  heap_bh154_w71_2_d2;
+            heap_bh154_w72_2_d1 <=  heap_bh154_w72_2;
+            tempR_bh154_1_d1 <=  tempR_bh154_1;
+            tempR_bh154_1_d2 <=  tempR_bh154_1_d1;
+            heap_bh154_w35_6_d1 <=  heap_bh154_w35_6;
+            heap_bh154_w35_6_d2 <=  heap_bh154_w35_6_d1;
+            heap_bh154_w36_6_d1 <=  heap_bh154_w36_6;
+            heap_bh154_w36_6_d2 <=  heap_bh154_w36_6_d1;
+            heap_bh154_w38_6_d1 <=  heap_bh154_w38_6;
+            heap_bh154_w38_6_d2 <=  heap_bh154_w38_6_d1;
+            heap_bh154_w39_6_d1 <=  heap_bh154_w39_6;
+            heap_bh154_w39_6_d2 <=  heap_bh154_w39_6_d1;
+            heap_bh154_w41_6_d1 <=  heap_bh154_w41_6;
+            heap_bh154_w41_6_d2 <=  heap_bh154_w41_6_d1;
+            heap_bh154_w42_6_d1 <=  heap_bh154_w42_6;
+            heap_bh154_w42_6_d2 <=  heap_bh154_w42_6_d1;
+            heap_bh154_w44_6_d1 <=  heap_bh154_w44_6;
+            heap_bh154_w44_6_d2 <=  heap_bh154_w44_6_d1;
+            heap_bh154_w45_6_d1 <=  heap_bh154_w45_6;
+            heap_bh154_w45_6_d2 <=  heap_bh154_w45_6_d1;
+            heap_bh154_w47_6_d1 <=  heap_bh154_w47_6;
+            heap_bh154_w47_6_d2 <=  heap_bh154_w47_6_d1;
+            heap_bh154_w48_6_d1 <=  heap_bh154_w48_6;
+            heap_bh154_w48_6_d2 <=  heap_bh154_w48_6_d1;
+            heap_bh154_w50_6_d1 <=  heap_bh154_w50_6;
+            heap_bh154_w50_6_d2 <=  heap_bh154_w50_6_d1;
+            heap_bh154_w51_6_d1 <=  heap_bh154_w51_6;
+            heap_bh154_w51_6_d2 <=  heap_bh154_w51_6_d1;
+            heap_bh154_w53_6_d1 <=  heap_bh154_w53_6;
+            heap_bh154_w53_6_d2 <=  heap_bh154_w53_6_d1;
+            heap_bh154_w54_6_d1 <=  heap_bh154_w54_6;
+            heap_bh154_w54_6_d2 <=  heap_bh154_w54_6_d1;
+            heap_bh154_w56_6_d1 <=  heap_bh154_w56_6;
+            heap_bh154_w56_6_d2 <=  heap_bh154_w56_6_d1;
+            heap_bh154_w57_6_d1 <=  heap_bh154_w57_6;
+            heap_bh154_w57_6_d2 <=  heap_bh154_w57_6_d1;
+            heap_bh154_w59_6_d1 <=  heap_bh154_w59_6;
+            heap_bh154_w59_6_d2 <=  heap_bh154_w59_6_d1;
+            heap_bh154_w60_6_d1 <=  heap_bh154_w60_6;
+            heap_bh154_w60_6_d2 <=  heap_bh154_w60_6_d1;
+            heap_bh154_w61_4_d1 <=  heap_bh154_w61_4;
+            heap_bh154_w61_4_d2 <=  heap_bh154_w61_4_d1;
+            heap_bh154_w61_5_d1 <=  heap_bh154_w61_5;
+            heap_bh154_w61_5_d2 <=  heap_bh154_w61_5_d1;
+            heap_bh154_w62_5_d1 <=  heap_bh154_w62_5;
+            heap_bh154_w62_5_d2 <=  heap_bh154_w62_5_d1;
+            heap_bh154_w72_3_d1 <=  heap_bh154_w72_3;
+            heap_bh154_w72_3_d2 <=  heap_bh154_w72_3_d1;
+            heap_bh154_w73_2_d1 <=  heap_bh154_w73_2;
+            heap_bh154_w73_2_d2 <=  heap_bh154_w73_2_d1;
+            inAdder0_bh154_2_d1 <=  inAdder0_bh154_2;
+            inAdder1_bh154_2_d1 <=  inAdder1_bh154_2;
+            cin_bh154_2_d1 <=  cin_bh154_2;
+            heap_bh154_w34_7_d1 <=  heap_bh154_w34_7;
+            tempR_bh154_2_d1 <=  tempR_bh154_2;
+            heap_bh154_w34_8_d1 <=  heap_bh154_w34_8;
+            heap_bh154_w34_8_d2 <=  heap_bh154_w34_8_d1;
+            heap_bh154_w35_7_d1 <=  heap_bh154_w35_7;
+            heap_bh154_w35_7_d2 <=  heap_bh154_w35_7_d1;
+            heap_bh154_w37_7_d1 <=  heap_bh154_w37_7;
+            heap_bh154_w37_7_d2 <=  heap_bh154_w37_7_d1;
+            heap_bh154_w38_7_d1 <=  heap_bh154_w38_7;
+            heap_bh154_w38_7_d2 <=  heap_bh154_w38_7_d1;
+            heap_bh154_w40_7_d1 <=  heap_bh154_w40_7;
+            heap_bh154_w40_7_d2 <=  heap_bh154_w40_7_d1;
+            heap_bh154_w41_7_d1 <=  heap_bh154_w41_7;
+            heap_bh154_w41_7_d2 <=  heap_bh154_w41_7_d1;
+            heap_bh154_w43_7_d1 <=  heap_bh154_w43_7;
+            heap_bh154_w43_7_d2 <=  heap_bh154_w43_7_d1;
+            heap_bh154_w44_7_d1 <=  heap_bh154_w44_7;
+            heap_bh154_w44_7_d2 <=  heap_bh154_w44_7_d1;
+            heap_bh154_w46_7_d1 <=  heap_bh154_w46_7;
+            heap_bh154_w46_7_d2 <=  heap_bh154_w46_7_d1;
+            heap_bh154_w47_7_d1 <=  heap_bh154_w47_7;
+            heap_bh154_w47_7_d2 <=  heap_bh154_w47_7_d1;
+            heap_bh154_w49_7_d1 <=  heap_bh154_w49_7;
+            heap_bh154_w49_7_d2 <=  heap_bh154_w49_7_d1;
+            heap_bh154_w50_7_d1 <=  heap_bh154_w50_7;
+            heap_bh154_w50_7_d2 <=  heap_bh154_w50_7_d1;
+            heap_bh154_w52_7_d1 <=  heap_bh154_w52_7;
+            heap_bh154_w52_7_d2 <=  heap_bh154_w52_7_d1;
+            heap_bh154_w53_7_d1 <=  heap_bh154_w53_7;
+            heap_bh154_w53_7_d2 <=  heap_bh154_w53_7_d1;
+            heap_bh154_w55_7_d1 <=  heap_bh154_w55_7;
+            heap_bh154_w55_7_d2 <=  heap_bh154_w55_7_d1;
+            heap_bh154_w56_7_d1 <=  heap_bh154_w56_7;
+            heap_bh154_w56_7_d2 <=  heap_bh154_w56_7_d1;
+            heap_bh154_w58_7_d1 <=  heap_bh154_w58_7;
+            heap_bh154_w58_7_d2 <=  heap_bh154_w58_7_d1;
+            heap_bh154_w59_7_d1 <=  heap_bh154_w59_7;
+            heap_bh154_w59_7_d2 <=  heap_bh154_w59_7_d1;
+            heap_bh154_w63_5_d1 <=  heap_bh154_w63_5;
+            heap_bh154_w63_5_d2 <=  heap_bh154_w63_5_d1;
+            heap_bh154_w64_5_d1 <=  heap_bh154_w64_5;
+            heap_bh154_w64_5_d2 <=  heap_bh154_w64_5_d1;
+            heap_bh154_w65_4_d1 <=  heap_bh154_w65_4;
+            heap_bh154_w65_4_d2 <=  heap_bh154_w65_4_d1;
+            heap_bh154_w66_5_d1 <=  heap_bh154_w66_5;
+            heap_bh154_w66_5_d2 <=  heap_bh154_w66_5_d1;
+            heap_bh154_w67_4_d1 <=  heap_bh154_w67_4;
+            heap_bh154_w67_4_d2 <=  heap_bh154_w67_4_d1;
+            heap_bh154_w68_5_d1 <=  heap_bh154_w68_5;
+            heap_bh154_w68_5_d2 <=  heap_bh154_w68_5_d1;
+            heap_bh154_w69_4_d1 <=  heap_bh154_w69_4;
+            heap_bh154_w69_4_d2 <=  heap_bh154_w69_4_d1;
+            heap_bh154_w70_5_d1 <=  heap_bh154_w70_5;
+            heap_bh154_w70_5_d2 <=  heap_bh154_w70_5_d1;
+            heap_bh154_w71_3_d1 <=  heap_bh154_w71_3;
+            heap_bh154_w71_3_d2 <=  heap_bh154_w71_3_d1;
+            heap_bh154_w74_3_d1 <=  heap_bh154_w74_3;
+            heap_bh154_w74_3_d2 <=  heap_bh154_w74_3_d1;
+            heap_bh154_w75_2_d1 <=  heap_bh154_w75_2;
+            heap_bh154_w75_2_d2 <=  heap_bh154_w75_2_d1;
+            heap_bh154_w76_2_d1 <=  heap_bh154_w76_2;
+            heap_bh154_w76_2_d2 <=  heap_bh154_w76_2_d1;
+            heap_bh154_w77_2_d1 <=  heap_bh154_w77_2;
+            heap_bh154_w77_2_d2 <=  heap_bh154_w77_2_d1;
+            heap_bh154_w78_1_d1 <=  heap_bh154_w78_1;
+            heap_bh154_w78_1_d2 <=  heap_bh154_w78_1_d1;
          end if;
       end process;
-   XX_m127 <= Y ;
-   YY_m127 <= X ;
+   XX_m153 <= Y ;
+   YY_m153 <= X ;
    
    -- Beginning of code generated by BitHeap::generateCompressorVHDL
    -- code generated by BitHeap::generateSupertileVHDL()
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch0_0 <= ("" & XX_m127(47 downto 24) & "") * ("" & YY_m127(46 downto 30) & "");
-   heap_bh128_w94_0 <= DSP_bh128_ch0_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w93_0 <= DSP_bh128_ch0_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w92_0 <= DSP_bh128_ch0_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w91_0 <= DSP_bh128_ch0_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w90_0 <= DSP_bh128_ch0_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w89_0 <= DSP_bh128_ch0_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w88_0 <= DSP_bh128_ch0_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w87_0 <= DSP_bh128_ch0_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w86_0 <= DSP_bh128_ch0_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w85_0 <= DSP_bh128_ch0_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w84_0 <= DSP_bh128_ch0_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w83_0 <= DSP_bh128_ch0_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w82_0 <= DSP_bh128_ch0_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w81_0 <= DSP_bh128_ch0_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w80_0 <= DSP_bh128_ch0_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w79_0 <= DSP_bh128_ch0_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w78_0 <= DSP_bh128_ch0_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w77_0 <= DSP_bh128_ch0_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w76_0 <= DSP_bh128_ch0_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w75_0 <= DSP_bh128_ch0_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w74_0 <= DSP_bh128_ch0_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w73_0 <= DSP_bh128_ch0_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w72_0 <= DSP_bh128_ch0_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w71_0 <= DSP_bh128_ch0_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w70_0 <= DSP_bh128_ch0_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w69_0 <= DSP_bh128_ch0_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w68_0 <= DSP_bh128_ch0_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w67_0 <= DSP_bh128_ch0_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w66_0 <= DSP_bh128_ch0_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w65_0 <= DSP_bh128_ch0_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w64_0 <= DSP_bh128_ch0_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w63_0 <= DSP_bh128_ch0_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w62_0 <= DSP_bh128_ch0_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w61_0 <= DSP_bh128_ch0_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w60_0 <= DSP_bh128_ch0_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w59_0 <= DSP_bh128_ch0_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w58_0 <= DSP_bh128_ch0_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w57_0 <= DSP_bh128_ch0_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w56_0 <= DSP_bh128_ch0_0(2); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w55_0 <= DSP_bh128_ch0_0(1); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w54_0 <= DSP_bh128_ch0_0(0); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch0_0 <= ("" & XX_m153(47 downto 24) & "") * ("" & YY_m153(46 downto 30) & "");
+   heap_bh154_w94_0 <= DSP_bh154_ch0_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w93_0 <= DSP_bh154_ch0_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w92_0 <= DSP_bh154_ch0_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w91_0 <= DSP_bh154_ch0_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w90_0 <= DSP_bh154_ch0_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w89_0 <= DSP_bh154_ch0_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w88_0 <= DSP_bh154_ch0_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w87_0 <= DSP_bh154_ch0_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w86_0 <= DSP_bh154_ch0_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w85_0 <= DSP_bh154_ch0_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w84_0 <= DSP_bh154_ch0_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w83_0 <= DSP_bh154_ch0_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w82_0 <= DSP_bh154_ch0_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w81_0 <= DSP_bh154_ch0_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w80_0 <= DSP_bh154_ch0_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w79_0 <= DSP_bh154_ch0_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w78_0 <= DSP_bh154_ch0_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w77_0 <= DSP_bh154_ch0_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w76_0 <= DSP_bh154_ch0_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w75_0 <= DSP_bh154_ch0_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w74_0 <= DSP_bh154_ch0_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w73_0 <= DSP_bh154_ch0_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w72_0 <= DSP_bh154_ch0_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w71_0 <= DSP_bh154_ch0_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w70_0 <= DSP_bh154_ch0_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w69_0 <= DSP_bh154_ch0_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w68_0 <= DSP_bh154_ch0_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w67_0 <= DSP_bh154_ch0_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w66_0 <= DSP_bh154_ch0_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w65_0 <= DSP_bh154_ch0_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w64_0 <= DSP_bh154_ch0_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w63_0 <= DSP_bh154_ch0_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w62_0 <= DSP_bh154_ch0_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w61_0 <= DSP_bh154_ch0_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w60_0 <= DSP_bh154_ch0_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w59_0 <= DSP_bh154_ch0_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w58_0 <= DSP_bh154_ch0_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w57_0 <= DSP_bh154_ch0_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w56_0 <= DSP_bh154_ch0_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w55_0 <= DSP_bh154_ch0_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w54_0 <= DSP_bh154_ch0_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch1_0 <= ("" & XX_m127(23 downto 0) & "") * ("" & YY_m127(46 downto 30) & "");
-   heap_bh128_w70_1 <= DSP_bh128_ch1_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w69_1 <= DSP_bh128_ch1_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w68_1 <= DSP_bh128_ch1_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w67_1 <= DSP_bh128_ch1_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w66_1 <= DSP_bh128_ch1_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w65_1 <= DSP_bh128_ch1_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w64_1 <= DSP_bh128_ch1_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w63_1 <= DSP_bh128_ch1_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w62_1 <= DSP_bh128_ch1_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w61_1 <= DSP_bh128_ch1_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w60_1 <= DSP_bh128_ch1_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w59_1 <= DSP_bh128_ch1_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w58_1 <= DSP_bh128_ch1_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w57_1 <= DSP_bh128_ch1_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w56_1 <= DSP_bh128_ch1_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w55_1 <= DSP_bh128_ch1_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w54_1 <= DSP_bh128_ch1_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w53_0 <= DSP_bh128_ch1_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w52_0 <= DSP_bh128_ch1_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w51_0 <= DSP_bh128_ch1_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w50_0 <= DSP_bh128_ch1_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w49_0 <= DSP_bh128_ch1_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w48_0 <= DSP_bh128_ch1_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w47_0 <= DSP_bh128_ch1_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w46_0 <= DSP_bh128_ch1_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w45_0 <= DSP_bh128_ch1_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w44_0 <= DSP_bh128_ch1_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w43_0 <= DSP_bh128_ch1_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w42_0 <= DSP_bh128_ch1_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w41_0 <= DSP_bh128_ch1_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w40_0 <= DSP_bh128_ch1_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w39_0 <= DSP_bh128_ch1_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w38_0 <= DSP_bh128_ch1_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w37_0 <= DSP_bh128_ch1_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w36_0 <= DSP_bh128_ch1_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w35_0 <= DSP_bh128_ch1_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w34_0 <= DSP_bh128_ch1_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w33_0 <= DSP_bh128_ch1_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w32_0 <= DSP_bh128_ch1_0(2); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w31_0 <= DSP_bh128_ch1_0(1); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w30_0 <= DSP_bh128_ch1_0(0); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch1_0 <= ("" & XX_m153(23 downto 0) & "") * ("" & YY_m153(46 downto 30) & "");
+   heap_bh154_w70_1 <= DSP_bh154_ch1_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w69_1 <= DSP_bh154_ch1_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w68_1 <= DSP_bh154_ch1_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w67_1 <= DSP_bh154_ch1_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w66_1 <= DSP_bh154_ch1_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w65_1 <= DSP_bh154_ch1_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w64_1 <= DSP_bh154_ch1_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w63_1 <= DSP_bh154_ch1_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w62_1 <= DSP_bh154_ch1_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w61_1 <= DSP_bh154_ch1_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w60_1 <= DSP_bh154_ch1_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w59_1 <= DSP_bh154_ch1_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w58_1 <= DSP_bh154_ch1_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w57_1 <= DSP_bh154_ch1_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w56_1 <= DSP_bh154_ch1_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w55_1 <= DSP_bh154_ch1_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w54_1 <= DSP_bh154_ch1_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w53_0 <= DSP_bh154_ch1_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w52_0 <= DSP_bh154_ch1_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w51_0 <= DSP_bh154_ch1_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w50_0 <= DSP_bh154_ch1_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w49_0 <= DSP_bh154_ch1_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w48_0 <= DSP_bh154_ch1_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w47_0 <= DSP_bh154_ch1_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w46_0 <= DSP_bh154_ch1_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w45_0 <= DSP_bh154_ch1_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w44_0 <= DSP_bh154_ch1_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w43_0 <= DSP_bh154_ch1_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w42_0 <= DSP_bh154_ch1_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w41_0 <= DSP_bh154_ch1_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w40_0 <= DSP_bh154_ch1_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w39_0 <= DSP_bh154_ch1_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w38_0 <= DSP_bh154_ch1_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w37_0 <= DSP_bh154_ch1_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w36_0 <= DSP_bh154_ch1_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w35_0 <= DSP_bh154_ch1_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w34_0 <= DSP_bh154_ch1_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w33_0 <= DSP_bh154_ch1_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w32_0 <= DSP_bh154_ch1_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w31_0 <= DSP_bh154_ch1_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w30_0 <= DSP_bh154_ch1_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch2_0 <= ("" & XX_m127(47 downto 24) & "") * ("" & YY_m127(29 downto 13) & "");
-   heap_bh128_w77_1 <= DSP_bh128_ch2_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w76_1 <= DSP_bh128_ch2_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w75_1 <= DSP_bh128_ch2_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w74_1 <= DSP_bh128_ch2_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w73_1 <= DSP_bh128_ch2_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w72_1 <= DSP_bh128_ch2_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w71_1 <= DSP_bh128_ch2_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w70_2 <= DSP_bh128_ch2_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w69_2 <= DSP_bh128_ch2_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w68_2 <= DSP_bh128_ch2_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w67_2 <= DSP_bh128_ch2_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w66_2 <= DSP_bh128_ch2_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w65_2 <= DSP_bh128_ch2_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w64_2 <= DSP_bh128_ch2_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w63_2 <= DSP_bh128_ch2_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w62_2 <= DSP_bh128_ch2_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w61_2 <= DSP_bh128_ch2_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w60_2 <= DSP_bh128_ch2_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w59_2 <= DSP_bh128_ch2_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w58_2 <= DSP_bh128_ch2_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w57_2 <= DSP_bh128_ch2_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w56_2 <= DSP_bh128_ch2_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w55_2 <= DSP_bh128_ch2_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w54_2 <= DSP_bh128_ch2_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w53_1 <= DSP_bh128_ch2_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w52_1 <= DSP_bh128_ch2_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w51_1 <= DSP_bh128_ch2_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w50_1 <= DSP_bh128_ch2_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w49_1 <= DSP_bh128_ch2_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w48_1 <= DSP_bh128_ch2_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w47_1 <= DSP_bh128_ch2_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w46_1 <= DSP_bh128_ch2_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w45_1 <= DSP_bh128_ch2_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w44_1 <= DSP_bh128_ch2_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w43_1 <= DSP_bh128_ch2_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w42_1 <= DSP_bh128_ch2_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w41_1 <= DSP_bh128_ch2_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w40_1 <= DSP_bh128_ch2_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w39_1 <= DSP_bh128_ch2_0(2); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w38_1 <= DSP_bh128_ch2_0(1); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w37_1 <= DSP_bh128_ch2_0(0); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch2_0 <= ("" & XX_m153(47 downto 24) & "") * ("" & YY_m153(29 downto 13) & "");
+   heap_bh154_w77_1 <= DSP_bh154_ch2_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w76_1 <= DSP_bh154_ch2_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w75_1 <= DSP_bh154_ch2_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w74_1 <= DSP_bh154_ch2_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w73_1 <= DSP_bh154_ch2_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w72_1 <= DSP_bh154_ch2_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w71_1 <= DSP_bh154_ch2_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w70_2 <= DSP_bh154_ch2_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w69_2 <= DSP_bh154_ch2_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w68_2 <= DSP_bh154_ch2_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w67_2 <= DSP_bh154_ch2_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w66_2 <= DSP_bh154_ch2_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w65_2 <= DSP_bh154_ch2_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w64_2 <= DSP_bh154_ch2_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w63_2 <= DSP_bh154_ch2_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w62_2 <= DSP_bh154_ch2_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w61_2 <= DSP_bh154_ch2_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w60_2 <= DSP_bh154_ch2_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w59_2 <= DSP_bh154_ch2_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w58_2 <= DSP_bh154_ch2_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w57_2 <= DSP_bh154_ch2_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w56_2 <= DSP_bh154_ch2_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w55_2 <= DSP_bh154_ch2_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w54_2 <= DSP_bh154_ch2_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w53_1 <= DSP_bh154_ch2_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w52_1 <= DSP_bh154_ch2_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w51_1 <= DSP_bh154_ch2_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w50_1 <= DSP_bh154_ch2_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w49_1 <= DSP_bh154_ch2_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w48_1 <= DSP_bh154_ch2_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w47_1 <= DSP_bh154_ch2_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w46_1 <= DSP_bh154_ch2_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w45_1 <= DSP_bh154_ch2_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w44_1 <= DSP_bh154_ch2_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w43_1 <= DSP_bh154_ch2_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w42_1 <= DSP_bh154_ch2_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w41_1 <= DSP_bh154_ch2_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w40_1 <= DSP_bh154_ch2_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w39_1 <= DSP_bh154_ch2_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w38_1 <= DSP_bh154_ch2_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w37_1 <= DSP_bh154_ch2_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch3_0 <= ("" & XX_m127(23 downto 0) & "") * ("" & YY_m127(29 downto 13) & "");
-   heap_bh128_w53_2 <= DSP_bh128_ch3_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w52_2 <= DSP_bh128_ch3_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w51_2 <= DSP_bh128_ch3_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w50_2 <= DSP_bh128_ch3_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w49_2 <= DSP_bh128_ch3_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w48_2 <= DSP_bh128_ch3_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w47_2 <= DSP_bh128_ch3_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w46_2 <= DSP_bh128_ch3_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w45_2 <= DSP_bh128_ch3_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w44_2 <= DSP_bh128_ch3_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w43_2 <= DSP_bh128_ch3_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w42_2 <= DSP_bh128_ch3_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w41_2 <= DSP_bh128_ch3_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w40_2 <= DSP_bh128_ch3_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w39_2 <= DSP_bh128_ch3_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w38_2 <= DSP_bh128_ch3_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w37_2 <= DSP_bh128_ch3_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w36_1 <= DSP_bh128_ch3_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w35_1 <= DSP_bh128_ch3_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w34_1 <= DSP_bh128_ch3_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w33_1 <= DSP_bh128_ch3_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w32_1 <= DSP_bh128_ch3_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w31_1 <= DSP_bh128_ch3_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w30_1 <= DSP_bh128_ch3_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w29_0 <= DSP_bh128_ch3_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w28_0 <= DSP_bh128_ch3_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w27_0 <= DSP_bh128_ch3_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w26_0 <= DSP_bh128_ch3_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w25_0 <= DSP_bh128_ch3_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w24_0 <= DSP_bh128_ch3_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w23_0 <= DSP_bh128_ch3_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w22_0 <= DSP_bh128_ch3_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w21_0 <= DSP_bh128_ch3_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w20_0 <= DSP_bh128_ch3_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w19_0 <= DSP_bh128_ch3_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w18_0 <= DSP_bh128_ch3_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w17_0 <= DSP_bh128_ch3_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w16_0 <= DSP_bh128_ch3_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w15_0 <= DSP_bh128_ch3_0(2); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w14_0 <= DSP_bh128_ch3_0(1); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w13_0 <= DSP_bh128_ch3_0(0); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch3_0 <= ("" & XX_m153(23 downto 0) & "") * ("" & YY_m153(29 downto 13) & "");
+   heap_bh154_w53_2 <= DSP_bh154_ch3_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w52_2 <= DSP_bh154_ch3_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w51_2 <= DSP_bh154_ch3_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w50_2 <= DSP_bh154_ch3_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w49_2 <= DSP_bh154_ch3_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w48_2 <= DSP_bh154_ch3_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w47_2 <= DSP_bh154_ch3_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w46_2 <= DSP_bh154_ch3_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w45_2 <= DSP_bh154_ch3_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w44_2 <= DSP_bh154_ch3_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w43_2 <= DSP_bh154_ch3_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w42_2 <= DSP_bh154_ch3_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w41_2 <= DSP_bh154_ch3_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w40_2 <= DSP_bh154_ch3_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w39_2 <= DSP_bh154_ch3_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w38_2 <= DSP_bh154_ch3_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w37_2 <= DSP_bh154_ch3_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w36_1 <= DSP_bh154_ch3_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w35_1 <= DSP_bh154_ch3_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w34_1 <= DSP_bh154_ch3_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w33_1 <= DSP_bh154_ch3_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w32_1 <= DSP_bh154_ch3_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w31_1 <= DSP_bh154_ch3_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w30_1 <= DSP_bh154_ch3_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w29_0 <= DSP_bh154_ch3_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w28_0 <= DSP_bh154_ch3_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w27_0 <= DSP_bh154_ch3_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w26_0 <= DSP_bh154_ch3_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w25_0 <= DSP_bh154_ch3_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w24_0 <= DSP_bh154_ch3_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w23_0 <= DSP_bh154_ch3_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w22_0 <= DSP_bh154_ch3_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w21_0 <= DSP_bh154_ch3_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w20_0 <= DSP_bh154_ch3_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w19_0 <= DSP_bh154_ch3_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w18_0 <= DSP_bh154_ch3_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w17_0 <= DSP_bh154_ch3_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w16_0 <= DSP_bh154_ch3_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w15_0 <= DSP_bh154_ch3_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w14_0 <= DSP_bh154_ch3_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w13_0 <= DSP_bh154_ch3_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch4_0 <= ("" & XX_m127(47 downto 24) & "") * ("" & YY_m127(12 downto 0) & "0000");
-   heap_bh128_w60_3 <= DSP_bh128_ch4_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w59_3 <= DSP_bh128_ch4_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w58_3 <= DSP_bh128_ch4_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w57_3 <= DSP_bh128_ch4_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w56_3 <= DSP_bh128_ch4_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w55_3 <= DSP_bh128_ch4_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w54_3 <= DSP_bh128_ch4_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w53_3 <= DSP_bh128_ch4_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w52_3 <= DSP_bh128_ch4_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w51_3 <= DSP_bh128_ch4_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w50_3 <= DSP_bh128_ch4_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w49_3 <= DSP_bh128_ch4_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w48_3 <= DSP_bh128_ch4_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w47_3 <= DSP_bh128_ch4_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w46_3 <= DSP_bh128_ch4_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w45_3 <= DSP_bh128_ch4_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w44_3 <= DSP_bh128_ch4_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w43_3 <= DSP_bh128_ch4_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w42_3 <= DSP_bh128_ch4_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w41_3 <= DSP_bh128_ch4_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w40_3 <= DSP_bh128_ch4_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w39_3 <= DSP_bh128_ch4_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w38_3 <= DSP_bh128_ch4_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w37_3 <= DSP_bh128_ch4_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w36_2 <= DSP_bh128_ch4_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w35_2 <= DSP_bh128_ch4_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w34_2 <= DSP_bh128_ch4_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w33_2 <= DSP_bh128_ch4_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w32_2 <= DSP_bh128_ch4_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w31_2 <= DSP_bh128_ch4_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w30_2 <= DSP_bh128_ch4_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w29_1 <= DSP_bh128_ch4_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w28_1 <= DSP_bh128_ch4_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w27_1 <= DSP_bh128_ch4_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w26_1 <= DSP_bh128_ch4_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w25_1 <= DSP_bh128_ch4_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w24_1 <= DSP_bh128_ch4_0(4); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w23_1 <= DSP_bh128_ch4_0(3); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w22_1 <= DSP_bh128_ch4_0(2); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w21_1 <= DSP_bh128_ch4_0(1); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w20_1 <= DSP_bh128_ch4_0(0); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch4_0 <= ("" & XX_m153(47 downto 24) & "") * ("" & YY_m153(12 downto 0) & "0000");
+   heap_bh154_w60_3 <= DSP_bh154_ch4_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w59_3 <= DSP_bh154_ch4_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w58_3 <= DSP_bh154_ch4_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w57_3 <= DSP_bh154_ch4_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w56_3 <= DSP_bh154_ch4_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w55_3 <= DSP_bh154_ch4_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w54_3 <= DSP_bh154_ch4_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w53_3 <= DSP_bh154_ch4_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w52_3 <= DSP_bh154_ch4_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w51_3 <= DSP_bh154_ch4_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w50_3 <= DSP_bh154_ch4_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w49_3 <= DSP_bh154_ch4_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w48_3 <= DSP_bh154_ch4_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w47_3 <= DSP_bh154_ch4_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w46_3 <= DSP_bh154_ch4_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w45_3 <= DSP_bh154_ch4_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w44_3 <= DSP_bh154_ch4_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w43_3 <= DSP_bh154_ch4_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w42_3 <= DSP_bh154_ch4_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w41_3 <= DSP_bh154_ch4_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w40_3 <= DSP_bh154_ch4_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w39_3 <= DSP_bh154_ch4_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w38_3 <= DSP_bh154_ch4_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w37_3 <= DSP_bh154_ch4_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w36_2 <= DSP_bh154_ch4_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w35_2 <= DSP_bh154_ch4_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w34_2 <= DSP_bh154_ch4_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w33_2 <= DSP_bh154_ch4_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w32_2 <= DSP_bh154_ch4_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w31_2 <= DSP_bh154_ch4_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w30_2 <= DSP_bh154_ch4_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w29_1 <= DSP_bh154_ch4_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w28_1 <= DSP_bh154_ch4_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w27_1 <= DSP_bh154_ch4_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w26_1 <= DSP_bh154_ch4_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w25_1 <= DSP_bh154_ch4_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w24_1 <= DSP_bh154_ch4_0(4); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w23_1 <= DSP_bh154_ch4_0(3); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w22_1 <= DSP_bh154_ch4_0(2); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w21_1 <= DSP_bh154_ch4_0(1); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w20_1 <= DSP_bh154_ch4_0(0); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
-   DSP_bh128_ch5_0 <= ("" & XX_m127(23 downto 0) & "") * ("" & YY_m127(12 downto 0) & "0000");
-   heap_bh128_w36_3 <= DSP_bh128_ch5_0(40); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w35_3 <= DSP_bh128_ch5_0(39); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w34_3 <= DSP_bh128_ch5_0(38); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w33_3 <= DSP_bh128_ch5_0(37); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w32_3 <= DSP_bh128_ch5_0(36); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w31_3 <= DSP_bh128_ch5_0(35); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w30_3 <= DSP_bh128_ch5_0(34); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w29_2 <= DSP_bh128_ch5_0(33); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w28_2 <= DSP_bh128_ch5_0(32); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w27_2 <= DSP_bh128_ch5_0(31); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w26_2 <= DSP_bh128_ch5_0(30); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w25_2 <= DSP_bh128_ch5_0(29); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w24_2 <= DSP_bh128_ch5_0(28); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w23_2 <= DSP_bh128_ch5_0(27); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w22_2 <= DSP_bh128_ch5_0(26); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w21_2 <= DSP_bh128_ch5_0(25); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w20_2 <= DSP_bh128_ch5_0(24); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w19_1 <= DSP_bh128_ch5_0(23); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w18_1 <= DSP_bh128_ch5_0(22); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w17_1 <= DSP_bh128_ch5_0(21); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w16_1 <= DSP_bh128_ch5_0(20); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w15_1 <= DSP_bh128_ch5_0(19); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w14_1 <= DSP_bh128_ch5_0(18); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w13_1 <= DSP_bh128_ch5_0(17); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w12_0 <= DSP_bh128_ch5_0(16); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w11_0 <= DSP_bh128_ch5_0(15); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w10_0 <= DSP_bh128_ch5_0(14); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w9_0 <= DSP_bh128_ch5_0(13); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w8_0 <= DSP_bh128_ch5_0(12); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w7_0 <= DSP_bh128_ch5_0(11); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w6_0 <= DSP_bh128_ch5_0(10); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w5_0 <= DSP_bh128_ch5_0(9); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w4_0 <= DSP_bh128_ch5_0(8); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w3_0 <= DSP_bh128_ch5_0(7); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w2_0 <= DSP_bh128_ch5_0(6); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w1_0 <= DSP_bh128_ch5_0(5); -- cycle= 0 cp= 2.387e-09
-   heap_bh128_w0_0 <= DSP_bh128_ch5_0(4); -- cycle= 0 cp= 2.387e-09
+   DSP_bh154_ch5_0 <= ("" & XX_m153(23 downto 0) & "") * ("" & YY_m153(12 downto 0) & "0000");
+   heap_bh154_w36_3 <= DSP_bh154_ch5_0(40); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w35_3 <= DSP_bh154_ch5_0(39); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w34_3 <= DSP_bh154_ch5_0(38); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w33_3 <= DSP_bh154_ch5_0(37); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w32_3 <= DSP_bh154_ch5_0(36); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w31_3 <= DSP_bh154_ch5_0(35); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w30_3 <= DSP_bh154_ch5_0(34); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w29_2 <= DSP_bh154_ch5_0(33); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w28_2 <= DSP_bh154_ch5_0(32); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w27_2 <= DSP_bh154_ch5_0(31); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w26_2 <= DSP_bh154_ch5_0(30); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w25_2 <= DSP_bh154_ch5_0(29); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w24_2 <= DSP_bh154_ch5_0(28); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w23_2 <= DSP_bh154_ch5_0(27); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w22_2 <= DSP_bh154_ch5_0(26); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w21_2 <= DSP_bh154_ch5_0(25); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w20_2 <= DSP_bh154_ch5_0(24); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w19_1 <= DSP_bh154_ch5_0(23); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w18_1 <= DSP_bh154_ch5_0(22); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w17_1 <= DSP_bh154_ch5_0(21); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w16_1 <= DSP_bh154_ch5_0(20); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w15_1 <= DSP_bh154_ch5_0(19); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w14_1 <= DSP_bh154_ch5_0(18); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w13_1 <= DSP_bh154_ch5_0(17); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w12_0 <= DSP_bh154_ch5_0(16); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w11_0 <= DSP_bh154_ch5_0(15); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w10_0 <= DSP_bh154_ch5_0(14); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w9_0 <= DSP_bh154_ch5_0(13); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w8_0 <= DSP_bh154_ch5_0(12); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w7_0 <= DSP_bh154_ch5_0(11); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w6_0 <= DSP_bh154_ch5_0(10); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w5_0 <= DSP_bh154_ch5_0(9); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w4_0 <= DSP_bh154_ch5_0(8); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w3_0 <= DSP_bh154_ch5_0(7); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w2_0 <= DSP_bh154_ch5_0(6); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w1_0 <= DSP_bh154_ch5_0(5); -- cycle= 0 cp= 1.638e-09
+   heap_bh154_w0_0 <= DSP_bh154_ch5_0(4); -- cycle= 0 cp= 1.638e-09
    ----------------Synchro barrier, entering cycle 0----------------
 
    -- Adding the constant bits
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 0----------------
-   tempR_bh128_0 <= heap_bh128_w12_0 & heap_bh128_w11_0 & heap_bh128_w10_0 & heap_bh128_w9_0 & heap_bh128_w8_0 & heap_bh128_w7_0 & heap_bh128_w6_0 & heap_bh128_w5_0 & heap_bh128_w4_0 & heap_bh128_w3_0 & heap_bh128_w2_0 & heap_bh128_w1_0 & heap_bh128_w0_0; -- already compressed
+   tempR_bh154_0 <= heap_bh154_w12_0 & heap_bh154_w11_0 & heap_bh154_w10_0 & heap_bh154_w9_0 & heap_bh154_w8_0 & heap_bh154_w7_0 & heap_bh154_w6_0 & heap_bh154_w5_0 & heap_bh154_w4_0 & heap_bh154_w3_0 & heap_bh154_w2_0 & heap_bh154_w1_0 & heap_bh154_w0_0; -- already compressed
    ----------------Synchro barrier, entering cycle 0----------------
-   inAdder0_bh128_0 <= '0' & heap_bh128_w19_1 & heap_bh128_w18_1 & heap_bh128_w17_1 & heap_bh128_w16_1 & heap_bh128_w15_1 & heap_bh128_w14_1 & heap_bh128_w13_1;
-   inAdder1_bh128_0 <= '0' & heap_bh128_w19_0 & heap_bh128_w18_0 & heap_bh128_w17_0 & heap_bh128_w16_0 & heap_bh128_w15_0 & heap_bh128_w14_0 & heap_bh128_w13_0;
-   cin_bh128_0 <= '0';
+   inAdder0_bh154_0 <= '0' & heap_bh154_w19_1 & heap_bh154_w18_1 & heap_bh154_w17_1 & heap_bh154_w16_1 & heap_bh154_w15_1 & heap_bh154_w14_1 & heap_bh154_w13_1;
+   inAdder1_bh154_0 <= '0' & heap_bh154_w19_0 & heap_bh154_w18_0 & heap_bh154_w17_0 & heap_bh154_w16_0 & heap_bh154_w15_0 & heap_bh154_w14_0 & heap_bh154_w13_0;
+   cin_bh154_0 <= '0';
    ----------------Synchro barrier, entering cycle 1----------------
-   outAdder_bh128_0 <= inAdder0_bh128_0_d1 + inAdder1_bh128_0_d1 + cin_bh128_0_d1;
-   heap_bh128_w13_2 <= outAdder_bh128_0(0); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w14_2 <= outAdder_bh128_0(1); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w15_2 <= outAdder_bh128_0(2); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w16_2 <= outAdder_bh128_0(3); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w17_2 <= outAdder_bh128_0(4); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w18_2 <= outAdder_bh128_0(5); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w19_2 <= outAdder_bh128_0(6); -- cycle= 1 cp= 1.29672e-09
-   heap_bh128_w20_3 <= outAdder_bh128_0(7); -- cycle= 1 cp= 1.29672e-09
+   outAdder_bh154_0 <= inAdder0_bh154_0_d1 + inAdder1_bh154_0_d1 + cin_bh154_0_d1;
+   heap_bh154_w13_2 <= outAdder_bh154_0(0); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w14_2 <= outAdder_bh154_0(1); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w15_2 <= outAdder_bh154_0(2); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w16_2 <= outAdder_bh154_0(3); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w17_2 <= outAdder_bh154_0(4); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w18_2 <= outAdder_bh154_0(5); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w19_2 <= outAdder_bh154_0(6); -- cycle= 1 cp= 8.8565e-10
+   heap_bh154_w20_3 <= outAdder_bh154_0(7); -- cycle= 1 cp= 8.8565e-10
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_0_0 <= heap_bh154_w20_2 & heap_bh154_w20_1 & heap_bh154_w20_0;
+   CompressorIn_bh154_0_1 <= heap_bh154_w21_2 & heap_bh154_w21_1;
+   Compressor_bh154_0: Compressor_23_3
+      port map ( R => CompressorOut_bh154_0_0   ,
+                 X0 => CompressorIn_bh154_0_0,
+                 X1 => CompressorIn_bh154_0_1);
+   heap_bh154_w20_4 <= CompressorOut_bh154_0_0(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w21_3 <= CompressorOut_bh154_0_0(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w22_3 <= CompressorOut_bh154_0_0(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_1_2 <= heap_bh154_w22_2 & heap_bh154_w22_1 & heap_bh154_w22_0;
+   CompressorIn_bh154_1_3 <= heap_bh154_w23_2 & heap_bh154_w23_1;
+   Compressor_bh154_1: Compressor_23_3
+      port map ( R => CompressorOut_bh154_1_1   ,
+                 X0 => CompressorIn_bh154_1_2,
+                 X1 => CompressorIn_bh154_1_3);
+   heap_bh154_w22_4 <= CompressorOut_bh154_1_1(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w23_3 <= CompressorOut_bh154_1_1(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w24_3 <= CompressorOut_bh154_1_1(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_2_4 <= heap_bh154_w24_2 & heap_bh154_w24_1 & heap_bh154_w24_0;
+   CompressorIn_bh154_2_5 <= heap_bh154_w25_2 & heap_bh154_w25_1;
+   Compressor_bh154_2: Compressor_23_3
+      port map ( R => CompressorOut_bh154_2_2   ,
+                 X0 => CompressorIn_bh154_2_4,
+                 X1 => CompressorIn_bh154_2_5);
+   heap_bh154_w24_4 <= CompressorOut_bh154_2_2(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w25_3 <= CompressorOut_bh154_2_2(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w26_3 <= CompressorOut_bh154_2_2(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_3_6 <= heap_bh154_w26_2 & heap_bh154_w26_1 & heap_bh154_w26_0;
+   CompressorIn_bh154_3_7 <= heap_bh154_w27_2 & heap_bh154_w27_1;
+   Compressor_bh154_3: Compressor_23_3
+      port map ( R => CompressorOut_bh154_3_3   ,
+                 X0 => CompressorIn_bh154_3_6,
+                 X1 => CompressorIn_bh154_3_7);
+   heap_bh154_w26_4 <= CompressorOut_bh154_3_3(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w27_3 <= CompressorOut_bh154_3_3(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w28_3 <= CompressorOut_bh154_3_3(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_4_8 <= heap_bh154_w28_2 & heap_bh154_w28_1 & heap_bh154_w28_0;
+   CompressorIn_bh154_4_9 <= heap_bh154_w29_2 & heap_bh154_w29_1;
+   Compressor_bh154_4: Compressor_23_3
+      port map ( R => CompressorOut_bh154_4_4   ,
+                 X0 => CompressorIn_bh154_4_8,
+                 X1 => CompressorIn_bh154_4_9);
+   heap_bh154_w28_4 <= CompressorOut_bh154_4_4(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w29_3 <= CompressorOut_bh154_4_4(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w30_4 <= CompressorOut_bh154_4_4(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_5_10 <= heap_bh154_w30_3 & heap_bh154_w30_2 & heap_bh154_w30_1 & heap_bh154_w30_0;
+   CompressorIn_bh154_5_11(0) <= heap_bh154_w31_3;
+   Compressor_bh154_5: Compressor_14_3
+      port map ( R => CompressorOut_bh154_5_5   ,
+                 X0 => CompressorIn_bh154_5_10,
+                 X1 => CompressorIn_bh154_5_11);
+   heap_bh154_w30_5 <= CompressorOut_bh154_5_5(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w31_4 <= CompressorOut_bh154_5_5(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w32_4 <= CompressorOut_bh154_5_5(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_6_12 <= heap_bh154_w31_2 & heap_bh154_w31_1 & heap_bh154_w31_0;
+   CompressorIn_bh154_6_13 <= heap_bh154_w32_3 & heap_bh154_w32_2;
+   Compressor_bh154_6: Compressor_23_3
+      port map ( R => CompressorOut_bh154_6_6   ,
+                 X0 => CompressorIn_bh154_6_12,
+                 X1 => CompressorIn_bh154_6_13);
+   heap_bh154_w31_5 <= CompressorOut_bh154_6_6(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w32_5 <= CompressorOut_bh154_6_6(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w33_4 <= CompressorOut_bh154_6_6(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_7_14 <= heap_bh154_w33_3 & heap_bh154_w33_2 & heap_bh154_w33_1 & heap_bh154_w33_0;
+   CompressorIn_bh154_7_15(0) <= heap_bh154_w34_3;
+   Compressor_bh154_7: Compressor_14_3
+      port map ( R => CompressorOut_bh154_7_7   ,
+                 X0 => CompressorIn_bh154_7_14,
+                 X1 => CompressorIn_bh154_7_15);
+   heap_bh154_w33_5 <= CompressorOut_bh154_7_7(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w34_4 <= CompressorOut_bh154_7_7(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w35_4 <= CompressorOut_bh154_7_7(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_8_16 <= heap_bh154_w34_2 & heap_bh154_w34_1 & heap_bh154_w34_0;
+   CompressorIn_bh154_8_17 <= heap_bh154_w35_3 & heap_bh154_w35_2;
+   Compressor_bh154_8: Compressor_23_3
+      port map ( R => CompressorOut_bh154_8_8   ,
+                 X0 => CompressorIn_bh154_8_16,
+                 X1 => CompressorIn_bh154_8_17);
+   heap_bh154_w34_5 <= CompressorOut_bh154_8_8(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w35_5 <= CompressorOut_bh154_8_8(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w36_4 <= CompressorOut_bh154_8_8(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_9_18 <= heap_bh154_w36_3 & heap_bh154_w36_2 & heap_bh154_w36_1 & heap_bh154_w36_0;
+   CompressorIn_bh154_9_19(0) <= heap_bh154_w37_3;
+   Compressor_bh154_9: Compressor_14_3
+      port map ( R => CompressorOut_bh154_9_9   ,
+                 X0 => CompressorIn_bh154_9_18,
+                 X1 => CompressorIn_bh154_9_19);
+   heap_bh154_w36_5 <= CompressorOut_bh154_9_9(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w37_4 <= CompressorOut_bh154_9_9(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w38_4 <= CompressorOut_bh154_9_9(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_10_20 <= heap_bh154_w37_2 & heap_bh154_w37_1 & heap_bh154_w37_0;
+   CompressorIn_bh154_10_21 <= heap_bh154_w38_3 & heap_bh154_w38_2;
+   Compressor_bh154_10: Compressor_23_3
+      port map ( R => CompressorOut_bh154_10_10   ,
+                 X0 => CompressorIn_bh154_10_20,
+                 X1 => CompressorIn_bh154_10_21);
+   heap_bh154_w37_5 <= CompressorOut_bh154_10_10(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w38_5 <= CompressorOut_bh154_10_10(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w39_4 <= CompressorOut_bh154_10_10(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_11_22 <= heap_bh154_w39_3 & heap_bh154_w39_2 & heap_bh154_w39_1 & heap_bh154_w39_0;
+   CompressorIn_bh154_11_23(0) <= heap_bh154_w40_3;
+   Compressor_bh154_11: Compressor_14_3
+      port map ( R => CompressorOut_bh154_11_11   ,
+                 X0 => CompressorIn_bh154_11_22,
+                 X1 => CompressorIn_bh154_11_23);
+   heap_bh154_w39_5 <= CompressorOut_bh154_11_11(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w40_4 <= CompressorOut_bh154_11_11(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w41_4 <= CompressorOut_bh154_11_11(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_12_24 <= heap_bh154_w40_2 & heap_bh154_w40_1 & heap_bh154_w40_0;
+   CompressorIn_bh154_12_25 <= heap_bh154_w41_3 & heap_bh154_w41_2;
+   Compressor_bh154_12: Compressor_23_3
+      port map ( R => CompressorOut_bh154_12_12   ,
+                 X0 => CompressorIn_bh154_12_24,
+                 X1 => CompressorIn_bh154_12_25);
+   heap_bh154_w40_5 <= CompressorOut_bh154_12_12(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w41_5 <= CompressorOut_bh154_12_12(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w42_4 <= CompressorOut_bh154_12_12(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_13_26 <= heap_bh154_w42_3 & heap_bh154_w42_2 & heap_bh154_w42_1 & heap_bh154_w42_0;
+   CompressorIn_bh154_13_27(0) <= heap_bh154_w43_3;
+   Compressor_bh154_13: Compressor_14_3
+      port map ( R => CompressorOut_bh154_13_13   ,
+                 X0 => CompressorIn_bh154_13_26,
+                 X1 => CompressorIn_bh154_13_27);
+   heap_bh154_w42_5 <= CompressorOut_bh154_13_13(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w43_4 <= CompressorOut_bh154_13_13(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w44_4 <= CompressorOut_bh154_13_13(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_14_28 <= heap_bh154_w43_2 & heap_bh154_w43_1 & heap_bh154_w43_0;
+   CompressorIn_bh154_14_29 <= heap_bh154_w44_3 & heap_bh154_w44_2;
+   Compressor_bh154_14: Compressor_23_3
+      port map ( R => CompressorOut_bh154_14_14   ,
+                 X0 => CompressorIn_bh154_14_28,
+                 X1 => CompressorIn_bh154_14_29);
+   heap_bh154_w43_5 <= CompressorOut_bh154_14_14(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w44_5 <= CompressorOut_bh154_14_14(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w45_4 <= CompressorOut_bh154_14_14(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_15_30 <= heap_bh154_w45_3 & heap_bh154_w45_2 & heap_bh154_w45_1 & heap_bh154_w45_0;
+   CompressorIn_bh154_15_31(0) <= heap_bh154_w46_3;
+   Compressor_bh154_15: Compressor_14_3
+      port map ( R => CompressorOut_bh154_15_15   ,
+                 X0 => CompressorIn_bh154_15_30,
+                 X1 => CompressorIn_bh154_15_31);
+   heap_bh154_w45_5 <= CompressorOut_bh154_15_15(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w46_4 <= CompressorOut_bh154_15_15(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w47_4 <= CompressorOut_bh154_15_15(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_16_32 <= heap_bh154_w46_2 & heap_bh154_w46_1 & heap_bh154_w46_0;
+   CompressorIn_bh154_16_33 <= heap_bh154_w47_3 & heap_bh154_w47_2;
+   Compressor_bh154_16: Compressor_23_3
+      port map ( R => CompressorOut_bh154_16_16   ,
+                 X0 => CompressorIn_bh154_16_32,
+                 X1 => CompressorIn_bh154_16_33);
+   heap_bh154_w46_5 <= CompressorOut_bh154_16_16(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w47_5 <= CompressorOut_bh154_16_16(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w48_4 <= CompressorOut_bh154_16_16(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_17_34 <= heap_bh154_w48_3 & heap_bh154_w48_2 & heap_bh154_w48_1 & heap_bh154_w48_0;
+   CompressorIn_bh154_17_35(0) <= heap_bh154_w49_3;
+   Compressor_bh154_17: Compressor_14_3
+      port map ( R => CompressorOut_bh154_17_17   ,
+                 X0 => CompressorIn_bh154_17_34,
+                 X1 => CompressorIn_bh154_17_35);
+   heap_bh154_w48_5 <= CompressorOut_bh154_17_17(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w49_4 <= CompressorOut_bh154_17_17(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w50_4 <= CompressorOut_bh154_17_17(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_18_36 <= heap_bh154_w49_2 & heap_bh154_w49_1 & heap_bh154_w49_0;
+   CompressorIn_bh154_18_37 <= heap_bh154_w50_3 & heap_bh154_w50_2;
+   Compressor_bh154_18: Compressor_23_3
+      port map ( R => CompressorOut_bh154_18_18   ,
+                 X0 => CompressorIn_bh154_18_36,
+                 X1 => CompressorIn_bh154_18_37);
+   heap_bh154_w49_5 <= CompressorOut_bh154_18_18(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w50_5 <= CompressorOut_bh154_18_18(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w51_4 <= CompressorOut_bh154_18_18(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_19_38 <= heap_bh154_w51_3 & heap_bh154_w51_2 & heap_bh154_w51_1 & heap_bh154_w51_0;
+   CompressorIn_bh154_19_39(0) <= heap_bh154_w52_3;
+   Compressor_bh154_19: Compressor_14_3
+      port map ( R => CompressorOut_bh154_19_19   ,
+                 X0 => CompressorIn_bh154_19_38,
+                 X1 => CompressorIn_bh154_19_39);
+   heap_bh154_w51_5 <= CompressorOut_bh154_19_19(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w52_4 <= CompressorOut_bh154_19_19(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w53_4 <= CompressorOut_bh154_19_19(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_20_40 <= heap_bh154_w52_2 & heap_bh154_w52_1 & heap_bh154_w52_0;
+   CompressorIn_bh154_20_41 <= heap_bh154_w53_3 & heap_bh154_w53_2;
+   Compressor_bh154_20: Compressor_23_3
+      port map ( R => CompressorOut_bh154_20_20   ,
+                 X0 => CompressorIn_bh154_20_40,
+                 X1 => CompressorIn_bh154_20_41);
+   heap_bh154_w52_5 <= CompressorOut_bh154_20_20(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w53_5 <= CompressorOut_bh154_20_20(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w54_4 <= CompressorOut_bh154_20_20(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_21_42 <= heap_bh154_w54_3 & heap_bh154_w54_2 & heap_bh154_w54_1 & heap_bh154_w54_0;
+   CompressorIn_bh154_21_43(0) <= heap_bh154_w55_3;
+   Compressor_bh154_21: Compressor_14_3
+      port map ( R => CompressorOut_bh154_21_21   ,
+                 X0 => CompressorIn_bh154_21_42,
+                 X1 => CompressorIn_bh154_21_43);
+   heap_bh154_w54_5 <= CompressorOut_bh154_21_21(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w55_4 <= CompressorOut_bh154_21_21(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w56_4 <= CompressorOut_bh154_21_21(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_22_44 <= heap_bh154_w55_2 & heap_bh154_w55_1 & heap_bh154_w55_0;
+   CompressorIn_bh154_22_45 <= heap_bh154_w56_3 & heap_bh154_w56_2;
+   Compressor_bh154_22: Compressor_23_3
+      port map ( R => CompressorOut_bh154_22_22   ,
+                 X0 => CompressorIn_bh154_22_44,
+                 X1 => CompressorIn_bh154_22_45);
+   heap_bh154_w55_5 <= CompressorOut_bh154_22_22(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w56_5 <= CompressorOut_bh154_22_22(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w57_4 <= CompressorOut_bh154_22_22(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_23_46 <= heap_bh154_w57_3 & heap_bh154_w57_2 & heap_bh154_w57_1 & heap_bh154_w57_0;
+   CompressorIn_bh154_23_47(0) <= heap_bh154_w58_3;
+   Compressor_bh154_23: Compressor_14_3
+      port map ( R => CompressorOut_bh154_23_23   ,
+                 X0 => CompressorIn_bh154_23_46,
+                 X1 => CompressorIn_bh154_23_47);
+   heap_bh154_w57_5 <= CompressorOut_bh154_23_23(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w58_4 <= CompressorOut_bh154_23_23(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w59_4 <= CompressorOut_bh154_23_23(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_24_48 <= heap_bh154_w58_2 & heap_bh154_w58_1 & heap_bh154_w58_0;
+   CompressorIn_bh154_24_49 <= heap_bh154_w59_3 & heap_bh154_w59_2;
+   Compressor_bh154_24: Compressor_23_3
+      port map ( R => CompressorOut_bh154_24_24   ,
+                 X0 => CompressorIn_bh154_24_48,
+                 X1 => CompressorIn_bh154_24_49);
+   heap_bh154_w58_5 <= CompressorOut_bh154_24_24(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w59_5 <= CompressorOut_bh154_24_24(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w60_4 <= CompressorOut_bh154_24_24(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_25_50 <= heap_bh154_w60_3 & heap_bh154_w60_2 & heap_bh154_w60_1 & heap_bh154_w60_0;
+   CompressorIn_bh154_25_51(0) <= heap_bh154_w61_2;
+   Compressor_bh154_25: Compressor_14_3
+      port map ( R => CompressorOut_bh154_25_25   ,
+                 X0 => CompressorIn_bh154_25_50,
+                 X1 => CompressorIn_bh154_25_51);
+   heap_bh154_w60_5 <= CompressorOut_bh154_25_25(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w61_3 <= CompressorOut_bh154_25_25(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w62_3 <= CompressorOut_bh154_25_25(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_26_52 <= heap_bh154_w62_2 & heap_bh154_w62_1 & heap_bh154_w62_0;
+   CompressorIn_bh154_26_53 <= heap_bh154_w63_2 & heap_bh154_w63_1;
+   Compressor_bh154_26: Compressor_23_3
+      port map ( R => CompressorOut_bh154_26_26   ,
+                 X0 => CompressorIn_bh154_26_52,
+                 X1 => CompressorIn_bh154_26_53);
+   heap_bh154_w62_4 <= CompressorOut_bh154_26_26(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w63_3 <= CompressorOut_bh154_26_26(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w64_3 <= CompressorOut_bh154_26_26(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_27_54 <= heap_bh154_w64_2 & heap_bh154_w64_1 & heap_bh154_w64_0;
+   CompressorIn_bh154_27_55 <= heap_bh154_w65_2 & heap_bh154_w65_1;
+   Compressor_bh154_27: Compressor_23_3
+      port map ( R => CompressorOut_bh154_27_27   ,
+                 X0 => CompressorIn_bh154_27_54,
+                 X1 => CompressorIn_bh154_27_55);
+   heap_bh154_w64_4 <= CompressorOut_bh154_27_27(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w65_3 <= CompressorOut_bh154_27_27(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w66_3 <= CompressorOut_bh154_27_27(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_28_56 <= heap_bh154_w66_2 & heap_bh154_w66_1 & heap_bh154_w66_0;
+   CompressorIn_bh154_28_57 <= heap_bh154_w67_2 & heap_bh154_w67_1;
+   Compressor_bh154_28: Compressor_23_3
+      port map ( R => CompressorOut_bh154_28_28   ,
+                 X0 => CompressorIn_bh154_28_56,
+                 X1 => CompressorIn_bh154_28_57);
+   heap_bh154_w66_4 <= CompressorOut_bh154_28_28(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w67_3 <= CompressorOut_bh154_28_28(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w68_3 <= CompressorOut_bh154_28_28(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_29_58 <= heap_bh154_w68_2 & heap_bh154_w68_1 & heap_bh154_w68_0;
+   CompressorIn_bh154_29_59 <= heap_bh154_w69_2 & heap_bh154_w69_1;
+   Compressor_bh154_29: Compressor_23_3
+      port map ( R => CompressorOut_bh154_29_29   ,
+                 X0 => CompressorIn_bh154_29_58,
+                 X1 => CompressorIn_bh154_29_59);
+   heap_bh154_w68_4 <= CompressorOut_bh154_29_29(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w69_3 <= CompressorOut_bh154_29_29(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w70_3 <= CompressorOut_bh154_29_29(2); -- cycle= 0 cp= 2.01965e-09
+
+   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_30_60 <= heap_bh154_w70_2 & heap_bh154_w70_1 & heap_bh154_w70_0;
+   CompressorIn_bh154_30_61 <= heap_bh154_w71_1 & heap_bh154_w71_0;
+   Compressor_bh154_30: Compressor_23_3
+      port map ( R => CompressorOut_bh154_30_30   ,
+                 X0 => CompressorIn_bh154_30_60,
+                 X1 => CompressorIn_bh154_30_61);
+   heap_bh154_w70_4 <= CompressorOut_bh154_30_30(0); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w71_2 <= CompressorOut_bh154_30_30(1); -- cycle= 0 cp= 2.01965e-09
+   heap_bh154_w72_2 <= CompressorOut_bh154_30_30(2); -- cycle= 0 cp= 2.01965e-09
+   ----------------Synchro barrier, entering cycle 1----------------
+   tempR_bh154_1 <= heap_bh154_w19_2 & heap_bh154_w18_2 & heap_bh154_w17_2 & heap_bh154_w16_2 & heap_bh154_w15_2 & heap_bh154_w14_2 & heap_bh154_w13_2; -- already compressed
+   ----------------Synchro barrier, entering cycle 1----------------
+   inAdder0_bh154_1 <= '0' & heap_bh154_w31_5_d1 & heap_bh154_w30_5_d1 & heap_bh154_w29_0_d1 & heap_bh154_w28_4_d1 & heap_bh154_w27_0_d1 & heap_bh154_w26_4_d1 & heap_bh154_w25_0_d1 & heap_bh154_w24_4_d1 & heap_bh154_w23_0_d1 & heap_bh154_w22_4_d1 & heap_bh154_w21_0_d1 & heap_bh154_w20_4_d1;
+   inAdder1_bh154_1 <= '0' & heap_bh154_w31_4_d1 & heap_bh154_w30_4_d1 & heap_bh154_w29_3_d1 & heap_bh154_w28_3_d1 & heap_bh154_w27_3_d1 & heap_bh154_w26_3_d1 & heap_bh154_w25_3_d1 & heap_bh154_w24_3_d1 & heap_bh154_w23_3_d1 & heap_bh154_w22_3_d1 & heap_bh154_w21_3_d1 & '0';
+   cin_bh154_1 <= '0';
+   outAdder_bh154_1 <= inAdder0_bh154_1 + inAdder1_bh154_1 + cin_bh154_1;
+   heap_bh154_w20_5 <= outAdder_bh154_1(0); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w21_4 <= outAdder_bh154_1(1); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w22_5 <= outAdder_bh154_1(2); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w23_4 <= outAdder_bh154_1(3); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w24_5 <= outAdder_bh154_1(4); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w25_4 <= outAdder_bh154_1(5); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w26_5 <= outAdder_bh154_1(6); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w27_4 <= outAdder_bh154_1(7); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w28_5 <= outAdder_bh154_1(8); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w29_4 <= outAdder_bh154_1(9); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w30_6 <= outAdder_bh154_1(10); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w31_6 <= outAdder_bh154_1(11); -- cycle= 1 cp= 1.8463e-09
+   heap_bh154_w32_6 <= outAdder_bh154_1(12); -- cycle= 1 cp= 1.8463e-09
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_0_0 <= heap_bh128_w20_2_d1 & heap_bh128_w20_1_d1 & heap_bh128_w20_0_d1;
-   CompressorIn_bh128_0_1 <= heap_bh128_w21_2_d1 & heap_bh128_w21_1_d1;
-   Compressor_bh128_0: Compressor_23_3
-      port map ( R => CompressorOut_bh128_0_0   ,
-                 X0 => CompressorIn_bh128_0_0,
-                 X1 => CompressorIn_bh128_0_1);
-   heap_bh128_w20_4 <= CompressorOut_bh128_0_0(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w21_3 <= CompressorOut_bh128_0_0(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w22_3 <= CompressorOut_bh128_0_0(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_31_62 <= heap_bh154_w32_1_d1 & heap_bh154_w32_0_d1 & heap_bh154_w32_5_d1 & heap_bh154_w32_4_d1;
+   CompressorIn_bh154_31_63(0) <= heap_bh154_w33_5_d1;
+   Compressor_bh154_31: Compressor_14_3
+      port map ( R => CompressorOut_bh154_31_31   ,
+                 X0 => CompressorIn_bh154_31_62,
+                 X1 => CompressorIn_bh154_31_63);
+   heap_bh154_w32_7 <= CompressorOut_bh154_31_31(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w33_6 <= CompressorOut_bh154_31_31(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w34_6 <= CompressorOut_bh154_31_31(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_1_2 <= heap_bh128_w22_2_d1 & heap_bh128_w22_1_d1 & heap_bh128_w22_0_d1;
-   CompressorIn_bh128_1_3 <= heap_bh128_w23_2_d1 & heap_bh128_w23_1_d1;
-   Compressor_bh128_1: Compressor_23_3
-      port map ( R => CompressorOut_bh128_1_1   ,
-                 X0 => CompressorIn_bh128_1_2,
-                 X1 => CompressorIn_bh128_1_3);
-   heap_bh128_w22_4 <= CompressorOut_bh128_1_1(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w23_3 <= CompressorOut_bh128_1_1(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w24_3 <= CompressorOut_bh128_1_1(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_32_64 <= heap_bh154_w35_1_d1 & heap_bh154_w35_0_d1 & heap_bh154_w35_5_d1 & heap_bh154_w35_4_d1;
+   CompressorIn_bh154_32_65(0) <= heap_bh154_w36_5_d1;
+   Compressor_bh154_32: Compressor_14_3
+      port map ( R => CompressorOut_bh154_32_32   ,
+                 X0 => CompressorIn_bh154_32_64,
+                 X1 => CompressorIn_bh154_32_65);
+   heap_bh154_w35_6 <= CompressorOut_bh154_32_32(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w36_6 <= CompressorOut_bh154_32_32(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w37_6 <= CompressorOut_bh154_32_32(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_2_4 <= heap_bh128_w24_2_d1 & heap_bh128_w24_1_d1 & heap_bh128_w24_0_d1;
-   CompressorIn_bh128_2_5 <= heap_bh128_w25_2_d1 & heap_bh128_w25_1_d1;
-   Compressor_bh128_2: Compressor_23_3
-      port map ( R => CompressorOut_bh128_2_2   ,
-                 X0 => CompressorIn_bh128_2_4,
-                 X1 => CompressorIn_bh128_2_5);
-   heap_bh128_w24_4 <= CompressorOut_bh128_2_2(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w25_3 <= CompressorOut_bh128_2_2(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w26_3 <= CompressorOut_bh128_2_2(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_33_66 <= heap_bh154_w38_1_d1 & heap_bh154_w38_0_d1 & heap_bh154_w38_5_d1 & heap_bh154_w38_4_d1;
+   CompressorIn_bh154_33_67(0) <= heap_bh154_w39_5_d1;
+   Compressor_bh154_33: Compressor_14_3
+      port map ( R => CompressorOut_bh154_33_33   ,
+                 X0 => CompressorIn_bh154_33_66,
+                 X1 => CompressorIn_bh154_33_67);
+   heap_bh154_w38_6 <= CompressorOut_bh154_33_33(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w39_6 <= CompressorOut_bh154_33_33(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w40_6 <= CompressorOut_bh154_33_33(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_3_6 <= heap_bh128_w26_2_d1 & heap_bh128_w26_1_d1 & heap_bh128_w26_0_d1;
-   CompressorIn_bh128_3_7 <= heap_bh128_w27_2_d1 & heap_bh128_w27_1_d1;
-   Compressor_bh128_3: Compressor_23_3
-      port map ( R => CompressorOut_bh128_3_3   ,
-                 X0 => CompressorIn_bh128_3_6,
-                 X1 => CompressorIn_bh128_3_7);
-   heap_bh128_w26_4 <= CompressorOut_bh128_3_3(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w27_3 <= CompressorOut_bh128_3_3(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w28_3 <= CompressorOut_bh128_3_3(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_34_68 <= heap_bh154_w41_1_d1 & heap_bh154_w41_0_d1 & heap_bh154_w41_5_d1 & heap_bh154_w41_4_d1;
+   CompressorIn_bh154_34_69(0) <= heap_bh154_w42_5_d1;
+   Compressor_bh154_34: Compressor_14_3
+      port map ( R => CompressorOut_bh154_34_34   ,
+                 X0 => CompressorIn_bh154_34_68,
+                 X1 => CompressorIn_bh154_34_69);
+   heap_bh154_w41_6 <= CompressorOut_bh154_34_34(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w42_6 <= CompressorOut_bh154_34_34(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w43_6 <= CompressorOut_bh154_34_34(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_4_8 <= heap_bh128_w28_2_d1 & heap_bh128_w28_1_d1 & heap_bh128_w28_0_d1;
-   CompressorIn_bh128_4_9 <= heap_bh128_w29_2_d1 & heap_bh128_w29_1_d1;
-   Compressor_bh128_4: Compressor_23_3
-      port map ( R => CompressorOut_bh128_4_4   ,
-                 X0 => CompressorIn_bh128_4_8,
-                 X1 => CompressorIn_bh128_4_9);
-   heap_bh128_w28_4 <= CompressorOut_bh128_4_4(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w29_3 <= CompressorOut_bh128_4_4(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w30_4 <= CompressorOut_bh128_4_4(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_35_70 <= heap_bh154_w44_1_d1 & heap_bh154_w44_0_d1 & heap_bh154_w44_5_d1 & heap_bh154_w44_4_d1;
+   CompressorIn_bh154_35_71(0) <= heap_bh154_w45_5_d1;
+   Compressor_bh154_35: Compressor_14_3
+      port map ( R => CompressorOut_bh154_35_35   ,
+                 X0 => CompressorIn_bh154_35_70,
+                 X1 => CompressorIn_bh154_35_71);
+   heap_bh154_w44_6 <= CompressorOut_bh154_35_35(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w45_6 <= CompressorOut_bh154_35_35(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w46_6 <= CompressorOut_bh154_35_35(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_5_10 <= heap_bh128_w30_3_d1 & heap_bh128_w30_2_d1 & heap_bh128_w30_1_d1 & heap_bh128_w30_0_d1;
-   CompressorIn_bh128_5_11(0) <= heap_bh128_w31_3_d1;
-   Compressor_bh128_5: Compressor_14_3
-      port map ( R => CompressorOut_bh128_5_5   ,
-                 X0 => CompressorIn_bh128_5_10,
-                 X1 => CompressorIn_bh128_5_11);
-   heap_bh128_w30_5 <= CompressorOut_bh128_5_5(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w31_4 <= CompressorOut_bh128_5_5(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w32_4 <= CompressorOut_bh128_5_5(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_36_72 <= heap_bh154_w47_1_d1 & heap_bh154_w47_0_d1 & heap_bh154_w47_5_d1 & heap_bh154_w47_4_d1;
+   CompressorIn_bh154_36_73(0) <= heap_bh154_w48_5_d1;
+   Compressor_bh154_36: Compressor_14_3
+      port map ( R => CompressorOut_bh154_36_36   ,
+                 X0 => CompressorIn_bh154_36_72,
+                 X1 => CompressorIn_bh154_36_73);
+   heap_bh154_w47_6 <= CompressorOut_bh154_36_36(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w48_6 <= CompressorOut_bh154_36_36(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w49_6 <= CompressorOut_bh154_36_36(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_6_12 <= heap_bh128_w31_2_d1 & heap_bh128_w31_1_d1 & heap_bh128_w31_0_d1;
-   CompressorIn_bh128_6_13 <= heap_bh128_w32_3_d1 & heap_bh128_w32_2_d1;
-   Compressor_bh128_6: Compressor_23_3
-      port map ( R => CompressorOut_bh128_6_6   ,
-                 X0 => CompressorIn_bh128_6_12,
-                 X1 => CompressorIn_bh128_6_13);
-   heap_bh128_w31_5 <= CompressorOut_bh128_6_6(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w32_5 <= CompressorOut_bh128_6_6(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w33_4 <= CompressorOut_bh128_6_6(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_37_74 <= heap_bh154_w50_1_d1 & heap_bh154_w50_0_d1 & heap_bh154_w50_5_d1 & heap_bh154_w50_4_d1;
+   CompressorIn_bh154_37_75(0) <= heap_bh154_w51_5_d1;
+   Compressor_bh154_37: Compressor_14_3
+      port map ( R => CompressorOut_bh154_37_37   ,
+                 X0 => CompressorIn_bh154_37_74,
+                 X1 => CompressorIn_bh154_37_75);
+   heap_bh154_w50_6 <= CompressorOut_bh154_37_37(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w51_6 <= CompressorOut_bh154_37_37(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w52_6 <= CompressorOut_bh154_37_37(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_7_14 <= heap_bh128_w33_3_d1 & heap_bh128_w33_2_d1 & heap_bh128_w33_1_d1 & heap_bh128_w33_0_d1;
-   CompressorIn_bh128_7_15(0) <= heap_bh128_w34_3_d1;
-   Compressor_bh128_7: Compressor_14_3
-      port map ( R => CompressorOut_bh128_7_7   ,
-                 X0 => CompressorIn_bh128_7_14,
-                 X1 => CompressorIn_bh128_7_15);
-   heap_bh128_w33_5 <= CompressorOut_bh128_7_7(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w34_4 <= CompressorOut_bh128_7_7(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w35_4 <= CompressorOut_bh128_7_7(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_38_76 <= heap_bh154_w53_1_d1 & heap_bh154_w53_0_d1 & heap_bh154_w53_5_d1 & heap_bh154_w53_4_d1;
+   CompressorIn_bh154_38_77(0) <= heap_bh154_w54_5_d1;
+   Compressor_bh154_38: Compressor_14_3
+      port map ( R => CompressorOut_bh154_38_38   ,
+                 X0 => CompressorIn_bh154_38_76,
+                 X1 => CompressorIn_bh154_38_77);
+   heap_bh154_w53_6 <= CompressorOut_bh154_38_38(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w54_6 <= CompressorOut_bh154_38_38(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w55_6 <= CompressorOut_bh154_38_38(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_8_16 <= heap_bh128_w34_2_d1 & heap_bh128_w34_1_d1 & heap_bh128_w34_0_d1;
-   CompressorIn_bh128_8_17 <= heap_bh128_w35_3_d1 & heap_bh128_w35_2_d1;
-   Compressor_bh128_8: Compressor_23_3
-      port map ( R => CompressorOut_bh128_8_8   ,
-                 X0 => CompressorIn_bh128_8_16,
-                 X1 => CompressorIn_bh128_8_17);
-   heap_bh128_w34_5 <= CompressorOut_bh128_8_8(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w35_5 <= CompressorOut_bh128_8_8(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w36_4 <= CompressorOut_bh128_8_8(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_39_78 <= heap_bh154_w56_1_d1 & heap_bh154_w56_0_d1 & heap_bh154_w56_5_d1 & heap_bh154_w56_4_d1;
+   CompressorIn_bh154_39_79(0) <= heap_bh154_w57_5_d1;
+   Compressor_bh154_39: Compressor_14_3
+      port map ( R => CompressorOut_bh154_39_39   ,
+                 X0 => CompressorIn_bh154_39_78,
+                 X1 => CompressorIn_bh154_39_79);
+   heap_bh154_w56_6 <= CompressorOut_bh154_39_39(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w57_6 <= CompressorOut_bh154_39_39(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w58_6 <= CompressorOut_bh154_39_39(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_9_18 <= heap_bh128_w36_3_d1 & heap_bh128_w36_2_d1 & heap_bh128_w36_1_d1 & heap_bh128_w36_0_d1;
-   CompressorIn_bh128_9_19(0) <= heap_bh128_w37_3_d1;
-   Compressor_bh128_9: Compressor_14_3
-      port map ( R => CompressorOut_bh128_9_9   ,
-                 X0 => CompressorIn_bh128_9_18,
-                 X1 => CompressorIn_bh128_9_19);
-   heap_bh128_w36_5 <= CompressorOut_bh128_9_9(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w37_4 <= CompressorOut_bh128_9_9(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w38_4 <= CompressorOut_bh128_9_9(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_40_80 <= heap_bh154_w59_1_d1 & heap_bh154_w59_0_d1 & heap_bh154_w59_5_d1 & heap_bh154_w59_4_d1;
+   CompressorIn_bh154_40_81(0) <= heap_bh154_w60_5_d1;
+   Compressor_bh154_40: Compressor_14_3
+      port map ( R => CompressorOut_bh154_40_40   ,
+                 X0 => CompressorIn_bh154_40_80,
+                 X1 => CompressorIn_bh154_40_81);
+   heap_bh154_w59_6 <= CompressorOut_bh154_40_40(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w60_6 <= CompressorOut_bh154_40_40(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w61_4 <= CompressorOut_bh154_40_40(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_10_20 <= heap_bh128_w37_2_d1 & heap_bh128_w37_1_d1 & heap_bh128_w37_0_d1;
-   CompressorIn_bh128_10_21 <= heap_bh128_w38_3_d1 & heap_bh128_w38_2_d1;
-   Compressor_bh128_10: Compressor_23_3
-      port map ( R => CompressorOut_bh128_10_10   ,
-                 X0 => CompressorIn_bh128_10_20,
-                 X1 => CompressorIn_bh128_10_21);
-   heap_bh128_w37_5 <= CompressorOut_bh128_10_10(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w38_5 <= CompressorOut_bh128_10_10(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w39_4 <= CompressorOut_bh128_10_10(2); -- cycle= 1 cp= 5.3072e-10
+   CompressorIn_bh154_41_82 <= heap_bh154_w61_1_d1 & heap_bh154_w61_0_d1 & heap_bh154_w61_3_d1;
+   CompressorIn_bh154_41_83 <= heap_bh154_w62_4_d1 & heap_bh154_w62_3_d1;
+   Compressor_bh154_41: Compressor_23_3
+      port map ( R => CompressorOut_bh154_41_41   ,
+                 X0 => CompressorIn_bh154_41_82,
+                 X1 => CompressorIn_bh154_41_83);
+   heap_bh154_w61_5 <= CompressorOut_bh154_41_41(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w62_5 <= CompressorOut_bh154_41_41(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w63_4 <= CompressorOut_bh154_41_41(2); -- cycle= 1 cp= 3.8165e-10
 
    ----------------Synchro barrier, entering cycle 0----------------
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_11_22 <= heap_bh128_w39_3_d1 & heap_bh128_w39_2_d1 & heap_bh128_w39_1_d1 & heap_bh128_w39_0_d1;
-   CompressorIn_bh128_11_23(0) <= heap_bh128_w40_3_d1;
-   Compressor_bh128_11: Compressor_14_3
-      port map ( R => CompressorOut_bh128_11_11   ,
-                 X0 => CompressorIn_bh128_11_22,
-                 X1 => CompressorIn_bh128_11_23);
-   heap_bh128_w39_5 <= CompressorOut_bh128_11_11(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w40_4 <= CompressorOut_bh128_11_11(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w41_4 <= CompressorOut_bh128_11_11(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
+   CompressorIn_bh154_42_84 <= heap_bh154_w72_1_d1 & heap_bh154_w72_0_d1 & heap_bh154_w72_2_d1;
+   CompressorIn_bh154_42_85 <= heap_bh154_w73_1_d1 & heap_bh154_w73_0_d1;
+   Compressor_bh154_42: Compressor_23_3
+      port map ( R => CompressorOut_bh154_42_42   ,
+                 X0 => CompressorIn_bh154_42_84,
+                 X1 => CompressorIn_bh154_42_85);
+   heap_bh154_w72_3 <= CompressorOut_bh154_42_42(0); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w73_2 <= CompressorOut_bh154_42_42(1); -- cycle= 1 cp= 3.8165e-10
+   heap_bh154_w74_2 <= CompressorOut_bh154_42_42(2); -- cycle= 1 cp= 3.8165e-10
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_12_24 <= heap_bh128_w40_2_d1 & heap_bh128_w40_1_d1 & heap_bh128_w40_0_d1;
-   CompressorIn_bh128_12_25 <= heap_bh128_w41_3_d1 & heap_bh128_w41_2_d1;
-   Compressor_bh128_12: Compressor_23_3
-      port map ( R => CompressorOut_bh128_12_12   ,
-                 X0 => CompressorIn_bh128_12_24,
-                 X1 => CompressorIn_bh128_12_25);
-   heap_bh128_w40_5 <= CompressorOut_bh128_12_12(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w41_5 <= CompressorOut_bh128_12_12(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w42_4 <= CompressorOut_bh128_12_12(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_13_26 <= heap_bh128_w42_3_d1 & heap_bh128_w42_2_d1 & heap_bh128_w42_1_d1 & heap_bh128_w42_0_d1;
-   CompressorIn_bh128_13_27(0) <= heap_bh128_w43_3_d1;
-   Compressor_bh128_13: Compressor_14_3
-      port map ( R => CompressorOut_bh128_13_13   ,
-                 X0 => CompressorIn_bh128_13_26,
-                 X1 => CompressorIn_bh128_13_27);
-   heap_bh128_w42_5 <= CompressorOut_bh128_13_13(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w43_4 <= CompressorOut_bh128_13_13(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w44_4 <= CompressorOut_bh128_13_13(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_14_28 <= heap_bh128_w43_2_d1 & heap_bh128_w43_1_d1 & heap_bh128_w43_0_d1;
-   CompressorIn_bh128_14_29 <= heap_bh128_w44_3_d1 & heap_bh128_w44_2_d1;
-   Compressor_bh128_14: Compressor_23_3
-      port map ( R => CompressorOut_bh128_14_14   ,
-                 X0 => CompressorIn_bh128_14_28,
-                 X1 => CompressorIn_bh128_14_29);
-   heap_bh128_w43_5 <= CompressorOut_bh128_14_14(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w44_5 <= CompressorOut_bh128_14_14(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w45_4 <= CompressorOut_bh128_14_14(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_15_30 <= heap_bh128_w45_3_d1 & heap_bh128_w45_2_d1 & heap_bh128_w45_1_d1 & heap_bh128_w45_0_d1;
-   CompressorIn_bh128_15_31(0) <= heap_bh128_w46_3_d1;
-   Compressor_bh128_15: Compressor_14_3
-      port map ( R => CompressorOut_bh128_15_15   ,
-                 X0 => CompressorIn_bh128_15_30,
-                 X1 => CompressorIn_bh128_15_31);
-   heap_bh128_w45_5 <= CompressorOut_bh128_15_15(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w46_4 <= CompressorOut_bh128_15_15(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w47_4 <= CompressorOut_bh128_15_15(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_16_32 <= heap_bh128_w46_2_d1 & heap_bh128_w46_1_d1 & heap_bh128_w46_0_d1;
-   CompressorIn_bh128_16_33 <= heap_bh128_w47_3_d1 & heap_bh128_w47_2_d1;
-   Compressor_bh128_16: Compressor_23_3
-      port map ( R => CompressorOut_bh128_16_16   ,
-                 X0 => CompressorIn_bh128_16_32,
-                 X1 => CompressorIn_bh128_16_33);
-   heap_bh128_w46_5 <= CompressorOut_bh128_16_16(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w47_5 <= CompressorOut_bh128_16_16(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w48_4 <= CompressorOut_bh128_16_16(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_17_34 <= heap_bh128_w48_3_d1 & heap_bh128_w48_2_d1 & heap_bh128_w48_1_d1 & heap_bh128_w48_0_d1;
-   CompressorIn_bh128_17_35(0) <= heap_bh128_w49_3_d1;
-   Compressor_bh128_17: Compressor_14_3
-      port map ( R => CompressorOut_bh128_17_17   ,
-                 X0 => CompressorIn_bh128_17_34,
-                 X1 => CompressorIn_bh128_17_35);
-   heap_bh128_w48_5 <= CompressorOut_bh128_17_17(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w49_4 <= CompressorOut_bh128_17_17(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w50_4 <= CompressorOut_bh128_17_17(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_18_36 <= heap_bh128_w49_2_d1 & heap_bh128_w49_1_d1 & heap_bh128_w49_0_d1;
-   CompressorIn_bh128_18_37 <= heap_bh128_w50_3_d1 & heap_bh128_w50_2_d1;
-   Compressor_bh128_18: Compressor_23_3
-      port map ( R => CompressorOut_bh128_18_18   ,
-                 X0 => CompressorIn_bh128_18_36,
-                 X1 => CompressorIn_bh128_18_37);
-   heap_bh128_w49_5 <= CompressorOut_bh128_18_18(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w50_5 <= CompressorOut_bh128_18_18(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w51_4 <= CompressorOut_bh128_18_18(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_19_38 <= heap_bh128_w51_3_d1 & heap_bh128_w51_2_d1 & heap_bh128_w51_1_d1 & heap_bh128_w51_0_d1;
-   CompressorIn_bh128_19_39(0) <= heap_bh128_w52_3_d1;
-   Compressor_bh128_19: Compressor_14_3
-      port map ( R => CompressorOut_bh128_19_19   ,
-                 X0 => CompressorIn_bh128_19_38,
-                 X1 => CompressorIn_bh128_19_39);
-   heap_bh128_w51_5 <= CompressorOut_bh128_19_19(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w52_4 <= CompressorOut_bh128_19_19(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w53_4 <= CompressorOut_bh128_19_19(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_20_40 <= heap_bh128_w52_2_d1 & heap_bh128_w52_1_d1 & heap_bh128_w52_0_d1;
-   CompressorIn_bh128_20_41 <= heap_bh128_w53_3_d1 & heap_bh128_w53_2_d1;
-   Compressor_bh128_20: Compressor_23_3
-      port map ( R => CompressorOut_bh128_20_20   ,
-                 X0 => CompressorIn_bh128_20_40,
-                 X1 => CompressorIn_bh128_20_41);
-   heap_bh128_w52_5 <= CompressorOut_bh128_20_20(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w53_5 <= CompressorOut_bh128_20_20(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w54_4 <= CompressorOut_bh128_20_20(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_21_42 <= heap_bh128_w54_3_d1 & heap_bh128_w54_2_d1 & heap_bh128_w54_1_d1 & heap_bh128_w54_0_d1;
-   CompressorIn_bh128_21_43(0) <= heap_bh128_w55_3_d1;
-   Compressor_bh128_21: Compressor_14_3
-      port map ( R => CompressorOut_bh128_21_21   ,
-                 X0 => CompressorIn_bh128_21_42,
-                 X1 => CompressorIn_bh128_21_43);
-   heap_bh128_w54_5 <= CompressorOut_bh128_21_21(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w55_4 <= CompressorOut_bh128_21_21(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w56_4 <= CompressorOut_bh128_21_21(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_22_44 <= heap_bh128_w55_2_d1 & heap_bh128_w55_1_d1 & heap_bh128_w55_0_d1;
-   CompressorIn_bh128_22_45 <= heap_bh128_w56_3_d1 & heap_bh128_w56_2_d1;
-   Compressor_bh128_22: Compressor_23_3
-      port map ( R => CompressorOut_bh128_22_22   ,
-                 X0 => CompressorIn_bh128_22_44,
-                 X1 => CompressorIn_bh128_22_45);
-   heap_bh128_w55_5 <= CompressorOut_bh128_22_22(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w56_5 <= CompressorOut_bh128_22_22(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w57_4 <= CompressorOut_bh128_22_22(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_23_46 <= heap_bh128_w57_3_d1 & heap_bh128_w57_2_d1 & heap_bh128_w57_1_d1 & heap_bh128_w57_0_d1;
-   CompressorIn_bh128_23_47(0) <= heap_bh128_w58_3_d1;
-   Compressor_bh128_23: Compressor_14_3
-      port map ( R => CompressorOut_bh128_23_23   ,
-                 X0 => CompressorIn_bh128_23_46,
-                 X1 => CompressorIn_bh128_23_47);
-   heap_bh128_w57_5 <= CompressorOut_bh128_23_23(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w58_4 <= CompressorOut_bh128_23_23(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w59_4 <= CompressorOut_bh128_23_23(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_24_48 <= heap_bh128_w58_2_d1 & heap_bh128_w58_1_d1 & heap_bh128_w58_0_d1;
-   CompressorIn_bh128_24_49 <= heap_bh128_w59_3_d1 & heap_bh128_w59_2_d1;
-   Compressor_bh128_24: Compressor_23_3
-      port map ( R => CompressorOut_bh128_24_24   ,
-                 X0 => CompressorIn_bh128_24_48,
-                 X1 => CompressorIn_bh128_24_49);
-   heap_bh128_w58_5 <= CompressorOut_bh128_24_24(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w59_5 <= CompressorOut_bh128_24_24(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w60_4 <= CompressorOut_bh128_24_24(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_25_50 <= heap_bh128_w60_3_d1 & heap_bh128_w60_2_d1 & heap_bh128_w60_1_d1 & heap_bh128_w60_0_d1;
-   CompressorIn_bh128_25_51(0) <= heap_bh128_w61_2_d1;
-   Compressor_bh128_25: Compressor_14_3
-      port map ( R => CompressorOut_bh128_25_25   ,
-                 X0 => CompressorIn_bh128_25_50,
-                 X1 => CompressorIn_bh128_25_51);
-   heap_bh128_w60_5 <= CompressorOut_bh128_25_25(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w61_3 <= CompressorOut_bh128_25_25(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w62_3 <= CompressorOut_bh128_25_25(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_26_52 <= heap_bh128_w62_2_d1 & heap_bh128_w62_1_d1 & heap_bh128_w62_0_d1;
-   CompressorIn_bh128_26_53 <= heap_bh128_w63_2_d1 & heap_bh128_w63_1_d1;
-   Compressor_bh128_26: Compressor_23_3
-      port map ( R => CompressorOut_bh128_26_26   ,
-                 X0 => CompressorIn_bh128_26_52,
-                 X1 => CompressorIn_bh128_26_53);
-   heap_bh128_w62_4 <= CompressorOut_bh128_26_26(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w63_3 <= CompressorOut_bh128_26_26(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w64_3 <= CompressorOut_bh128_26_26(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_27_54 <= heap_bh128_w64_2_d1 & heap_bh128_w64_1_d1 & heap_bh128_w64_0_d1;
-   CompressorIn_bh128_27_55 <= heap_bh128_w65_2_d1 & heap_bh128_w65_1_d1;
-   Compressor_bh128_27: Compressor_23_3
-      port map ( R => CompressorOut_bh128_27_27   ,
-                 X0 => CompressorIn_bh128_27_54,
-                 X1 => CompressorIn_bh128_27_55);
-   heap_bh128_w64_4 <= CompressorOut_bh128_27_27(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w65_3 <= CompressorOut_bh128_27_27(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w66_3 <= CompressorOut_bh128_27_27(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_28_56 <= heap_bh128_w66_2_d1 & heap_bh128_w66_1_d1 & heap_bh128_w66_0_d1;
-   CompressorIn_bh128_28_57 <= heap_bh128_w67_2_d1 & heap_bh128_w67_1_d1;
-   Compressor_bh128_28: Compressor_23_3
-      port map ( R => CompressorOut_bh128_28_28   ,
-                 X0 => CompressorIn_bh128_28_56,
-                 X1 => CompressorIn_bh128_28_57);
-   heap_bh128_w66_4 <= CompressorOut_bh128_28_28(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w67_3 <= CompressorOut_bh128_28_28(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w68_3 <= CompressorOut_bh128_28_28(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_29_58 <= heap_bh128_w68_2_d1 & heap_bh128_w68_1_d1 & heap_bh128_w68_0_d1;
-   CompressorIn_bh128_29_59 <= heap_bh128_w69_2_d1 & heap_bh128_w69_1_d1;
-   Compressor_bh128_29: Compressor_23_3
-      port map ( R => CompressorOut_bh128_29_29   ,
-                 X0 => CompressorIn_bh128_29_58,
-                 X1 => CompressorIn_bh128_29_59);
-   heap_bh128_w68_4 <= CompressorOut_bh128_29_29(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w69_3 <= CompressorOut_bh128_29_29(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w70_3 <= CompressorOut_bh128_29_29(2); -- cycle= 1 cp= 5.3072e-10
-
-   ----------------Synchro barrier, entering cycle 0----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_30_60 <= heap_bh128_w70_2_d1 & heap_bh128_w70_1_d1 & heap_bh128_w70_0_d1;
-   CompressorIn_bh128_30_61 <= heap_bh128_w71_1_d1 & heap_bh128_w71_0_d1;
-   Compressor_bh128_30: Compressor_23_3
-      port map ( R => CompressorOut_bh128_30_30   ,
-                 X0 => CompressorIn_bh128_30_60,
-                 X1 => CompressorIn_bh128_30_61);
-   heap_bh128_w70_4 <= CompressorOut_bh128_30_30(0); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w71_2 <= CompressorOut_bh128_30_30(1); -- cycle= 1 cp= 5.3072e-10
-   heap_bh128_w72_2 <= CompressorOut_bh128_30_30(2); -- cycle= 1 cp= 5.3072e-10
-   ----------------Synchro barrier, entering cycle 1----------------
-   tempR_bh128_1 <= heap_bh128_w19_2 & heap_bh128_w18_2 & heap_bh128_w17_2 & heap_bh128_w16_2 & heap_bh128_w15_2 & heap_bh128_w14_2 & heap_bh128_w13_2; -- already compressed
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh128_1 <= '0' & heap_bh128_w23_0_d1 & heap_bh128_w22_4 & heap_bh128_w21_0_d1 & heap_bh128_w20_4;
-   inAdder1_bh128_1 <= '0' & heap_bh128_w23_3 & heap_bh128_w22_3 & heap_bh128_w21_3 & '0';
-   cin_bh128_1 <= '0';
    ----------------Synchro barrier, entering cycle 2----------------
-   outAdder_bh128_1 <= inAdder0_bh128_1_d1 + inAdder1_bh128_1_d1 + cin_bh128_1_d1;
-   heap_bh128_w20_5 <= outAdder_bh128_1(0); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w21_4 <= outAdder_bh128_1(1); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w22_5 <= outAdder_bh128_1(2); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w23_4 <= outAdder_bh128_1(3); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w24_5 <= outAdder_bh128_1(4); -- cycle= 2 cp= 1.22772e-09
+   ----------------Synchro barrier, entering cycle 1----------------
+   inAdder0_bh154_2 <= '0' & heap_bh154_w33_4_d1 & heap_bh154_w32_7 & heap_bh154_w31_6 & heap_bh154_w30_6 & heap_bh154_w29_4 & heap_bh154_w28_5 & heap_bh154_w27_4 & heap_bh154_w26_5 & heap_bh154_w25_4 & heap_bh154_w24_5 & heap_bh154_w23_4 & heap_bh154_w22_5 & heap_bh154_w21_4 & heap_bh154_w20_3;
+   inAdder1_bh154_2 <= '0' & heap_bh154_w33_6 & heap_bh154_w32_6 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh154_w20_5;
+   cin_bh154_2 <= '0';
+   ----------------Synchro barrier, entering cycle 2----------------
+   outAdder_bh154_2 <= inAdder0_bh154_2_d1 + inAdder1_bh154_2_d1 + cin_bh154_2_d1;
+   heap_bh154_w20_6 <= outAdder_bh154_2(0); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w21_5 <= outAdder_bh154_2(1); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w22_6 <= outAdder_bh154_2(2); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w23_5 <= outAdder_bh154_2(3); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w24_6 <= outAdder_bh154_2(4); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w25_5 <= outAdder_bh154_2(5); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w26_6 <= outAdder_bh154_2(6); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w27_5 <= outAdder_bh154_2(7); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w28_6 <= outAdder_bh154_2(8); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w29_5 <= outAdder_bh154_2(9); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w30_7 <= outAdder_bh154_2(10); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w31_7 <= outAdder_bh154_2(11); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w32_8 <= outAdder_bh154_2(12); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w33_7 <= outAdder_bh154_2(13); -- cycle= 2 cp= 9.9065e-10
+   heap_bh154_w34_7 <= outAdder_bh154_2(14); -- cycle= 2 cp= 9.9065e-10
+   ----------------Synchro barrier, entering cycle 2----------------
+   tempR_bh154_2 <= heap_bh154_w33_7 & heap_bh154_w32_8 & heap_bh154_w31_7 & heap_bh154_w30_7 & heap_bh154_w29_5 & heap_bh154_w28_6 & heap_bh154_w27_5 & heap_bh154_w26_6 & heap_bh154_w25_5 & heap_bh154_w24_6 & heap_bh154_w23_5 & heap_bh154_w22_6 & heap_bh154_w21_5 & heap_bh154_w20_6; -- already compressed
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_31_62 <= heap_bh128_w32_1_d1 & heap_bh128_w32_0_d1 & heap_bh128_w32_5 & heap_bh128_w32_4;
-   CompressorIn_bh128_31_63(0) <= heap_bh128_w33_5;
-   Compressor_bh128_31: Compressor_14_3
-      port map ( R => CompressorOut_bh128_31_31   ,
-                 X0 => CompressorIn_bh128_31_62,
-                 X1 => CompressorIn_bh128_31_63);
-   heap_bh128_w32_6 <= CompressorOut_bh128_31_31(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w33_6 <= CompressorOut_bh128_31_31(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w34_6 <= CompressorOut_bh128_31_31(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_43_86 <= heap_bh154_w34_5_d1 & heap_bh154_w34_4_d1 & heap_bh154_w34_6;
+   Compressor_bh154_43: Compressor_3_2
+      port map ( R => CompressorOut_bh154_43_43   ,
+                 X0 => CompressorIn_bh154_43_86);
+   heap_bh154_w34_8 <= CompressorOut_bh154_43_43(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w35_7 <= CompressorOut_bh154_43_43(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_32_64 <= heap_bh128_w35_1_d1 & heap_bh128_w35_0_d1 & heap_bh128_w35_5 & heap_bh128_w35_4;
-   CompressorIn_bh128_32_65(0) <= heap_bh128_w36_5;
-   Compressor_bh128_32: Compressor_14_3
-      port map ( R => CompressorOut_bh128_32_32   ,
-                 X0 => CompressorIn_bh128_32_64,
-                 X1 => CompressorIn_bh128_32_65);
-   heap_bh128_w35_6 <= CompressorOut_bh128_32_32(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w36_6 <= CompressorOut_bh128_32_32(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w37_6 <= CompressorOut_bh128_32_32(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_44_87 <= heap_bh154_w37_5_d1 & heap_bh154_w37_4_d1 & heap_bh154_w37_6;
+   Compressor_bh154_44: Compressor_3_2
+      port map ( R => CompressorOut_bh154_44_44   ,
+                 X0 => CompressorIn_bh154_44_87);
+   heap_bh154_w37_7 <= CompressorOut_bh154_44_44(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w38_7 <= CompressorOut_bh154_44_44(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_33_66 <= heap_bh128_w38_1_d1 & heap_bh128_w38_0_d1 & heap_bh128_w38_5 & heap_bh128_w38_4;
-   CompressorIn_bh128_33_67(0) <= heap_bh128_w39_5;
-   Compressor_bh128_33: Compressor_14_3
-      port map ( R => CompressorOut_bh128_33_33   ,
-                 X0 => CompressorIn_bh128_33_66,
-                 X1 => CompressorIn_bh128_33_67);
-   heap_bh128_w38_6 <= CompressorOut_bh128_33_33(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w39_6 <= CompressorOut_bh128_33_33(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w40_6 <= CompressorOut_bh128_33_33(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_45_88 <= heap_bh154_w40_5_d1 & heap_bh154_w40_4_d1 & heap_bh154_w40_6;
+   Compressor_bh154_45: Compressor_3_2
+      port map ( R => CompressorOut_bh154_45_45   ,
+                 X0 => CompressorIn_bh154_45_88);
+   heap_bh154_w40_7 <= CompressorOut_bh154_45_45(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w41_7 <= CompressorOut_bh154_45_45(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_34_68 <= heap_bh128_w41_1_d1 & heap_bh128_w41_0_d1 & heap_bh128_w41_5 & heap_bh128_w41_4;
-   CompressorIn_bh128_34_69(0) <= heap_bh128_w42_5;
-   Compressor_bh128_34: Compressor_14_3
-      port map ( R => CompressorOut_bh128_34_34   ,
-                 X0 => CompressorIn_bh128_34_68,
-                 X1 => CompressorIn_bh128_34_69);
-   heap_bh128_w41_6 <= CompressorOut_bh128_34_34(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w42_6 <= CompressorOut_bh128_34_34(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w43_6 <= CompressorOut_bh128_34_34(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_46_89 <= heap_bh154_w43_5_d1 & heap_bh154_w43_4_d1 & heap_bh154_w43_6;
+   Compressor_bh154_46: Compressor_3_2
+      port map ( R => CompressorOut_bh154_46_46   ,
+                 X0 => CompressorIn_bh154_46_89);
+   heap_bh154_w43_7 <= CompressorOut_bh154_46_46(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w44_7 <= CompressorOut_bh154_46_46(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_35_70 <= heap_bh128_w44_1_d1 & heap_bh128_w44_0_d1 & heap_bh128_w44_5 & heap_bh128_w44_4;
-   CompressorIn_bh128_35_71(0) <= heap_bh128_w45_5;
-   Compressor_bh128_35: Compressor_14_3
-      port map ( R => CompressorOut_bh128_35_35   ,
-                 X0 => CompressorIn_bh128_35_70,
-                 X1 => CompressorIn_bh128_35_71);
-   heap_bh128_w44_6 <= CompressorOut_bh128_35_35(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w45_6 <= CompressorOut_bh128_35_35(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w46_6 <= CompressorOut_bh128_35_35(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_47_90 <= heap_bh154_w46_5_d1 & heap_bh154_w46_4_d1 & heap_bh154_w46_6;
+   Compressor_bh154_47: Compressor_3_2
+      port map ( R => CompressorOut_bh154_47_47   ,
+                 X0 => CompressorIn_bh154_47_90);
+   heap_bh154_w46_7 <= CompressorOut_bh154_47_47(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w47_7 <= CompressorOut_bh154_47_47(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_36_72 <= heap_bh128_w47_1_d1 & heap_bh128_w47_0_d1 & heap_bh128_w47_5 & heap_bh128_w47_4;
-   CompressorIn_bh128_36_73(0) <= heap_bh128_w48_5;
-   Compressor_bh128_36: Compressor_14_3
-      port map ( R => CompressorOut_bh128_36_36   ,
-                 X0 => CompressorIn_bh128_36_72,
-                 X1 => CompressorIn_bh128_36_73);
-   heap_bh128_w47_6 <= CompressorOut_bh128_36_36(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w48_6 <= CompressorOut_bh128_36_36(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w49_6 <= CompressorOut_bh128_36_36(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_48_91 <= heap_bh154_w49_5_d1 & heap_bh154_w49_4_d1 & heap_bh154_w49_6;
+   Compressor_bh154_48: Compressor_3_2
+      port map ( R => CompressorOut_bh154_48_48   ,
+                 X0 => CompressorIn_bh154_48_91);
+   heap_bh154_w49_7 <= CompressorOut_bh154_48_48(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w50_7 <= CompressorOut_bh154_48_48(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_37_74 <= heap_bh128_w50_1_d1 & heap_bh128_w50_0_d1 & heap_bh128_w50_5 & heap_bh128_w50_4;
-   CompressorIn_bh128_37_75(0) <= heap_bh128_w51_5;
-   Compressor_bh128_37: Compressor_14_3
-      port map ( R => CompressorOut_bh128_37_37   ,
-                 X0 => CompressorIn_bh128_37_74,
-                 X1 => CompressorIn_bh128_37_75);
-   heap_bh128_w50_6 <= CompressorOut_bh128_37_37(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w51_6 <= CompressorOut_bh128_37_37(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w52_6 <= CompressorOut_bh128_37_37(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_49_92 <= heap_bh154_w52_5_d1 & heap_bh154_w52_4_d1 & heap_bh154_w52_6;
+   Compressor_bh154_49: Compressor_3_2
+      port map ( R => CompressorOut_bh154_49_49   ,
+                 X0 => CompressorIn_bh154_49_92);
+   heap_bh154_w52_7 <= CompressorOut_bh154_49_49(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w53_7 <= CompressorOut_bh154_49_49(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_38_76 <= heap_bh128_w53_1_d1 & heap_bh128_w53_0_d1 & heap_bh128_w53_5 & heap_bh128_w53_4;
-   CompressorIn_bh128_38_77(0) <= heap_bh128_w54_5;
-   Compressor_bh128_38: Compressor_14_3
-      port map ( R => CompressorOut_bh128_38_38   ,
-                 X0 => CompressorIn_bh128_38_76,
-                 X1 => CompressorIn_bh128_38_77);
-   heap_bh128_w53_6 <= CompressorOut_bh128_38_38(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w54_6 <= CompressorOut_bh128_38_38(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w55_6 <= CompressorOut_bh128_38_38(2); -- cycle= 1 cp= 1.06144e-09
+   CompressorIn_bh154_50_93 <= heap_bh154_w55_5_d1 & heap_bh154_w55_4_d1 & heap_bh154_w55_6;
+   Compressor_bh154_50: Compressor_3_2
+      port map ( R => CompressorOut_bh154_50_50   ,
+                 X0 => CompressorIn_bh154_50_93);
+   heap_bh154_w55_7 <= CompressorOut_bh154_50_50(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w56_7 <= CompressorOut_bh154_50_50(1); -- cycle= 1 cp= 7.633e-10
 
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_39_78 <= heap_bh128_w56_1_d1 & heap_bh128_w56_0_d1 & heap_bh128_w56_5 & heap_bh128_w56_4;
-   CompressorIn_bh128_39_79(0) <= heap_bh128_w57_5;
-   Compressor_bh128_39: Compressor_14_3
-      port map ( R => CompressorOut_bh128_39_39   ,
-                 X0 => CompressorIn_bh128_39_78,
-                 X1 => CompressorIn_bh128_39_79);
-   heap_bh128_w56_6 <= CompressorOut_bh128_39_39(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w57_6 <= CompressorOut_bh128_39_39(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w58_6 <= CompressorOut_bh128_39_39(2); -- cycle= 1 cp= 1.06144e-09
-
+   CompressorIn_bh154_51_94 <= heap_bh154_w58_5_d1 & heap_bh154_w58_4_d1 & heap_bh154_w58_6;
+   Compressor_bh154_51: Compressor_3_2
+      port map ( R => CompressorOut_bh154_51_51   ,
+                 X0 => CompressorIn_bh154_51_94);
+   heap_bh154_w58_7 <= CompressorOut_bh154_51_51(0); -- cycle= 1 cp= 7.633e-10
+   heap_bh154_w59_7 <= CompressorOut_bh154_51_51(1); -- cycle= 1 cp= 7.633e-10
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_40_80 <= heap_bh128_w59_1_d1 & heap_bh128_w59_0_d1 & heap_bh128_w59_5 & heap_bh128_w59_4;
-   CompressorIn_bh128_40_81(0) <= heap_bh128_w60_5;
-   Compressor_bh128_40: Compressor_14_3
-      port map ( R => CompressorOut_bh128_40_40   ,
-                 X0 => CompressorIn_bh128_40_80,
-                 X1 => CompressorIn_bh128_40_81);
-   heap_bh128_w59_6 <= CompressorOut_bh128_40_40(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w60_6 <= CompressorOut_bh128_40_40(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w61_4 <= CompressorOut_bh128_40_40(2); -- cycle= 1 cp= 1.06144e-09
-
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_41_82 <= heap_bh128_w61_1_d1 & heap_bh128_w61_0_d1 & heap_bh128_w61_3;
-   CompressorIn_bh128_41_83 <= heap_bh128_w62_4 & heap_bh128_w62_3;
-   Compressor_bh128_41: Compressor_23_3
-      port map ( R => CompressorOut_bh128_41_41   ,
-                 X0 => CompressorIn_bh128_41_82,
-                 X1 => CompressorIn_bh128_41_83);
-   heap_bh128_w61_5 <= CompressorOut_bh128_41_41(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w62_5 <= CompressorOut_bh128_41_41(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w63_4 <= CompressorOut_bh128_41_41(2); -- cycle= 1 cp= 1.06144e-09
-
+   inAdder0_bh154_3 <= '0' & heap_bh154_w70_4_d1 & heap_bh154_w69_0_d1 & heap_bh154_w68_4_d1 & heap_bh154_w67_0_d1 & heap_bh154_w66_4_d1 & heap_bh154_w65_0_d1 & heap_bh154_w64_4_d1 & heap_bh154_w63_0_d1;
+   inAdder1_bh154_3 <= '0' & heap_bh154_w70_3_d1 & heap_bh154_w69_3_d1 & heap_bh154_w68_3_d1 & heap_bh154_w67_3_d1 & heap_bh154_w66_3_d1 & heap_bh154_w65_3_d1 & heap_bh154_w64_3_d1 & heap_bh154_w63_3_d1;
+   cin_bh154_3 <= heap_bh154_w63_4;
+   outAdder_bh154_3 <= inAdder0_bh154_3 + inAdder1_bh154_3 + cin_bh154_3;
+   heap_bh154_w63_5 <= outAdder_bh154_3(0); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w64_5 <= outAdder_bh154_3(1); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w65_4 <= outAdder_bh154_3(2); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w66_5 <= outAdder_bh154_3(3); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w67_4 <= outAdder_bh154_3(4); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w68_5 <= outAdder_bh154_3(5); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w69_4 <= outAdder_bh154_3(6); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w70_5 <= outAdder_bh154_3(7); -- cycle= 1 cp= 1.2823e-09
+   heap_bh154_w71_3 <= outAdder_bh154_3(8); -- cycle= 1 cp= 1.2823e-09
    ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_42_84 <= heap_bh128_w72_1_d1 & heap_bh128_w72_0_d1 & heap_bh128_w72_2;
-   CompressorIn_bh128_42_85 <= heap_bh128_w73_1_d1 & heap_bh128_w73_0_d1;
-   Compressor_bh128_42: Compressor_23_3
-      port map ( R => CompressorOut_bh128_42_42   ,
-                 X0 => CompressorIn_bh128_42_84,
-                 X1 => CompressorIn_bh128_42_85);
-   heap_bh128_w72_3 <= CompressorOut_bh128_42_42(0); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w73_2 <= CompressorOut_bh128_42_42(1); -- cycle= 1 cp= 1.06144e-09
-   heap_bh128_w74_2 <= CompressorOut_bh128_42_42(2); -- cycle= 1 cp= 1.06144e-09
+   ----------------Synchro barrier, entering cycle 1----------------
+   inAdder0_bh154_4 <= '0' & heap_bh154_w77_1_d1 & heap_bh154_w76_1_d1 & heap_bh154_w75_1_d1 & heap_bh154_w74_1_d1;
+   inAdder1_bh154_4 <= '0' & heap_bh154_w77_0_d1 & heap_bh154_w76_0_d1 & heap_bh154_w75_0_d1 & heap_bh154_w74_0_d1;
+   cin_bh154_4 <= heap_bh154_w74_2;
+   outAdder_bh154_4 <= inAdder0_bh154_4 + inAdder1_bh154_4 + cin_bh154_4;
+   heap_bh154_w74_3 <= outAdder_bh154_4(0); -- cycle= 1 cp= 1.2223e-09
+   heap_bh154_w75_2 <= outAdder_bh154_4(1); -- cycle= 1 cp= 1.2223e-09
+   heap_bh154_w76_2 <= outAdder_bh154_4(2); -- cycle= 1 cp= 1.2223e-09
+   heap_bh154_w77_2 <= outAdder_bh154_4(3); -- cycle= 1 cp= 1.2223e-09
+   heap_bh154_w78_1 <= outAdder_bh154_4(4); -- cycle= 1 cp= 1.2223e-09
    ----------------Synchro barrier, entering cycle 2----------------
    ----------------Synchro barrier, entering cycle 3----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   inAdder0_bh128_2 <= '0' & heap_bh128_w23_4 & heap_bh128_w22_5 & heap_bh128_w21_4 & heap_bh128_w20_3_d1;
-   inAdder1_bh128_2 <= '0' & '0' & '0' & '0' & heap_bh128_w20_5;
-   cin_bh128_2 <= '0';
-   ----------------Synchro barrier, entering cycle 3----------------
-   outAdder_bh128_2 <= inAdder0_bh128_2_d1 + inAdder1_bh128_2_d1 + cin_bh128_2_d1;
-   heap_bh128_w20_6 <= outAdder_bh128_2(0); -- cycle= 3 cp= 1.22772e-09
-   heap_bh128_w21_5 <= outAdder_bh128_2(1); -- cycle= 3 cp= 1.22772e-09
-   heap_bh128_w22_6 <= outAdder_bh128_2(2); -- cycle= 3 cp= 1.22772e-09
-   heap_bh128_w23_5 <= outAdder_bh128_2(3); -- cycle= 3 cp= 1.22772e-09
-   heap_bh128_w24_6 <= outAdder_bh128_2(4); -- cycle= 3 cp= 1.22772e-09
-   ----------------Synchro barrier, entering cycle 3----------------
-   tempR_bh128_2 <= heap_bh128_w23_5 & heap_bh128_w22_6 & heap_bh128_w21_5 & heap_bh128_w20_6; -- already compressed
-   ----------------Synchro barrier, entering cycle 3----------------
-   ----------------Synchro barrier, entering cycle 4----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   inAdder0_bh128_3 <= '0' & heap_bh128_w31_5_d1 & heap_bh128_w30_5_d1 & heap_bh128_w29_0_d2 & heap_bh128_w28_4_d1 & heap_bh128_w27_0_d2 & heap_bh128_w26_4_d1 & heap_bh128_w25_0_d2 & heap_bh128_w24_4_d1;
-   inAdder1_bh128_3 <= '0' & heap_bh128_w31_4_d1 & heap_bh128_w30_4_d1 & heap_bh128_w29_3_d1 & heap_bh128_w28_3_d1 & heap_bh128_w27_3_d1 & heap_bh128_w26_3_d1 & heap_bh128_w25_3_d1 & heap_bh128_w24_3_d1;
-   cin_bh128_3 <= heap_bh128_w24_5;
-   ----------------Synchro barrier, entering cycle 3----------------
-   outAdder_bh128_3 <= inAdder0_bh128_3_d1 + inAdder1_bh128_3_d1 + cin_bh128_3_d1;
-   heap_bh128_w24_7 <= outAdder_bh128_3(0); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w25_4 <= outAdder_bh128_3(1); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w26_5 <= outAdder_bh128_3(2); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w27_4 <= outAdder_bh128_3(3); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w28_5 <= outAdder_bh128_3(4); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w29_4 <= outAdder_bh128_3(5); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w30_6 <= outAdder_bh128_3(6); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w31_6 <= outAdder_bh128_3(7); -- cycle= 3 cp= 1.31972e-09
-   heap_bh128_w32_7 <= outAdder_bh128_3(8); -- cycle= 3 cp= 1.31972e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_43_86 <= heap_bh128_w34_5 & heap_bh128_w34_4 & heap_bh128_w34_6;
-   Compressor_bh128_43: Compressor_3_2
-      port map ( R => CompressorOut_bh128_43_43   ,
-                 X0 => CompressorIn_bh128_43_86);
-   heap_bh128_w34_7 <= CompressorOut_bh128_43_43(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w35_7 <= CompressorOut_bh128_43_43(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_44_87 <= heap_bh128_w37_5 & heap_bh128_w37_4 & heap_bh128_w37_6;
-   Compressor_bh128_44: Compressor_3_2
-      port map ( R => CompressorOut_bh128_44_44   ,
-                 X0 => CompressorIn_bh128_44_87);
-   heap_bh128_w37_7 <= CompressorOut_bh128_44_44(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w38_7 <= CompressorOut_bh128_44_44(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_45_88 <= heap_bh128_w40_5 & heap_bh128_w40_4 & heap_bh128_w40_6;
-   Compressor_bh128_45: Compressor_3_2
-      port map ( R => CompressorOut_bh128_45_45   ,
-                 X0 => CompressorIn_bh128_45_88);
-   heap_bh128_w40_7 <= CompressorOut_bh128_45_45(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w41_7 <= CompressorOut_bh128_45_45(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_46_89 <= heap_bh128_w43_5 & heap_bh128_w43_4 & heap_bh128_w43_6;
-   Compressor_bh128_46: Compressor_3_2
-      port map ( R => CompressorOut_bh128_46_46   ,
-                 X0 => CompressorIn_bh128_46_89);
-   heap_bh128_w43_7 <= CompressorOut_bh128_46_46(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w44_7 <= CompressorOut_bh128_46_46(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_47_90 <= heap_bh128_w46_5 & heap_bh128_w46_4 & heap_bh128_w46_6;
-   Compressor_bh128_47: Compressor_3_2
-      port map ( R => CompressorOut_bh128_47_47   ,
-                 X0 => CompressorIn_bh128_47_90);
-   heap_bh128_w46_7 <= CompressorOut_bh128_47_47(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w47_7 <= CompressorOut_bh128_47_47(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_48_91 <= heap_bh128_w49_5 & heap_bh128_w49_4 & heap_bh128_w49_6;
-   Compressor_bh128_48: Compressor_3_2
-      port map ( R => CompressorOut_bh128_48_48   ,
-                 X0 => CompressorIn_bh128_48_91);
-   heap_bh128_w49_7 <= CompressorOut_bh128_48_48(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w50_7 <= CompressorOut_bh128_48_48(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_49_92 <= heap_bh128_w52_5 & heap_bh128_w52_4 & heap_bh128_w52_6;
-   Compressor_bh128_49: Compressor_3_2
-      port map ( R => CompressorOut_bh128_49_49   ,
-                 X0 => CompressorIn_bh128_49_92);
-   heap_bh128_w52_7 <= CompressorOut_bh128_49_49(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w53_7 <= CompressorOut_bh128_49_49(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_50_93 <= heap_bh128_w55_5 & heap_bh128_w55_4 & heap_bh128_w55_6;
-   Compressor_bh128_50: Compressor_3_2
-      port map ( R => CompressorOut_bh128_50_50   ,
-                 X0 => CompressorIn_bh128_50_93);
-   heap_bh128_w55_7 <= CompressorOut_bh128_50_50(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w56_7 <= CompressorOut_bh128_50_50(1); -- cycle= 1 cp= 1.59216e-09
-
-   ----------------Synchro barrier, entering cycle 1----------------
-   CompressorIn_bh128_51_94 <= heap_bh128_w58_5 & heap_bh128_w58_4 & heap_bh128_w58_6;
-   Compressor_bh128_51: Compressor_3_2
-      port map ( R => CompressorOut_bh128_51_51   ,
-                 X0 => CompressorIn_bh128_51_94);
-   heap_bh128_w58_7 <= CompressorOut_bh128_51_51(0); -- cycle= 1 cp= 1.59216e-09
-   heap_bh128_w59_7 <= CompressorOut_bh128_51_51(1); -- cycle= 1 cp= 1.59216e-09
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh128_4 <= '0' & heap_bh128_w70_4 & heap_bh128_w69_0_d1 & heap_bh128_w68_4 & heap_bh128_w67_0_d1 & heap_bh128_w66_4 & heap_bh128_w65_0_d1 & heap_bh128_w64_4 & heap_bh128_w63_0_d1;
-   inAdder1_bh128_4 <= '0' & heap_bh128_w70_3 & heap_bh128_w69_3 & heap_bh128_w68_3 & heap_bh128_w67_3 & heap_bh128_w66_3 & heap_bh128_w65_3 & heap_bh128_w64_3 & heap_bh128_w63_3;
-   cin_bh128_4 <= heap_bh128_w63_4;
-   ----------------Synchro barrier, entering cycle 2----------------
-   outAdder_bh128_4 <= inAdder0_bh128_4_d1 + inAdder1_bh128_4_d1 + cin_bh128_4_d1;
-   heap_bh128_w63_5 <= outAdder_bh128_4(0); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w64_5 <= outAdder_bh128_4(1); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w65_4 <= outAdder_bh128_4(2); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w66_5 <= outAdder_bh128_4(3); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w67_4 <= outAdder_bh128_4(4); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w68_5 <= outAdder_bh128_4(5); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w69_4 <= outAdder_bh128_4(6); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w70_5 <= outAdder_bh128_4(7); -- cycle= 2 cp= 1.31972e-09
-   heap_bh128_w71_3 <= outAdder_bh128_4(8); -- cycle= 2 cp= 1.31972e-09
-   ----------------Synchro barrier, entering cycle 1----------------
-   ----------------Synchro barrier, entering cycle 2----------------
-   ----------------Synchro barrier, entering cycle 1----------------
-   inAdder0_bh128_5 <= '0' & heap_bh128_w77_1_d1 & heap_bh128_w76_1_d1 & heap_bh128_w75_1_d1 & heap_bh128_w74_1_d1;
-   inAdder1_bh128_5 <= '0' & heap_bh128_w77_0_d1 & heap_bh128_w76_0_d1 & heap_bh128_w75_0_d1 & heap_bh128_w74_0_d1;
-   cin_bh128_5 <= heap_bh128_w74_2;
-   ----------------Synchro barrier, entering cycle 2----------------
-   outAdder_bh128_5 <= inAdder0_bh128_5_d1 + inAdder1_bh128_5_d1 + cin_bh128_5_d1;
-   heap_bh128_w74_3 <= outAdder_bh128_5(0); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w75_2 <= outAdder_bh128_5(1); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w76_2 <= outAdder_bh128_5(2); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w77_2 <= outAdder_bh128_5(3); -- cycle= 2 cp= 1.22772e-09
-   heap_bh128_w78_1 <= outAdder_bh128_5(4); -- cycle= 2 cp= 1.22772e-09
-   ----------------Synchro barrier, entering cycle 3----------------
-   ----------------Synchro barrier, entering cycle 4----------------
-   finalAdderIn0_bh128 <= "0" & heap_bh128_w94_0_d4 & heap_bh128_w93_0_d4 & heap_bh128_w92_0_d4 & heap_bh128_w91_0_d4 & heap_bh128_w90_0_d4 & heap_bh128_w89_0_d4 & heap_bh128_w88_0_d4 & heap_bh128_w87_0_d4 & heap_bh128_w86_0_d4 & heap_bh128_w85_0_d4 & heap_bh128_w84_0_d4 & heap_bh128_w83_0_d4 & heap_bh128_w82_0_d4 & heap_bh128_w81_0_d4 & heap_bh128_w80_0_d4 & heap_bh128_w79_0_d4 & heap_bh128_w78_0_d4 & heap_bh128_w77_2_d2 & heap_bh128_w76_2_d2 & heap_bh128_w75_2_d2 & heap_bh128_w74_3_d2 & heap_bh128_w73_2_d3 & heap_bh128_w72_3_d3 & heap_bh128_w71_2_d3 & heap_bh128_w70_5_d2 & heap_bh128_w69_4_d2 & heap_bh128_w68_5_d2 & heap_bh128_w67_4_d2 & heap_bh128_w66_5_d2 & heap_bh128_w65_4_d2 & heap_bh128_w64_5_d2 & heap_bh128_w63_5_d2 & heap_bh128_w62_5_d3 & heap_bh128_w61_5_d3 & heap_bh128_w60_4_d3 & heap_bh128_w59_6_d3 & heap_bh128_w58_7_d3 & heap_bh128_w57_4_d3 & heap_bh128_w56_6_d3 & heap_bh128_w55_7_d3 & heap_bh128_w54_4_d3 & heap_bh128_w53_6_d3 & heap_bh128_w52_7_d3 & heap_bh128_w51_4_d3 & heap_bh128_w50_6_d3 & heap_bh128_w49_7_d3 & heap_bh128_w48_4_d3 & heap_bh128_w47_6_d3 & heap_bh128_w46_7_d3 & heap_bh128_w45_4_d3 & heap_bh128_w44_6_d3 & heap_bh128_w43_7_d3 & heap_bh128_w42_4_d3 & heap_bh128_w41_6_d3 & heap_bh128_w40_7_d3 & heap_bh128_w39_4_d3 & heap_bh128_w38_6_d3 & heap_bh128_w37_7_d3 & heap_bh128_w36_4_d3 & heap_bh128_w35_6_d3 & heap_bh128_w34_7_d3 & heap_bh128_w33_4_d3 & heap_bh128_w32_6_d3 & heap_bh128_w31_6_d1 & heap_bh128_w30_6_d1 & heap_bh128_w29_4_d1 & heap_bh128_w28_5_d1 & heap_bh128_w27_4_d1 & heap_bh128_w26_5_d1 & heap_bh128_w25_4_d1 & heap_bh128_w24_6_d1;
-   finalAdderIn1_bh128 <= "0" & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh128_w78_1_d2 & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh128_w71_3_d2 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh128_w61_4_d3 & heap_bh128_w60_6_d3 & heap_bh128_w59_7_d3 & '0' & heap_bh128_w57_6_d3 & heap_bh128_w56_7_d3 & '0' & heap_bh128_w54_6_d3 & heap_bh128_w53_7_d3 & '0' & heap_bh128_w51_6_d3 & heap_bh128_w50_7_d3 & '0' & heap_bh128_w48_6_d3 & heap_bh128_w47_7_d3 & '0' & heap_bh128_w45_6_d3 & heap_bh128_w44_7_d3 & '0' & heap_bh128_w42_6_d3 & heap_bh128_w41_7_d3 & '0' & heap_bh128_w39_6_d3 & heap_bh128_w38_7_d3 & '0' & heap_bh128_w36_6_d3 & heap_bh128_w35_7_d3 & '0' & heap_bh128_w33_6_d3 & heap_bh128_w32_7_d1 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh128_w24_7_d1;
-   finalAdderCin_bh128 <= '0';
-   Adder_final128_6: IntAdder_72_f400_uid191  -- pipelineDepth=1 maxInDelay=0
+   finalAdderIn0_bh154 <= "0" & heap_bh154_w94_0_d3 & heap_bh154_w93_0_d3 & heap_bh154_w92_0_d3 & heap_bh154_w91_0_d3 & heap_bh154_w90_0_d3 & heap_bh154_w89_0_d3 & heap_bh154_w88_0_d3 & heap_bh154_w87_0_d3 & heap_bh154_w86_0_d3 & heap_bh154_w85_0_d3 & heap_bh154_w84_0_d3 & heap_bh154_w83_0_d3 & heap_bh154_w82_0_d3 & heap_bh154_w81_0_d3 & heap_bh154_w80_0_d3 & heap_bh154_w79_0_d3 & heap_bh154_w78_0_d3 & heap_bh154_w77_2_d2 & heap_bh154_w76_2_d2 & heap_bh154_w75_2_d2 & heap_bh154_w74_3_d2 & heap_bh154_w73_2_d2 & heap_bh154_w72_3_d2 & heap_bh154_w71_2_d3 & heap_bh154_w70_5_d2 & heap_bh154_w69_4_d2 & heap_bh154_w68_5_d2 & heap_bh154_w67_4_d2 & heap_bh154_w66_5_d2 & heap_bh154_w65_4_d2 & heap_bh154_w64_5_d2 & heap_bh154_w63_5_d2 & heap_bh154_w62_5_d2 & heap_bh154_w61_5_d2 & heap_bh154_w60_4_d3 & heap_bh154_w59_6_d2 & heap_bh154_w58_7_d2 & heap_bh154_w57_4_d3 & heap_bh154_w56_6_d2 & heap_bh154_w55_7_d2 & heap_bh154_w54_4_d3 & heap_bh154_w53_6_d2 & heap_bh154_w52_7_d2 & heap_bh154_w51_4_d3 & heap_bh154_w50_6_d2 & heap_bh154_w49_7_d2 & heap_bh154_w48_4_d3 & heap_bh154_w47_6_d2 & heap_bh154_w46_7_d2 & heap_bh154_w45_4_d3 & heap_bh154_w44_6_d2 & heap_bh154_w43_7_d2 & heap_bh154_w42_4_d3 & heap_bh154_w41_6_d2 & heap_bh154_w40_7_d2 & heap_bh154_w39_4_d3 & heap_bh154_w38_6_d2 & heap_bh154_w37_7_d2 & heap_bh154_w36_4_d3 & heap_bh154_w35_6_d2 & heap_bh154_w34_8_d2;
+   finalAdderIn1_bh154 <= "0" & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh154_w78_1_d2 & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh154_w71_3_d2 & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & '0' & heap_bh154_w61_4_d2 & heap_bh154_w60_6_d2 & heap_bh154_w59_7_d2 & '0' & heap_bh154_w57_6_d2 & heap_bh154_w56_7_d2 & '0' & heap_bh154_w54_6_d2 & heap_bh154_w53_7_d2 & '0' & heap_bh154_w51_6_d2 & heap_bh154_w50_7_d2 & '0' & heap_bh154_w48_6_d2 & heap_bh154_w47_7_d2 & '0' & heap_bh154_w45_6_d2 & heap_bh154_w44_7_d2 & '0' & heap_bh154_w42_6_d2 & heap_bh154_w41_7_d2 & '0' & heap_bh154_w39_6_d2 & heap_bh154_w38_7_d2 & '0' & heap_bh154_w36_6_d2 & heap_bh154_w35_7_d2 & heap_bh154_w34_7_d1;
+   finalAdderCin_bh154 <= '0';
+   Adder_final154_5: IntAdder_62_f400_uid217  -- pipelineDepth=0 maxInDelay=0
       port map ( clk  => clk,
                  rst  => rst,
-                 Cin => finalAdderCin_bh128,
-                 R => finalAdderOut_bh128   ,
-                 X => finalAdderIn0_bh128,
-                 Y => finalAdderIn1_bh128);
-   ----------------Synchro barrier, entering cycle 5----------------
+                 Cin => finalAdderCin_bh154,
+                 R => finalAdderOut_bh154   ,
+                 X => finalAdderIn0_bh154,
+                 Y => finalAdderIn1_bh154);
    -- concatenate all the compressed chunks
-   CompressionResult128 <= finalAdderOut_bh128 & tempR_bh128_2_d2 & tempR_bh128_1_d4 & tempR_bh128_0_d5;
+   CompressionResult154 <= finalAdderOut_bh154 & tempR_bh154_2_d1 & tempR_bh154_1_d2 & tempR_bh154_0_d3;
    -- End of code generated by BitHeap::generateCompressorVHDL
-   R <= CompressionResult128(94 downto 0);
+   R <= CompressionResult154(94 downto 0);
 end architecture;
 
 --------------------------------------------------------------------------------
---                          IntAdder_57_f400_uid199
---                    (IntAdderAlternative_57_f400_uid203)
+--                          IntAdder_57_f400_uid225
+--                     (IntAdderClassical_57_f400_uid227)
+-- This operator is part of the Infinite Virtual Library FloPoCoLib
+-- All rights reserved 
+-- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
+--------------------------------------------------------------------------------
+-- Pipeline depth: 0 cycles
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library std;
+use std.textio.all;
+library work;
+
+entity IntAdder_57_f400_uid225 is
+   port ( clk, rst : in std_logic;
+          X : in  std_logic_vector(56 downto 0);
+          Y : in  std_logic_vector(56 downto 0);
+          Cin : in std_logic;
+          R : out  std_logic_vector(56 downto 0)   );
+end entity;
+
+architecture arch of IntAdder_57_f400_uid225 is
+begin
+   process(clk)
+      begin
+         if clk'event and clk = '1' then
+         end if;
+      end process;
+   --Classical
+    R <= X + Y + Cin;
+end architecture;
+
+--------------------------------------------------------------------------------
+--                          IntAdder_65_f400_uid232
+--                     (IntAdderClassical_65_f400_uid234)
 -- This operator is part of the Infinite Virtual Library FloPoCoLib
 -- All rights reserved 
 -- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
@@ -5809,65 +6189,7 @@ library std;
 use std.textio.all;
 library work;
 
-entity IntAdder_57_f400_uid199 is
-   port ( clk, rst : in std_logic;
-          X : in  std_logic_vector(56 downto 0);
-          Y : in  std_logic_vector(56 downto 0);
-          Cin : in std_logic;
-          R : out  std_logic_vector(56 downto 0)   );
-end entity;
-
-architecture arch of IntAdder_57_f400_uid199 is
-signal s_sum_l0_idx0 :  std_logic_vector(42 downto 0);
-signal s_sum_l0_idx1, s_sum_l0_idx1_d1 :  std_logic_vector(15 downto 0);
-signal sum_l0_idx0, sum_l0_idx0_d1 :  std_logic_vector(41 downto 0);
-signal c_l0_idx0, c_l0_idx0_d1 :  std_logic_vector(0 downto 0);
-signal sum_l0_idx1 :  std_logic_vector(14 downto 0);
-signal c_l0_idx1 :  std_logic_vector(0 downto 0);
-signal s_sum_l1_idx1 :  std_logic_vector(15 downto 0);
-signal sum_l1_idx1 :  std_logic_vector(14 downto 0);
-signal c_l1_idx1 :  std_logic_vector(0 downto 0);
-begin
-   process(clk)
-      begin
-         if clk'event and clk = '1' then
-            s_sum_l0_idx1_d1 <=  s_sum_l0_idx1;
-            sum_l0_idx0_d1 <=  sum_l0_idx0;
-            c_l0_idx0_d1 <=  c_l0_idx0;
-         end if;
-      end process;
-   --Alternative
-   s_sum_l0_idx0 <= ( "0" & X(41 downto 0)) + ( "0" & Y(41 downto 0)) + Cin;
-   s_sum_l0_idx1 <= ( "0" & X(56 downto 42)) + ( "0" & Y(56 downto 42));
-   sum_l0_idx0 <= s_sum_l0_idx0(41 downto 0);
-   c_l0_idx0 <= s_sum_l0_idx0(42 downto 42);
-   sum_l0_idx1 <= s_sum_l0_idx1(14 downto 0);
-   c_l0_idx1 <= s_sum_l0_idx1(15 downto 15);
-   ----------------Synchro barrier, entering cycle 1----------------
-   s_sum_l1_idx1 <=  s_sum_l0_idx1_d1 + c_l0_idx0_d1(0 downto 0);
-   sum_l1_idx1 <= s_sum_l1_idx1(14 downto 0);
-   c_l1_idx1 <= s_sum_l1_idx1(15 downto 15);
-   R <= sum_l1_idx1(14 downto 0) & sum_l0_idx0_d1(41 downto 0);
-end architecture;
-
---------------------------------------------------------------------------------
---                          IntAdder_65_f400_uid206
---                     (IntAdderClassical_65_f400_uid208)
--- This operator is part of the Infinite Virtual Library FloPoCoLib
--- All rights reserved 
--- Authors: Bogdan Pasca, Florent de Dinechin (2008-2010)
---------------------------------------------------------------------------------
--- Pipeline depth: 2 cycles
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
-use ieee.std_logic_unsigned.all;
-library std;
-use std.textio.all;
-library work;
-
-entity IntAdder_65_f400_uid206 is
+entity IntAdder_65_f400_uid232 is
    port ( clk, rst : in std_logic;
           X : in  std_logic_vector(64 downto 0);
           Y : in  std_logic_vector(64 downto 0);
@@ -5875,44 +6197,22 @@ entity IntAdder_65_f400_uid206 is
           R : out  std_logic_vector(64 downto 0)   );
 end entity;
 
-architecture arch of IntAdder_65_f400_uid206 is
-signal x0 :  std_logic_vector(11 downto 0);
-signal y0 :  std_logic_vector(11 downto 0);
-signal x1, x1_d1 :  std_logic_vector(41 downto 0);
-signal y1, y1_d1 :  std_logic_vector(41 downto 0);
-signal x2, x2_d1, x2_d2 :  std_logic_vector(10 downto 0);
-signal y2, y2_d1, y2_d2 :  std_logic_vector(10 downto 0);
-signal sum0, sum0_d1, sum0_d2 :  std_logic_vector(12 downto 0);
-signal sum1, sum1_d1 :  std_logic_vector(42 downto 0);
-signal sum2 :  std_logic_vector(11 downto 0);
+architecture arch of IntAdder_65_f400_uid232 is
+signal X_d1 :  std_logic_vector(64 downto 0);
+signal Y_d1 :  std_logic_vector(64 downto 0);
+signal Cin_d1 : std_logic;
 begin
    process(clk)
       begin
          if clk'event and clk = '1' then
-            x1_d1 <=  x1;
-            y1_d1 <=  y1;
-            x2_d1 <=  x2;
-            x2_d2 <=  x2_d1;
-            y2_d1 <=  y2;
-            y2_d2 <=  y2_d1;
-            sum0_d1 <=  sum0;
-            sum0_d2 <=  sum0_d1;
-            sum1_d1 <=  sum1;
+            X_d1 <=  X;
+            Y_d1 <=  Y;
+            Cin_d1 <=  Cin;
          end if;
       end process;
    --Classical
-   x0 <= X(11 downto 0);
-   y0 <= Y(11 downto 0);
-   x1 <= X(53 downto 12);
-   y1 <= Y(53 downto 12);
-   x2 <= X(64 downto 54);
-   y2 <= Y(64 downto 54);
-   sum0 <= ( "0" & x0) + ( "0" & y0)  + Cin;
    ----------------Synchro barrier, entering cycle 1----------------
-   sum1 <= ( "0" & x1_d1) + ( "0" & y1_d1)  + sum0_d1(12);
-   ----------------Synchro barrier, entering cycle 2----------------
-   sum2 <= ( "0" & x2_d2) + ( "0" & y2_d2)  + sum1_d1(42);
-   R <= sum2(10 downto 0) & sum1_d1(41 downto 0) & sum0_d2(11 downto 0);
+    R <= X_d1 + Y_d1 + Cin_d1;
 end architecture;
 
 --------------------------------------------------------------------------------
@@ -5921,7 +6221,7 @@ end architecture;
 -- All rights reserved 
 -- Authors: F. de Dinechin, Bogdan Pasca (2008-2010)
 --------------------------------------------------------------------------------
--- Pipeline depth: 27 cycles
+-- Pipeline depth: 20 cycles
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -5956,7 +6256,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(38 downto 0)   );
    end component;
 
-   component IntAdder_48_f400_uid112 is
+   component IntAdder_48_f400_uid138 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(47 downto 0);
              Y : in  std_logic_vector(47 downto 0);
@@ -5964,7 +6264,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(47 downto 0)   );
    end component;
 
-   component IntAdder_48_f400_uid119 is
+   component IntAdder_48_f400_uid145 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(47 downto 0);
              Y : in  std_logic_vector(47 downto 0);
@@ -5972,7 +6272,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(47 downto 0)   );
    end component;
 
-   component IntAdder_56_f484_uid27 is
+   component IntAdder_56_f441_uid27 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(55 downto 0);
              Y : in  std_logic_vector(55 downto 0);
@@ -5980,7 +6280,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(55 downto 0)   );
    end component;
 
-   component IntAdder_57_f400_uid199 is
+   component IntAdder_57_f400_uid225 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(56 downto 0);
              Y : in  std_logic_vector(56 downto 0);
@@ -5988,7 +6288,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(56 downto 0)   );
    end component;
 
-   component IntAdder_65_f400_uid206 is
+   component IntAdder_65_f400_uid232 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(64 downto 0);
              Y : in  std_logic_vector(64 downto 0);
@@ -5996,7 +6296,7 @@ architecture arch of FPExp_11_52_400 is
              R : out  std_logic_vector(64 downto 0)   );
    end component;
 
-   component IntMultiplier_UsingDSP_47_48_0_unsigned_uid126 is
+   component IntMultiplier_UsingDSP_47_48_0_unsigned_uid152 is
       port ( clk, rst : in std_logic;
              X : in  std_logic_vector(46 downto 0);
              Y : in  std_logic_vector(47 downto 0);
@@ -6016,22 +6316,22 @@ architecture arch of FPExp_11_52_400 is
              Y : out  std_logic_vector(56 downto 0)   );
    end component;
 
-signal Xexn, Xexn_d1, Xexn_d2, Xexn_d3, Xexn_d4, Xexn_d5, Xexn_d6, Xexn_d7, Xexn_d8, Xexn_d9, Xexn_d10, Xexn_d11, Xexn_d12, Xexn_d13, Xexn_d14, Xexn_d15, Xexn_d16, Xexn_d17, Xexn_d18, Xexn_d19, Xexn_d20, Xexn_d21, Xexn_d22, Xexn_d23, Xexn_d24, Xexn_d25, Xexn_d26, Xexn_d27 :  std_logic_vector(1 downto 0);
-signal XSign, XSign_d1, XSign_d2, XSign_d3, XSign_d4, XSign_d5, XSign_d6, XSign_d7, XSign_d8, XSign_d9, XSign_d10, XSign_d11, XSign_d12, XSign_d13, XSign_d14, XSign_d15, XSign_d16, XSign_d17, XSign_d18, XSign_d19, XSign_d20, XSign_d21, XSign_d22, XSign_d23, XSign_d24, XSign_d25, XSign_d26, XSign_d27 : std_logic;
+signal Xexn, Xexn_d1, Xexn_d2, Xexn_d3, Xexn_d4, Xexn_d5, Xexn_d6, Xexn_d7, Xexn_d8, Xexn_d9, Xexn_d10, Xexn_d11, Xexn_d12, Xexn_d13, Xexn_d14, Xexn_d15, Xexn_d16, Xexn_d17, Xexn_d18, Xexn_d19, Xexn_d20 :  std_logic_vector(1 downto 0);
+signal XSign, XSign_d1, XSign_d2, XSign_d3, XSign_d4, XSign_d5, XSign_d6, XSign_d7, XSign_d8, XSign_d9, XSign_d10, XSign_d11, XSign_d12, XSign_d13, XSign_d14, XSign_d15, XSign_d16, XSign_d17, XSign_d18, XSign_d19, XSign_d20 : std_logic;
 signal XexpField :  std_logic_vector(10 downto 0);
 signal Xfrac :  std_logic_vector(51 downto 0);
 signal e0 :  std_logic_vector(12 downto 0);
 signal shiftVal, shiftVal_d1 :  std_logic_vector(12 downto 0);
-signal resultWillBeOne, resultWillBeOne_d1, resultWillBeOne_d2, resultWillBeOne_d3 : std_logic;
+signal resultWillBeOne, resultWillBeOne_d1, resultWillBeOne_d2, resultWillBeOne_d3, resultWillBeOne_d4 : std_logic;
 signal mXu :  std_logic_vector(52 downto 0);
-signal oufl0, oufl0_d1, oufl0_d2, oufl0_d3, oufl0_d4, oufl0_d5, oufl0_d6, oufl0_d7, oufl0_d8, oufl0_d9, oufl0_d10, oufl0_d11, oufl0_d12, oufl0_d13, oufl0_d14, oufl0_d15, oufl0_d16, oufl0_d17, oufl0_d18, oufl0_d19, oufl0_d20, oufl0_d21, oufl0_d22, oufl0_d23, oufl0_d24, oufl0_d25, oufl0_d26 : std_logic;
+signal oufl0, oufl0_d1, oufl0_d2, oufl0_d3, oufl0_d4, oufl0_d5, oufl0_d6, oufl0_d7, oufl0_d8, oufl0_d9, oufl0_d10, oufl0_d11, oufl0_d12, oufl0_d13, oufl0_d14, oufl0_d15, oufl0_d16, oufl0_d17, oufl0_d18, oufl0_d19 : std_logic;
 signal shiftValIn :  std_logic_vector(6 downto 0);
 signal fixX0, fixX0_d1 :  std_logic_vector(118 downto 0);
-signal fixX, fixX_d1, fixX_d2, fixX_d3 :  std_logic_vector(66 downto 0);
+signal fixX, fixX_d1, fixX_d2 :  std_logic_vector(66 downto 0);
 signal xMulIn :  std_logic_vector(12 downto 0);
-signal absK, absK_d1 :  std_logic_vector(10 downto 0);
+signal absK :  std_logic_vector(10 downto 0);
 signal minusAbsK :  std_logic_vector(11 downto 0);
-signal K, K_d1, K_d2, K_d3, K_d4, K_d5, K_d6, K_d7, K_d8, K_d9, K_d10, K_d11, K_d12, K_d13, K_d14, K_d15, K_d16, K_d17, K_d18, K_d19, K_d20 :  std_logic_vector(11 downto 0);
+signal K, K_d1, K_d2, K_d3, K_d4, K_d5, K_d6, K_d7, K_d8, K_d9, K_d10, K_d11, K_d12, K_d13, K_d14 :  std_logic_vector(11 downto 0);
 signal absKLog2 :  std_logic_vector(66 downto 0);
 signal subOp1 :  std_logic_vector(55 downto 0);
 signal subOp2 :  std_logic_vector(55 downto 0);
@@ -6039,7 +6339,7 @@ signal Y :  std_logic_vector(55 downto 0);
 signal Addr1 :  std_logic_vector(8 downto 0);
 signal Z, Z_d1, Z_d2, Z_d3, Z_d4, Z_d5, Z_d6, Z_d7, Z_d8 :  std_logic_vector(46 downto 0);
 signal Zhigh, Zhigh_d1 :  std_logic_vector(37 downto 0);
-signal expA, expA_d1, expA_d2, expA_d3, expA_d4, expA_d5, expA_d6, expA_d7, expA_d8, expA_d9, expA_d10, expA_d11, expA_d12, expA_d13, expA_d14 :  std_logic_vector(56 downto 0);
+signal expA, expA_d1, expA_d2, expA_d3, expA_d4, expA_d5, expA_d6, expA_d7, expA_d8, expA_d9, expA_d10, expA_d11 :  std_logic_vector(56 downto 0);
 signal expZmZm1_0 :  std_logic_vector(38 downto 0);
 signal expZmZm1 :  std_logic_vector(38 downto 0);
 signal expZminus1X :  std_logic_vector(47 downto 0);
@@ -6093,13 +6393,6 @@ begin
             Xexn_d18 <=  Xexn_d17;
             Xexn_d19 <=  Xexn_d18;
             Xexn_d20 <=  Xexn_d19;
-            Xexn_d21 <=  Xexn_d20;
-            Xexn_d22 <=  Xexn_d21;
-            Xexn_d23 <=  Xexn_d22;
-            Xexn_d24 <=  Xexn_d23;
-            Xexn_d25 <=  Xexn_d24;
-            Xexn_d26 <=  Xexn_d25;
-            Xexn_d27 <=  Xexn_d26;
             XSign_d1 <=  XSign;
             XSign_d2 <=  XSign_d1;
             XSign_d3 <=  XSign_d2;
@@ -6120,17 +6413,11 @@ begin
             XSign_d18 <=  XSign_d17;
             XSign_d19 <=  XSign_d18;
             XSign_d20 <=  XSign_d19;
-            XSign_d21 <=  XSign_d20;
-            XSign_d22 <=  XSign_d21;
-            XSign_d23 <=  XSign_d22;
-            XSign_d24 <=  XSign_d23;
-            XSign_d25 <=  XSign_d24;
-            XSign_d26 <=  XSign_d25;
-            XSign_d27 <=  XSign_d26;
             shiftVal_d1 <=  shiftVal;
             resultWillBeOne_d1 <=  resultWillBeOne;
             resultWillBeOne_d2 <=  resultWillBeOne_d1;
             resultWillBeOne_d3 <=  resultWillBeOne_d2;
+            resultWillBeOne_d4 <=  resultWillBeOne_d3;
             oufl0_d1 <=  oufl0;
             oufl0_d2 <=  oufl0_d1;
             oufl0_d3 <=  oufl0_d2;
@@ -6150,18 +6437,9 @@ begin
             oufl0_d17 <=  oufl0_d16;
             oufl0_d18 <=  oufl0_d17;
             oufl0_d19 <=  oufl0_d18;
-            oufl0_d20 <=  oufl0_d19;
-            oufl0_d21 <=  oufl0_d20;
-            oufl0_d22 <=  oufl0_d21;
-            oufl0_d23 <=  oufl0_d22;
-            oufl0_d24 <=  oufl0_d23;
-            oufl0_d25 <=  oufl0_d24;
-            oufl0_d26 <=  oufl0_d25;
             fixX0_d1 <=  fixX0;
             fixX_d1 <=  fixX;
             fixX_d2 <=  fixX_d1;
-            fixX_d3 <=  fixX_d2;
-            absK_d1 <=  absK;
             K_d1 <=  K;
             K_d2 <=  K_d1;
             K_d3 <=  K_d2;
@@ -6176,12 +6454,6 @@ begin
             K_d12 <=  K_d11;
             K_d13 <=  K_d12;
             K_d14 <=  K_d13;
-            K_d15 <=  K_d14;
-            K_d16 <=  K_d15;
-            K_d17 <=  K_d16;
-            K_d18 <=  K_d17;
-            K_d19 <=  K_d18;
-            K_d20 <=  K_d19;
             Z_d1 <=  Z;
             Z_d2 <=  Z_d1;
             Z_d3 <=  Z_d2;
@@ -6202,9 +6474,6 @@ begin
             expA_d9 <=  expA_d8;
             expA_d10 <=  expA_d9;
             expA_d11 <=  expA_d10;
-            expA_d12 <=  expA_d11;
-            expA_d13 <=  expA_d12;
-            expA_d14 <=  expA_d13;
             expArounded_d1 <=  expArounded;
             expArounded_d2 <=  expArounded_d1;
             expArounded_d3 <=  expArounded_d2;
@@ -6231,35 +6500,34 @@ begin
    oufl0 <= not shiftVal_d1(wE+1) when shiftVal_d1(wE downto 0) >= conv_std_logic_vector(66, wE+1) else '0';
    ---------------- cycle 0----------------
    shiftValIn <= shiftVal(6 downto 0);
-   mantissa_shift: LeftShifter_53_by_max_66_uid3  -- pipelineDepth=2 maxInDelay=2.7546e-09
+   mantissa_shift: LeftShifter_53_by_max_66_uid3  -- pipelineDepth=3 maxInDelay=2.43175e-09
       port map ( clk  => clk,
                  rst  => rst,
                  R => fixX0,
                  S => shiftValIn,
                  X => mXu);
-   ----------------Synchro barrier, entering cycle 2----------------
    ----------------Synchro barrier, entering cycle 3----------------
-   fixX <=  fixX0_d1(118 downto 52)when resultWillBeOne_d3='0' else "0000000000000000000000000000000000000000000000000000000000000000000";
+   ----------------Synchro barrier, entering cycle 4----------------
+   fixX <=  fixX0_d1(118 downto 52)when resultWillBeOne_d4='0' else "0000000000000000000000000000000000000000000000000000000000000000000";
    xMulIn <=  fixX(65 downto 53); -- truncation, error 2^-3
-   mulInvLog2: FixRealKCM_M3_9_0_1_log_2_unsigned  -- pipelineDepth=1 maxInDelay=1.55968e-09
+   mulInvLog2: FixRealKCM_M3_9_0_1_log_2_unsigned  -- pipelineDepth=1 maxInDelay=1.75885e-09
       port map ( clk  => clk,
                  rst  => rst,
                  R => absK,
                  X => xMulIn);
-   ----------------Synchro barrier, entering cycle 4----------------
    ----------------Synchro barrier, entering cycle 5----------------
-   minusAbsK <= (11 downto 0 => '0') - ('0' & absK_d1);
-   K <= minusAbsK when  XSign_d5='1'   else ('0' & absK_d1);
-   ---------------- cycle 4----------------
-   mulLog2: FixRealKCM_0_10_M56_log_2_unsigned  -- pipelineDepth=2 maxInDelay=2.28284e-09
+   minusAbsK <= (11 downto 0 => '0') - ('0' & absK);
+   K <= minusAbsK when  XSign_d5='1'   else ('0' & absK);
+   ---------------- cycle 5----------------
+   mulLog2: FixRealKCM_0_10_M56_log_2_unsigned  -- pipelineDepth=1 maxInDelay=2.2648e-09
       port map ( clk  => clk,
                  rst  => rst,
                  R => absKLog2,
                  X => absK);
    ----------------Synchro barrier, entering cycle 6----------------
-   subOp1 <= fixX_d3(55 downto 0) when XSign_d6='0' else not (fixX_d3(55 downto 0));
+   subOp1 <= fixX_d2(55 downto 0) when XSign_d6='0' else not (fixX_d2(55 downto 0));
    subOp2 <= absKLog2(55 downto 0) when XSign_d6='1' else not (absKLog2(55 downto 0));
-   theYAdder: IntAdder_56_f484_uid27  -- pipelineDepth=2 maxInDelay=9.7544e-10
+   theYAdder: IntAdder_56_f441_uid27  -- pipelineDepth=0 maxInDelay=7.103e-10
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '1',
@@ -6267,7 +6535,6 @@ begin
                  X => subOp1,
                  Y => subOp2);
 
-   ----------------Synchro barrier, entering cycle 8----------------
    -- Now compute the exp of this fixed-point value
    Addr1 <= Y(55 downto 47);
    Z <= Y(46 downto 0);
@@ -6277,65 +6544,64 @@ begin
                  rst  => rst,
                  X => Addr1,
                  Y => expA);
-   ----------------Synchro barrier, entering cycle 9----------------
--- signal delay at BRAM output = 1.75e-09
-   poly: FunctionEvaluator_36  -- pipelineDepth=7 maxInDelay=2.19472e-09
+   ----------------Synchro barrier, entering cycle 7----------------
+-- signal delay at BRAM output = 1.591e-09
+   poly: FunctionEvaluator_36  -- pipelineDepth=7 maxInDelay=1.91965e-09
       port map ( clk  => clk,
                  rst  => rst,
                  R => expZmZm1_0,
                  X => Zhigh_d1);
-   ----------------Synchro barrier, entering cycle 16----------------
+   ----------------Synchro barrier, entering cycle 14----------------
    expZmZm1 <= expZmZm1_0(38 downto 0); 
    -- Computing Z + (exp(Z)-1-Z)
    expZminus1X <= '0' & Z_d8;
    expZminus1Y <= (47 downto 39 => '0') & expZmZm1 ;
-   Adder_expZminus1: IntAdder_48_f400_uid112  -- pipelineDepth=2 maxInDelay=2.07872e-09
+   Adder_expZminus1: IntAdder_48_f400_uid138  -- pipelineDepth=1 maxInDelay=1.39565e-09
       port map ( clk  => clk,
                  rst  => rst,
                  Cin =>  '0' ,
                  R => expZminus1,
                  X => expZminus1X,
                  Y => expZminus1Y);
-   ----------------Synchro barrier, entering cycle 18----------------
+   ----------------Synchro barrier, entering cycle 15----------------
    -- Truncating expA to the same accuracy as expZminus1
-   ---------------- cycle 9----------------
-   Adder_expArounded0: IntAdder_48_f400_uid119  -- pipelineDepth=2 maxInDelay=2.186e-09
+   ---------------- cycle 7----------------
+   Adder_expArounded0: IntAdder_48_f400_uid145  -- pipelineDepth=1 maxInDelay=1.826e-09
       port map ( clk  => clk,
                  rst  => rst,
                  Cin =>  '1' ,
                  R => expArounded0,
                  X => expA(56 downto 9),
                  Y => "000000000000000000000000000000000000000000000000");
-   ----------------Synchro barrier, entering cycle 11----------------
+   ----------------Synchro barrier, entering cycle 8----------------
    expArounded <= expArounded0(47 downto 1);
-   ----------------Synchro barrier, entering cycle 18----------------
-   TheLowerProduct: IntMultiplier_UsingDSP_47_48_0_unsigned_uid126  -- pipelineDepth=5 maxInDelay=1.242e-09
+   ----------------Synchro barrier, entering cycle 15----------------
+   TheLowerProduct: IntMultiplier_UsingDSP_47_48_0_unsigned_uid152  -- pipelineDepth=3 maxInDelay=9.33e-10
       port map ( clk  => clk,
                  rst  => rst,
                  R => lowerProduct,
                  X => expArounded_d7,
                  Y => expZminus1);
 
-   ----------------Synchro barrier, entering cycle 23----------------
+   ----------------Synchro barrier, entering cycle 18----------------
    -- Final addition -- the product MSB bit weight is -k+2 = -7
    extendedLowerProduct <= ((56 downto 49 => '0') & lowerProduct(94 downto 46));
-   TheFinalAdder: IntAdder_57_f400_uid199  -- pipelineDepth=1 maxInDelay=4.4472e-10
+   TheFinalAdder: IntAdder_57_f400_uid225  -- pipelineDepth=0 maxInDelay=3.2865e-10
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '0',
                  R => expY,
-                 X => expA_d14,
+                 X => expA_d11,
                  Y => extendedLowerProduct);
 
-   ----------------Synchro barrier, entering cycle 24----------------
    needNoNorm <= expY(56);
-   ----------------Synchro barrier, entering cycle 25----------------
+   ----------------Synchro barrier, entering cycle 19----------------
    -- Rounding: all this should consume one row of LUTs
    preRoundBiasSig <= conv_std_logic_vector(1023, wE+2)  & expY_d1(55 downto 4) when needNoNorm_d1 = '1'
       else conv_std_logic_vector(1022, wE+2)  & expY_d1(54 downto 3) ;
    roundBit <= expY_d1(3)  when needNoNorm_d1 = '1'    else expY_d1(2) ;
-   roundNormAddend <= K_d20(11) & K_d20 & (51 downto 1 => '0') & roundBit;
-   roundedExpSigOperandAdder: IntAdder_65_f400_uid206  -- pipelineDepth=2 maxInDelay=1.53352e-09
+   roundNormAddend <= K_d14(11) & K_d14 & (51 downto 1 => '0') & roundBit;
+   roundedExpSigOperandAdder: IntAdder_65_f400_uid232  -- pipelineDepth=1 maxInDelay=1.7119e-09
       port map ( clk  => clk,
                  rst  => rst,
                  Cin => '0',
@@ -6343,18 +6609,18 @@ begin
                  X => preRoundBiasSig,
                  Y => roundNormAddend);
 
-   ----------------Synchro barrier, entering cycle 27----------------
-   -- delay at adder output is 9.21e-10
-   roundedExpSig <= roundedExpSigRes when Xexn_d27="01" else  "000" & (wE-2 downto 0 => '1') & (wF-1 downto 0 => '0');
-   ofl1 <= not XSign_d27 and oufl0_d26 and (not Xexn_d27(1) and Xexn_d27(0)); -- input positive, normal,  very large
-   ofl2 <= not XSign_d27 and (roundedExpSig(wE+wF) and not roundedExpSig(wE+wF+1)) and (not Xexn_d27(1) and Xexn_d27(0)); -- input positive, normal, overflowed
-   ofl3 <= not XSign_d27 and Xexn_d27(1) and not Xexn_d27(0);  -- input was -infty
+   ----------------Synchro barrier, entering cycle 20----------------
+   -- delay at adder output is 1.412e-09
+   roundedExpSig <= roundedExpSigRes when Xexn_d20="01" else  "000" & (wE-2 downto 0 => '1') & (wF-1 downto 0 => '0');
+   ofl1 <= not XSign_d20 and oufl0_d19 and (not Xexn_d20(1) and Xexn_d20(0)); -- input positive, normal,  very large
+   ofl2 <= not XSign_d20 and (roundedExpSig(wE+wF) and not roundedExpSig(wE+wF+1)) and (not Xexn_d20(1) and Xexn_d20(0)); -- input positive, normal, overflowed
+   ofl3 <= not XSign_d20 and Xexn_d20(1) and not Xexn_d20(0);  -- input was -infty
    ofl <= ofl1 or ofl2 or ofl3;
-   ufl1 <= (roundedExpSig(wE+wF) and roundedExpSig(wE+wF+1))  and (not Xexn_d27(1) and Xexn_d27(0)); -- input normal
-   ufl2 <= XSign_d27 and Xexn_d27(1) and not Xexn_d27(0);  -- input was -infty
-   ufl3 <= XSign_d27 and oufl0_d26  and (not Xexn_d27(1) and Xexn_d27(0)); -- input negative, normal,  very large
+   ufl1 <= (roundedExpSig(wE+wF) and roundedExpSig(wE+wF+1))  and (not Xexn_d20(1) and Xexn_d20(0)); -- input normal
+   ufl2 <= XSign_d20 and Xexn_d20(1) and not Xexn_d20(0);  -- input was -infty
+   ufl3 <= XSign_d20 and oufl0_d19  and (not Xexn_d20(1) and Xexn_d20(0)); -- input negative, normal,  very large
    ufl <= ufl1 or ufl2 or ufl3;
-   Rexn <= "11" when Xexn_d27 = "11"
+   Rexn <= "11" when Xexn_d20 = "11"
       else "10" when ofl='1'
       else "00" when ufl='1'
       else "01";
