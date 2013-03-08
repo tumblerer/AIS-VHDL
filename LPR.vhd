@@ -56,7 +56,6 @@ end component;
 	signal Sub1Result, Sub2Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Add1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Mult1Result,Mult2Result,Mult3Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Div1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal CompResult: std_logic_vector (0 downto 0);
 	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
@@ -212,45 +211,43 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
     result => rng_norm
   );
   
-	-- Total pipeline 120
+	
 	Control_sync: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
 			if  reset='1' then
 				sample_counter <= 0;
-				--elsif reset = '0' AND activate = '0'
-			elsif activate='1' then
-                -- Place output in shift register for use later
-				shift_in_proposed <= Add1Result;
-            if state = load_rng then
+				Address_Counter_Rd <= 0;
+				Address_Counter_Wr <= 0;
+				load_rng_counter <= 0;
+			elsif reset = '0' AND activate = '0' then
 					load_rng_counter <= load_rng_counter + 1 ;
-				else
-					-- Pipeline old sample incase its needed
-					Old_Sample(1) <= xState;
-					Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
-					Old_Sample_Out <= Old_sample(TOTAL_PIPE);
-					-- Shifting of proposed value to end of pipeline
-					Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE);
-					Proposed_sample(2 to TOTAL_PIPE) <= Proposed_sample(1 to TOTAL_PIPE-1);
-					Proposed_sample(1) <= Shift_in_proposed;
-					-- LPR Value pipeline 
-					Proposed_LPR(1) <= Div1Result;
-					Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
-					Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
-					-- Pipe of previous LPR value
-					Old_LPR(1) <= Mem_Data_B_In;
-					Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1);	
-					Old_LPR_output <= Old_LPR(SMALL_PIPE);
-					if sample_counter < TOTAL_PIPE then
-						sample_counter <= sample_counter + 1;
-					end if;
-					if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then
-						Address_Counter_Rd <= Address_Counter_rd + 8;
-				   end if;
-					if sample_counter >= TOTAL_PIPE-1 then -- Write currently 1 clock too early
-						Address_Counter_Wr <= Address_Counter_Wr + 8;
-				   end if;
-            end if;
+			elsif activate='1' then
+				-- Pipeline old sample incase its needed
+				Old_Sample(1) <= xState;
+				Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
+				Old_Sample_Out <= Old_sample(TOTAL_PIPE);
+				-- Shifting of proposed value to end of pipeline
+				Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE);
+				Proposed_sample(2 to TOTAL_PIPE) <= Proposed_sample(1 to TOTAL_PIPE-1);
+				Proposed_sample(1) <= Shift_in_proposed;
+				-- LPR Value pipeline 
+				Proposed_LPR(1) <= Mult3Result;
+				Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
+				Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
+				-- Pipe of previous LPR value
+				Old_LPR(1) <= Mem_Data_B_In;
+				Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1);	
+				Old_LPR_output <= Old_LPR(SMALL_PIPE);
+				if sample_counter < TOTAL_PIPE then
+					sample_counter <= sample_counter + 1;
+				end if;
+				if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then
+					Address_Counter_Rd <= Address_Counter_rd + 8;
+				end if;
+				if sample_counter >= TOTAL_PIPE-1 then -- Write currently 1 clock too early
+					Address_Counter_Wr <= Address_Counter_Wr + 8;
+				end if;
 			end if;
 			
 		end process Control_sync;
@@ -258,7 +255,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		State_Machine_clk: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
-			if reset='1' or activate ='0' then
+			if reset='1' then
 				state<= idle;
 			else
 				state<= nstate;
@@ -277,7 +274,6 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				when idle =>
 					nstate <= load_rng;
 						if flag_first_run = 1 then
-							nstate<= load_rng;
 							flag_first_run := 0;
 						end if;
 				when load_rng =>

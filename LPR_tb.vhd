@@ -78,7 +78,9 @@
 		reset <= '1';
         wait for 100 ns; -- wait until global set/reset completes
 		reset<= '0';
-			wait for clk_period;
+		activate <= '0';
+		wait for clk_period;
+		xstate<= (OTHERS => '0');
 			wea <= x"FF";
 		wait for clk_period*10;
 		addra(7 downto 0)<=  x"00";
@@ -91,12 +93,15 @@
 		wait for clk_period;
 		dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
 
-		wait for clk_period;
+		wait for clk_period*2049;
         activate <= '1';
 		  xstate (63 downto 52)<= "001111111110";
 		  xstate (51 downto 0) <= (OTHERS=> '0');
 			beta(63 downto 52)<= "001111111111";
 			beta (51 downto 0) <= (OTHERS=> '0');
+			wait for clk_period;
+			-- Input 0.1
+			xstate<= "0011111101110011001100110011001100110011001100110011001100110011";
 			wait for clk_period*1000;
         wait; -- will wait forever 
      END PROCESS tb;
