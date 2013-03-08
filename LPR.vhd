@@ -230,7 +230,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				-- Shifting of proposed value to end of pipeline
 				Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE);
 				Proposed_sample(2 to TOTAL_PIPE) <= Proposed_sample(1 to TOTAL_PIPE-1);
-				Proposed_sample(1) <= Shift_in_proposed;
+				Proposed_sample(1) <= Add1Result;
 				-- LPR Value pipeline 
 				Proposed_LPR(1) <= Mult3Result;
 				Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
@@ -245,7 +245,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then
 					Address_Counter_Rd <= Address_Counter_rd + 8;
 				end if;
-				if sample_counter >= TOTAL_PIPE-1 then -- Write currently 1 clock too early
+				if sample_counter >= TOTAL_PIPE then -- Write currently 1 clock too early
 					Address_Counter_Wr <= Address_Counter_Wr + 8;
 				end if;
 			end if;
