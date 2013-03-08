@@ -72,7 +72,7 @@ end component;
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Proposed_LPR : pipeline_type(1 to 50);
 	signal Old_LPR : pipeline_type(1 to 50);
-	signal Old_LPR_input, old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
+	signal old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
    signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
 
 	-- Counters
@@ -85,8 +85,8 @@ end component;
 	
 	--Memory signals
 	signal  write_a : std_logic_vector(7 DOWNTO 0);
-	signal data_in_a,data_out_b : std_logic_vector(63 downto 0);
-	signal addr_a, addr_b : std_logic_vector (31 downto 0);
+	signal data_in_a : std_logic_vector(63 downto 0):=(others => '0');
+	signal addr_a : std_logic_vector (31 downto 0):=(others => '0');
 
 	signal state,nstate : state_type;
 	
@@ -238,7 +238,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					Proposed_LPR(2 to 50) <= Proposed_LPR(1 to 49);	
 					Proposed_LPR_output <= Proposed_LPR(50);
 					-- Pipe of previous LPR value
-					Old_LPR(1) <= data_out_b;
+					Old_LPR(1) <= Mem_Data_B_In;
 					Old_LPR(2 to 50) <= Old_LPR(1 to 49);	
 					Old_LPR_output <= Old_LPR(50);
 					if sample_counter < TOTAL_PIPE then
@@ -247,7 +247,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					if sample_counter > 68 then
 						Address_Counter_Rd <= Address_Counter_rd + 8;
 				   end if;
-					if sample_counter = 120 then
+					if sample_counter = TOTAL_PIPE then -- Write currently 1 clock too early
 						Address_Counter_Wr <= Address_Counter_Wr + 8;
 				   end if;
             end if;
@@ -266,7 +266,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		end process State_machine_clk;	
 		
 		
-		State_machine: PROCESS(state,nstate,load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
+		State_machine: PROCESS(state,nstate,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
 		variable flag_first_run: integer range 0 to 1 := 1;
 		
 		begin
@@ -282,11 +282,11 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 						end if;
 				when load_rng =>
 					nstate <= load_rng;
+					rng_ce_uni <= '1';
+					rng_ce_norm <= '1';
+					rng_mode_uni <= '1';
+					rng_mode_norm <= '1';
 					if load_rng_counter = 1 then
-					   rng_ce_uni <= '1';
-						rng_ce_norm <= '1';
-						rng_mode_uni <= '1';
-						rng_mode_norm <= '1';
 						s_in_uni <= seed(0);
 						s_in_norm <= seed(0);
 					elsif load_rng_counter >= 2049 then
@@ -299,29 +299,19 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					end if;	
 				when running =>
 					nstate <= running; 
-					
-					if sample_counter = 69 then
-						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
-					elsif sample_counter >= 70 then
-						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd ,Mem_Addr_B_In'length));
-						Old_LPR_input <=Mem_Data_B_In;
+					write_a <= x"FF";
+					Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
+               addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
+	
+					if CompResult = "1" then
+					-- Save to LPR address and X forward to next LPR unit
+						data_in_a <= Proposed_LPR_output;
+						Output <= Proposed_sample_out;
+					else
+						data_in_a <= Old_LPR_output;
+						Output <= Old_Sample_Out;
 					end if;
-					
-					if sample_counter = 119 then -- Needs to be addressed one step before
-						write_a <= x"FF";
-                  addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
-					elsif sample_counter = 120 then
-					      write_a <= x"FF";
-                     addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
-						if CompResult = "1" then
-						-- Save to LPR address and X forward to next LPR unit
-						   data_in_a <= Proposed_LPR_output;
-							Output <= Proposed_sample_out;
-						else
-							data_in_a <= Old_LPR_output;
-							Output <= Old_Sample_Out;
-						end if;
-					end if;
+
 			end case;
 		end process;
 		
