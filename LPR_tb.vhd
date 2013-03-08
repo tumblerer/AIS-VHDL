@@ -28,8 +28,11 @@
 			 SIGNAL reset :  std_logic;
 			 signal 	activate: std_logic;
 			 signal 	xState : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-		    signal 	Output : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+		    signal 	Output, Mem_Data_B_Out,   data_out : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 			 signal 	Beta : STD_LOGIC_VECTOR (63 DOWNTO 0);
+			 signal wea : std_logic_vector(7 downto 0) := (others => '0');
+			 signal Mem_addr_b_out, addr_out, addra : std_logic_vector(31 downto 0) := (others => '0');
+		    signal dina : std_logic_vector(63 downto 0) := (others => '0');
           constant clk_period : time := 10 ns;
  
 
@@ -42,8 +45,24 @@
 				activate => activate,
 				xState => xState,
 				Output => output,
-				Beta_in => Beta
+				Beta_in => Beta,
+				Mem_Addr_B_In => Mem_addr_b_out,
+				Mem_Data_B_In => Mem_Data_B_Out,
+				Mem_Addr_B_Out => addr_out,
+				Mem_Data_B_Out => data_out
           );
+			 
+		   BRAM: ENTITY work.Dual_Port_BRAM PORT MAP (
+          clka => clk,
+          wea => wea,
+          addra => addra,
+          dina => dina,
+          clkb => clk,
+          rstb => reset,
+          addrb => Mem_addr_b_out,
+          doutb => Mem_Data_B_Out
+        );
+
 
    clk_process :process
    begin
@@ -60,6 +79,19 @@
         wait for 100 ns; -- wait until global set/reset completes
 		reset<= '0';
 			wait for clk_period;
+			wea <= x"FF";
+		wait for clk_period*10;
+		addra(7 downto 0)<=  x"00";
+		wait for clk_period;
+		-- write 0.5 to mem location 0
+		dina(63 downto 0) <= "0011111111000000000000000000000000000000000000000000000000000000";
+		wait for clk_period;
+		-- write 0.25 to mem location 8
+		addra(31 downto 0)<=  std_logic_vector(to_unsigned(8,addra'length));
+		wait for clk_period;
+		dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
+
+		wait for clk_period;
         activate <= '1';
 		  xstate (63 downto 52)<= "001111111110";
 		  xstate (51 downto 0) <= (OTHERS=> '0');

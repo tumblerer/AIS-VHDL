@@ -59,12 +59,12 @@ end component;
 	signal Div1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal CompResult: std_logic_vector (0 downto 0);
-	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0);
+	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
 
-   signal Proposed_LPR_output : std_logic_vector(63 downto 0);  
+   signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
     
  	--Outputs
-    signal result : std_logic_vector(63 downto 0);
+    signal result : std_logic_vector(63 downto 0):= (others => '0');
 
 	--PipeLine
 	constant TOTAL_PIPE : integer := 120;
@@ -73,7 +73,7 @@ end component;
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Proposed_LPR : pipeline_type(1 to 50);
 	signal Old_LPR : pipeline_type(1 to 50);
-	signal Old_LPR_input, old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0);
+	signal Old_LPR_input, old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
 	
 	-- Counters
 	signal sample_counter : integer range 0 to 108 := 0;
@@ -118,7 +118,7 @@ begin
 	-- 12 cycles
 	SUB2: ENTITY work.LPR_Subtract PORT MAP (
           a => Mult3Result,
-          b => data_out_b,
+          b => Mem_Data_B_In,
           clk => clk,
           result => Sub2Result
         );
@@ -216,9 +216,9 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 	Control_sync: PROCESS
 		begin
 		WAIT UNTIL clk'EVENT AND clk='1';
-			if activate ='0' OR reset='1' then
+			if  reset='1' then
 				sample_counter <= 0;
-				load_rng_counter <= 0;
+				--elsif reset = '0' AND activate = '0'
 			elsif activate='1' then
                 -- Place output in shift register for use later
 				shift_in_proposed <= Add1Result;
@@ -243,8 +243,9 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					Old_LPR_output <= Old_LPR(50);
 					if sample_counter < TOTAL_PIPE then
 						sample_counter <= sample_counter + 1;
-					else 
-						Address_Counter <= Address_Counter + 1;
+					end if;
+					if sample_counter > 68 then
+						Address_Counter <= Address_Counter + 8;
 				   end if;
             end if;
 			end if;
@@ -298,13 +299,13 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					
 					if sample_counter = 69 then
 						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter,Mem_Addr_B_In'length));
-					elsif sample_counter >70 then
+					elsif sample_counter >= 70 then
 						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter ,Mem_Addr_B_In'length));
 						Old_LPR_input <=Mem_Data_B_In;
 					end if;
 					
 					if sample_counter = 119 then -- Needs to be addressed one step before
-						write_a <= x"11";
+						write_a <= x"FF";
                   addr_a <= std_logic_vector(to_unsigned(Address_Counter,addr_a'length));
 					elsif sample_counter = 120 then
 					      write_a <= x"11";
