@@ -10,9 +10,14 @@ entity LPR is
 				activate: in std_logic;
 				xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0)
+				Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
+				-- Shared memory block
+				Mem_Addr_B_In : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+				Mem_Data_B_In : in STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+				Mem_Addr_B_Out : in STD_LOGIC_VECTOR(31 DOWNTO 0);
+				Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 	); 
-		  
+
 end LPR;
 
 architecture Behavioral of LPR is
@@ -72,12 +77,13 @@ end component;
 	
 	-- Counters
 	signal sample_counter : integer range 0 to 108 := 0;
-	signal load_rng_counter : integer range 0 to 2048 :=0;
+	signal load_rng_counter : integer range 0 to 2049 :=0;
 	signal LPR_old_counter : integer range 0 to 1024 := 0;
 	signal Address_Counter : integer range 0 to 8192 :=0;
 	signal Address_Set_Counter : integer range 0 to 1 :=0;  -- Oscillates to give memory address one before
     --Control Signals
 	
+	--Memory signals
 	signal  write_a : std_logic_vector(7 DOWNTO 0);
 	signal data_in_a,data_out_b : std_logic_vector(63 downto 0);
 	signal addr_a, addr_b : std_logic_vector (31 downto 0);
@@ -172,8 +178,8 @@ begin
 			 dina => data_in_a,
 			 clkb => clk,
 			 rstb => reset,
-			 addrb => addr_b,
-			 doutb => data_out_b
+			 addrb => Mem_Addr_B_Out,
+			 doutb => Mem_Data_B_Out
   );
   
   -- 2048 cycles to load
@@ -291,10 +297,10 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					nstate <= running; 
 					
 					if sample_counter = 69 then
-						addr_b <= std_logic_vector(to_unsigned(Address_Counter - VARS,addr_b'length));
+						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter,Mem_Addr_B_In'length));
 					elsif sample_counter >70 then
-						addr_b <= std_logic_vector(to_unsigned(Address_Counter - VARS,addr_b'length));
-						Old_LPR_input <=data_out_b;
+						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter ,Mem_Addr_B_In'length));
+						Old_LPR_input <=Mem_Data_B_In;
 					end if;
 					
 					if sample_counter = 119 then -- Needs to be addressed one step before
