@@ -84,13 +84,13 @@ BEGIN
       wait for clka_period*10;
 		wea <= x"0F";
 		wait for clka_period*10;
-		addra(7 downto 0)<=  x"0F";
+		addra(7 downto 0)<=  x"00";
 		wait for clka_period;
-		dina(7 downto 0) <= x"FF";
+		dina(15 downto 0) <= x"FFFF";
 		wait for clka_period;
 		addra(7 downto 0) <= x"FF";
 		wait for clka_period;
-		dina(7 downto 0) <= x"AA";
+		dina(31 downto 0) <= x"DEADBEEF";
 		wait for clka_period*20;
 		
 		addrb(7 downto 0)<= x"0F";

@@ -61,7 +61,6 @@ end component;
 	signal CompResult: std_logic_vector (0 downto 0);
 	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
 
-   signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
     
  	--Outputs
     signal result : std_logic_vector(63 downto 0):= (others => '0');
@@ -74,12 +73,13 @@ end component;
 	signal Proposed_LPR : pipeline_type(1 to 50);
 	signal Old_LPR : pipeline_type(1 to 50);
 	signal Old_LPR_input, old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
-	
+   signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
+
 	-- Counters
 	signal sample_counter : integer range 0 to 108 := 0;
 	signal load_rng_counter : integer range 0 to 2049 :=0;
 	signal LPR_old_counter : integer range 0 to 1024 := 0;
-	signal Address_Counter : integer range 0 to 8192 :=0;
+	signal Address_Counter_Wr, Address_Counter_Rd: integer range 0 to 8192 :=0;
 	signal Address_Set_Counter : integer range 0 to 1 :=0;  -- Oscillates to give memory address one before
     --Control Signals
 	
@@ -245,7 +245,10 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 						sample_counter <= sample_counter + 1;
 					end if;
 					if sample_counter > 68 then
-						Address_Counter <= Address_Counter + 8;
+						Address_Counter_Rd <= Address_Counter_rd + 8;
+				   end if;
+					if sample_counter = 120 then
+						Address_Counter_Wr <= Address_Counter_Wr + 8;
 				   end if;
             end if;
 			end if;
@@ -267,7 +270,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		variable flag_first_run: integer range 0 to 1 := 1;
 		
 		begin
-			mult2Result_ext <= "00" & mult2result;
+			mult2Result_ext <= "01" & mult2result;
 			Exp1Result <= Exp1Result_ext(63 downto 0);
 		
 			case (state) is
@@ -298,18 +301,18 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					nstate <= running; 
 					
 					if sample_counter = 69 then
-						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter,Mem_Addr_B_In'length));
+						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
 					elsif sample_counter >= 70 then
-						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter ,Mem_Addr_B_In'length));
+						Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd ,Mem_Addr_B_In'length));
 						Old_LPR_input <=Mem_Data_B_In;
 					end if;
 					
 					if sample_counter = 119 then -- Needs to be addressed one step before
 						write_a <= x"FF";
-                  addr_a <= std_logic_vector(to_unsigned(Address_Counter,addr_a'length));
+                  addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
 					elsif sample_counter = 120 then
-					      write_a <= x"11";
-                     addr_a <= std_logic_vector(to_unsigned(Address_Counter,addr_a'length));
+					      write_a <= x"FF";
+                     addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
 						if CompResult = "1" then
 						-- Save to LPR address and X forward to next LPR unit
 						   data_in_a <= Proposed_LPR_output;
