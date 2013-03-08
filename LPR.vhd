@@ -15,7 +15,7 @@ entity LPR is
 				Mem_Addr_B_In : out STD_LOGIC_VECTOR(31 DOWNTO 0);
 				Mem_Data_B_In : in STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 				Mem_Addr_B_Out : in STD_LOGIC_VECTOR(31 DOWNTO 0);
-				Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+				Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 
 end LPR;
@@ -124,7 +124,7 @@ begin
         );
 		  
 	-- (Xi - Mean)^2
-	-- 9 cycles 
+	-- 15 cycles 
 	MULT1: ENTITY work.LPR_Mult PORT MAP(
           a => Sub1Result,
           b => Sub1Result,
@@ -133,7 +133,7 @@ begin
         );
 		  
 	-- (LPRNew-LPROld) * eta
-	-- 9 cycles
+	-- 15 cycles
 	MULT2: ENTITY work.LPR_Mult PORT MAP(
           a => Sub2Result,
           b => Beta_in,
@@ -142,7 +142,7 @@ begin
         );
 		  
 	-- (Xi - Mean)^2 / 1/(Sigma^2)
-	-- 9 cycles
+	-- 15 cycles
 	MULT3: ENTITY work.LPR_Mult PORT MAP(
           a => Mult1Result,
           b => Variance,
