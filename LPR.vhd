@@ -66,12 +66,12 @@ end component;
     signal result : std_logic_vector(63 downto 0):= (others => '0');
 
 	--PipeLine
-	constant TOTAL_PIPE : integer := 120;
-	constant SMALL_PIPE : integer :=50;
+	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
+	constant SMALL_PIPE : integer := 12+15+22+2; -- 51
 	signal Proposed_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
-	signal Proposed_LPR : pipeline_type(1 to 50);
-	signal Old_LPR : pipeline_type(1 to 50);
+	signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
+	signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
 	signal old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
    signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
 
@@ -235,19 +235,19 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					Proposed_sample(1) <= Shift_in_proposed;
 					-- LPR Value pipeline 
 					Proposed_LPR(1) <= Div1Result;
-					Proposed_LPR(2 to 50) <= Proposed_LPR(1 to 49);	
-					Proposed_LPR_output <= Proposed_LPR(50);
+					Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
+					Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
 					-- Pipe of previous LPR value
 					Old_LPR(1) <= Mem_Data_B_In;
-					Old_LPR(2 to 50) <= Old_LPR(1 to 49);	
-					Old_LPR_output <= Old_LPR(50);
+					Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1);	
+					Old_LPR_output <= Old_LPR(SMALL_PIPE);
 					if sample_counter < TOTAL_PIPE then
 						sample_counter <= sample_counter + 1;
 					end if;
-					if sample_counter > 68 then
+					if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then
 						Address_Counter_Rd <= Address_Counter_rd + 8;
 				   end if;
-					if sample_counter = TOTAL_PIPE then -- Write currently 1 clock too early
+					if sample_counter >= TOTAL_PIPE-1 then -- Write currently 1 clock too early
 						Address_Counter_Wr <= Address_Counter_Wr + 8;
 				   end if;
             end if;
@@ -302,7 +302,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					write_a <= x"FF";
 					Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
                addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
-	
+					
 					if CompResult = "1" then
 					-- Save to LPR address and X forward to next LPR unit
 						data_in_a <= Proposed_LPR_output;
