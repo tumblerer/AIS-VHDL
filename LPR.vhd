@@ -72,7 +72,7 @@ end component;
 	signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
 	signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
 	signal old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
-   signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
+    signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
 
 	-- Counters
 	signal sample_counter : integer range 0 to 108 := 0;
@@ -94,6 +94,7 @@ end component;
 	signal rng_norm, rng_uni, rng_uni_out: std_logic_vector(63 downto 0);	
 	signal s_in_uni, s_in_norm, s_out_norm, s_out_uni : std_logic;
 	signal rng_norm_out: std_logic_vector(16 downto 0);
+	
 begin
 	-- RNG + Xi
 	-- 12 cycles
@@ -222,7 +223,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				load_rng_counter <= 0;
 			elsif reset = '0' AND activate = '0' then
 					load_rng_counter <= load_rng_counter + 1 ;
-			elsif activate='1' then
+			else --activate = 1
 				-- Pipeline old sample incase its needed
 				Old_Sample(1) <= xState;
 				Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
@@ -260,7 +261,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 			else
 				state<= nstate;
 			end if;
-		end process State_machine_clk;	
+		end process State_Machine_clk;	
 		
 		
 		State_machine: PROCESS(state,nstate,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
