@@ -14,8 +14,8 @@ constant LPR_SIZE:	integer := 63;
 constant STEPS: integer := 200;
 constant MEAN: std_logic_vector(63 downto 0) := "001111111111" & "0000000000000000000000000000000000000000000000000000";
 constant VARIANCE: std_logic_vector(63 downto 0) := "001111111111" & "0000000000000000000000000000000000000000000000000000";
-constant MEAN_Gen std_logic_vector(63 downto 0):= (OTHERS => '0');
-constant STANDARDDEV_Gen std_logic_vector(63 downto 0):=x"3ff0000000000000"
+constant MEAN_Gen: std_logic_vector(63 downto 0):= (OTHERS => '0');
+constant STANDARDDEV_Gen :std_logic_vector(63 downto 0):=x"3ff0000000000000";
 
 --
 TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(63 DOWNTO 0);

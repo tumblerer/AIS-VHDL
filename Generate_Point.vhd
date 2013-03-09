@@ -6,16 +6,16 @@ use work.Pack.ALL;
 
 -- Calculating intitial X values
 -- Total time - 128 + 12 + 15 = 155
-entity Generate is
+entity Generate_Sample is
     Port (	clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
 				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 
-end Generate;
+end Generate_Sample;
 
-architecture Behavourial of Generate_Point is
+architecture Behavourial of Generate_Sample is
 
 	-- Seed
 	signal seed : std_logic_vector(63 downto 0):=x"0123456789abcdef";
@@ -79,7 +79,7 @@ begin
   	end if;
   	end process Control_sync;
 
-  	State_machine PROCESS (state, nstate, load_rng_counter)
+  	State_machine: PROCESS (state, nstate, load_rng_counter)
   	begin
 
   		case(state) is
@@ -92,7 +92,7 @@ begin
   				if load_rng_counter = 1 then
   					s_in_norm <= seed(0);
   				elsif load_rng_counter >= 128 then
-  					rng_mode_norm < '0';
+  					rng_mode_norm <= '0';
   					nstate<= running;
   				else
   					s_in_norm <= seed(load_rng_counter);
