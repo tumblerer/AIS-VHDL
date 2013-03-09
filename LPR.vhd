@@ -75,7 +75,7 @@ end component;
    signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
 
 	-- Counters
-	signal sample_counter : integer range 0 to 108 := 0;
+	signal sample_counter : integer range 0 to 256 := 0;
 	signal load_rng_counter : integer range 0 to 2049 :=0;
 	signal LPR_old_counter : integer range 0 to 1024 := 0;
 	signal Address_Counter_Wr, Address_Counter_Rd: integer range 0 to 8192 :=0;
@@ -99,7 +99,9 @@ begin
 	-- 12 cycles
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
-          b => rng_norm,
+			 -- 0.25
+          b => "0011111110100000000000000000000000000000000000000000000000000000",
+			 --rng_norm,
           clk => clk,
           result => Add1Result
         );    
@@ -239,13 +241,13 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Old_LPR(1) <= Mem_Data_B_In;
 				Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1);	
 				Old_LPR_output <= Old_LPR(SMALL_PIPE);
-				if sample_counter < TOTAL_PIPE then
+				if sample_counter <= TOTAL_PIPE then
 					sample_counter <= sample_counter + 1;
 				end if;
-				if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then
+				if sample_counter > TOTAL_PIPE-SMALL_PIPE-2 then -- Time 2 too long (hence -2)
 					Address_Counter_Rd <= Address_Counter_rd + 8;
 				end if;
-				if sample_counter >= TOTAL_PIPE then -- Write currently 1 clock too early
+				if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
 					Address_Counter_Wr <= Address_Counter_Wr + 8;
 				end if;
 			end if;

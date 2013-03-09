@@ -95,8 +95,8 @@
 
 		wait for clk_period*2049;
         activate <= '1';
-		  xstate (63 downto 52)<= "001111111110";
-		  xstate (51 downto 0) <= (OTHERS=> '0');
+		  -- Input 0.5 to x
+		  xstate <= "0011111111000000000000000000000000000000000000000000000000000000";
 			beta(63 downto 52)<= "001111111111";
 			beta (51 downto 0) <= (OTHERS=> '0');
 			wait for clk_period;
