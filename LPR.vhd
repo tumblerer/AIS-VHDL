@@ -153,8 +153,8 @@ begin
         );
         
 	-- Exp ((LprNew-LprOld)*eta)
-	-- Flopoco MSB are error bits
-	-- 27 cycles
+	-- Flopoco 2MSB are error bits
+	-- 22 cycles
 	EXP1: ENTITY work.FPExp_11_52_400 PORT MAP(
 		 clk => clk, 
 		 rst => reset,
@@ -162,11 +162,12 @@ begin
          R  => Exp1Result_ext
 	);
 	
-	-- exp(d) < rng
+	-- exp(d) > rng
+	-- 2 cycles
 	COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
 			clk => clk,
-		    a => Exp1Result,
-			b => rng_uni,
+		    a => "0" & rng_uni(62 downto 0),
+			b => Exp1Result,
 			result => CompResult
    );
 
@@ -266,7 +267,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		end process State_Machine_clk;	
 		
 		
-		State_machine: PROCESS(state,nstate,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
+		State_machine: PROCESS(state,nstate,Old_LPR_output,Old_sample_out,Proposed_sample_out,Proposed_LPR_output,Exp1Result_ext,mult2result,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
 		variable flag_first_run: integer range 0 to 1 := 1;
 		
 		begin

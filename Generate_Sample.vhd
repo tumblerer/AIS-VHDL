@@ -16,16 +16,18 @@ entity Generate_Sample is
 end Generate_Sample;
 
 architecture Behavourial of Generate_Sample is
-
+	TYPE state_type is (idle, load_rng, running);
+	--state
+	signal state,nstate : state_type;
 	-- Seed
-	signal seed : std_logic_vector(63 downto 0):=x"0123456789abcdef";
+	signal seed : std_logic_vector(127 downto 0):=x"0123456789abcdef0123456789abcdef";
 
 	-- RNG Signal
 	signal rng_mode_norm, rng_ce_norm, s_in_norm : std_logic;
 	signal rng_norm: std_logic_vector(63 downto 0);	
 	signal rng_norm_out: std_logic_vector(16 downto 0); 
-	signal Sub1Result_Gen, Mult1Result_Gen : std_logic_vector(63 downto 0);
-
+	signal Sub1Result_Gen, Mult1Result_Gen : std_logic_vector(63 downto 0):=(OTHERS =>'0');
+	
 
 	--Counters
 	signal load_rng_counter : integer range 0 to 128 :=0;
@@ -91,7 +93,7 @@ begin
   				rng_ce_norm <= '1';
   				if load_rng_counter = 1 then
   					s_in_norm <= seed(0);
-  				elsif load_rng_counter >= 128 then
+  				elsif load_rng_counter >= 127 then
   					rng_mode_norm <= '0';
   					nstate<= running;
   				else
