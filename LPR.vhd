@@ -226,10 +226,10 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Address_Counter_Rd <= 0;
 				Address_Counter_Wr <= 0;
 				load_rng_counter <= 0;
-				activate_out <= '0'
-			elsif reset = '0' AND activate = '0' then
+				activate_out <= '0';
+			elsif reset = '0' AND activate_in = '0' then
 					load_rng_counter <= load_rng_counter + 1 ;
-			else --activate = 1
+			else --activate_in = 1
 				-- Pipeline old sample incase its needed
 				Old_Sample(1) <= xState;
 				Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
@@ -252,11 +252,15 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then -- Time 2 too long (hence -2)
 					Address_Counter_Rd <= Address_Counter_rd + 8;
 				end if;
-				if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
-					Address_Counter_Wr <= Address_Counter_Wr + 8;
+				if sample_counter > TOTAL_PIPE-1 then
 					activate_out <= '1';
 				else
 					activate_out <= '0';
+				end if;
+				if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
+					Address_Counter_Wr <= Address_Counter_Wr + 8;	
+				else
+					Address_Counter_Wr <= 0;
 				end if;
 			end if;
 			

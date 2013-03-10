@@ -43,14 +43,15 @@ ARCHITECTURE behavior OF LPR_Chain IS
     PORT(
          clk : IN  std_logic;
          reset : IN  std_logic;
-         activate : IN  std_logic;
+         activate_in : IN  std_logic;
          xState : IN  std_logic_vector(63 downto 0);
          Output : OUT  std_logic_vector(63 downto 0);
          Beta_in : IN  std_logic_vector(63 downto 0);
          Mem_Addr_B_In : OUT  std_logic_vector(31 downto 0);
          Mem_Data_B_In : IN  std_logic_vector(63 downto 0);
          Mem_Addr_B_Out : IN  std_logic_vector(31 downto 0);
-         Mem_Data_B_Out : OUT  std_logic_vector(63 downto 0)
+         Mem_Data_B_Out : OUT  std_logic_vector(63 downto 0);
+			activate_out: OUT std_logic
         );
     END COMPONENT;
     
@@ -71,7 +72,7 @@ ARCHITECTURE behavior OF LPR_Chain IS
    signal Beta_in : std_logic_vector(63 downto 0) := (others => '0');
    signal Mem_Data_B_In : std_logic_vector(63 downto 0) := (others => '0');
    signal Mem_Addr_B_Out,Mem_Addr_B_Out2 : std_logic_vector(31 downto 0) := (others => '0');
-	 signal activate: std_logic:='0';
+	 signal activate_wire: std_logic:='0';
 	
  	--Outputs
    signal Output : std_logic_vector(63 downto 0);
@@ -87,7 +88,7 @@ BEGIN
    uut1: LPR PORT MAP (
           clk => clk,
           reset => reset,
-          activate => activate_lpr1,
+          activate_in => activate_lpr1,
           xState => xState,
           Output => Output,
           Beta_in => Beta_in,
@@ -95,13 +96,13 @@ BEGIN
           Mem_Data_B_In => (OTHERS => '0'),
           Mem_Addr_B_Out => Mem_Addr_B_Out,
           Mem_Data_B_Out => Mem_Data_B_Out,
-          activate_out <= activate
+          activate_out => activate_wire
         );
 		  
    uut2: LPR PORT MAP (
           clk => clk,
           reset => reset,
-          activate_in => activate,
+          activate_in => activate_wire,
           xState => Output,
           Output => Output2,
           Beta_in => Beta_in,
@@ -109,7 +110,7 @@ BEGIN
           Mem_Data_B_In => Mem_Data_B_Out,
           Mem_Addr_B_Out => Mem_Addr_B_Out2,
           Mem_Data_B_Out => Mem_Data_B_Out2,
-          activate_out <= acti
+          activate_out => acti
         );
 	
 	Gen: Generate_Sample PORT MAP (
