@@ -12,8 +12,10 @@ constant LPR_SIZE:	integer := 63;
 
 -- Paramaters (again, generics?)
 constant STEPS: integer := 200;
-constant MEAN: std_logic_vector(63 downto 0) := "001111111111" & "0000000000000000000000000000000000000000000000000000";
-constant VARIANCE: std_logic_vector(63 downto 0) := "001111111111" & "0000000000000000000000000000000000000000000000000000";
+-- Mean 1
+constant MEAN: std_logic_vector(63 downto 0) := x"3ff0000000000000";
+-- 1/Sd 1/(2*0.1^2)
+constant VARIANCE: std_logic_vector(63 downto 0) := x"4049000000000000";
 constant MEAN_Gen: std_logic_vector(63 downto 0):= (OTHERS => '0');
 constant STANDARDDEV_Gen :std_logic_vector(63 downto 0):=x"3ff0000000000000";
 
