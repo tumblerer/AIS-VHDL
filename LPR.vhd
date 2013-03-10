@@ -67,7 +67,7 @@ end component;
 	--PipeLine
 	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
 	constant SMALL_PIPE : integer := 12+15+22+2; -- 51
-	signal Proposed_Sample : pipeline_type(1 to TOTAL_PIPE);
+	signal Proposed_Sample : pipeline_type(1 to TOTAL_PIPE-12);
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
 	signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
@@ -101,7 +101,8 @@ begin
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
 			 -- 0.25
-          b => "0011111110100000000000000000000000000000000000000000000000000000",
+          b => x"0000000000000000",
+			 --"0011111110100000000000000000000000000000000000000000000000000000",
 			 --rng_norm,
           clk => clk,
           result => Add1Result
@@ -232,8 +233,8 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
 				Old_Sample_Out <= Old_sample(TOTAL_PIPE);
 				-- Shifting of proposed value to end of pipeline
-				Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE);
-				Proposed_sample(2 to TOTAL_PIPE) <= Proposed_sample(1 to TOTAL_PIPE-1);
+				Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-12);
+				Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
 				Proposed_sample(1) <= Add1Result;
 				-- LPR Value pipeline 
 				Proposed_LPR(1) <= Mult3Result;
