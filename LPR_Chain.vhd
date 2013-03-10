@@ -66,12 +66,12 @@ ARCHITECTURE behavior OF LPR_Chain IS
    --Inputs
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
-   signal activate_lpr1, activate_lpr2, activate_gen : std_logic := '0';
+   signal activate_lpr1, activate_lpr2, activate_gen, acti : std_logic := '0';
    signal xState,output2 : std_logic_vector(63 downto 0) := (others => '0');
    signal Beta_in : std_logic_vector(63 downto 0) := (others => '0');
    signal Mem_Data_B_In : std_logic_vector(63 downto 0) := (others => '0');
    signal Mem_Addr_B_Out,Mem_Addr_B_Out2 : std_logic_vector(31 downto 0) := (others => '0');
-	
+	 signal activate: std_logic:='0';
 	
  	--Outputs
    signal Output : std_logic_vector(63 downto 0);
@@ -94,20 +94,22 @@ BEGIN
           Mem_Addr_B_In => Mem_Addr_B_In,
           Mem_Data_B_In => (OTHERS => '0'),
           Mem_Addr_B_Out => Mem_Addr_B_Out,
-          Mem_Data_B_Out => Mem_Data_B_Out
+          Mem_Data_B_Out => Mem_Data_B_Out,
+          activate_out <= activate
         );
 		  
    uut2: LPR PORT MAP (
           clk => clk,
           reset => reset,
-          activate => activate_lpr2,
+          activate_in => activate,
           xState => Output,
           Output => Output2,
           Beta_in => Beta_in,
           Mem_Addr_B_In => Mem_Addr_B_Out,
           Mem_Data_B_In => Mem_Data_B_Out,
           Mem_Addr_B_Out => Mem_Addr_B_Out2,
-          Mem_Data_B_Out => Mem_Data_B_Out2
+          Mem_Data_B_Out => Mem_Data_B_Out2,
+          activate_out <= acti
         );
 	
 	Gen: Generate_Sample PORT MAP (
@@ -145,8 +147,8 @@ BEGIN
 		activate_gen <= '1';
 		wait for clk_period*130;
 		activate_lpr1 <= '1';
-		wait for clk_period*106;
-		activate_lpr2 <= '1';
+--		wait for clk_period*106;
+--		activate_lpr2 <= '1';
 		wait for clk_period;
 		
 		wait;

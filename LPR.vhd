@@ -6,16 +6,17 @@ use work.Pack.ALL;
 
 entity LPR is
     Port (	clk : in std_logic;
-				reset : in std_logic;
-				activate: in std_logic;
-				xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
-				-- Shared memory block
-				Mem_Addr_B_In : out STD_LOGIC_VECTOR(31 DOWNTO 0);
-				Mem_Data_B_In : in STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-				Mem_Addr_B_Out : in STD_LOGIC_VECTOR(31 DOWNTO 0);
-				Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+			reset : in std_logic;
+			activate_in: in std_logic;
+			xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
+			-- Shared memory block
+			Mem_Addr_B_In : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+			Mem_Data_B_In : in STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			Mem_Addr_B_Out : in STD_LOGIC_VECTOR(31 DOWNTO 0);
+			Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			activate_out : out std_logic
 	); 
 
 end LPR;
@@ -225,6 +226,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Address_Counter_Rd <= 0;
 				Address_Counter_Wr <= 0;
 				load_rng_counter <= 0;
+				activate_out <= '0'
 			elsif reset = '0' AND activate = '0' then
 					load_rng_counter <= load_rng_counter + 1 ;
 			else --activate = 1
@@ -252,6 +254,9 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				end if;
 				if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
 					Address_Counter_Wr <= Address_Counter_Wr + 8;
+					activate_out <= '1';
+				else
+					activate_out <= '0';
 				end if;
 			end if;
 			
@@ -302,7 +307,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 					nstate <= running; 
 					write_a <= x"FF";
 					Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
-               addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
+             		addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
 					
 					if CompResult = "1" then
 					-- Save to LPR address and X forward to next LPR unit
