@@ -137,7 +137,7 @@ begin
 	end process State_Machine_clk;	
 		
 
-	State_machine: PROCESS(state, nstate, load_rng_counter, seed)
+	State_machine: PROCESS(state, nstate, load_rng_counter, seed, Comp_In,Proposed_Sample_out, Old_Sample_Out)
 	begin
 		case (state) is
 			when idle =>
@@ -153,7 +153,7 @@ begin
 				rng_mode_norm <= '1';
 				if load_rng_counter = 1 then
 					s_in_norm <= seed(0);
-				elsif load_rng_counter >= 2049 then
+				elsif load_rng_counter >= 2048 then
 					rng_mode_norm <= '0';
 					nstate<= running;
 					s_in_norm <= seed(load_rng_counter);
@@ -167,7 +167,7 @@ begin
 				rng_mode_norm <= '0';
 				s_in_norm <= seed(load_rng_counter);
 				nstate <= running; 		
-				if Comp_In = "1" then
+				if Comp_In = '1' then
 					x_out <= Proposed_Sample_out;
 				else
 					x_out <= Old_Sample_Out;	
