@@ -3,6 +3,8 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.Pack.ALL;
+library UNISIM;
+use UNISIM.VComponents.all;
 
 -- Calculating intitial X values
 -- Total time - 128 + 12 + 15 = 155
@@ -10,12 +12,12 @@ entity Generate_Sample is
     Port (	clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
-				Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+				sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 
 end Generate_Sample;
 
-architecture Behavourial of Generate_Sample is
+architecture Behavorial of Generate_Sample is
 	TYPE state_type is (idle, load_rng, running);
 	--state
 	signal state,nstate : state_type;
@@ -64,7 +66,7 @@ begin
         a => Sub1Result_Gen,
         b => StandardDev_Gen,
         clk => clk,
-        result => Output
+        result => sample_output
     );
 
   	Control_sync: PROCESS
@@ -81,12 +83,16 @@ begin
   	end if;
   	end process Control_sync;
 
-  	State_machine: PROCESS (state, nstate, load_rng_counter)
+  	State_machine: PROCESS (state, nstate, load_rng_counter,seed)
   	begin
+	seed <= x"0123456789abcdef0123456789abcdef";
 
   		case(state) is
   			when idle =>
   				nstate <= load_rng;
+				rng_mode_norm <= '0';
+  				rng_ce_norm <= '0';
+				s_in_norm <= seed(0);
   			when load_rng =>
   				nstate <= load_rng;
   				rng_mode_norm <= '1';
@@ -96,10 +102,14 @@ begin
   				elsif load_rng_counter >= 127 then
   					rng_mode_norm <= '0';
   					nstate<= running;
+					s_in_norm <= seed(0);
   				else
   					s_in_norm <= seed(load_rng_counter);
   				end if;
   			when running =>
+				s_in_norm <= seed(0);
+				rng_ce_norm <= '1';
+				rng_mode_norm <= '0';
   				nstate <= running;
   		end case;
   	end process State_machine;
