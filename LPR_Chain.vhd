@@ -145,7 +145,7 @@ BEGIN
 		activate_gen <= '1';
 		wait for clk_period*130;
 		activate_lpr1 <= '1';
-		wait for clk_period*105;
+		wait for clk_period*106;
 		activate_lpr2 <= '1';
 		wait for clk_period;
 		

@@ -247,7 +247,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				if sample_counter <= TOTAL_PIPE then
 					sample_counter <= sample_counter + 1;
 				end if;
-				if sample_counter > TOTAL_PIPE-SMALL_PIPE-2 then -- Time 2 too long (hence -2)
+				if sample_counter > TOTAL_PIPE-SMALL_PIPE-1 then -- Time 2 too long (hence -2)
 					Address_Counter_Rd <= Address_Counter_rd + 8;
 				end if;
 				if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
