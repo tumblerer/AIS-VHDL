@@ -55,12 +55,6 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="LPR_Arith_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="32"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="32"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="32"/>
-    </file>
     <file xil_pn:name="LPR_Sub_tb.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="34"/>
@@ -71,27 +65,26 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="Mult_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="68"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="68"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="68"/>
-    </file>
     <file xil_pn:name="BRAM_tb.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="25"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="25"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="25"/>
     </file>
+<<<<<<< Updated upstream
     <file xil_pn:name="RAM_Sample_Ctl.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="../RNG/rng_n2048_r64_t5_k32_sbfbaac.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
+=======
+    <file xil_pn:name="rng_n2048_r64_t5_k32_sbfbaac.vhdl" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
+>>>>>>> Stashed changes
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="../RNG/test_rng_n2048_r64_t5_k32_sbfbaac.vhdl" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="test_rng_n2048_r64_t5_k32_sbfbaac.vhdl" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="39"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="39"/>
@@ -101,23 +94,11 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="Div_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="41"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="41"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="41"/>
-    </file>
     <file xil_pn:name="LPR_tb.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="46"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="46"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="46"/>
-    </file>
-    <file xil_pn:name="Exp_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="40"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="40"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="40"/>
     </file>
     <file xil_pn:name="ipcore_dir/LPR_Add.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
@@ -148,16 +129,6 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="Generate_Sample.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="Gen_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="83"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="83"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="83"/>
-    </file>
-    <file xil_pn:name="LPR_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
@@ -205,7 +176,7 @@
     <property xil_pn:name="Change Device Speed To" xil_pn:value="-2" xil_pn:valueState="default"/>
     <property xil_pn:name="Change Device Speed To Post Trace" xil_pn:value="-2" xil_pn:valueState="default"/>
     <property xil_pn:name="Combinatorial Logic Optimization" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Compile EDK Simulation Library" xil_pn:value="false" xil_pn:valueState="default"/>
+    <property xil_pn:name="Compile EDK Simulation Library" xil_pn:value="false" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Compile SIMPRIM (Timing) Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Compile UNISIM (Functional) Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Compile XilinxCoreLib (CORE Generator) Simulation Library" xil_pn:value="true" xil_pn:valueState="default"/>
