@@ -11,9 +11,9 @@ entity Comparator is
            active : in  STD_LOGIC;
            LPR_In : in std_logic_vector(STATE_SIZE downto 0);
            CompResult : out  STD_LOGIC;
-           Mem_Addr_B_In : out  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Addr_B_In : out  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
-           Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
            Beta : in  STD_LOGIC_VECTOR (63 downto 0)
       );
