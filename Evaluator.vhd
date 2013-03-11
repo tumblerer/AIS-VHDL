@@ -17,7 +17,7 @@ entity Evaluator is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
            xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-           Comp_In : in std_logic;
+           Comp_In : in std_logic_vector(0 downto 0);
            Proposed_LPR : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
            x_out : out std_logic_vector(STATE_SIZE downto 0)
     );
@@ -170,7 +170,7 @@ begin
 				rng_mode_norm <= '0';
 				s_in_norm <= seed(load_rng_counter);
 				nstate <= running; 		
-				if Comp_In = '1' then
+				if Comp_In = "1" then
 					x_out <= Proposed_Sample_out;
 				else
 					x_out <= Old_Sample_Out;	

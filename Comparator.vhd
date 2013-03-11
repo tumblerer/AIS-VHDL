@@ -8,14 +8,15 @@ use IEEE.NUMERIC_STD.ALL;
 entity Comparator is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           active : in  STD_LOGIC;
+           activate_in : in  STD_LOGIC;
            LPR_In : in std_logic_vector(STATE_SIZE downto 0);
-           CompResult : out  STD_LOGIC;
+           CompResult : out  STD_LOGIC_VECTOR(0 downto 0);
            Mem_Addr_B_In : out  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
-           Beta : in  STD_LOGIC_VECTOR (63 downto 0)
+           Beta : in  STD_LOGIC_VECTOR (63 downto 0);
+           activate_out: out std_logic
       );
 end Comparator;
 
@@ -28,8 +29,10 @@ architecture Behavioral of Comparator is
   
   signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
   signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
+  signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
   signal Mult1Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
 
+  signal CompResult_reg :std_logic_vector(0 downto 0);
 -- Pipeline
   constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
   constant SMALL_PIPE : integer := 12+15+22+2; -- 51
@@ -40,8 +43,8 @@ architecture Behavioral of Comparator is
 
   -- RNG Signal
   signal rng_mode_uni, rng_ce_uni : std_logic;
-  signal rng_uni, rng_uni_pos : std_logic_vector(63 downto 0);  
-
+  signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(63 downto 0);  
+  signal s_in_uni, s_out_uni : std_logic;
   -- Counters
   signal sample_counter : integer range 0 to 256 := 0;
   signal load_rng_counter : integer range 0 to 2049 :=0;
@@ -69,7 +72,7 @@ begin
   -- 15 cycles
   MULT1: ENTITY work.LPR_Mult PORT MAP(
           a => Sub1Result,
-          b => Beta_in,
+          b => Beta,
           clk => clk,
           result => Mult1Result
         );
@@ -90,7 +93,7 @@ begin
       clk => clk,
       a => rng_uni,
       b => Exp1Result,
-      result => CompResult
+      result => CompResult_reg
    );
 
       
@@ -173,13 +176,13 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, mult1result, Exp1Result_Ext,rng_norm,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd,CompResult)
+    State_machine: PROCESS(state,nstate, mult1result, CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd,CompResult)
     
     begin
       mult1Result_ext <= "01" & mult1result;
       Exp1Result <= Exp1Result_ext(63 downto 0);
-      rng_uni_pos <= "0" & rng_norm(62 downto 0);
-      
+      rng_uni_pos <= "0" & rng_uni(62 downto 0);
+      CompResult <= CompResult_reg;
       case (state) is
       
         when idle =>
@@ -203,7 +206,7 @@ Control_sync: PROCESS
           write_a <= x"FF";
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
-          if CompResult = "1" then
+          if CompResult = '1' then
           -- Save to LPR address
             data_in_a <= Proposed_LPR_output;
           else
