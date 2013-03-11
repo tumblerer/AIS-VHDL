@@ -284,7 +284,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		begin
 			mult2Result_ext <= "01" & mult2result;
 			Exp1Result <= Exp1Result_ext(63 downto 0);
-			Mult3Result_inv(STATE_SIZE) <= not Mult3Result(STATE_SIZE)
+			Mult3Result_inv(STATE_SIZE) <= not Mult3Result(STATE_SIZE);
 
 			case (state) is
 				when idle =>
@@ -292,7 +292,7 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 						if flag_first_run = 1 then
 							flag_first_run := 0;
 						end if;
-				when load_rng =>
+				when load_rng => 
 					nstate <= load_rng;
 					rng_ce_uni <= '1';
 					rng_ce_norm <= '1';
