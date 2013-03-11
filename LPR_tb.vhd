@@ -26,7 +26,7 @@
 
           SIGNAL clk :  std_logic;
 			 SIGNAL reset :  std_logic;
-			 signal 	activate: std_logic;
+			 signal 	activate_wire: std_logic:=0;
 			 signal 	xState : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 		    signal 	Output, Mem_Data_B_Out,   data_out : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 			 signal 	Beta : STD_LOGIC_VECTOR (63 DOWNTO 0);
@@ -42,7 +42,7 @@
          uut: ENTITY work.LPR PORT MAP(
             clk => clk,
 				reset => reset,
-				activate => activate,
+				activate_in => activate_wire,
 				xState => xState,
 				Output => output,
 				Beta_in => Beta,

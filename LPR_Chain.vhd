@@ -1,30 +1,3 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   21:40:59 03/09/2013
--- Design Name:   
--- Module Name:   /home/ct/VHDL/AIS/LPR_Chain.vhd
--- Project Name:  AIS
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: LPR
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
@@ -54,7 +27,7 @@ ARCHITECTURE behavior OF LPR_Chain IS
 			activate_out: OUT std_logic
         );
     END COMPONENT;
-    
+     	
 	COMPONENT Generate_Sample
     PORT(
          clk : IN  std_logic;
@@ -81,7 +54,7 @@ ARCHITECTURE behavior OF LPR_Chain IS
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
- 
+  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)

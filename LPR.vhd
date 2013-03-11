@@ -91,6 +91,7 @@ end component;
 	signal state,nstate : state_type;
 	
 	-- RNG Signal
+	signal rng_uni_pos : std_logic_vector(63 downto 0);
 	signal rng_mode_uni, rng_ce_uni, rng_mode_norm, rng_ce_norm: std_logic;
 	signal rng_norm, rng_uni, rng_uni_out: std_logic_vector(63 downto 0);	
 	signal s_in_uni, s_in_norm, s_out_norm, s_out_uni : std_logic;
@@ -168,7 +169,7 @@ begin
 	-- 2 cycles
 	COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
 			clk => clk,
-		    a => "0" & rng_uni(62 downto 0),
+		    a => rng_uni_pos,
 			b => Exp1Result,
 			result => CompResult
    );
@@ -285,7 +286,8 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 			mult2Result_ext <= "01" & mult2result;
 			Exp1Result <= Exp1Result_ext(63 downto 0);
 			Mult3Result_inv(STATE_SIZE) <= not Mult3Result(STATE_SIZE);
-
+			rng_uni_pos <= "0" & rng_norm(62 downto 0);
+			
 			case (state) is
 				when idle =>
 					nstate <= load_rng;
