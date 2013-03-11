@@ -56,7 +56,7 @@ end component;
    --Inputs	
 	signal Sub1Result, Sub2Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Add1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Mult1Result,Mult2Result,Mult3Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Mult1Result,Mult2Result,Mult3Result, Mult3Result_inv : std_logic_vector(63 downto 0) := (others => '0');
 	signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal CompResult: std_logic_vector (0 downto 0);
 	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
@@ -121,12 +121,12 @@ begin
 	-- LprNew - LprOld	  
 	-- 12 cycles
 	SUB2: ENTITY work.LPR_Subtract PORT MAP (
-          a => Mult3Result,
+          a => Mult3Result_Inv,
           b => Mem_Data_B_In,
           clk => clk,
           result => Sub2Result
         );
-		  
+
 	-- (Xi - Mean)^2
 	-- 15 cycles 
 	MULT1: ENTITY work.LPR_Mult PORT MAP(
@@ -239,7 +239,8 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
 				Proposed_sample(1) <= Add1Result;
 				-- LPR Value pipeline 
-				Proposed_LPR(1) <= Mult3Result;
+				Proposed_LPR(1)(STATE_SIZE-1 downto 0) <= Mult3Result(STATE_SIZE-1 downto 0);
+				Proposed_LPR(1)(STATE_SIZE) <= not Mult3Result (STATE_SIZE);
 				Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
 				Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
 				-- Pipe of previous LPR value
@@ -277,13 +278,14 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 		end process State_Machine_clk;	
 		
 		
-		State_machine: PROCESS(state,nstate,Old_LPR_output,Old_sample_out,Proposed_sample_out,Proposed_LPR_output,Exp1Result_ext,mult2result,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
+		State_machine: PROCESS(state,nstate, Mult3Result, Old_LPR_output,Old_sample_out,Proposed_sample_out,Proposed_LPR_output,Exp1Result_ext,mult2result,Address_Counter_Rd, Address_Counter_Wr, load_rng_counter,sample_counter,CompResult,Old_Sample_Out,seed)
 		variable flag_first_run: integer range 0 to 1 := 1;
 		
 		begin
 			mult2Result_ext <= "01" & mult2result;
 			Exp1Result <= Exp1Result_ext(63 downto 0);
-		
+			Mult3Result_inv(STATE_SIZE) <= not Mult3Result(STATE_SIZE)
+
 			case (state) is
 				when idle =>
 					nstate <= load_rng;
