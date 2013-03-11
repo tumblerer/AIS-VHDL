@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+library work;
+use work.Pack.all;
+use work.Seed.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -32,7 +34,8 @@ component Evaluator is
            xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
            Comp_In : in std_logic_vector(0 downto 0);
            Proposed_LPR : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-           x_out : out std_logic_vector(STATE_SIZE downto 0)
+           x_out : out std_logic_vector(STATE_SIZE downto 0);
+           seed: in std_logic_vector(2048 downto 0)
     );
 end component;
 
@@ -46,7 +49,8 @@ component Comparator is
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
-           Beta : in  STD_LOGIC_VECTOR (63 downto 0)
+           Beta : in  STD_LOGIC_VECTOR (63 downto 0);
+           seed: in std_logic_vector(2048 downto 0)
       );
 end component;
   
@@ -61,12 +65,13 @@ LPR: for i in 1 to VARS generate
           xState => X_in,   --(i*63 downto i*(VARS-1)),
           Comp_In => Comp_In,
           Proposed_LPR => Proposed_LPR,
-          x_out => x_out 
+          x_out => x_out,
+          seed => seed_source(i)
       );
 
 end generate; 
 
-LPR2 : for i in x to y generate
+LPR2 : for i in 1 to VARS generate
       Comparator: entity work.Comparator Port Map (
          clk => clk,
          reset => reset,
@@ -78,7 +83,8 @@ LPR2 : for i in x to y generate
          Mem_Addr_B_Out => Mem_Addr_B_Out,
          Mem_Data_B_Out =>  Mem_Data_B_Out,
          Beta => Beta,
-         activate_out => activate_out
+         activate_out => activate_out,
+         seed => seed_source(i)
         );
 end generate ; -- LPR2
 

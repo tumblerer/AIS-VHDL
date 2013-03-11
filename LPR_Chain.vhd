@@ -31,6 +31,7 @@ component Generate_Sample is
     Port (	clk : in std_logic;
 			reset : in std_logic;
 			activate: in std_logic;
+			seed : in std_logic_vector(129 downto 0);
 			sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 end component;

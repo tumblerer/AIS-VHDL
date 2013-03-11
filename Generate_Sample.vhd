@@ -12,6 +12,7 @@ entity Generate_Sample is
     Port (	clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
+        seed : in std_logic_vector(127 downto 0);
 				sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 
@@ -21,8 +22,6 @@ architecture Behavorial of Generate_Sample is
 	TYPE state_type is (idle, load_rng, running);
 	--state
 	signal state,nstate : state_type;
-	-- Seed
-	signal seed : std_logic_vector(127 downto 0):=x"0123456789abcdef0123456789abcdef";
 
 	-- RNG Signal
 	signal rng_mode_norm, rng_ce_norm, s_in_norm : std_logic;
@@ -85,7 +84,6 @@ begin
 
   	State_machine: PROCESS (state, nstate, load_rng_counter,seed)
   	begin
-	seed <= x"0123456789abcdef0123456789abcdef";
 
   		case(state) is
   			when idle =>
