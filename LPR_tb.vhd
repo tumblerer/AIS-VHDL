@@ -5,8 +5,8 @@
   USE ieee.std_logic_1164.ALL;
   USE ieee.numeric_std.ALL;
 	USE work.pack.all;
-	
-	
+
+
   ENTITY LPR_tb IS
   END LPR_tb;
 
@@ -26,7 +26,7 @@
 
           SIGNAL clk :  std_logic;
 			 SIGNAL reset :  std_logic;
-			 signal 	activate: std_logic;
+			 signal 	activate_wire,acti: std_logic;
 			 signal 	xState : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 		    signal 	Output, Mem_Data_B_Out,   data_out : STD_LOGIC_VECTOR (STATE_SIZE downto 0);
 			 signal 	Beta : STD_LOGIC_VECTOR (63 DOWNTO 0);
@@ -42,16 +42,17 @@
          uut: ENTITY work.LPR PORT MAP(
             clk => clk,
 				reset => reset,
-				activate => activate,
+				activate_in => activate_wire,
 				xState => xState,
 				Output => output,
 				Beta_in => Beta,
 				Mem_Addr_B_In => Mem_addr_b_out,
 				Mem_Data_B_In => Mem_Data_B_Out,
 				Mem_Addr_B_Out => addr_out,
-				Mem_Data_B_Out => data_out
+				Mem_Data_B_Out => data_out,
+				activate_out => acti
           );
-			 
+
 		   BRAM: ENTITY work.Dual_Port_BRAM PORT MAP (
           clka => clk,
           wea => wea,
@@ -78,7 +79,7 @@
 		reset <= '1';
         wait for 100 ns; -- wait until global set/reset completes
 		reset<= '0';
-		activate <= '0';
+		activate_wire <= '0';
 		wait for clk_period;
 		xstate<= (OTHERS => '0');
 			wea <= x"FF";
@@ -94,7 +95,7 @@
 		dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
 
 		wait for clk_period*2049;
-	   activate <= '1';
+	   activate_wire <= '1';
 	   -- Input 0.5 to x
 	   xstate <= "0011111111000000000000000000000000000000000000000000000000000000";
 		beta(63 downto 52)<= "001111111111";
