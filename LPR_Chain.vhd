@@ -44,8 +44,8 @@ end component;
   type mem_addr_wire is array(STEPS downto 0) of std_logic_vector(31 downto 0); 
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
-  signal Mem_Data_B_In : wire_array;
-	signal Mem_Addr_B_In :mem_addr_wire;
+  signal Mem_Data_B : wire_array;
+	signal Mem_Addr_B :mem_addr_wire;
   signal activate_in : std_logic;
 	signal Beta_in : std_logic_vector(STATE_SIZE downto 0);
 	signal activate_gen: std_logic;
@@ -92,16 +92,16 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
          activate_out => activate_wire(i),
          X_In => X_wire(i-1),
          X_out => X_wire(i),
-         Mem_Addr_B_In => Mem_Addr_B_In(i),
-         Mem_Data_B_In =>  Mem_Data_B_In(i),
-         Mem_Addr_B_Out => Mem_Addr_B_In(i+1),
-         Mem_Data_B_Out =>  Mem_Data_B_In(i+1)
+         Mem_Addr_B_In => Mem_Addr_B(i),
+         Mem_Data_B_In =>  Mem_Data_B(i),
+         Mem_Addr_B_Out => Mem_Addr_B(i+1),
+         Mem_Data_B_Out =>  Mem_Data_B(i+1)
     );
 
   end generate;
 
   seed <= x"0123456789abcdef0123456789abcdef";
-  Mem_Data_B_In(1) <= (Others => '0');
+  Mem_Data_B(1) <= (Others => '0');
   
   Control : process
   begin

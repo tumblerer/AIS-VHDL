@@ -126,8 +126,8 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
     </file>
     <file xil_pn:name="LPR_Chain.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="18"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="19"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="19"/>
     </file>
     <file xil_pn:name="Comparator_tb.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -142,10 +142,14 @@
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="124"/>
     </file>
     <file xil_pn:name="LPR_Chain_tb.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="19"/>
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="20"/>
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="156"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="156"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="156"/>
+    </file>
+    <file xil_pn:name="Beta_pack.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="18"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
     </file>
   </files>
 
