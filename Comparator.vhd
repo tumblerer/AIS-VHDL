@@ -34,8 +34,7 @@ architecture Behavioral of Comparator is
 
   signal CompResult_reg :std_logic_vector(0 downto 0);
 -- Pipeline
-  constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
-  constant SMALL_PIPE : integer := 12+15+22+2; -- 51
+
 
   signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
   signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
