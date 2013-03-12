@@ -40,12 +40,13 @@ component Generate_Sample is
 end component;
   type wire_array is array(STEPS downto 0) of std_logic_vector(STATE_SIZE downto 0);
   type single_wire_array is array(STEPS downto 0) of std_logic;
+  type mem_addr_wire is array(STEPS downto 0) of std_logic_vector(31 downto 0); 
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
-  signal Mem_Data_B_Out ,Mem_Data_B_In : std_logic_vector(STATE_SIZE downto 0);
-	signal  Mem_Addr_B_Out, Mem_Addr_B_In :std_logic_vector(31 downto 0);
+  signal Mem_Data_B_In : wire_array;
+	signal Mem_Addr_B_In :mem_addr_wire;
   signal activate_in : std_logic;
-	signal Beta : std_logic_vector(STATE_SIZE downto 0);
+	--signal Beta : std_logic_vector(STATE_SIZE downto 0);
 	signal activate_gen: std_logic;
   signal seed : std_logic_vector (127 downto 0);
 
@@ -61,40 +62,39 @@ begin
           sample_output => X_wire(0)
         );
 
-  Chain: for i in 1 to 1 generate
+  Chain: for i in 1 to 2 generate
   begin
     LPR_TOP0: entity work.LPR_top Port Map (
          clk => clk,
          reset => reset,
-         Beta => beta,
+         Beta => x"3f747ae147ae147b",
          activate_in => activate_wire(i-1),
          activate_out => activate_wire(i),
-         X_In => X_wire(i),
-         X_out => X_wire(i+1),
-         Mem_Addr_B_In => Mem_Addr_B_In,
-         Mem_Data_B_In =>  Mem_Data_B_In,
-         Mem_Addr_B_Out => Mem_Addr_B_Out,
-         Mem_Data_B_Out =>  Mem_Data_B_Out
+         X_In => X_wire(i-1),
+         X_out => X_wire(i),
+         Mem_Addr_B_In => Mem_Addr_B_In(i),
+         Mem_Data_B_In =>  Mem_Data_B_In(i),
+         Mem_Addr_B_Out => Mem_Addr_B_In(i+1),
+         Mem_Data_B_Out =>  Mem_Data_B_In(i+1)
     );
 
   end generate;
 
   seed <= x"0123456789abcdef0123456789abcdef";
-  Mem_Data_B_In <= (Others=>'0');
-
+  Mem_Data_B_In(1) <= (Others => '0');
   Control : process
   begin
     wait until clk'EVENT AND clk='1';
       if reset = '1' then
         activate_gen <= '0';
-        activate_wire(1) <= '0';
+        activate_wire(0) <= '0';
         counter <= 0;
       else
         if counter < 2100 then
           counter <= counter + 1;
-          activate_wire(1) <='0';
+          activate_wire(0) <='0';
         else 
-         activate_wire(1) <= '1';
+         activate_wire(0) <= '1';
         end if;
 
         if counter > 200 then
