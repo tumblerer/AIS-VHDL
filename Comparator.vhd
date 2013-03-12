@@ -209,7 +209,7 @@ Control_sync: PROCESS
           if load_rng_counter = 1 then
             s_in_uni <= seed(0);
           elsif load_rng_counter >= 2048 then
-            rng_mode_uni <= '0';
+            rng_mode_uni <= '1';
             nstate<= running;
             s_in_uni <= seed(load_rng_counter);
           else
