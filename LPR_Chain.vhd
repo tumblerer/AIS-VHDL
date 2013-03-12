@@ -42,4 +42,51 @@ end component;
 
 begin
 
+  Generate_Sample :  entity work.Generate_Sample Port Map(
+          clk => clk,
+          reset => reset,
+          activate => activate_gen,
+          sample_output => xState
+        );
+
+  Chain: for i in 1 to STEPS generate
+  begin
+    LPR_TOP0: if (i = 1) generate
+      begin T0: entity work.LPR_top Port Map (
+         clk => clk,
+         reset => reset,
+         Beta => beta,
+         activate_in => activate_in,
+         activate_out => activate_out,
+         X_In => ,
+         X_out =>,
+         Mem_Addr_B_In => Mem_Addr_B_In,
+         Mem_Data_B_In =>  Mem_Data_B_In,
+         Mem_Addr_B_Out => Mem_Addr_B_Out,
+         Mem_Data_B_Out =>  Mem_Data_B_Out,
+         seed => seed_source(i)
+    );
+    end generate LPR_TOP0;
+    
+    LPR_TOP1: if (i /=1) generate
+      begin T1: entity work.LPR_top Port Map (
+         clk => clk,
+         reset => reset,
+         Beta => beta,
+         activate_in => activate_in,
+         activate_out => activate_out,
+         X_In => ,
+         X_out =>,
+         Mem_Addr_B_In => Mem_Addr_B_In,
+         Mem_Data_B_In =>  Mem_Data_B_In,
+         Mem_Addr_B_Out => Mem_Addr_B_Out,
+         Mem_Data_B_Out =>  Mem_Data_B_Out,
+         seed => seed_source(i)
+        );
+    end generate LPR_TOP1;
+
+  end generate;
+
+
+
 end architecture ; -- behavorial
