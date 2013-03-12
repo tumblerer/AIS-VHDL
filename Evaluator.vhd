@@ -34,6 +34,7 @@ architecture Behavioral of Evaluator is
 	signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Add1Result : std_logic_vector(63 downto 0) := (others => '0');
 	signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Mult2Result : std_logic_vector(63 downto 0) := (others => '0');
 
 	--PipeLine
 	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
@@ -88,7 +89,7 @@ begin
           a => Mult1Result,
           b => Variance,
           clk => clk,
-          result => Proposed_LPR
+          result => Mult2Result
         );
 
  	RNG_NORMAL : ENTITY work.grng_pwclt8 PORT MAP(
@@ -118,9 +119,9 @@ begin
 			Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
 			Old_Sample_Out <= Old_sample(TOTAL_PIPE);
 			-- Shifting of proposed value to end of pipeline
-			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-12);
-			Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
 			Proposed_sample(1) <= Add1Result;
+			Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
+			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-12);
 		end if;
 	end process;
 
@@ -136,9 +137,12 @@ begin
 	end process State_Machine_clk;	
 		
 
-	State_machine: PROCESS(state, nstate, load_rng_counter, seed, Comp_In,Proposed_Sample_out, Old_Sample_Out)
+	State_machine: PROCESS(state, nstate, Mult2Result, load_rng_counter, seed, Comp_In,Proposed_Sample_out, Old_Sample_Out)
 	begin
-
+		-- Negate result of LPR
+		Proposed_LPR(STATE_SIZE) <= not Mult2Result(STATE_SIZE);
+		Proposed_LPR(STATE_SIZE-1 downto 0) <= Mult2Result(STATE_SIZE-1 downto 0);
+		
 		case (state) is
 			when idle =>
 				rng_ce_norm <= '0';
