@@ -12,6 +12,10 @@ constant LPR_SIZE:	integer := 63;
 
 -- Paramaters (again, generics?)
 constant STEPS: integer := 200;
+-- Basically how many states
+constant RUNS: integer := 20;
+
+constant BLOCKS: integer:=5;
 -- Mean 1
 constant MEAN: std_logic_vector(63 downto 0) := x"3ff0000000000000";
 -- 1/Sd 1/(2*0.1^2)
@@ -22,19 +26,11 @@ constant STANDARDDEV_Gen :std_logic_vector(63 downto 0):=x"3ff0000000000000";
 --
 TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(63 DOWNTO 0);
 
+constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
+constant SMALL_PIPE : integer := 12+15+22+2; -- 51
+
 type StateArray is Array (VARS-1 downto 0) of std_logic_vector(STATE_SIZE-1 downto 0);
 type etas is Array (STEPS-1 downto 0) of std_logic_vector(ETA_SIZE-1 downto 0);
-
-type AisResult is
-	record
-    state	       : std_logic_vector( STATE_SIZE-1 downto 0);
-    ratio		 	 : std_logic_vector( RATIO_SIZE-1 downto 0);
-	end record;
-
-
-end Pack;
-
-package body Pack is
 
  
 end Pack;

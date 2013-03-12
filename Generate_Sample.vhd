@@ -9,7 +9,8 @@ use UNISIM.VComponents.all;
 -- Calculating intitial X values
 -- Total time - 128 + 12 + 15 = 155
 entity Generate_Sample is
-    Port (	clk : in std_logic;
+    Port (	
+      clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
         seed : in std_logic_vector(127 downto 0);
@@ -88,9 +89,9 @@ begin
   		case(state) is
   			when idle =>
   				nstate <= load_rng;
-				rng_mode_norm <= '0';
+				  rng_mode_norm <= '0';
   				rng_ce_norm <= '0';
-				s_in_norm <= seed(0);
+			   	s_in_norm <= seed(0);
   			when load_rng =>
   				nstate <= load_rng;
   				rng_mode_norm <= '1';
