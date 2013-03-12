@@ -109,6 +109,12 @@ BEGIN
       addra(31 downto 0)<=  std_logic_vector(to_unsigned(8,addra'length));
       wait for clk_period;
       dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
+     
+      wait for clk_period;
+      -- write 0.9 to mem location 16
+      addra(31 downto 0)<=  std_logic_vector(to_unsigned(16,addra'length));
+      wait for clk_period;
+      dina(63 downto 0) <= x"3feccccccccccccd";
 
       wait for clk_period*2050.5;
 

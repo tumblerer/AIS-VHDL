@@ -91,7 +91,7 @@ begin
   -- 2 cycles
   COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
       clk => clk,
-      a => rng_uni,
+      a => rng_uni_pos,
       b => Exp1Result,
       result => CompResult_reg
    );
@@ -136,16 +136,18 @@ Control_sync: PROCESS
         load_rng_counter <= 0;
         activate_out <= '0';
       elsif reset = '0' AND activate_in = '0' then
-          load_rng_counter <= load_rng_counter + 1 ;
+        if load_rng_counter < 2048 then
+          load_rng_counter <= load_rng_counter + 1;
+        end if;
       else --activate_in = 1
      -- LPR Value pipeline 
-        Proposed_LPR(1) <= Mult1Result;
+        Proposed_LPR(1) <= LPR_In;
         Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1); 
         Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
         -- Pipe of previous LPR value
         Old_LPR(1) <= Mem_Data_B_In;
         Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1); 
-        Old_LPR_output <= Old_LPR(SMALL_PIPE);
+        Old_LPR_output <= Old_LPR(SMALL_PIPE-1); -- Seems dubious - keep eye on
         if sample_counter <= TOTAL_PIPE then
           sample_counter <= sample_counter + 1;
         end if;
@@ -176,7 +178,7 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, mult1result, CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd,CompResult)
+    State_machine: PROCESS(state,nstate, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
       mult1Result_ext <= "01" & mult1result;
@@ -187,26 +189,43 @@ Control_sync: PROCESS
       
         when idle =>
           nstate <= load_rng;
-      
+          rng_ce_uni <= '0';
+          rng_mode_uni <= '0';
+          s_in_uni <= seed(load_rng_counter);
+          write_a <= x"FF";
+          Mem_Addr_B_In <= x"00000000";
+          addr_a <= x"00000000";
+          data_in_a <= (others=> '0');
+
         when load_rng => 
           nstate <= load_rng;
           rng_ce_uni <= '1';
           rng_mode_uni <= '1';
+          write_a <= x"FF";
+          Mem_Addr_B_In <= x"00000000";
+          addr_a <= x"00000000";
+          data_in_a <= (others=> '0');
+
           if load_rng_counter = 1 then
             s_in_uni <= seed(0);
-          elsif load_rng_counter >= 2049 then
+          elsif load_rng_counter >= 2048 then
             rng_mode_uni <= '0';
             nstate<= running;
+            s_in_uni <= seed(load_rng_counter);
           else
             s_in_uni <= seed(load_rng_counter);
           end if; 
       
         when running =>
+          rng_ce_uni <= '1';
+          rng_mode_uni <= '0';
+          s_in_uni <= seed(load_rng_counter);
+
           nstate <= running; 
           write_a <= x"FF";
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
-          if CompResult = '1' then
+          if CompResult_reg = "1" then
           -- Save to LPR address
             data_in_a <= Proposed_LPR_output;
           else
