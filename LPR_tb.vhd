@@ -82,17 +82,17 @@
 		activate_wire <= '0';
 		wait for clk_period;
 		xstate<= (OTHERS => '0');
-			wea <= x"FF";
-		wait for clk_period*10;
-		addra(7 downto 0)<=  x"00";
-		wait for clk_period;
-		-- write 0.5 to mem location 0
-		dina(63 downto 0) <= "0011111111000000000000000000000000000000000000000000000000000000";
-		wait for clk_period;
-		-- write 0.25 to mem location 8
-		addra(31 downto 0)<=  std_logic_vector(to_unsigned(8,addra'length));
-		wait for clk_period;
-		dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
+		-- 	wea <= x"FF";
+		-- wait for clk_period*10;
+		-- addra(7 downto 0)<=  x"00";
+		-- wait for clk_period;
+		-- -- write 0.5 to mem location 0
+		-- dina(63 downto 0) <= "0011111111000000000000000000000000000000000000000000000000000000";
+		-- wait for clk_period;
+		-- -- write 0.25 to mem location 8
+		-- addra(31 downto 0)<=  std_logic_vector(to_unsigned(8,addra'length));
+		-- wait for clk_period;
+		-- dina(63 downto 0) <= "0011111110100000000000000000000000000000000000000000000000000000";
 
 		wait for clk_period*2049;
 	   activate_wire <= '1';
@@ -103,6 +103,8 @@
 		wait for clk_period;
 		-- Input 0.1
 		xstate<= "0011111101110011001100110011001100110011001100110011001100110011";
+		-- Input 0.55
+		xstate<= x"3fe199999999999a";
 		wait for clk_period*1000;
 	   wait; -- will wait forever 
       END PROCESS tb;

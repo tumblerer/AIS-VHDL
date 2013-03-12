@@ -121,7 +121,7 @@ BEGIN
 
 
       activate_in <= '1';
-      wait for clk_period*54;
+      wait for clk_period*53;
       LPR_In <= x"c029000000000000";
       wait for clk_period;
       LPR_In <= x"c044400000000000";

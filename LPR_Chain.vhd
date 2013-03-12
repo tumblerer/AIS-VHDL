@@ -35,10 +35,12 @@ component Generate_Sample is
 			sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 end component;
-
+  type wire_array is array(STEPS downto 1) of std_logic_vector(STATE_SIZE downto 0);
+  signal activate_wire : wire_array;
+  signal X_wire : wire_array;
 	signal activate_in : std_logic;
 	signal Beta : std_logic_vector(STATE_SIZE downto 0);
-
+	signal xState : std_logic_vector (STATE_SIZE downto 0);
 
 begin
 
@@ -46,44 +48,25 @@ begin
           clk => clk,
           reset => reset,
           activate => activate_gen,
-          sample_output => xState
+          sample_output => X_wire(0)
         );
 
   Chain: for i in 1 to STEPS generate
   begin
-    LPR_TOP0: if (i = 1) generate
-      begin T0: entity work.LPR_top Port Map (
+    LPR_TOP0: entity work.LPR_top Port Map (
          clk => clk,
          reset => reset,
          Beta => beta,
          activate_in => activate_in,
          activate_out => activate_out,
-         X_In => ,
-         X_out =>,
+         X_In => X_wire(i),
+         X_out => X_wire(i+1),
          Mem_Addr_B_In => Mem_Addr_B_In,
          Mem_Data_B_In =>  Mem_Data_B_In,
          Mem_Addr_B_Out => Mem_Addr_B_Out,
          Mem_Data_B_Out =>  Mem_Data_B_Out,
          seed => seed_source(i)
     );
-    end generate LPR_TOP0;
-    
-    LPR_TOP1: if (i /=1) generate
-      begin T1: entity work.LPR_top Port Map (
-         clk => clk,
-         reset => reset,
-         Beta => beta,
-         activate_in => activate_in,
-         activate_out => activate_out,
-         X_In => ,
-         X_out =>,
-         Mem_Addr_B_In => Mem_Addr_B_In,
-         Mem_Data_B_In =>  Mem_Data_B_In,
-         Mem_Addr_B_Out => Mem_Addr_B_Out,
-         Mem_Data_B_Out =>  Mem_Data_B_Out,
-         seed => seed_source(i)
-        );
-    end generate LPR_TOP1;
 
   end generate;
 
