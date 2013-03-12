@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+library work;
+use work.Pack.all;
 
 
 entity LPR_Chain is
@@ -28,48 +29,83 @@ component LPR_top is
 end component;
 
 component Generate_Sample is
-    Port (	clk : in std_logic;
-			reset : in std_logic;
-			activate: in std_logic;
-			seed : in std_logic_vector(129 downto 0);
-			sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
-	); 
+    Port (  
+        clk : in std_logic;
+        reset : in std_logic;
+        activate: in std_logic;
+        seed : in std_logic_vector(127 downto 0);
+        sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+  ); 
+
 end component;
-  type wire_array is array(STEPS downto 1) of std_logic_vector(STATE_SIZE downto 0);
-  signal activate_wire : wire_array;
+  type wire_array is array(STEPS downto 0) of std_logic_vector(STATE_SIZE downto 0);
+  type single_wire_array is array(STEPS downto 0) of std_logic;
+  signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
-	signal activate_in : std_logic;
+  signal Mem_Data_B_Out ,Mem_Data_B_In : std_logic_vector(STATE_SIZE downto 0);
+	signal  Mem_Addr_B_Out, Mem_Addr_B_In :std_logic_vector(31 downto 0);
+  signal activate_in : std_logic;
 	signal Beta : std_logic_vector(STATE_SIZE downto 0);
-	signal xState : std_logic_vector (STATE_SIZE downto 0);
+	signal activate_gen: std_logic;
+  signal seed : std_logic_vector (127 downto 0);
+
+  signal counter: integer range 0 to 2050;
 
 begin
 
-  Generate_Sample :  entity work.Generate_Sample Port Map(
+  Gen:  entity work.Generate_Sample Port Map(
           clk => clk,
           reset => reset,
           activate => activate_gen,
+          seed => seed, 
           sample_output => X_wire(0)
         );
 
-  Chain: for i in 1 to STEPS generate
+  Chain: for i in 1 to 1 generate
   begin
     LPR_TOP0: entity work.LPR_top Port Map (
          clk => clk,
          reset => reset,
          Beta => beta,
-         activate_in => activate_in,
-         activate_out => activate_out,
+         activate_in => activate_wire(i-1),
+         activate_out => activate_wire(i),
          X_In => X_wire(i),
          X_out => X_wire(i+1),
          Mem_Addr_B_In => Mem_Addr_B_In,
          Mem_Data_B_In =>  Mem_Data_B_In,
          Mem_Addr_B_Out => Mem_Addr_B_Out,
-         Mem_Data_B_Out =>  Mem_Data_B_Out,
-         seed => seed_source(i)
+         Mem_Data_B_Out =>  Mem_Data_B_Out
     );
 
   end generate;
 
+  seed <= x"0123456789abcdef0123456789abcdef";
+  Mem_Data_B_In <= (Others=>'0');
 
+  Control : process
+  begin
+    wait until clk'EVENT AND clk='1';
+      if reset = '1' then
+        activate_gen <= '0';
+        activate_wire(1) <= '0';
+        counter <= 0;
+      else
+        if counter < 2100 then
+          counter <= counter + 1;
+          activate_wire(1) <='0';
+        else 
+         activate_wire(1) <= '1';
+        end if;
+
+        if counter > 200 then
+          activate_gen <= '1';
+        else
+          activate_gen <= '0';
+        end if;
+         
+      end if;
+
+
+  end process ; -- Control
 
 end architecture ; -- behavorial
