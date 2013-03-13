@@ -39,6 +39,8 @@ component Generate_Sample is
   ); 
 
 end component;
+ 
+ --Arrays
   type wire_array is array(STEPS downto 0) of std_logic_vector(STATE_SIZE downto 0);
   type single_wire_array is array(STEPS downto 0) of std_logic;
   type mem_addr_wire is array(STEPS downto 0) of std_logic_vector(31 downto 0); 
@@ -46,12 +48,19 @@ end component;
   signal X_wire : wire_array;
   signal Mem_Data_B : wire_array;
 	signal Mem_Addr_B :mem_addr_wire;
+  
   signal activate_in : std_logic;
 	signal Beta_in : std_logic_vector(STATE_SIZE downto 0);
 	signal activate_gen: std_logic;
   signal seed : std_logic_vector (127 downto 0);
+  
+  -- Pipeline
   signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS);
+  signal Loop_back_output : std_logic_vector(STATE_SIZE downto 0);
 
+  -- Gen
+  signal sample_output : std_logic_vector(STATE_SIZE downto 0);
+  
   -- BRAM
   signal addr_a, addrb : std_logic_vector(31 downto 0);
   signal write_a : std_logic_vector(7 downto 0);
@@ -114,6 +123,11 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
         addr_a <= std_logic_vector(to_unsigned(0,addr_a'length));
       else
         write_a <= x"FF";
+
+        Loop_Back_Pipe(1) <= X_wire(BLOCKS);
+        Loop_Back_Pipe(2 to STEPS*RUNS-TOTAL_PIPE*BLOCKS) <= Loop_Back_Pipe(1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS-1);
+        Loop_back_output <= Loop_Back_Pipe(STEPS*RUNS-TOTAL_PIPE*BLOCKS)
+       
         if counter < 2100 then
           activate_wire(0) <='0';
         else 
@@ -131,9 +145,15 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
         else
           address_counter <= address_counter + 8;
           addr_a <= std_logic_vector(to_unsigned(address_counter,addr_a'length));
-        end if;  
-      end if;
+        end if;
 
+        if counter > RUNS then
+          X_wire(0) <= Loop_back_output;
+        else
+          X_wire(0) <= sample_output;
+        end if;
+
+      end if;
 
   end process ; -- Control
 
