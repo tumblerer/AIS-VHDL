@@ -56,6 +56,7 @@ end component;
   signal seed : std_logic_vector (127 downto 0);
   
   -- Pipeline
+  -- Needs to be conditionally generated
   signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS);
   signal Loop_back_output : std_logic_vector(STATE_SIZE downto 0);
 
@@ -68,7 +69,7 @@ end component;
   signal doutb : std_logic_vector(63 downto 0);
 
   --Counter
-  signal counter: integer range 0 to RUNS*STEPS+2100+TOTAL_PIPE*BLOCKS;
+  signal counter: integer range 0 to RUNS*STEPS+2100+TOTAL_PIPE*BLOCKS+1;
   signal address_counter : integer range 0 to RUNS*STEPS*8;
 begin
 
@@ -108,6 +109,7 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_Out => Mem_Addr_B(1),
            Mem_Data_B_Out =>  Mem_Data_B(1)
       ); end generate CHAIN1;
+
       CHAIN2 : if (i /= BLOCKS) generate
         begin LPR_TOP1 : entity work.LPR_top Port Map (
            clk => clk,
@@ -139,10 +141,14 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
       else
         write_a <= x"FF";
 
-        Loop_Back_Pipe(1) <= X_wire(BLOCKS);
-        Loop_Back_Pipe(2 to STEPS*RUNS-TOTAL_PIPE*BLOCKS) <= Loop_Back_Pipe(1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS-1);
-        Loop_back_output <= Loop_Back_Pipe(STEPS*RUNS-TOTAL_PIPE*BLOCKS);
-       
+        if TOTAL_PIPE*BLOCKS < RUNS then
+          Loop_Back_Pipe(1) <= X_wire(BLOCKS);
+          Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE*BLOCKS-1);
+          Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE*BLOCKS);
+        else
+          Loop_back_output <= X_wire(BLOCKS);
+        end if;
+
         if counter < 2100 then
           activate_wire(0) <='0';
         else 
@@ -155,14 +161,24 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
           activate_gen <= '0';
         end if;
 
-        if counter < STEPS*RUNS+2100+TOTAL_PIPE*BLOCKS then
+        -- Produce a sample for each run
+        if counter < RUNS+2100-1 then
           X_wire(0) <= sample_output;
+        else
+          if counter < RUNS+2100+TOTAL_PIPE*BLOCKS then
+            X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
+          else
+            X_wire(0) <= Loop_back_output;   
+          end if;       
+        end if;
+
+        if counter < 2100+STEPS*TOTAL_PIPE then
           counter <= counter + 1;
         else
           address_counter <= address_counter + 8;
           addr_a <= std_logic_vector(to_unsigned(address_counter,addr_a'length));
-          X_wire(0) <= Loop_back_output;
         end if;
+
 
       end if;
 
