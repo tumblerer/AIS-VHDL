@@ -11,11 +11,11 @@ constant RATIO_SIZE: integer := 63;		-- Number of bits for ratio values
 constant LPR_SIZE:	integer := 63;
 
 -- Paramaters (again, generics?)
-constant STEPS: integer := 200;
+constant STEPS: integer := 100;
 -- Basically how many states
-constant RUNS: integer := 20;
+constant RUNS: integer := 2;
 
-constant BLOCKS: integer:=5;
+constant BLOCKS: integer:=1;
 -- Mean 1
 constant MEAN: std_logic_vector(63 downto 0) := x"3ff0000000000000";
 -- 1/Sd 1/(2*0.1^2)

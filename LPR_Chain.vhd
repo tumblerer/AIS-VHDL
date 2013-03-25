@@ -41,12 +41,13 @@ component Generate_Sample is
 end component;
  
  --Arrays
-  type wire_array is array(STEPS downto 0) of std_logic_vector(STATE_SIZE downto 0);
-  type single_wire_array is array(STEPS downto 0) of std_logic;
-  type mem_addr_wire is array(STEPS downto 0) of std_logic_vector(31 downto 0); 
+  type wire_array is array(BLOCKS downto 0) of std_logic_vector(STATE_SIZE downto 0);
+  type single_wire_array is array(BLOCKS downto 0) of std_logic;
+  type mem_addr_wire is array(BLOCKS+1 downto 0) of std_logic_vector(31 downto 0); 
+  type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(STATE_SIZE downto 0);
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
-  signal Mem_Data_B : wire_array;
+  signal Mem_Data_B : mem_data_wire;
 	signal Mem_Addr_B :mem_addr_wire;
   
   signal activate_in : std_logic;
@@ -67,7 +68,7 @@ end component;
   signal doutb : std_logic_vector(63 downto 0);
 
   --Counter
-  signal counter: integer range 0 to RUNS*STEPS+1;
+  signal counter: integer range 0 to RUNS*STEPS+2100+TOTAL_PIPE*BLOCKS;
   signal address_counter : integer range 0 to RUNS*STEPS*8;
 begin
 
@@ -76,7 +77,7 @@ begin
           reset => reset,
           activate => activate_gen,
           seed => seed, 
-          sample_output => X_wire(0)
+          sample_output => sample_output
         );
 
   -- BRAM for all the final X states found
@@ -93,20 +94,34 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   Chain: for i in 1 to BLOCKS generate
   begin
-    LPR_TOP0: entity work.LPR_top Port Map (
-         clk => clk,
-         reset => reset,
-         Beta => beta(i),
-         activate_in => activate_wire(i-1),
-         activate_out => activate_wire(i),
-         X_In => X_wire(i-1),
-         X_out => X_wire(i),
-         Mem_Addr_B_In => Mem_Addr_B(i),
-         Mem_Data_B_In =>  Mem_Data_B(i),
-         Mem_Addr_B_Out => Mem_Addr_B(i+1),
-         Mem_Data_B_Out =>  Mem_Data_B(i+1)
-    );
-
+      CHAIN1: if (i = BLOCKS) generate
+        begin LPR_TOP0 : entity work.LPR_top Port Map (
+           clk => clk,
+           reset => reset,
+           Beta => beta(i),
+           activate_in => activate_wire(i-1),
+           activate_out => activate_wire(i),
+           X_In => X_wire(i-1),
+           X_out => X_wire(i),
+           Mem_Addr_B_In => Mem_Addr_B(i),
+           Mem_Data_B_In =>  Mem_Data_B(i),
+           Mem_Addr_B_Out => Mem_Addr_B(1),
+           Mem_Data_B_Out =>  Mem_Data_B(1)
+      ); end generate CHAIN1;
+      CHAIN2 : if (i /= BLOCKS) generate
+        begin LPR_TOP1 : entity work.LPR_top Port Map (
+           clk => clk,
+           reset => reset,
+           Beta => beta(i),
+           activate_in => activate_wire(i-1),
+           activate_out => activate_wire(i),
+           X_In => X_wire(i-1),
+           X_out => X_wire(i),
+           Mem_Addr_B_In => Mem_Addr_B(i),
+           Mem_Data_B_In =>  Mem_Data_B(i),
+           Mem_Addr_B_Out => Mem_Addr_B(i+1),
+           Mem_Data_B_Out =>  Mem_Data_B(i+1)
+      ); end generate CHAIN2;
   end generate;
 
   seed <= x"0123456789abcdef0123456789abcdef";
@@ -126,7 +141,7 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
 
         Loop_Back_Pipe(1) <= X_wire(BLOCKS);
         Loop_Back_Pipe(2 to STEPS*RUNS-TOTAL_PIPE*BLOCKS) <= Loop_Back_Pipe(1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS-1);
-        Loop_back_output <= Loop_Back_Pipe(STEPS*RUNS-TOTAL_PIPE*BLOCKS)
+        Loop_back_output <= Loop_Back_Pipe(STEPS*RUNS-TOTAL_PIPE*BLOCKS);
        
         if counter < 2100 then
           activate_wire(0) <='0';
@@ -140,17 +155,13 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
           activate_gen <= '0';
         end if;
 
-        if counter < STEPS*RUNS  then
+        if counter < STEPS*RUNS+2100+TOTAL_PIPE*BLOCKS then
+          X_wire(0) <= sample_output;
           counter <= counter + 1;
         else
           address_counter <= address_counter + 8;
           addr_a <= std_logic_vector(to_unsigned(address_counter,addr_a'length));
-        end if;
-
-        if counter > RUNS then
           X_wire(0) <= Loop_back_output;
-        else
-          X_wire(0) <= sample_output;
         end if;
 
       end if;
