@@ -13,7 +13,7 @@ entity Generate_Sample is
       clk : in std_logic;
 				reset : in std_logic;
 				activate: in std_logic;
-        seed : in std_logic_vector(127 downto 0);
+        seed : in std_logic;
 				sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
 	); 
 
@@ -91,22 +91,22 @@ begin
   				nstate <= load_rng;
 				  rng_mode_norm <= '0';
   				rng_ce_norm <= '0';
-			   	s_in_norm <= seed(0);
+			   	s_in_norm <= seed;
   			when load_rng =>
   				nstate <= load_rng;
   				rng_mode_norm <= '1';
   				rng_ce_norm <= '1';
   				if load_rng_counter = 1 then
-  					s_in_norm <= seed(0);
+  					s_in_norm <= seed;
   				elsif load_rng_counter >= 127 then
   					rng_mode_norm <= '0';
   					nstate<= running;
-					s_in_norm <= seed(0);
+					s_in_norm <= seed;
   				else
-  					s_in_norm <= seed(load_rng_counter);
+  					s_in_norm <= seed;
   				end if;
   			when running =>
-				s_in_norm <= seed(0);
+				s_in_norm <= seed;
 				rng_ce_norm <= '1';
 				rng_mode_norm <= '0';
   				nstate <= running;

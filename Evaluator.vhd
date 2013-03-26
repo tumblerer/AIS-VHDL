@@ -20,7 +20,7 @@ entity Evaluator is
            Comp_In : in std_logic_vector(0 downto 0);
            Proposed_LPR : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
            x_out : out std_logic_vector(STATE_SIZE downto 0);
-           seed : in  std_logic_vector(2048 downto 0)
+           seed : in  std_logic
     );
 end Evaluator;
 
@@ -147,7 +147,7 @@ begin
 			when idle =>
 				rng_ce_norm <= '0';
 				rng_mode_norm <= '0';
-				s_in_norm <= seed(load_rng_counter);
+				s_in_norm <= seed;
 				nstate <= load_rng;
 				x_out <= (others => '0');
 
@@ -156,20 +156,20 @@ begin
 				rng_ce_norm <= '1';
 				rng_mode_norm <= '1';
 				if load_rng_counter = 1 then
-					s_in_norm <= seed(0);
+					s_in_norm <= seed;
 				elsif load_rng_counter >= 2048 then
 					rng_mode_norm <= '0';
 					nstate<= running;
-					s_in_norm <= seed(load_rng_counter);
+					s_in_norm <= seed;
 				else
-					s_in_norm <= seed(load_rng_counter);
+					s_in_norm <= seed;
 				end if;
 				x_out <= (others => '0');
 			
 			when running =>
 				rng_ce_norm <= '1';
 				rng_mode_norm <= '0';
-				s_in_norm <= seed(load_rng_counter);
+				s_in_norm <= seed;
 				nstate <= running; 		
 				if Comp_In = "1" then
 					x_out <= Proposed_Sample_out;

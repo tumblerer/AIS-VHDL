@@ -17,7 +17,7 @@ entity Comparator is
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
            Beta : in  STD_LOGIC_VECTOR (63 downto 0);
            activate_out: out std_logic;
-           seed: in std_logic_vector(2048 downto 0)
+           seed: in std_logic
       );
 end Comparator;
 
@@ -190,7 +190,7 @@ Control_sync: PROCESS
           nstate <= load_rng;
           rng_ce_uni <= '0';
           rng_mode_uni <= '0';
-          s_in_uni <= seed(load_rng_counter);
+          s_in_uni <= seed;
           write_a <= x"FF";
           Mem_Addr_B_In <= x"00000000";
           addr_a <= x"00000000";
@@ -206,19 +206,19 @@ Control_sync: PROCESS
           data_in_a <= (others=> '0');
 
           if load_rng_counter = 1 then
-            s_in_uni <= seed(0);
+            s_in_uni <= seed;
           elsif load_rng_counter >= 2048 then
             rng_mode_uni <= '1';
             nstate<= running;
-            s_in_uni <= seed(load_rng_counter);
+            s_in_uni <= seed;
           else
-            s_in_uni <= seed(load_rng_counter);
+            s_in_uni <= seed;
           end if; 
       
         when running =>
           rng_ce_uni <= '1';
           rng_mode_uni <= '0';
-          s_in_uni <= seed(load_rng_counter);
+          s_in_uni <= seed;
 
           nstate <= running; 
           write_a <= x"FF";

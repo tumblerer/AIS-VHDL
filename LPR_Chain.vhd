@@ -7,9 +7,15 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity LPR_Chain is
   port (
-	clk : in std_logic;
-	reset : in std_logic
-  ) ;
+    	clk : in std_logic;
+    	reset : in std_logic;
+      addra_seed : in std_logic_vector(31 downto 0);
+      addra_beta : in std_logic_vector(31 downto 0);
+      dina_seed : in std_logic_vector(63 downto 0);
+      dina_beta : in std_logic_vector(63 downto 0);
+      wea_seed : in std_logic_vector(7 downto 0);
+      wea_beta : in std_logic_vector(7 downto 0)
+   ) ;
 end entity ; -- LPR_Chain
 
 architecture behavorial of LPR_Chain is
@@ -26,7 +32,9 @@ component LPR_top is
            Mem_Addr_B_In : out  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
-           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0));
+           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
+           seed : in std_logic
+           );
 end component;
 
 component Generate_Sample is
@@ -34,7 +42,7 @@ component Generate_Sample is
         clk : in std_logic;
         reset : in std_logic;
         activate: in std_logic;
-        seed : in std_logic_vector(127 downto 0);
+        seed : in std_logic;
         sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
   ); 
 
@@ -49,6 +57,7 @@ end component;
   signal X_wire : wire_array;
   signal Mem_Data_B : mem_data_wire;
 	signal Mem_Addr_B :mem_addr_wire;
+  signal beta_wire : wire_array;
   
   signal activate_in : std_logic;
 	signal Beta_in : std_logic_vector(STATE_SIZE downto 0);
@@ -68,16 +77,24 @@ end component;
   signal write_a : std_logic_vector(7 downto 0);
   signal doutb : std_logic_vector(63 downto 0);
 
+--Seed BRAM
+  signal addrb_beta, addrb_seed : std_logic_vector(31 downto 0);
+  signal doutb_beta : std_logic_vector(STATE_SIZE downto 0);
+  signal doutb_seed : std_logic_vector(63 downto 0);
+
   --Counter
-  signal counter: integer range 0 to RUNS*STEPS+2100+TOTAL_PIPE*BLOCKS+1;
-  signal address_counter : integer range 0 to RUNS*STEPS*8;
+  signal counter: integer range 0 to 2100+STEPS*TOTAL_PIPE*BLOCKS+1;
+  signal address_counter_X : integer range 0 to RUNS*STEPS*8;
+  signal address_counter_beta :integer range 0 to 8*STEPS;
+  signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
+  signal block_counter : integer range 1 to BLOCKS;
 begin
 
   Gen:  entity work.Generate_Sample Port Map(
           clk => clk,
           reset => reset,
           activate => activate_gen,
-          seed => seed, 
+          seed => doutb_seed(0), 
           sample_output => sample_output
         );
 
@@ -93,13 +110,35 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
        doutb => doutb
   );
 
+BRAM_BETA: ENTITY work.Dual_Port_BRAM PORT MAP(
+       clka => clk,
+       wea => wea_beta,
+       addra => addra_beta,
+       dina => dina_beta,
+       clkb => clk,
+       rstb => reset,
+       addrb => addrb_beta,
+       doutb => doutb_beta
+  );
+
+BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
+       clka => clk,
+       wea => wea_seed,
+       addra => addra_seed,
+       dina => dina_seed,
+       clkb => clk,
+       rstb => reset,
+       addrb => addrb_seed,
+       doutb => doutb_seed
+  );
+
   Chain: for i in 1 to BLOCKS generate
   begin
       CHAIN1: if (i = BLOCKS) generate
         begin LPR_TOP0 : entity work.LPR_top Port Map (
            clk => clk,
            reset => reset,
-           Beta => beta(i),
+           Beta => beta_wire(i),
            activate_in => activate_wire(i-1),
            activate_out => activate_wire(i),
            X_In => X_wire(i-1),
@@ -107,14 +146,15 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_In => Mem_Addr_B(i),
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(1),
-           Mem_Data_B_Out =>  Mem_Data_B(1)
+           Mem_Data_B_Out =>  Mem_Data_B(1),
+           seed => doutb_seed(i)
       ); end generate CHAIN1;
 
       CHAIN2 : if (i /= BLOCKS) generate
         begin LPR_TOP1 : entity work.LPR_top Port Map (
            clk => clk,
            reset => reset,
-           Beta => beta(i),
+           Beta => beta_wire(i),
            activate_in => activate_wire(i-1),
            activate_out => activate_wire(i),
            X_In => X_wire(i-1),
@@ -122,12 +162,13 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_In => Mem_Addr_B(i),
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(i+1),
-           Mem_Data_B_Out =>  Mem_Data_B(i+1)
+           Mem_Data_B_Out =>  Mem_Data_B(i+1),
+           seed => doutb_seed(i)
       ); end generate CHAIN2;
   end generate;
 
-  seed <= x"0123456789abcdef0123456789abcdef";
-  Mem_Data_B(1) <= (Others => '0');
+  --seed <= x"0123456789abcdef0123456789abcdef";
+  --Mem_Data_B(1) <= (Others => '0');
   
   Control : process
   begin
@@ -136,7 +177,10 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
         activate_gen <= '0';
         activate_wire(0) <= '0';
         counter <= 0;
-        address_counter <= 0;
+        address_counter_X <= 0;
+        address_counter_seed <= 0;
+        address_counter_beta <= 0;
+        block_counter <= BLOCKS;
         addr_a <= std_logic_vector(to_unsigned(0,addr_a'length));
       else
         write_a <= x"FF";
@@ -172,14 +216,34 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
           end if;       
         end if;
 
+        -- Address Final X memory
         if counter < 2100+STEPS*TOTAL_PIPE then
           counter <= counter + 1;
         else
-          address_counter <= address_counter + 8;
-          addr_a <= std_logic_vector(to_unsigned(address_counter,addr_a'length));
+          address_counter_X <= address_counter_X + 8;
+          addr_a <= std_logic_vector(to_unsigned(address_counter_X,addr_a'length));
         end if;
 
+        -- Address seed memory
+        if counter < 2100 then
+          address_counter_seed <= address_counter_seed + 8;
+          addrb_seed <= std_logic_vector(to_unsigned(address_counter_seed,addrb_seed'length));
+        else
+          address_counter_seed <= 0;
+          addrb_seed <= std_logic_vector(to_unsigned(address_counter_seed,addrb_seed'length));
+        end if;
 
+        -- Address beta values
+        if counter = 2000 OR counter mod (BETA_PIPE+RUNS) = 0 then
+          block_counter <= 1;
+        elsif block_counter < BLOCKS then
+          block_counter <= block_counter + 1;
+          address_counter_beta <= address_counter_beta + 8;
+        end if;
+
+        beta_wire(block_counter) <= doutb_beta;
+        addrb_beta <= std_logic_vector(to_unsigned(address_counter_beta,addrb_seed'length));
+        
       end if;
 
   end process ; -- Control
