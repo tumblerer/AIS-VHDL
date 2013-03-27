@@ -16,7 +16,7 @@ constant STEPS: integer := 100;
 constant RUNS: integer := 3;
 
 -- Blocks per chain
-constant BLOCKS: integer:=2;
+constant BLOCKS: integer:=3;
 -- Mean 1
 constant MEAN: std_logic_vector(63 downto 0) := x"3ff0000000000000";
 -- 1/Sd 1/(2*0.1^2)
