@@ -22,7 +22,9 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
   		  dina_seed : in std_logic_vector(63 downto 0);
   		  dina_beta : in std_logic_vector(63 downto 0);
   		  wea_seed : in std_logic_vector(7 downto 0);
-  		  wea_beta : in std_logic_vector(7 downto 0)
+  		  wea_beta : in std_logic_vector(7 downto 0);
+        addrb_X : in std_logic_vector(31 downto 0);
+        doutb_x : out  std_logic_vector(63 downto 0)
    ) ;
     END COMPONENT;
     
@@ -36,6 +38,8 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
    signal dina_beta : std_logic_vector(63 downto 0);
    signal addra_beta : std_logic_vector(31 downto 0);
    signal addra_seed : std_logic_vector(31 downto 0);
+   signal addrb_x : std_logic_vector(31 downto 0);
+   signal doutb_x : std_logic_vector(63 downto 0);
    -- Clock period definitions
    constant clk_period : time := 10 ns;
  
@@ -50,7 +54,9 @@ BEGIN
           dina_beta => dina_beta,
           dina_seed => dina_seed,
           wea_beta => wea_beta,
-          wea_seed => wea_seed
+          wea_seed => wea_seed,
+          addrb_x => addrb_x,
+          doutb_x => doutb_x
         );
 
    -- Clock process definitions

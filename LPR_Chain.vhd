@@ -14,7 +14,9 @@ entity LPR_Chain is
       dina_seed : in std_logic_vector(63 downto 0);
       dina_beta : in std_logic_vector(63 downto 0);
       wea_seed : in std_logic_vector(7 downto 0);
-      wea_beta : in std_logic_vector(7 downto 0)
+      wea_beta : in std_logic_vector(7 downto 0);
+      addrb_X : in std_logic_vector(31 downto 0);
+      doutb_x : out  std_logic_vector(63 downto 0)
    ) ;
 end entity ; -- LPR_Chain
 
@@ -75,9 +77,8 @@ end component;
   signal sample_output : std_logic_vector(STATE_SIZE downto 0);
   
   -- BRAM
-  signal addr_a, addrb : std_logic_vector(31 downto 0);
+  signal addr_a : std_logic_vector(31 downto 0);
   signal write_a : std_logic_vector(7 downto 0);
-  signal doutb : std_logic_vector(63 downto 0);
 
 --Seed BRAM
   signal addrb_beta, addrb_seed : std_logic_vector(31 downto 0);
@@ -112,8 +113,8 @@ BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
        dina => X_wire(BLOCKS),
        clkb => clk,
        rstb => reset,
-       addrb => addrb,
-       doutb => doutb
+       addrb => addrb_x,
+       doutb => doutb_x
   );
 
 BRAM_BETA: ENTITY work.Dual_Port_BRAM PORT MAP(
@@ -261,7 +262,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
         -- Increment beta value after a settime
         -- Changes first block after all particles have passed
-        if beta_counter /= 0 AND beta_counter mod (BETA_PIPE+RUNS-1) = 0 AND first_beta = 2 then
+        if beta_counter = (BETA_PIPE+RUNS-1) AND first_beta = 2 then
           block_counter_delay <= 0;
           first_beta <= 1;
           address_counter_beta <= address_counter_beta + 8;
