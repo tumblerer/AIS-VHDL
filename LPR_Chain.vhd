@@ -60,13 +60,15 @@ end component;
 	signal Mem_Addr_B :mem_addr_wire;
   signal beta_wire : beta_wire_array;
   
+  signal X_delay : wire_array;
+
   --signal activate_in : std_logic;
 	signal activate_gen: std_logic;
   --signal seed : std_logic_vector (127 downto 0);
   
   -- Pipeline
   -- Needs to be conditionally generated
-  signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE*BLOCKS);
+  signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE_INCR*BLOCKS);
   signal Loop_back_output : std_logic_vector(STATE_SIZE downto 0);
 
   -- Gen
@@ -83,13 +85,13 @@ end component;
   signal doutb_seed : std_logic_vector(63 downto 0);
 
   --Counter
-  signal counter: integer range 0 to 2100+STEPS*TOTAL_PIPE*BLOCKS+1;
+  signal counter: integer range 0 to 2100+STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
   signal address_counter_X : integer range 0 to RUNS*STEPS*8;
   signal address_counter_beta :integer range 0 to 8*STEPS;
   signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
-  signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE*BLOCKS+1;
+  signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
   signal block_counter : integer range 0 to BLOCKS;
-  signal block_counter_delay : integer range 0 to TOTAL_PIPE+1;
+  signal block_counter_delay : integer range 0 to TOTAL_PIPE_INCR+2;
   signal first_beta : integer range 0 to 1;
 
 begin
@@ -185,17 +187,17 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         address_counter_seed <= 0;
         address_counter_beta <= 0;
         beta_counter <= 0;
-        block_counter <= 1;
-        block_counter_delay <= TOTAL_PIPE+1;
+        block_counter <= 0;
+        block_counter_delay <= TOTAL_PIPE_INCR+2;
         first_beta <= 1;
         addr_a <= std_logic_vector(to_unsigned(0,addr_a'length));
       else
         write_a <= x"FF";
 
-        if TOTAL_PIPE*BLOCKS < RUNS then
+        if TOTAL_PIPE_INCR*BLOCKS < RUNS then
           Loop_Back_Pipe(1) <= X_wire(BLOCKS);
-          Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE*BLOCKS-1);
-          Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE*BLOCKS);
+          Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
+          Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
         else
           Loop_back_output <= X_wire(BLOCKS);
         end if;
@@ -216,7 +218,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         if counter >= 2100 AND counter < RUNS+2100 then
           X_wire(0) <= sample_output;
         else
-          if counter < 2100+TOTAL_PIPE*BLOCKS then
+          if counter < 2100+TOTAL_PIPE_INCR*BLOCKS then
             X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
           else
             X_wire(0) <= Loop_back_output;   
@@ -224,7 +226,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         end if;
 
         -- Address Final X memory
-        if counter < 2100+STEPS*TOTAL_PIPE then
+        if counter < 2100+STEPS*TOTAL_PIPE_INCR then
           counter <= counter + 1;
         else
           address_counter_X <= address_counter_X + 8;
@@ -247,27 +249,32 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         end if;
 
         if counter < 2100 then
-          beta_counter <= 0; -- random value to prevent modulo = 0
+          beta_counter <= 0; 
         else 
           beta_counter <= beta_counter +1;
         end if;
 
         -- Increment beta value after a settime
         -- Changes first block after all particles have passed
-        if beta_counter /= 0 AND beta_counter mod (BETA_PIPE+RUNS) = 0 AND first_beta = 1 then
+        if beta_counter /= 0 AND beta_counter mod (BETA_PIPE+RUNS-3) = 0 AND first_beta = 1 then
           block_counter_delay <= 0;
           first_beta <= 0;
           address_counter_beta <= address_counter_beta + 8;
-        elsif block_counter_delay < TOTAL_PIPE then
+        elsif block_counter_delay < TOTAL_PIPE_INCR+1 then
           block_counter_delay <= block_counter_delay + 1;
         end if;
 
-        if block_counter_delay = TOTAL_PIPE then
+        if block_counter = 1 and block_counter_delay = TOTAL_PIPE_INCR +1 then
           address_counter_beta <= address_counter_beta + 8;
           block_counter_delay <= 0;
         end if;
 
-        if block_counter < BLOCKS AND block_counter_delay = TOTAL_PIPE then
+        if block_counter /= 1 and block_counter_delay = TOTAL_PIPE_INCR then
+          address_counter_beta <= address_counter_beta + 8;
+          block_counter_delay <= 0;
+        end if;
+
+        if block_counter < BLOCKS AND block_counter_delay = TOTAL_PIPE_INCR then
           block_counter <= block_counter + 1;
         elsif block_counter = BLOCKS then
           block_counter <= 1;
