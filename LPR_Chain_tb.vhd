@@ -75,8 +75,8 @@ BEGIN
       addra_beta <= std_logic_vector(to_unsigned(0,addra_beta'length));
       addra_seed <= std_logic_vector(to_unsigned(0,addra_seed'length));
       wait for clk_period;
-      dina_beta <= std_logic_vector(to_unsigned(0,dina_beta'length));
-      dina_seed <= std_logic_vector(to_unsigned(0,dina_seed'length));
+      dina_beta <= "0011111110100000000000000000000000000000000000000000000000000000";
+      dina_seed <= "0011111110100000000000000000000000000000000000000000000000000000";
       wait for clk_period;
       
       -- 0.5
@@ -86,17 +86,30 @@ BEGIN
       dina_beta <= "0011111111000000000000000000000000000000000000000000000000000000";
       dina_seed <= "0011111111000000000000000000000000000000000000000000000000000011";
 
-      -- 1.0
       wait for clk_period;
       addra_beta <= x"00000010";
       addra_seed <= x"00000010";
+      dina_beta <=  "0011111111010000000000000000000000000000000000000000000000000000";
+      -- 1.0
+      wait for clk_period;
+      addra_beta <= x"00000018";
+      addra_seed <= x"00000018";
       wait for clk_period;
       dina_beta <= "0011111111100000000000000000000000000000000000000000000000000000";
       dina_seed <= "0011111111100000000000000000000000000000000000000000000000000011";
       -- insert stimulus here 
       wait for clk_period;
-      reset <= '0';
 
+      seed_load : for i in 1 to 100 loop
+         addra_seed <= std_logic_vector(to_unsigned(i*8*2,addra_seed'length));
+         wait for clk_period;
+         dina_seed <= "0011111111100000000000000000000000000000000000000000000000000011";
+         addra_seed <= std_logic_vector(to_unsigned((i-1)*8*2,addra_seed'length));
+         wait for clk_period;
+         dina_seed <= "0011111111100000000000000000000000000000000000000000000000000000";
+      end loop ; -- seed_load
+      reset <= '0';
+      wait for clk_period*100;
       wait;
    end process;
 

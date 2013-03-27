@@ -13,7 +13,7 @@ constant LPR_SIZE:	integer := 63;
 -- Paramaters (again, generics?)
 constant STEPS: integer := 100;
 -- How many states
-constant RUNS: integer := 2;
+constant RUNS: integer := 3;
 
 -- Blocks per chain
 constant BLOCKS: integer:=1;

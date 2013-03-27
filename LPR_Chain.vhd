@@ -53,16 +53,16 @@ end component;
   type single_wire_array is array(BLOCKS downto 0) of std_logic;
   type mem_addr_wire is array(BLOCKS+1 downto 0) of std_logic_vector(31 downto 0); 
   type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(STATE_SIZE downto 0);
+  type beta_wire_array is array(BLOCKS downto 1) of std_logic_vector(STATE_SIZE downto 0);
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
   signal Mem_Data_B : mem_data_wire;
 	signal Mem_Addr_B :mem_addr_wire;
-  signal beta_wire : wire_array;
+  signal beta_wire : beta_wire_array;
   
-  signal activate_in : std_logic;
-	signal Beta_in : std_logic_vector(STATE_SIZE downto 0);
+  --signal activate_in : std_logic;
 	signal activate_gen: std_logic;
-  signal seed : std_logic_vector (127 downto 0);
+  --signal seed : std_logic_vector (127 downto 0);
   
   -- Pipeline
   -- Needs to be conditionally generated
@@ -89,7 +89,8 @@ end component;
   signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
   signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE*BLOCKS+1;
   signal block_counter : integer range 0 to BLOCKS;
-  signal block_counter_delay : integer range 0 to TOTAL_PIPE;
+  signal block_counter_delay : integer range 0 to TOTAL_PIPE+1;
+  signal first_beta : integer range 0 to 1;
 
 begin
 
@@ -184,7 +185,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         address_counter_seed <= 0;
         address_counter_beta <= 0;
         beta_counter <= 0;
-        block_counter <= BLOCKS;
+        block_counter <= 1;
+        block_counter_delay <= TOTAL_PIPE+1;
+        first_beta <= 1;
         addr_a <= std_logic_vector(to_unsigned(0,addr_a'length));
       else
         write_a <= x"FF";
@@ -197,7 +200,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           Loop_back_output <= X_wire(BLOCKS);
         end if;
 
-        if counter < 2100 then
+        if counter < 2100-1 then
           activate_wire(0) <='0';
         else 
          activate_wire(0) <= '1';
@@ -210,10 +213,10 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         end if;
 
         -- Produce a sample for each run
-        if counter < RUNS+2100-1 then
+        if counter >= 2100 AND counter < RUNS+2100 then
           X_wire(0) <= sample_output;
         else
-          if counter < RUNS+2100+TOTAL_PIPE*BLOCKS then
+          if counter < 2100+TOTAL_PIPE*BLOCKS then
             X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
           else
             X_wire(0) <= Loop_back_output;   
@@ -240,29 +243,36 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         -- Address beta values
         -- Intitial Values
         if counter > 1500 AND counter < 1500+BLOCKS then
-          address_counter_beta <= address_counter_beta + 8
+          address_counter_beta <= address_counter_beta + 8;
         end if;
 
         if counter < 2100 then
-          beta_counter <= 0;
+          beta_counter <= 0; -- random value to prevent modulo = 0
         else 
           beta_counter <= beta_counter +1;
         end if;
 
         -- Increment beta value after a settime
-        if beta_counter mod (BETA_PIPE+RUNS) = 0 AND block_counter_delay = BLOCKS then
-           block_counter <= 0;
-           block_counter_delay <= 0;
-        elsif block_counter_delay < TOTAL_PIPE AND block_counter < BLOCKS then
+        -- Changes first block after all particles have passed
+        if beta_counter /= 0 AND beta_counter mod (BETA_PIPE+RUNS) = 0 AND first_beta = 1 then
+          block_counter_delay <= 0;
+          first_beta <= 0;
+          address_counter_beta <= address_counter_beta + 8;
+        elsif block_counter_delay < TOTAL_PIPE then
           block_counter_delay <= block_counter_delay + 1;
-        else
+        end if;
+
+        if block_counter_delay = TOTAL_PIPE then
+          address_counter_beta <= address_counter_beta + 8;
           block_counter_delay <= 0;
         end if;
 
         if block_counter < BLOCKS AND block_counter_delay = TOTAL_PIPE then
-          block_counter <= block_counter + 1
-          address_counter_beta <= address_counter_beta + 8;
+          block_counter <= block_counter + 1;
+        elsif block_counter = BLOCKS then
+          block_counter <= 1;
         end if;
+          
 
         beta_wire(block_counter) <= doutb_beta;
         addrb_beta <= std_logic_vector(to_unsigned(address_counter_beta,addrb_seed'length));

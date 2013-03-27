@@ -177,7 +177,7 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
+    State_machine: PROCESS(state,nstate, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
       mult1Result_ext <= "01" & mult1result;
@@ -187,7 +187,14 @@ Control_sync: PROCESS
       case (state) is
       
         when idle =>
-          nstate <= load_rng;
+          if load_rng_counter < 2048 then
+            nstate <= load_rng;
+          elsif activate_in = '0' then
+            nstate <= idle;
+          else
+            nstate <= running;
+          end if;
+            
           rng_ce_uni <= '0';
           rng_mode_uni <= '0';
           s_in_uni <= seed;
@@ -209,12 +216,18 @@ Control_sync: PROCESS
             s_in_uni <= seed;
           elsif load_rng_counter >= 2048 then
             rng_mode_uni <= '1';
-            nstate<= running;
             s_in_uni <= seed;
+            
+            if activate_in = '0' then
+              nstate <= idle;
+            else
+              nstate <= running;           
+            end if;
+
           else
             s_in_uni <= seed;
           end if; 
-      
+
         when running =>
           rng_ce_uni <= '1';
           rng_mode_uni <= '0';
