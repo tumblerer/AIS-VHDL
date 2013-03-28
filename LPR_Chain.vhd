@@ -280,11 +280,12 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           block_counter_delay <= block_counter_delay + 1;
         end if;
 
-        if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR then
+        -- Possibly need if blocks = 1, otherwise duplicate
+        if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR-1 then
           address_counter_beta <= address_counter_beta + 8;
         end if;
 
-        if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR+1 then
+        if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR then
           block_counter_delay <= 0;
           if block_counter = BLOCKS then
             block_counter <= 1;
