@@ -215,14 +215,6 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       else
         write_a <= x"FF";
 
-        if TOTAL_PIPE_INCR*BLOCKS < RUNS then
-          -- Loop_Back_Pipe(1) <= X_wire(BLOCKS);
-          -- Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
-          -- Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
-        else
-          Loop_back_output <= X_wire(BLOCKS);
-        end if;
-
         if counter < 2100-1 then
           activate_wire(0) <='0';
         else 
