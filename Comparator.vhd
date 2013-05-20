@@ -44,13 +44,14 @@ architecture Behavioral of Comparator is
   signal rng_mode_uni, rng_ce_uni : std_logic;
   signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(63 downto 0);  
   signal s_in_uni, s_out_uni : std_logic;
+
   -- Counters
   signal initial_counter : integer range 0 to 256 := 0;
   signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
   signal Address_Counter_Wr, Address_Counter_Rd: integer range 0 to 8192 :=0;
-  signal sample_counter : integer range 0 to RUNS := 0;
-
+  signal sample_counter : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
+  signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   --Memory signals
   signal  write_a : std_logic_vector(7 DOWNTO 0);
   signal data_in_a : std_logic_vector(63 downto 0):=(others => '0');
@@ -156,21 +157,30 @@ Control_sync: PROCESS
           initial_counter <= initial_counter + 1;
         end if;
 
-        if sample_counter < TOTAL_PIPE then
+        if sample_counter < TOTAL_PIPE*BLOCKS then
           sample_counter <= sample_counter + 1;
-        elsif sample_counter = TOTAL_PIPE then
+        elsif sample_counter = TOTAL_PIPE*BLOCKS then
           sample_counter <= 0;
         end if;
 
-        if sample_counter > TOTAL_PIPE-SMALL_PIPE-2  and sample_counter <= TOTAL_PIPE-SMALL_PIPE-2 + RUNS then -- Time 2 too long (hence -2)
+        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < TOTAL_PIPE*BLOCKS then
+          sample_counter_rd <= sample_counter_rd + 1;
+        else
+          sample_counter_rd <= 0;
+        end if;
+
+        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < RUNS then -- Time 2 too long (hence -2)
           Address_Counter_Rd <= Address_Counter_rd + 8;
         end if;
 
+        -- Enable and disable write enable for local BRAM
         if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too early
           Address_Counter_Wr <= Address_Counter_Wr + 8; 
-        -- else
-        --   Address_Counter_Wr <= 0;
+          write_a <= x"FF";
+        else
+          write_a <= x"00";
         end if;
+
 
         if initial_counter > TOTAL_PIPE-1 then
           activate_out <= '1';
@@ -212,7 +222,6 @@ Control_sync: PROCESS
           rng_ce_uni <= '0';
           rng_mode_uni <= '0';
           s_in_uni <= seed;
-          write_a <= x"FF";
           Mem_Addr_B_In <= x"00000000";
           addr_a <= x"00000000";
           data_in_a <= (others=> '0');
@@ -221,7 +230,6 @@ Control_sync: PROCESS
           nstate <= load_rng;
           rng_ce_uni <= '1';
           rng_mode_uni <= '1';
-          write_a <= x"FF";
           Mem_Addr_B_In <= x"00000000";
           addr_a <= x"00000000";
           data_in_a <= (others=> '0');
@@ -248,7 +256,6 @@ Control_sync: PROCESS
           s_in_uni <= seed;
 
           nstate <= running; 
-          write_a <= x"FF";
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
           if CompResult_reg = "1" then
