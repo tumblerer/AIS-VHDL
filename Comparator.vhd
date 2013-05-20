@@ -157,9 +157,9 @@ Control_sync: PROCESS
           initial_counter <= initial_counter + 1;
         end if;
 
-        if sample_counter < TOTAL_PIPE*BLOCKS then
+        if sample_counter < (TOTAL_PIPE+1)*BLOCKS+1 and initial_counter > TOTAL_PIPE then
           sample_counter <= sample_counter + 1;
-        elsif sample_counter = TOTAL_PIPE*BLOCKS then
+        else
           sample_counter <= 0;
         end if;
 
@@ -174,7 +174,7 @@ Control_sync: PROCESS
         end if;
 
         -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too early
+        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too late
           Address_Counter_Wr <= Address_Counter_Wr + 8; 
           write_a <= x"FF";
         else
