@@ -177,25 +177,25 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   --seed <= x"0123456789abcdef0123456789abcdef";
   --Mem_Data_B(1) <= (Others => '0');
   
-  -- Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS < RUNS) generate
-  -- begin
-  --   Loop: process
-  --   begin
-  --      wait until clk'EVENT AND clk='1';
-  --         Loop_Back_Pipe(1) <= X_wire(BLOCKS);
-  --         Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
-  --         Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
-  --   end process; 
-  -- end generate;
+  Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS < RUNS) generate
+  begin
+    Loop_Pipe: process
+    begin
+       wait until clk'EVENT AND clk='1';
+          Loop_Back_Pipe(1) <= X_wire(BLOCKS);
+          Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
+          Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
+    end process; 
+  end generate;
 
-  -- No_Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS >= RUNS) generate
-  -- begin
-    Loop: process
+  No_Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS >= RUNS) generate
+  begin
+    No_Loop: process
     begin
        wait until clk'EVENT AND clk='1';
         Loop_back_output <= X_wire(BLOCKS);
     end process; 
-  -- end generate;
+  end generate;
 
   Control : process
   begin
