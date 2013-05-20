@@ -45,10 +45,11 @@ architecture Behavioral of Comparator is
   signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(63 downto 0);  
   signal s_in_uni, s_out_uni : std_logic;
   -- Counters
-  signal sample_counter : integer range 0 to 256 := 0;
-  signal load_rng_counter : integer range 0 to 2049 :=0;
+  signal initial_counter : integer range 0 to 256 := 0;
+  signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
   signal Address_Counter_Wr, Address_Counter_Rd: integer range 0 to 8192 :=0;
+  signal sample_counter : integer range 0 to RUNS := 0;
 
   --Memory signals
   signal  write_a : std_logic_vector(7 DOWNTO 0);
@@ -110,6 +111,7 @@ begin
   );
   
   -- 2048 cycles to load
+
  RNG_UNIFORM: ENTITY work.rng_n2048_r64_t5_k32_sbfbaac PORT MAP(
     clk => clk,
     ce => rng_ce_uni,
@@ -125,10 +127,12 @@ begin
     result => rng_uni
   );
 
+
 Control_sync: PROCESS
     begin
     WAIT UNTIL clk'EVENT AND clk='1';
       if  reset='1' then
+        initial_counter <= 0;
         sample_counter <= 0;
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
@@ -147,21 +151,31 @@ Control_sync: PROCESS
         Old_LPR(1) <= Mem_Data_B_In;
         Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1); 
         Old_LPR_output <= Old_LPR(SMALL_PIPE-1); -- Seems dubious - keep eye on
-        if sample_counter <= TOTAL_PIPE then
-          sample_counter <= sample_counter + 1;
+
+        if initial_counter <= TOTAL_PIPE then
+          initial_counter <= initial_counter + 1;
         end if;
-        if sample_counter > TOTAL_PIPE-SMALL_PIPE-2 then -- Time 2 too long (hence -2)
+
+        if sample_counter < TOTAL_PIPE then
+          sample_counter <= sample_counter + 1;
+        elsif sample_counter = TOTAL_PIPE then
+          sample_counter <= 0;
+        end if;
+
+        if sample_counter > TOTAL_PIPE-SMALL_PIPE-2  and sample_counter <= TOTAL_PIPE-SMALL_PIPE-2 + RUNS then -- Time 2 too long (hence -2)
           Address_Counter_Rd <= Address_Counter_rd + 8;
         end if;
-        if sample_counter > TOTAL_PIPE-1 then
+
+        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too early
+          Address_Counter_Wr <= Address_Counter_Wr + 8; 
+        -- else
+        --   Address_Counter_Wr <= 0;
+        end if;
+
+        if initial_counter > TOTAL_PIPE-1 then
           activate_out <= '1';
         else
           activate_out <= '0';
-        end if;
-        if sample_counter > TOTAL_PIPE then -- Write currently 1 clock too early
-          Address_Counter_Wr <= Address_Counter_Wr + 8; 
-        else
-          Address_Counter_Wr <= 0;
         end if;
       end if;
       

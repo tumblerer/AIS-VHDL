@@ -176,7 +176,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   --seed <= x"0123456789abcdef0123456789abcdef";
   --Mem_Data_B(1) <= (Others => '0');
-  
+
+
+  -- Generate Loop_Back SR if needed
   Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS < RUNS) generate
   begin
     Loop_Pipe: process
