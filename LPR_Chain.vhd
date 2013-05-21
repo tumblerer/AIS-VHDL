@@ -61,8 +61,7 @@ end component;
   signal Mem_Data_B : mem_data_wire;
 	signal Mem_Addr_B :mem_addr_wire;
   signal beta_wire : wire_array;
-  
-  signal X_delay : wire_array;
+  --signal X_delay : wire_array;
 
   --signal activate_in : std_logic;
 	signal activate_gen: std_logic;

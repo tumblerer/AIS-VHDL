@@ -1,7 +1,9 @@
-
+LIBRARY work;
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
- 
+USE std.textio.ALL;
+use ieee.std_logic_textio.all;
+use work.Pack.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
@@ -42,6 +44,8 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
    signal doutb_x : std_logic_vector(63 downto 0);
    -- Clock period definitions
    constant clk_period : time := 10 ns;
+
+   signal addr_count: integer :=0;
  
 BEGIN
  
@@ -71,39 +75,53 @@ BEGIN
 
    -- Stimulus process
    stim_proc: process
+   file beta_file : text;
+   variable file_line: line;
+   variable temp_beta: std_logic_vector(PRECISION-1 downto 0);
+   
    begin		
       reset <= '1';
       wait for 100 ns;	
       
       wait for clk_period*10;
+      addra_beta <= (OTHERS => '0');
+      file_open(beta_file,"beta",READ_MODE);
+      while not endfile(beta_file) loop
+        readline(beta_file, file_line);
+        hread(file_line, temp_beta);
+        dina_beta <= temp_beta;
+        addr_count <= addr_count + 8;
+        addra_beta <= std_logic_vector(to_unsigned(addr_count,addra_beta'length));
+        wait for clk_period;
+      end loop;
       -- Load memory
       -- 0.0
-      addra_beta <= std_logic_vector(to_unsigned(0,addra_beta'length));
-      addra_seed <= std_logic_vector(to_unsigned(0,addra_seed'length));
-      wait for clk_period;
-      dina_beta <= "0011111110100000000000000000000000000000000000000000000000000000";
-      dina_seed <= "0011111110100000000000000000000000000000000000000000000000000000";
-      wait for clk_period;
+      -- addra_beta <= std_logic_vector(to_unsigned(0,addra_beta'length));
+      -- addra_seed <= std_logic_vector(to_unsigned(0,addra_seed'length));
+      -- wait for clk_period;
+      -- dina_beta <= "0011111110100000000000000000000000000000000000000000000000000000";
+      -- dina_seed <= "0011111110100000000000000000000000000000000000000000000000000000";
+      -- wait for clk_period;
       
-      -- 0.5
-      addra_beta <= x"00000008";
-      addra_seed <= x"00000008";
-      wait for clk_period;
-      dina_beta <= "0011111111000000000000000000000000000000000000000000000000000000";
-      dina_seed <= "0011111111000000000000000000000000000000000000000000000000000011";
+      -- -- 0.5
+      -- addra_beta <= x"00000008";
+      -- addra_seed <= x"00000008";
+      -- wait for clk_period;
+      -- dina_beta <= "0011111111000000000000000000000000000000000000000000000000000000";
+      -- dina_seed <= "0011111111000000000000000000000000000000000000000000000000000011";
 
-      wait for clk_period;
-      addra_beta <= x"00000010";
-      addra_seed <= x"00000010";
-      dina_beta <=  "0011111111010000000000000000000000000000000000000000000000000000";
-      -- 1.0
-      wait for clk_period;
-      addra_beta <= x"00000018";
-      addra_seed <= x"00000018";
-      wait for clk_period;
-      dina_beta <= "0011111111100000000000000000000000000000000000000000000000000000";
-      dina_seed <= "0011111111100000000000000000000000000000000000000000000000000011";
-      -- insert stimulus here 
+      -- wait for clk_period;
+      -- addra_beta <= x"00000010";
+      -- addra_seed <= x"00000010";
+      -- dina_beta <=  "0011111111010000000000000000000000000000000000000000000000000000";
+      -- -- 1.0
+      -- wait for clk_period;
+      -- addra_beta <= x"00000018";
+      -- addra_seed <= x"00000018";
+      -- wait for clk_period;
+      -- dina_beta <= "0011111111100000000000000000000000000000000000000000000000000000";
+      -- dina_seed <= "0011111111100000000000000000000000000000000000000000000000000011";
+      -- -- insert stimulus here 
       wait for clk_period;
 
       seed_load : for i in 1 to 100 loop
