@@ -34,8 +34,6 @@ architecture Behavioral of Comparator is
 
   signal CompResult_reg :std_logic_vector(0 downto 0);
 -- Pipeline
-
-
   signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
   signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
   signal old_lpr_output,Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');
@@ -49,7 +47,7 @@ architecture Behavioral of Comparator is
   signal initial_counter : integer range 0 to 256 := 0;
   signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
-  signal Address_Counter_Wr, Address_Counter_Rd: integer range 0 to 8192 :=0;
+  signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg: integer range 0 to 8192 :=0;
   signal sample_counter : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   --Memory signals
@@ -175,12 +173,13 @@ Control_sync: PROCESS
 
         -- Enable and disable write enable for local BRAM
         if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too late
-          Address_Counter_Wr <= Address_Counter_Wr + 8; 
+          Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
         else
           write_a <= x"00";
         end if;
 
+        Address_Counter_Wr <= Address_Counter_Wr_reg;
 
         if initial_counter > TOTAL_PIPE-1 then
           activate_out <= '1';
