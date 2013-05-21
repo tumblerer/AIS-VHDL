@@ -11,12 +11,12 @@ entity LPR_Chain is
     	reset : in std_logic;
       addra_seed : in std_logic_vector(31 downto 0);
       addra_beta : in std_logic_vector(31 downto 0);
-      dina_seed : in std_logic_vector(63 downto 0);
-      dina_beta : in std_logic_vector(63 downto 0);
+      dina_seed : in std_logic_vector(PRECISION-1 downto 0);
+      dina_beta : in std_logic_vector(PRECISION-1 downto 0);
       wea_seed : in std_logic_vector(7 downto 0);
       wea_beta : in std_logic_vector(7 downto 0);
       addrb_X : in std_logic_vector(31 downto 0);
-      doutb_x : out  std_logic_vector(63 downto 0)
+      doutb_x : out  std_logic_vector(PRECISION-1 downto 0)
    ) ;
 end entity ; -- LPR_Chain
 
@@ -26,15 +26,15 @@ architecture behavorial of LPR_Chain is
 component LPR_top is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           Beta : in  STD_LOGIC_VECTOR (63 downto 0);
+           Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            activate_in : in  STD_LOGIC;
            activate_out : out  STD_LOGIC;
-           X_in : in  STD_LOGIC_VECTOR (63 downto 0);
-           X_out : out  STD_LOGIC_VECTOR (63 downto 0);
+           X_in : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+           X_out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Mem_Addr_B_In : out  STD_LOGIC_VECTOR (31 downto 0);
-           Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Data_B_In : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
-           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed : in std_logic
            );
 end component;
@@ -45,17 +45,17 @@ component Generate_Sample is
         reset : in std_logic;
         activate: in std_logic;
         seed : in std_logic;
-        sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+        sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0)
   ); 
 
 end component;
  
  --Arrays
-  type wire_array is array(BLOCKS downto 0) of std_logic_vector(STATE_SIZE downto 0);
+  type wire_array is array(BLOCKS downto 0) of std_logic_vector(PRECISION-1 downto 0);
   type single_wire_array is array(BLOCKS downto 0) of std_logic;
   type mem_addr_wire is array(BLOCKS+1 downto 0) of std_logic_vector(31 downto 0); 
-  type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(STATE_SIZE downto 0);
-  --type beta_wire_array is array(BLOCKS downto 1) of std_logic_vector(STATE_SIZE downto 0);
+  type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(PRECISION-1 downto 0);
+  --type beta_wire_array is array(BLOCKS downto 1) of std_logic_vector(PRECISION-1 downto 0);
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
   signal Mem_Data_B : mem_data_wire;
@@ -71,10 +71,10 @@ end component;
   -- Pipeline
   -- Needs to be conditionally generated
   signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE_INCR*BLOCKS);
-  signal Loop_back_output : std_logic_vector(STATE_SIZE downto 0);
+  signal Loop_back_output : std_logic_vector(PRECISION-1 downto 0);
 
   -- Gen
-  signal sample_output : std_logic_vector(STATE_SIZE downto 0);
+  signal sample_output : std_logic_vector(PRECISION-1 downto 0);
   
   -- BRAM
   signal addr_a : std_logic_vector(31 downto 0);
@@ -82,8 +82,8 @@ end component;
 
 --Seed BRAM
   signal addrb_beta, addrb_seed : std_logic_vector(31 downto 0);
-  signal doutb_beta : std_logic_vector(STATE_SIZE downto 0);
-  signal doutb_seed : std_logic_vector(63 downto 0);
+  signal doutb_beta : std_logic_vector(PRECISION-1 downto 0);
+  signal doutb_seed : std_logic_vector(PRECISION-1 downto 0);
 
   --Counter
   signal counter: integer range 0 to 2100+STEPS*TOTAL_PIPE_INCR*BLOCKS+1;

@@ -8,14 +8,14 @@ entity LPR is
     Port (	clk : in std_logic;
 			reset : in std_logic;
 			activate_in: in std_logic;
-			xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-			Output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-			Beta_in : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
+			xState : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+			Output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+			Beta_in : in  STD_LOGIC_VECTOR (PRECISION-1 DOWNTO 0);
 			-- Shared memory block
 			Mem_Addr_B_In : out STD_LOGIC_VECTOR(31 DOWNTO 0);
-			Mem_Data_B_In : in STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			Mem_Data_B_In : in STD_LOGIC_VECTOR (PRECISION-1 downto 0);
 			Mem_Addr_B_Out : in STD_LOGIC_VECTOR(31 DOWNTO 0);
-			Mem_Data_B_Out : out STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+			Mem_Data_B_Out : out STD_LOGIC_VECTOR (PRECISION-1 downto 0);
 			activate_out : out std_logic
 	); 
 
@@ -28,11 +28,11 @@ component Dual_Port_BRAM IS
     clka : IN STD_LOGIC;
     wea : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     addra : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    dina : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+    dina : IN STD_LOGIC_VECTOR(PRECISION-1 DOWNTO 0);
     clkb : IN STD_LOGIC;
     rstb : IN STD_LOGIC;
     addrb : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    doutb : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+    doutb : OUT STD_LOGIC_VECTOR(PRECISION-1 DOWNTO 0)
   );
 END component;
  
@@ -43,7 +43,7 @@ component rng_n2048_r64_t5_k32_sbfbaac is
     mode:in std_logic;
     s_in:in std_logic;
     s_out:out std_logic;
-    rng:out std_logic_vector(63 downto 0)
+    rng:out std_logic_vector(PRECISION-1 downto 0)
   );
 end component;
 
@@ -54,16 +54,16 @@ end component;
 
 
    --Inputs	
-	signal Sub1Result, Sub2Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Add1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Mult1Result,Mult2Result,Mult3Result, Mult3Result_inv : std_logic_vector(63 downto 0) := (others => '0');
-	signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Sub1Result, Sub2Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Add1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Mult1Result,Mult2Result,Mult3Result, Mult3Result_inv : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Exp1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
 	signal CompResult: std_logic_vector (0 downto 0);
 	signal Mult2Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
 
     
  	--Outputs
-    signal result : std_logic_vector(63 downto 0):= (others => '0');
+    signal result : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
 
 	--PipeLine
 	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
@@ -72,8 +72,8 @@ end component;
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
 	signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
-	signal old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
-    signal Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');  
+	signal old_lpr_output, Shift_in_proposed, Proposed_sample_out, Shift_in_old, Old_Sample_out : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
+    signal Proposed_LPR_output : std_logic_vector(PRECISION-1 downto 0):= (others => '0');  
 
 	-- Counters
 	signal sample_counter : integer range 0 to 256 := 0;
@@ -85,15 +85,15 @@ end component;
 
 	--Memory signals
 	signal  write_a : std_logic_vector(7 DOWNTO 0);
-	signal data_in_a : std_logic_vector(63 downto 0):=(others => '0');
+	signal data_in_a : std_logic_vector(PRECISION-1 downto 0):=(others => '0');
 	signal addr_a : std_logic_vector (31 downto 0):=(others => '0');
 
 	signal state,nstate : state_type;
 
 	-- RNG Signal
-	signal rng_uni_pos : std_logic_vector(63 downto 0);
+	signal rng_uni_pos : std_logic_vector(PRECISION-1 downto 0);
 	signal rng_mode_uni, rng_ce_uni, rng_mode_norm, rng_ce_norm: std_logic;
-	signal rng_norm, rng_uni, rng_uni_out: std_logic_vector(63 downto 0);	
+	signal rng_norm, rng_uni, rng_uni_out: std_logic_vector(PRECISION-1 downto 0);	
 	signal s_in_uni, s_in_norm, s_out_norm, s_out_uni : std_logic;
 	signal rng_norm_out: std_logic_vector(16 downto 0);
 
@@ -240,8 +240,8 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 				Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
 				Proposed_sample(1) <= Add1Result;
 				-- LPR Value pipeline 
-				Proposed_LPR(1)(STATE_SIZE-1 downto 0) <= Mult3Result(STATE_SIZE-1 downto 0);
-				Proposed_LPR(1)(STATE_SIZE) <= not Mult3Result (STATE_SIZE);
+				Proposed_LPR(1)(PRECISION-1-1 downto 0) <= Mult3Result(PRECISION-1-1 downto 0);
+				Proposed_LPR(1)(PRECISION-1) <= not Mult3Result (PRECISION-1);
 				Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1);	
 				Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
 				-- Pipe of previous LPR value
@@ -284,8 +284,8 @@ RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 
 		begin
 			mult2Result_ext <= "01" & mult2result;
-			Exp1Result <= Exp1Result_ext(63 downto 0);
-			Mult3Result_inv(STATE_SIZE) <= not Mult3Result(STATE_SIZE);
+			Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
+			Mult3Result_inv(PRECISION-1) <= not Mult3Result(PRECISION-1);
 			rng_uni_pos <= "0" & rng_norm(62 downto 0);
 
 			case (state) is

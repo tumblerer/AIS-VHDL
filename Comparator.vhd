@@ -9,13 +9,13 @@ entity Comparator is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
            activate_in : in  STD_LOGIC;
-           LPR_In : in std_logic_vector(STATE_SIZE downto 0);
+           LPR_In : in std_logic_vector(PRECISION-1 downto 0);
            CompResult : out  STD_LOGIC_VECTOR(0 downto 0);
            Mem_Addr_B_In : out  STD_LOGIC_VECTOR (31 downto 0);
-           Mem_Data_B_In : in  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Data_B_In : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
-           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (63 downto 0);
-           Beta : in  STD_LOGIC_VECTOR (63 downto 0);
+           Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+           Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            activate_out: out std_logic;
            seed: in std_logic
       );
@@ -27,20 +27,20 @@ architecture Behavioral of Comparator is
   TYPE state_type is (idle, load_rng, running);
   signal state,nstate : state_type;
   
-  signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
-  signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
-  signal Exp1Result : std_logic_vector(63 downto 0) := (others => '0');
+  signal Sub1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+  signal Mult1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+  signal Exp1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
   signal Mult1Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
 
   signal CompResult_reg :std_logic_vector(0 downto 0);
 -- Pipeline
   signal Proposed_LPR : pipeline_type(1 to SMALL_PIPE);
   signal Old_LPR : pipeline_type(1 to SMALL_PIPE);
-  signal old_lpr_output,Proposed_LPR_output : std_logic_vector(63 downto 0):= (others => '0');
+  signal old_lpr_output,Proposed_LPR_output : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
 
   -- RNG Signal
   signal rng_mode_uni, rng_ce_uni : std_logic;
-  signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(63 downto 0);  
+  signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(PRECISION-1 downto 0);  
   signal s_in_uni, s_out_uni : std_logic;
 
   -- Counters
@@ -52,7 +52,7 @@ architecture Behavioral of Comparator is
   signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   --Memory signals
   signal  write_a : std_logic_vector(7 DOWNTO 0);
-  signal data_in_a : std_logic_vector(63 downto 0):=(others => '0');
+  signal data_in_a : std_logic_vector(PRECISION-1 downto 0):=(others => '0');
   signal addr_a : std_logic_vector (31 downto 0):=(others => '0');
 
 
@@ -205,8 +205,8 @@ Control_sync: PROCESS
     
     begin
       mult1Result_ext <= "01" & mult1result;
-      Exp1Result <= Exp1Result_ext(63 downto 0);
-      rng_uni_pos <= "0" & rng_uni(62 downto 0);
+      Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
+      rng_uni_pos <= "0" & rng_uni(PRECISION-2 downto 0);
       CompResult <= CompResult_reg;
       case (state) is
       

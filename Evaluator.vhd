@@ -16,10 +16,10 @@ use IEEE.NUMERIC_STD.ALL;
 entity Evaluator is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           xState : in  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
+           xState : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Comp_In : in std_logic_vector(0 downto 0);
-           Proposed_LPR : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0);
-           x_out : out std_logic_vector(STATE_SIZE downto 0);
+           Proposed_LPR : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+           x_out : out std_logic_vector(PRECISION-1 downto 0);
            seed : in  std_logic
     );
 end Evaluator;
@@ -31,23 +31,23 @@ architecture Behavioral of Evaluator is
 	TYPE state_type is (idle, load_rng, running);
 	signal state,nstate : state_type;
 
-	signal Sub1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Add1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Mult1Result : std_logic_vector(63 downto 0) := (others => '0');
-	signal Mult2Result : std_logic_vector(63 downto 0) := (others => '0');
+	signal Sub1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Add1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Mult1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
+	signal Mult2Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
 
 	--PipeLine
 	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
 	signal Proposed_Sample : pipeline_type(1 to TOTAL_PIPE-12);
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
-	signal Proposed_sample_out, Old_Sample_out : std_logic_vector(63 downto 0):= (others => '0');
+	signal Proposed_sample_out, Old_Sample_out : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
 
 	-- Counters
 	signal load_rng_counter : integer range 0 to 2049 :=0;
 
 	-- RNG Signal
 	signal rng_mode_norm, rng_ce_norm : std_logic;
-	signal rng_norm : std_logic_vector(63 downto 0);	
+	signal rng_norm : std_logic_vector(PRECISION-1 downto 0);	
 	signal s_in_norm, s_out_norm : std_logic;
 	signal rng_norm_out: std_logic_vector(16 downto 0);
 
@@ -139,9 +139,9 @@ begin
 
 	State_machine: PROCESS(state, nstate, Mult2Result, load_rng_counter, seed, Comp_In,Proposed_Sample_out, Old_Sample_Out)
 	begin
-		-- Negate result of LPR
-		Proposed_LPR(STATE_SIZE) <= not Mult2Result(STATE_SIZE);
-		Proposed_LPR(STATE_SIZE-1 downto 0) <= Mult2Result(STATE_SIZE-1 downto 0);
+		-- Negate result of LPR, to do add instead of subtract
+		Proposed_LPR(PRECISION-1) <= not Mult2Result(PRECISION-1);
+		Proposed_LPR(PRECISION-1-1 downto 0) <= Mult2Result(PRECISION-1-1 downto 0);
 		
 		case (state) is
 			when idle =>

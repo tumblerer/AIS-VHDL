@@ -14,7 +14,7 @@ entity Generate_Sample is
 				reset : in std_logic;
 				activate: in std_logic;
         seed : in std_logic;
-				sample_output : out  STD_LOGIC_VECTOR (STATE_SIZE downto 0)
+				sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0)
 	); 
 
 end Generate_Sample;
@@ -26,9 +26,9 @@ architecture Behavorial of Generate_Sample is
 
 	-- RNG Signal
 	signal rng_mode_norm, rng_ce_norm, s_in_norm : std_logic;
-	signal rng_norm: std_logic_vector(63 downto 0);	
+	signal rng_norm: std_logic_vector(PRECISION-1 downto 0);	
 	signal rng_norm_out: std_logic_vector(16 downto 0); 
-	signal Sub1Result_Gen, Mult1Result_Gen : std_logic_vector(63 downto 0):=(OTHERS =>'0');
+	signal Sub1Result_Gen, Mult1Result_Gen : std_logic_vector(PRECISION-1 downto 0):=(OTHERS =>'0');
 	
 
 	--Counters
