@@ -172,7 +172,7 @@ Control_sync: PROCESS
         end if;
 
         -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then -- Write currently 1 clock too late
+        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then 
           Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
         else

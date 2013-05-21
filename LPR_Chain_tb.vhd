@@ -109,7 +109,7 @@ BEGIN
       seed_load : for i in 1 to 100 loop
          addra_seed <= std_logic_vector(to_unsigned(i*8*2,addra_seed'length));
          wait for clk_period;
-         dina_seed <= "0011111111100000000000000000000000000000000000000000000000000011";
+         dina_seed <= "0011111111100000000000000000000000000000000000000000000000001111";
          addra_seed <= std_logic_vector(to_unsigned((i-1)*8*2,addra_seed'length));
          wait for clk_period;
          dina_seed <= "0011111111100000000000000000000000000000000000000000000000000000";
