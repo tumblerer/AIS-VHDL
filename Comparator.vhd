@@ -47,7 +47,7 @@ architecture Behavioral of Comparator is
   signal initial_counter : integer range 0 to 256 := 0;
   signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
-  signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg: integer range 0 to 8192 :=0;
+  signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg, Address_Counter_Rd_reg: integer range 0 to 8192 :=0;
   signal sample_counter : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   --Memory signals
@@ -161,14 +161,14 @@ Control_sync: PROCESS
           sample_counter <= 0;
         end if;
 
-        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < TOTAL_PIPE*BLOCKS then
+        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < (TOTAL_PIPE+1)*BLOCKS+1 then
           sample_counter_rd <= sample_counter_rd + 1;
         else
           sample_counter_rd <= 0;
         end if;
 
         if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < RUNS then -- Time 2 too long (hence -2)
-          Address_Counter_Rd <= Address_Counter_rd + 8;
+          Address_Counter_Rd_reg <= Address_Counter_rd_reg + 8;
         end if;
 
         -- Enable and disable write enable for local BRAM
@@ -180,6 +180,7 @@ Control_sync: PROCESS
         end if;
 
         Address_Counter_Wr <= Address_Counter_Wr_reg;
+        Address_Counter_Rd <= Address_Counter_Rd_reg;
 
         if initial_counter > TOTAL_PIPE-1 then
           activate_out <= '1';
