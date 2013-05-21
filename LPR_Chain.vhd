@@ -76,7 +76,7 @@ end component;
   signal sample_output : std_logic_vector(PRECISION-1 downto 0);
   
   -- BRAM
-  signal addr_a : std_logic_vector(31 downto 0);
+  signal addr_a_x : std_logic_vector(31 downto 0);
   signal write_a : std_logic_vector(7 downto 0);
 
 --Seed BRAM
@@ -107,9 +107,9 @@ begin
   -- BRAM for all the final X states found
 BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
        clka => clk,
-       wea => write_a,
-       addra => addr_a,
-       dina => X_wire(BLOCKS),
+       wea => wea_x,
+       addra => addr_a_x,
+       dina => dina_x,
        clkb => clk,
        rstb => reset,
        addrb => addrb_x,
@@ -213,7 +213,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         block_counter <= 1;
         block_counter_delay <= TOTAL_PIPE_INCR+2;
         first_beta <= 2;
-        addr_a <= std_logic_vector(to_unsigned(0,addr_a'length));
+        addr_a_x <= std_logic_vector(to_unsigned(0,addr_a_x'length));
       else
         write_a <= x"FF";
 
@@ -245,7 +245,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           counter <= counter + 1;
         else
           address_counter_X <= address_counter_X + 8;
-          addr_a <= std_logic_vector(to_unsigned(address_counter_X,addr_a'length));
+          addr_a_x <= std_logic_vector(to_unsigned(address_counter_X,addr_a_x'length));
         end if;
 
         -- Address seed memory

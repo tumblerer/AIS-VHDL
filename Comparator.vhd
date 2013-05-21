@@ -141,6 +141,7 @@ Control_sync: PROCESS
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
         end if;
+        activate_out <= '0';
       else --activate_in = 1
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
@@ -182,6 +183,7 @@ Control_sync: PROCESS
         Address_Counter_Wr <= Address_Counter_Wr_reg;
         Address_Counter_Rd <= Address_Counter_Rd_reg;
 
+        -- Propagate activate signal
         if initial_counter > TOTAL_PIPE-1 then
           activate_out <= '1';
         else
