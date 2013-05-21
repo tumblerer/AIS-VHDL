@@ -141,6 +141,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   Chain: for i in 1 to BLOCKS generate
   begin
+    -- Connect last block to the first block (memory)
       CHAIN1: if (i = BLOCKS) generate
         begin LPR_TOP0 : entity work.LPR_top Port Map (
            clk => clk,
