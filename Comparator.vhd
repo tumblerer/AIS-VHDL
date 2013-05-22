@@ -44,7 +44,7 @@ architecture Behavioral of Comparator is
   signal s_in_uni, s_out_uni : std_logic;
 
   -- Counters
-  signal initial_counter : integer range 0 to 256 := 0;
+  signal initial_counter : integer range 0 to (TOTAL_PIPE+1)*STEPS+RUNS+1:= 0;
   signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
   signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg, Address_Counter_Rd_reg: integer range 0 to 8192 :=0;
@@ -152,9 +152,7 @@ Control_sync: PROCESS
         Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1); 
         Old_LPR_output <= Old_LPR(SMALL_PIPE-1); -- Seems dubious - keep eye on
 
-        if initial_counter <= TOTAL_PIPE then
-          initial_counter <= initial_counter + 1;
-        end if;
+        initial_counter <= initial_counter + 1;
 
         if sample_counter < (TOTAL_PIPE+1)*BLOCKS+2 and initial_counter > TOTAL_PIPE-1 then
           sample_counter <= sample_counter + 1;
@@ -184,7 +182,7 @@ Control_sync: PROCESS
       --  Address_Counter_Rd <= Address_Counter_Rd_reg;
 
         -- Propagate activate signal
-        if initial_counter > TOTAL_PIPE then
+        if initial_counter > TOTAL_PIPE and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
           activate_out <= '1';
         else
           activate_out <= '0';

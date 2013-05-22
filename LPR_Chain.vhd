@@ -16,7 +16,8 @@ entity LPR_Chain is
       wea_seed : in std_logic_vector(7 downto 0);
       wea_beta : in std_logic_vector(7 downto 0);
       addrb_X : in std_logic_vector(31 downto 0);
-      doutb_x : out  std_logic_vector(PRECISION-1 downto 0)
+      doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
+      complete: out std_logic
    ) ;
 end entity ; -- LPR_Chain
 
@@ -67,7 +68,9 @@ end component;
   --signal activate_in : std_logic;
 	signal activate_gen: std_logic;
   --signal seed : std_logic_vector (127 downto 0);
-  
+  signal complete_r: std_logic;
+  signal running: std_logic;
+
   -- Pipeline
   -- Needs to be conditionally generated
   signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE_INCR*BLOCKS);
@@ -218,7 +221,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   Control : process
   begin
     wait until clk'EVENT AND clk='1';
-      if reset = '1' then
+      if reset = '1' or complete_r = '1' then
         activate_gen <= '0';
         activate_wire(0) <= '0';
         counter <= 0;
@@ -328,7 +331,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   end process ; -- Control
 
-  Data_Transfer : process( doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output )
+  Data_Transfer : process( doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
   begin
 
     beta_wire(block_counter) <= doutb_beta;
@@ -344,6 +347,18 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         X_wire(0) <= Loop_back_output;   
       end if;       
     end if;
+
+    if activate_wire(BLOCKS) = '1' then
+      running <= '1';
+    end if;
+    
+    if activate_wire(BLOCKS) = '0' and running = '1' then
+      complete_r <= '1';
+    else 
+      complete_r <= '0';
+    end if;
+
+    complete <= complete_r;
 
   end process ; -- Data_Transfer
 end architecture ; -- behavorial
