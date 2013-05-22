@@ -253,17 +253,6 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
      --   if counter > 2100+STEPS*TOTAL_PIPE_INCR+RUNS then
 
 
-        -- Produce a sample for each run
-        if counter >= 2100 AND counter < RUNS+2100 then
-          X_wire(0) <= sample_output;
-        else
-          if counter < 2100+TOTAL_PIPE_INCR*BLOCKS then
-            X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
-          else
-            X_wire(0) <= Loop_back_output;   
-          end if;       
-        end if;
-
         -- Address Final X memory
         if counter < 2100+STEPS*TOTAL_PIPE_INCR then
           counter <= counter + 1;
@@ -303,7 +292,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
         -- Increment beta value after a settime
         -- Changes first block after all particles have passed
-        if beta_counter = (BETA_PIPE+RUNS-1) AND first_beta = 2 then
+        if beta_counter = (BETA_PIPE+RUNS-2) AND first_beta = 2 then
           block_counter_delay <= 0;
           first_beta <= 1;
           address_counter_beta <= address_counter_beta + 8;
@@ -318,7 +307,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           first_beta <= 0;
         end if;
 
-        if block_counter_delay < TOTAL_PIPE_INCR then
+        if block_counter_delay < TOTAL_PIPE_INCR and first_beta = 0 then
           block_counter_delay <= block_counter_delay + 1;
         end if;
 
@@ -335,50 +324,26 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           end if;
         end if;
 
-        -- Possibly need if blocks = 1, otherwise duplicate
-        -- if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR-1 then
-        --   address_counter_beta <= address_counter_beta + 8;
-        -- end if;
-
-        -- if block_counter = BLOCKS and block_counter_delay = TOTAL_PIPE_INCR then
-        --   block_counter_delay <= 0;
-        --   if block_counter = BLOCKS then
-        --     block_counter <= 1;
-        --  else
-        --     block_counter <= block_counter + 1;
-        --   end if;
-        -- end if;
-
-        -- if block_counter /= BLOCKS and block_counter_delay = TOTAL_PIPE_INCR-1 then
-        --   address_counter_beta <= address_counter_beta + 8;
-        -- end if;
-
-        -- if block_counter /= BLOCKS and block_counter_delay = TOTAL_PIPE_INCR then
-        --   block_counter_delay <= 0;
-        --   if block_counter = BLOCKS then
-        --     block_counter <= 1;
-        --  else
-        --     block_counter <= block_counter + 1;
-        --   end if;
-        -- end if;
-
-        -- if block_counter_delay = TOTAL_PIPE_INCR+1 then
-        --   if block_counter = BLOCKS then
-        --     block_counter <= 1;
-        --  else
-        --     block_counter <= block_counter + 1;
-        --   end if;
-        -- end if;
-
       end if;
 
   end process ; -- Control
 
-  Data_Transfer : process( doutb_beta, address_counter_beta, block_counter )
+  Data_Transfer : process( doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output )
   begin
 
     beta_wire(block_counter) <= doutb_beta;
     addrb_beta <= std_logic_vector(to_unsigned(address_counter_beta,addrb_beta'length));
+
+    -- Produce a sample for each run
+    if counter >= 2100 AND counter < RUNS+2100 then
+      X_wire(0) <= sample_output;
+    else
+      if counter < 2100+TOTAL_PIPE_INCR*BLOCKS then
+        X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
+      else
+        X_wire(0) <= Loop_back_output;   
+      end if;       
+    end if;
 
   end process ; -- Data_Transfer
 end architecture ; -- behavorial
