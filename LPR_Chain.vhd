@@ -217,17 +217,23 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       else
         write_a <= x"FF";
 
+        -- Activate first block
         if counter < 2100-1 then
           activate_wire(0) <='0';
         else 
          activate_wire(0) <= '1';
         end if;
 
+        --Activate sample generator
         if counter > 200 then
           activate_gen <= '1';
         else
           activate_gen <= '0';
         end if;
+        
+        -- Stop signal
+     --   if counter > 2100+STEPS*TOTAL_PIPE_INCR+RUNS then
+
 
         -- Produce a sample for each run
         if counter >= 2100 AND counter < RUNS+2100 then
@@ -243,9 +249,12 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         -- Address Final X memory
         if counter < 2100+STEPS*TOTAL_PIPE_INCR then
           counter <= counter + 1;
+          wea_x <= x"00";
         else
           address_counter_X <= address_counter_X + 8;
           addr_a_x <= std_logic_vector(to_unsigned(address_counter_X,addr_a_x'length));
+          wea_x <= x"FF";
+          dina_x <= X_wire(BLOCKS);
         end if;
 
         -- Address seed memory
