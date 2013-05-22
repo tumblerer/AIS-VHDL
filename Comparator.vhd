@@ -132,7 +132,7 @@ Control_sync: PROCESS
     WAIT UNTIL clk'EVENT AND clk='1';
       if  reset='1' then
         initial_counter <= 0;
-        sample_counter <= 0;
+        sample_counter <= TOTAL_PIPE;
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
         load_rng_counter <= 0;
@@ -156,35 +156,35 @@ Control_sync: PROCESS
           initial_counter <= initial_counter + 1;
         end if;
 
-        if sample_counter < (TOTAL_PIPE+1)*BLOCKS+1 and initial_counter > TOTAL_PIPE then
+        if sample_counter < (TOTAL_PIPE+1)*BLOCKS+2 and initial_counter > TOTAL_PIPE-1 then
           sample_counter <= sample_counter + 1;
         else
           sample_counter <= 0;
         end if;
 
-        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < (TOTAL_PIPE+1)*BLOCKS+1 then
+        -- Enable and disable write enable for local BRAM
+        if initial_counter > TOTAL_PIPE-1 and sample_counter < RUNS then 
+          Address_Counter_Wr <= Address_Counter_Wr + 8; 
+          write_a <= x"FF";
+        else
+          write_a <= x"00";
+        end if;
+
+        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < (TOTAL_PIPE+1)*BLOCKS+1+1 then
           sample_counter_rd <= sample_counter_rd + 1;
         else
           sample_counter_rd <= 0;
         end if;
 
         if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < RUNS then -- Time 2 too long (hence -2)
-          Address_Counter_Rd_reg <= Address_Counter_rd_reg + 8;
+          Address_Counter_Rd <= Address_Counter_rd + 8;
         end if;
 
-        -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE and sample_counter < RUNS then 
-          Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
-          write_a <= x"FF";
-        else
-          write_a <= x"00";
-        end if;
-
-        Address_Counter_Wr <= Address_Counter_Wr_reg;
-        Address_Counter_Rd <= Address_Counter_Rd_reg;
+      --  Address_Counter_Wr <= Address_Counter_Wr_reg;
+      --  Address_Counter_Rd <= Address_Counter_Rd_reg;
 
         -- Propagate activate signal
-        if initial_counter > TOTAL_PIPE-1 then
+        if initial_counter > TOTAL_PIPE then
           activate_out <= '1';
         else
           activate_out <= '0';

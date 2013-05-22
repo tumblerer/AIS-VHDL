@@ -139,7 +139,7 @@ begin
 
 	State_machine: PROCESS(state, nstate, Mult2Result, load_rng_counter, seed, Comp_In,Proposed_Sample_out, Old_Sample_Out)
 	begin
-		-- Negate result of LPR, to do add instead of subtract
+		-- Negate result of LPR
 		Proposed_LPR(PRECISION-1) <= not Mult2Result(PRECISION-1);
 		Proposed_LPR(PRECISION-1-1 downto 0) <= Mult2Result(PRECISION-1-1 downto 0);
 		
