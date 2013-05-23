@@ -233,13 +233,13 @@ Control_sync: PROCESS
           elsif load_rng_counter >= 2048 then
             rng_mode_uni <= '1';
             s_in_uni <= seed;
-            
+
             if activate_in = '0' then
               nstate <= idle;
             else
               nstate <= running;           
             end if;
-
+            
           else
             s_in_uni <= seed;
           end if; 
@@ -249,9 +249,15 @@ Control_sync: PROCESS
           rng_mode_uni <= '0';
           s_in_uni <= seed;
 
-          nstate <= running; 
+          if activate_in = '0' then
+            nstate <= idle;
+          else
+            nstate <= running;
+          end if;
+
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
+
           if CompResult_reg = "1" then
           -- Save to LPR address
             data_in_a <= Proposed_LPR_output;
