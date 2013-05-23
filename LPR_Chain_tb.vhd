@@ -80,8 +80,11 @@ BEGIN
    stim_proc: process
    file beta_file : text;
    variable file_line: line;
+   variable output_line: line;
    variable temp_beta: std_logic_vector(PRECISION-1 downto 0);
-   
+   variable temp_output: std_logic_vector(PRECISION-1 downto 0);
+   file my_output : TEXT open WRITE_MODE is "output.out";
+
    begin		
       reset <= '1';
       wait for 100 ns;	
@@ -110,12 +113,23 @@ BEGIN
       reset <= '0';
 
       wait for clk_period*100;
-      while true loop
-        assert complete = '0'
-          report "Simultion stopped at completion"
-          severity FAILURE;
+      while complete = '0' loop
         wait for clk_period;
       end loop;
+
+    -- If complete, write out contents of BRAM_X to file      
+      FILEIO : for i in 0 to RUNS-1 loop
+        addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
+        wait for clk_period;
+        hwrite(output_line, doutb_x);
+        writeline(my_output, output_line);
+      end loop ; -- FILEIO
+
+      wait for clk_period;
+      assert complete = '0'
+        report "SUCCESS: Simulation stopped at completion"
+        severity FAILURE;
+
    end process;
 
 END;
