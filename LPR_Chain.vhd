@@ -348,8 +348,11 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       end if;       
     end if;
 
-    if activate_wire(BLOCKS) = '1' then
-      running <= '1';
+    if reset = '1' then
+      running <= '0'; 
+      if activate_wire(BLOCKS) = '1' then
+        running <= '1';
+      end if;
     end if;
     
     if reset = '1' then
