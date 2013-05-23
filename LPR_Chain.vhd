@@ -239,7 +239,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
 
         -- Activate first block
-        if counter < 2100-1 then
+        if counter < 2100-1 or complete_r = '1' then
           activate_wire(0) <='0';
         else 
          activate_wire(0) <= '1';
@@ -331,9 +331,10 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   end process ; -- Control
 
-  Data_Transfer : process(reset, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
+  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
   begin
 
+    -- Creates a latch - unsure how to fix.
     beta_wire(block_counter) <= doutb_beta;
     addrb_beta <= std_logic_vector(to_unsigned(address_counter_beta,addrb_beta'length));
 
