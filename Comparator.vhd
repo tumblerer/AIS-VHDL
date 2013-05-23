@@ -136,12 +136,10 @@ Control_sync: PROCESS
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
         load_rng_counter <= 0;
-        activate_out <= '0';
       elsif reset = '0' AND activate_in = '0' then
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
         end if;
-        activate_out <= '0';
       else --activate_in = 1
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
@@ -181,12 +179,6 @@ Control_sync: PROCESS
       --  Address_Counter_Wr <= Address_Counter_Wr_reg;
       --  Address_Counter_Rd <= Address_Counter_Rd_reg;
 
-        -- Propagate activate signal
-        if initial_counter > TOTAL_PIPE and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
-          activate_out <= '1';
-        else
-          activate_out <= '0';
-        end if;
       end if;
       
     end process Control_sync;
@@ -201,13 +193,22 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
+    State_machine: PROCESS(state,nstate, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
       mult1Result_ext <= "01" & mult1result;
       Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
       rng_uni_pos <= "0" & rng_uni(PRECISION-2 downto 0);
       CompResult <= CompResult_reg;
+
+
+      -- Propagate activate signal
+      if initial_counter > TOTAL_PIPE and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
+        activate_out <= '1';
+      else
+        activate_out <= '0';
+      end if;
+
       case (state) is
       
         when idle =>
