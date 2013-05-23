@@ -9,9 +9,9 @@ constant VARS: integer := 1;
 constant PRECISION: integer := 64; -- Overall precision
 
 -- Paramaters (again, generics?)
-constant STEPS: integer := 100;
+constant STEPS: integer := 6;
 -- How many states
-constant RUNS: integer := 3;
+constant RUNS: integer := 20;
 
 -- Blocks per chain
 constant BLOCKS: integer:=3;
