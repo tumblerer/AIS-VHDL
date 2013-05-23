@@ -257,7 +257,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
 
         -- Address Final X memory
-        if counter < 2100+STEPS*TOTAL_PIPE_INCR then
+        if counter < 2100+STEPS*TOTAL_PIPE_INCR+2 then
           counter <= counter + 1;
           wea_x <= x"00";
         else
