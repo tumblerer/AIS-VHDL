@@ -202,13 +202,6 @@ Control_sync: PROCESS
       CompResult <= CompResult_reg;
 
 
-      -- Propagate activate signal
-      if initial_counter > TOTAL_PIPE and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
-        activate_out <= '1';
-      else
-        activate_out <= '0';
-      end if;
-
       case (state) is
       
         when idle =>
@@ -266,6 +259,18 @@ Control_sync: PROCESS
             data_in_a <= Old_LPR_output;
           end if;
       end case;
+    end process;
+
+    Activate_Propagate: process(initial_counter)
+    begin
+
+      -- Propagate activate signal
+      if initial_counter > TOTAL_PIPE+1 and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
+        activate_out <= '1';
+      else
+        activate_out <= '0';
+      end if;
+
     end process;
 end Behavioral;
 
