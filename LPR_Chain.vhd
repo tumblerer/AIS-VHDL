@@ -235,8 +235,8 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         addr_a_x <= std_logic_vector(to_unsigned(0,addr_a_x'length));
         wea_x <= x"00";
       else
-        wea_x <= x"FF";
 
+        counter <= counter + 1;
 
         -- Activate first block
         if counter < 2100-1 or complete_r = '1' then
@@ -257,8 +257,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
 
         -- Address Final X memory
-        if counter < 2100+STEPS*TOTAL_PIPE_INCR+2 then
-          counter <= counter + 1;
+        if counter < 2100+STEPS*TOTAL_PIPE_INCR+2+3 or counter > 2100+STEPS*TOTAL_PIPE_INCR+2+RUNS+3 then
           wea_x <= x"00";
         else
           address_counter_X <= address_counter_X + 8;
