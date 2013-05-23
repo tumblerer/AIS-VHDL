@@ -331,7 +331,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   end process ; -- Control
 
-  Data_Transfer : process( doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
+  Data_Transfer : process(reset, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
   begin
 
     beta_wire(block_counter) <= doutb_beta;
@@ -352,12 +352,16 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       running <= '1';
     end if;
     
-    if activate_wire(BLOCKS) = '0' and running = '1' then
-      complete_r <= '1';
-    else 
+    if reset = '1' then
       complete_r <= '0';
+    else
+      if activate_wire(BLOCKS) = '0' and running = '1' then
+        complete_r <= '1';
+      else 
+        complete_r <= '0';
+      end if;
     end if;
-
+    
     complete <= complete_r;
 
   end process ; -- Data_Transfer
