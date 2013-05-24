@@ -96,6 +96,8 @@ BEGIN
       
       -- Read Beta values into BRAM_Beta
       addr_count <= 0;
+      wea_beta <= x"FF";
+      wait for clk_period;
       while not endfile(beta_file) loop
         readline(beta_file, file_line);
         hread(file_line, temp_beta);
@@ -108,6 +110,7 @@ BEGIN
 
       -- Read in seed values
       addr_count <= 0;
+      wea_seed <= x"FF";
       while not endfile(seed_file) loop
         readline(seed_file, file_line);
         hread(file_line, temp_seed);
