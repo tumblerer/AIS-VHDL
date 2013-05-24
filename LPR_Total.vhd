@@ -99,11 +99,12 @@ begin
 
   end process;
 
-  Transfer: process(complete_array)
+  Transfer: process(complete_array, addra_seed, addrb_x)
   begin
 
     complete <= complete_array(CHAINS);
     addra_seed_array(seed_counter) <= addra_seed;
+    addrb_x_array(x_counter) <= addrb_x;
 
   end process;
 
