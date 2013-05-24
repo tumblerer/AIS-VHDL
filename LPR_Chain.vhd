@@ -2,7 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library work;
 use work.Pack.all;
-use work.beta_pack.all;
 use IEEE.NUMERIC_STD.ALL;
 
 entity LPR_Chain is
