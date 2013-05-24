@@ -50,7 +50,8 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
- 
+  
+  signal addr_count: integer :=0;
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -80,13 +81,72 @@ BEGIN
 
    -- Stimulus process
    stim_proc: process
+
+   file beta_file : TEXT open READ_MODE is "beta";
+   file my_output : TEXT open WRITE_MODE is "output.out";
+   file seed_file : TEXT open READ_MODE is "seed";
+   variable file_line: line;
+   variable output_line: line;
+   variable temp_beta, temp_seed: std_logic_vector(PRECISION-1 downto 0);
+   variable temp_output: std_logic_vector(PRECISION-1 downto 0);
+
    begin		
+      wea_seed <= x"00";
+      wea_beta <=x"00";
+      reset <= '1';
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
       wait for clk_period*10;
+      addra_beta <= (OTHERS => '0');
+      
+      -- Read Beta values into BRAM_Beta
+      addr_count <= 0;
+      wea_beta <= x"FF";
+      while not endfile(beta_file) loop
+        readline(beta_file, file_line);
+        hread(file_line, temp_beta);
+        dina_beta <= temp_beta;
+        addr_count <= addr_count + 8;
+        addra_beta <= std_logic_vector(to_unsigned(addr_count,addra_beta'length));
+        wait for clk_period;
+      end loop;
+      wait for clk_period;
+      wea_beta <= x"00";
 
-      -- insert stimulus here 
+      -- Read in seed values
+      wea_seed <= x"FF" 
+      addr_count <= 0;
+      while not endfile(seed_file) loop
+        readline(seed_file, file_line);
+        hread(file_line, temp_seed);
+        dina_seed <= temp_seed;
+        addr_count <= addr_count + 8;
+        addra_seed <= std_logic_vector(to_unsigned(addr_count,addra_seed'length));
+        wait for clk_period;
+      end loop;
+      wait for clk_period;
+      wea_seed <= x"00";
+      
+      reset <= '0';
+
+      wait for clk_period*100;
+      while complete = '0' loop
+        wait for clk_period;
+      end loop;
+
+    -- If complete, write out contents of BRAM_X to file      
+      FILEIO : for i in 0 to RUNS-1 loop
+        addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
+        wait for clk_period;
+        hwrite(output_line, doutb_x);
+        writeline(my_output, output_line);
+      end loop ; -- FILEIO
+
+      wait for clk_period;
+      assert complete = '0'
+        report "SUCCESS: Simulation stopped at completion"
+        severity FAILURE;
 
       wait;
    end process;
