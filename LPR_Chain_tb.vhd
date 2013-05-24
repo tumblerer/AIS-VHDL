@@ -78,7 +78,7 @@ BEGIN
 
    -- Stimulus process
    stim_proc: process
-   file beta_file : text;
+   file beta_file : TEXT open READ_MODE is "beta";
    file my_output : TEXT open WRITE_MODE is "output.out";
    file seed_file : TEXT open READ_MODE is "seed";
    variable file_line: line;
@@ -96,7 +96,6 @@ BEGIN
       
       -- Read Beta values into BRAM_Beta
       addr_count <= 0;
-      file_open(beta_file,"beta",READ_MODE);
       while not endfile(beta_file) loop
         readline(beta_file, file_line);
         hread(file_line, temp_beta);
@@ -118,17 +117,7 @@ BEGIN
         wait for clk_period;
       end loop;
       wait for clk_period;
-
-      -- seed_load : for i in 1 to 100 loop
-      --    addra_seed <= std_logic_vector(to_unsigned(i*8*2,addra_seed'length));
-      --    wait for clk_period;
-      --    dina_seed <= "0011111111100000000000000000000000000000000000000000000000001111";
-      --    addra_seed <= std_logic_vector(to_unsigned((i-1)*8*2,addra_seed'length));
-      --    wait for clk_period;
-      --    dina_seed <= "0011111111100000000000000000000000000000000000000000000000000000";
-      -- end loop ; -- seed_load
-      
-
+ 
       reset <= '0';
 
       wait for clk_period*100;
