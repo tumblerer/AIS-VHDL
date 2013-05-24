@@ -7,7 +7,7 @@ use work.Pack.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+USE ieee.numeric_std.ALL;
  
 ENTITY LPR_Total_tb IS
 END LPR_Total_tb;
@@ -91,9 +91,8 @@ BEGIN
    variable temp_output: std_logic_vector(PRECISION-1 downto 0);
 
    begin		
-      wea_seed <= x"00";
-      wea_beta <=x"00";
       reset <= '1';
+    
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
@@ -115,7 +114,7 @@ BEGIN
       wea_beta <= x"00";
 
       -- Read in seed values
-      wea_seed <= x"FF" 
+      wea_seed <= x"FF"; 
       addr_count <= 0;
       while not endfile(seed_file) loop
         readline(seed_file, file_line);
@@ -127,7 +126,7 @@ BEGIN
       end loop;
       wait for clk_period;
       wea_seed <= x"00";
-      
+
       reset <= '0';
 
       wait for clk_period*100;
@@ -138,9 +137,11 @@ BEGIN
     -- If complete, write out contents of BRAM_X to file      
       FILEIO : for i in 0 to RUNS-1 loop
         addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
-        wait for clk_period;
-        hwrite(output_line, doutb_x);
-        writeline(my_output, output_line);
+        EACH_BRAM : for i in 0 to CHAINS-1 loop
+          wait for clk_period;
+          hwrite(output_line, doutb_x);
+          writeline(my_output, output_line);
+        end loop;
       end loop ; -- FILEIO
 
       wait for clk_period;
@@ -148,7 +149,6 @@ BEGIN
         report "SUCCESS: Simulation stopped at completion"
         severity FAILURE;
 
-      wait;
    end process;
 
 END;
