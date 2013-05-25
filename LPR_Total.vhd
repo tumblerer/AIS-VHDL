@@ -41,9 +41,11 @@ component LPR_Chain is
 end component ; -- LPR_Chain
 
   type address_array is array(CHAINS downto 1) of std_logic_vector(31 downto 0);
+  type data_array is array(CHAINS downto 1) of std_logic_vector(PRECISION-1 downto 0);
   type single_wire_array is array(CHAINS downto 1) of std_logic;
 
-  signal addra_seed_array , addra_beta_array, addrb_x_array: address_array;
+  signal addra_seed_array , addrb_x_array: address_array;
+  signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
 
   -- Counters
@@ -58,11 +60,11 @@ begin
           addra_seed => addra_seed_array(i),
           addra_beta => addra_beta,
           dina_beta => dina_beta,
-          dina_seed => dina_seed,
+          dina_seed => dina_seed_array(i),
           wea_beta => wea_beta,
           wea_seed => wea_seed,
           addrb_x => addrb_x_array(i),
-          doutb_x => doutb_x,
+          doutb_x => doutb_x_array(i),
           complete => complete_array(i)
         );
   end generate;
@@ -99,12 +101,14 @@ begin
 
   end process;
 
-  Transfer: process(complete_array, addra_seed, addrb_x)
+  Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter)
   begin
 
     complete <= complete_array(CHAINS);
     addra_seed_array(seed_counter) <= addra_seed;
+    dina_seed_array(seed_counter) <= dina_seed;
     addrb_x_array(x_counter) <= addrb_x;
+    doutb_x <= doutb_x_array(x_counter);
 
   end process;
 

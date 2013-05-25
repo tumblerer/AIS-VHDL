@@ -56,12 +56,16 @@ end component;
   type single_wire_array is array(BLOCKS downto 0) of std_logic;
   type mem_addr_wire is array(BLOCKS+1 downto 0) of std_logic_vector(31 downto 0); 
   type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(PRECISION-1 downto 0);
+  type complete_wire is array (BLOCKS downto 1) of std_logic;
+
   --type beta_wire_array is array(BLOCKS downto 1) of std_logic_vector(PRECISION-1 downto 0);
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
   signal Mem_Data_B : mem_data_wire;
 	signal Mem_Addr_B :mem_addr_wire;
   signal beta_wire : wire_array;
+  signal complete_array: complete_wire;
+
   --signal X_delay : wire_array;
 
   --signal activate_in : std_logic;
@@ -159,7 +163,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(1),
            Mem_Data_B_Out =>  Mem_Data_B(1),
-           seed => doutb_seed(i)
+           seed => doutb_seed(i),
+           complete => complete_array(i)
+
       ); end generate CHAIN1;
 
       CHAIN2 : if (i /= BLOCKS) generate
@@ -175,7 +181,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(i+1),
            Mem_Data_B_Out =>  Mem_Data_B(i+1),
-           seed => doutb_seed(i)
+           seed => doutb_seed(i),
+           complete => complete_array(i)
+
       ); end generate CHAIN2;
   end generate;
 
@@ -329,7 +337,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   end process ; -- Control
 
-  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_r )
+  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_array)
   begin
 
     -- Creates a latch - unsure how to fix.
@@ -347,25 +355,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       end if;       
     end if;
 
-    if reset = '1' then
-      running <= '0';
-    else
-      if activate_wire(BLOCKS) = '1' then
-        running <= '1';
-      end if;
-    end if;
-    
-    if reset = '1' then
-      complete_r <= '0';
-    else
-      if activate_wire(BLOCKS) = '0' and running = '1' then
-        complete_r <= '1';
-      else 
-        complete_r <= '0';
-      end if;
-    end if;
-    
-    complete <= complete_r;
+    complete <= complete_array(BLOCKS);
 
   end process ; -- Data_Transfer
 end architecture ; -- behavorial

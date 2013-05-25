@@ -17,7 +17,8 @@ entity Comparator is
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            activate_out: out std_logic;
-           seed: in std_logic
+           seed: in std_logic;
+           complete : out std_logic
       );
 end Comparator;
 
@@ -271,10 +272,16 @@ Control_sync: PROCESS
     begin
 
       -- Propagate activate signal
-      if initial_counter > TOTAL_PIPE+1 and initial_counter < (TOTAL_PIPE+1)*STEPS+RUNS then
+      if initial_counter > TOTAL_PIPE+1 then
         activate_out <= '1';
       else
         activate_out <= '0';
+      end if;
+
+      if initial_counter > (TOTAL_PIPE+1)*STEPS+RUNS then
+        complete <= '1';
+      else
+        complete <= '0';
       end if;
 
     end process;

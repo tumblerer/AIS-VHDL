@@ -24,7 +24,8 @@ entity LPR_top is
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
-           seed : in std_logic
+           seed : in std_logic;
+           complete: out std_logic
            );
 end LPR_top;
 
@@ -52,7 +53,8 @@ component Comparator is
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
-           seed: in std_logic
+           seed: in std_logic;
+           complete: out std_logic
       );
 end component;
   
@@ -87,7 +89,8 @@ end generate;
          Mem_Data_B_Out =>  Mem_Data_B_Out,
          Beta => Beta,
          activate_out => activate_out,
-         seed => seed
+         seed => seed,
+         complete => complete
         );
 --end generate ; -- LPR2
 
