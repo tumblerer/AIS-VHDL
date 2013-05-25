@@ -63,7 +63,7 @@ begin
           dina_seed => dina_seed_array(i),
           wea_beta => wea_beta,
           wea_seed => wea_seed,
-          addrb_x => addrb_x_array(i),
+          addrb_x => addrb_x,
           doutb_x => doutb_x_array(i),
           complete => complete_array(i)
         );
@@ -102,9 +102,7 @@ begin
   begin
 
     complete <= complete_array(CHAINS);
-    
-    
-    addrb_x_array(x_counter) <= addrb_x;
+
     doutb_x <= doutb_x_array(x_counter);
 
   end process;
