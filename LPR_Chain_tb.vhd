@@ -52,7 +52,7 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: work.LPR_Chain PORT MAP (
+   uut: LPR_Chain PORT MAP (
           clk => clk,
           reset => reset,
           addra_seed => addra_seed,
