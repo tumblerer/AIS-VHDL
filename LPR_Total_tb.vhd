@@ -47,7 +47,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
  	--Outputs
    signal doutb_x : std_logic_vector(63 downto 0);
    signal complete : std_logic;
-
+   signal hold_address: integer range 0 to BLOCKS := 0;
    -- Clock period definitions
    constant clk_period : time := 10 ns;
   
@@ -92,7 +92,7 @@ BEGIN
 
    begin		
       reset <= '1';
-    
+      wait for 0.5*clk_period;
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
@@ -117,11 +117,17 @@ BEGIN
       -- Read in seed values
       wea_seed <= x"FF"; 
       addr_count <= 0;
+      wait for clk_period;
       while not endfile(seed_file) loop
         readline(seed_file, file_line);
         hread(file_line, temp_seed);
         dina_seed <= temp_seed;
-        addr_count <= addr_count + 8;
+        if hold_address < CHAINS-1 then
+          hold_address <= hold_address + 1;
+        else
+          addr_count <= addr_count + 8;
+          hold_address <= 0;
+        end if;
         addra_seed <= std_logic_vector(to_unsigned(addr_count,addra_seed'length));
         wait for clk_period;
       end loop;

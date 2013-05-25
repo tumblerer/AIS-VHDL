@@ -99,14 +99,17 @@ begin
       end if;
     end if;
 
+    dina_seed_array(seed_counter) <= dina_seed;
+    addra_seed_array(seed_counter) <= addra_seed;
+    
   end process;
 
   Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter)
   begin
 
     complete <= complete_array(CHAINS);
-    addra_seed_array(seed_counter) <= addra_seed;
-    dina_seed_array(seed_counter) <= dina_seed;
+    
+    
     addrb_x_array(x_counter) <= addrb_x;
     doutb_x <= doutb_x_array(x_counter);
 
