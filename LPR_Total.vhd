@@ -73,11 +73,6 @@ Load: Process
 begin
   wait until clk'EVENT and clk='1';
 
-    if rising_edge(reset) then
-      seed_counter <= 1;
-      x_counter <= 1;
-
-    else
       if wea_seed = x"FF" then
         if seed_counter < CHAINS then
           seed_counter <= seed_counter + 1;
@@ -85,7 +80,7 @@ begin
           seed_counter <= 1;
         end if;
       else
-        seed_counter <= 1;
+        seed_counter <= CHAINS;
       end if;
 
       if complete_array(CHAINS) = '1' then
@@ -95,13 +90,12 @@ begin
           x_counter <= 1;
         end if;
       else
-        x_counter <= 1;
+        x_counter <= CHAINS;
       end if;
-    end if;
 
     dina_seed_array(seed_counter) <= dina_seed;
     addra_seed_array(seed_counter) <= addra_seed;
-    
+
   end process;
 
   Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter)
