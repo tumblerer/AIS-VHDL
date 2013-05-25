@@ -141,14 +141,20 @@ BEGIN
         wait for clk_period;
       end loop;
 
-    -- If complete, write out contents of BRAM_X to file      
-      FILEIO : for i in 0 to RUNS-1 loop
-        addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
-        EACH_BRAM : for i in 0 to CHAINS-1 loop
+    -- If complete, write out contents of BRAM_X to file
+     addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
+      FILEIO : for i in 0 to RUNS-1 loop  
+        EACH_BRAM : for j in 0 to CHAINS-1 loop 
+
           wait for clk_period;
+
           hwrite(output_line, doutb_x);
           writeline(my_output, output_line);
+          if j = CHAINS-2 then
+            addrb_x <= std_logic_vector(to_unsigned((i+1)*8, addrb_x'length));
+          end if;
         end loop;
+        
       end loop ; -- FILEIO
 
       wait for clk_period;
