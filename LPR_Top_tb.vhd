@@ -52,7 +52,7 @@ ARCHITECTURE behavior OF LPR_Top_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: LPR_top PORT MAP (
+   uut: work.LPR_top PORT MAP (
           clk => clk,
           reset => reset,
           Beta => Beta,

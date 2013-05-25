@@ -47,7 +47,7 @@ end component ; -- LPR_Chain
   signal complete_array : single_wire_array;
 
   -- Counters
-  signal seed_counter, x_counter : integer range 0 to RUNS*STEPS*8;
+  signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;
 begin 
 
  Parallel_Chains: for i in 1 to CHAINS generate

@@ -3,8 +3,8 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.Pack.ALL;
-library UNISIM;
-use UNISIM.VComponents.all;
+--library UNISIM;
+--use UNISIM.VComponents.all;
 
 -- Calculating intitial X values
 -- Total time - 128 + 12 + 15 = 155
