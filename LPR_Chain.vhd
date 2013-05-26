@@ -16,6 +16,8 @@ entity LPR_Chain is
       wea_beta : in std_logic_vector(7 downto 0);
       addrb_X : in std_logic_vector(31 downto 0);
       doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
+      addrb_LPR : in std_logic_vector(31 downto 0);
+      doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic
    ) ;
 end entity ; -- LPR_Chain
@@ -54,15 +56,15 @@ end component;
   type wire_array is array(BLOCKS downto 0) of std_logic_vector(PRECISION-1 downto 0);
   type buffer_wire_array is array(BLOCKS-1 downto 0) of std_logic_vector(PRECISION-1 downto 0);
   type single_wire_array is array(BLOCKS downto 0) of std_logic;
-  type mem_addr_wire is array(BLOCKS+1 downto 0) of std_logic_vector(31 downto 0); 
-  type mem_data_wire is array(BLOCKS+1 downto 0) of std_logic_vector(PRECISION-1 downto 0);
+  type mem_addr_wire is array(BLOCKS downto 1) of std_logic_vector(31 downto 0); 
+  type mem_data_wire is array(BLOCKS downto 1) of std_logic_vector(PRECISION-1 downto 0);
   type complete_wire is array (BLOCKS downto 1) of std_logic;
 
   --type beta_wire_array is array(BLOCKS downto 1) of std_logic_vector(PRECISION-1 downto 0);
   signal activate_wire : single_wire_array;
   signal X_wire : wire_array;
-  signal Mem_Data_B : mem_data_wire;
-	signal Mem_Addr_B :mem_addr_wire;
+  signal Mem_Data_B  : mem_data_wire;
+	signal Mem_Addr_B, Mem_Addr_B_Int :mem_addr_wire;
   signal beta_wire : wire_array;
   signal complete_array: complete_wire;
 
@@ -71,8 +73,8 @@ end component;
   --signal activate_in : std_logic;
 	signal activate_gen: std_logic;
   --signal seed : std_logic_vector (127 downto 0);
-  signal complete_r: std_logic;
-  signal running: std_logic;
+
+  -- signal running: std_logic;
 
   -- Pipeline
   -- Needs to be conditionally generated
@@ -102,6 +104,8 @@ end component;
   signal block_counter : integer range 0 to BLOCKS;
   signal block_counter_delay : integer range 0 to TOTAL_PIPE_INCR+2;
   signal first_beta : integer range 0 to 2;
+  signal address_counter_LPR : integer range 0 to 8*STEPS*RUNS;
+  signal Block_LPR_counter: integer range 1 to BLOCKS;
 
 begin
 
@@ -159,7 +163,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            activate_out => activate_wire(i),
            X_In => X_wire(i-1),
            X_out => X_wire(i),
-           Mem_Addr_B_In => Mem_Addr_B(i),
+           Mem_Addr_B_In => Mem_Addr_B_Int(i),
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(1),
            Mem_Data_B_Out =>  Mem_Data_B(1),
@@ -177,7 +181,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            activate_out => activate_wire(i),
            X_In => X_wire(i-1),
            X_out => X_buffer(i-1),
-           Mem_Addr_B_In => Mem_Addr_B(i),
+           Mem_Addr_B_In => Mem_Addr_B_Int(i),
            Mem_Data_B_In =>  Mem_Data_B(i),
            Mem_Addr_B_Out => Mem_Addr_B(i+1),
            Mem_Data_B_Out =>  Mem_Data_B(i+1),
@@ -228,7 +232,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   Control : process
   begin
     wait until clk'EVENT AND clk='1';
-      if reset = '1' or complete_r = '1' then
+      if reset = '1' then
         activate_gen <= '0';
         activate_wire(0) <= '0';
         counter <= 0;
@@ -246,7 +250,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         counter <= counter + 1;
 
         -- Activate first block
-        if counter < 2100-1 or complete_r = '1' then
+        if counter < 2100-1 then
           activate_wire(0) <='0';
         else 
          activate_wire(0) <= '1';
@@ -337,7 +341,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
   end process ; -- Control
 
-  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, running, complete_array)
+  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array)
   begin
 
     -- Creates a latch - unsure how to fix.
@@ -356,6 +360,19 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
     end if;
 
     complete <= complete_array(BLOCKS);
+
+    doutb_LPR <=  Mem_Data_B(Block_LPR_counter);
+
+    -- Switch to extracting LPR values from BRAMS 
+    if complete_array(BLOCKS) = '1' then
+      Mem_Addr_B(Block_LPR_counter) <= addrb_LPR;
+    else
+      Mem_Addr_B_Int(BLOCKS) <= Mem_Addr_B(1);
+      for i in 1 to BLOCKS-1 loop
+        Mem_Addr_B_Int(i) <= Mem_Addr_B(i+1);
+      end loop;
+    end if;
+
 
   end process ; -- Data_Transfer
 end architecture ; -- behavorial

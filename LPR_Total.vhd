@@ -16,6 +16,8 @@ entity LPR_Total is
     addra_seed : in std_logic_vector(31 downto 0);
     addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
+    addrb_LPR : in std_logic_vector(31 downto 0);
+    doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
     complete: out std_logic
 	);
 
@@ -36,6 +38,8 @@ component LPR_Chain is
       wea_beta : in std_logic_vector(7 downto 0);
       addrb_X : in std_logic_vector(31 downto 0);
       doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
+      addrb_LPR : in std_logic_vector(31 downto 0);
+      doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic
    ) ;
 end component ; -- LPR_Chain
@@ -65,6 +69,8 @@ begin
           wea_seed => wea_seed,
           addrb_x => addrb_x,
           doutb_x => doutb_x_array(i),
+          addrb_LPR => addrb_LPR,
+          doutb_LPR => doutb_LPR,
           complete => complete_array(i)
         );
   end generate;
