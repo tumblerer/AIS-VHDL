@@ -16,6 +16,7 @@ entity LPR_Chain is
       wea_beta : in std_logic_vector(7 downto 0);
       addrb_X : in std_logic_vector(31 downto 0);
       doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
+      x_complete: in std_logic;
       addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic
@@ -106,6 +107,7 @@ end component;
   signal first_beta : integer range 0 to 2;
   signal address_counter_LPR : integer range 0 to 8*STEPS*RUNS;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
+  signal Block_LPR_delay : integer range 0 to (STEPS/BLOCKS)*RUNS;
 
 begin
 
@@ -262,10 +264,6 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         else
           activate_gen <= '0';
         end if;
-        
-        -- Stop signal
-     --   if counter > 2100+STEPS*TOTAL_PIPE_INCR+RUNS then
-
 
         -- Address Final X memory
         if counter < 2100+STEPS*TOTAL_PIPE_INCR+2+3 or counter > 2100+STEPS*TOTAL_PIPE_INCR+2+RUNS+3 then
@@ -340,6 +338,31 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       end if;
 
   end process ; -- Control
+
+  LPR_Counter:process
+  begin
+   wait until clk'EVENT and clk='1';
+    
+    if reset = '1' then
+      Block_LPR_counter <= 1;
+      Block_LPR_delay <= 0;
+    else
+      if x_complete = '1' then
+        if Block_LPR_delay < (STEPS/BLOCKS)*RUNS then
+          Block_LPR_counter <= Block_LPR_delay + 1;
+        else
+          Block_LPR_delay <= 0;
+          if Block_LPR_counter < BLOCKS then
+            Block_LPR_counter <= Block_LPR_counter + 1;
+          else
+            Block_LPR_counter <= 1;
+          end if;
+        end if;
+      end if;
+    end if;
+
+  end process;
+
 
   Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array)
   begin

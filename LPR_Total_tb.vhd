@@ -28,6 +28,9 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          addra_seed : IN  std_logic_vector(31 downto 0);
          addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
+         x_complete: in std_logic;
+         addrb_LPR : in std_logic_vector(31 downto 0);
+         doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
          complete : OUT  std_logic
         );
     END COMPONENT;
@@ -46,8 +49,11 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
 
  	--Outputs
    signal doutb_x : std_logic_vector(63 downto 0);
-   signal complete : std_logic;
+   signal complete : std_logic := '0';
    signal hold_address: integer range 0 to BLOCKS := 0;
+   signal x_complete : std_logic;
+   signal addrb_LPR : std_logic_vector(31 downto 0);
+   signal doutb_LPR : std_logic_vector(PRECISION-1 downto 0);
    -- Clock period definitions
    constant clk_period : time := 10 ns;
   
@@ -66,6 +72,9 @@ BEGIN
           addra_seed => addra_seed,
           addrb_X => addrb_X,
           doutb_x => doutb_x,
+          x_complete => x_complete,
+          addrb_LPR => addrb_LPR,
+          doutb_LPR => doutb_LPR,
           complete => complete
         );
 
@@ -83,8 +92,9 @@ BEGIN
    stim_proc: process
 
    file beta_file : TEXT open READ_MODE is "beta";
-   file my_output : TEXT open WRITE_MODE is "output.out";
+   file output_x : TEXT open WRITE_MODE is "x.out";
    file seed_file : TEXT open READ_MODE is "seed";
+   file output_lpr : TEXT open WRITE_MODE is "LPR.out";
    variable file_line: line;
    variable output_line: line;
    variable temp_beta, temp_seed: std_logic_vector(PRECISION-1 downto 0);
@@ -147,13 +157,25 @@ BEGIN
         EACH_BRAM : for j in 0 to CHAINS-1 loop 
           wait for clk_period;
           hwrite(output_line, doutb_x);
-          writeline(my_output, output_line);
+          writeline(output_x, output_line);
           if j = CHAINS-2 then
             addrb_x <= std_logic_vector(to_unsigned((i+1)*8, addrb_x'length));
           end if;
-        end loop;
-        
+        end loop;    
       end loop ; -- FILEIO
+      x_complete <= '1';
+
+      wait for clk_period;
+
+      EACH_CHAIN: for i in 1 to CHAINS loop
+      addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
+        EACH_BLOCK: for j in 0 to BLOCKS-1 loop
+          EACH_LPR: for k in 0 to (STEPS/BLOCKS)*RUNS-1 loop
+          addrb_LPR <= std_logic_vector(to_unsigned(i*8, addrb_LPR'length));
+          wait for clk_period;
+          end loop;
+        end loop;
+      end loop;
 
       wait for clk_period;
       assert complete = '0'
