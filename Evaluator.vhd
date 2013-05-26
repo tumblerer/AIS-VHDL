@@ -57,7 +57,8 @@ begin
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
 			 -- 0.25
-          b => rng_norm,
+          b => --x"0000000000000000"--
+          		rng_norm,
           clk => clk,
           result => Add1Result
         );    

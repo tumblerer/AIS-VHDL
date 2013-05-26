@@ -145,9 +145,7 @@ BEGIN
      addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
       FILEIO : for i in 0 to RUNS-1 loop  
         EACH_BRAM : for j in 0 to CHAINS-1 loop 
-
           wait for clk_period;
-
           hwrite(output_line, doutb_x);
           writeline(my_output, output_line);
           if j = CHAINS-2 then
