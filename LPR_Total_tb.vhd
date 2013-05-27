@@ -173,6 +173,8 @@ BEGIN
           EACH_LPR: for k in 0 to (STEPS/BLOCKS)*RUNS-1 loop
           addrb_LPR <= std_logic_vector(to_unsigned(i*8, addrb_LPR'length));
           wait for clk_period;
+          hwrite(output_line, doutb_LPR);
+          writeline(output_lpr, output_line);
           end loop;
         end loop;
       end loop;

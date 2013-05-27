@@ -54,7 +54,7 @@ end component ; -- LPR_Chain
   signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
   signal doutb_LPR_array : data_array;
-  signal chain_counter_delay : integer range 1 to STEPS*RUNS := 1;
+  signal chain_counter_delay : integer range 0 to STEPS*RUNS := 0;
   signal chain_counter_lpr: integer range 1 to CHAINS := 1; 
   -- Counters
   signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;

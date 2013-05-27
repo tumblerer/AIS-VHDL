@@ -364,7 +364,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   end process;
 
 
-  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array)
+  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array, mem_data_b, addrb_lpr)
   begin
 
     -- Creates a latch - unsure how to fix.
