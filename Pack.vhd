@@ -13,7 +13,7 @@ constant STEPS: integer := 6;
 -- How many states
 constant RUNS: integer := 3;
 -- Blocks per chain
-constant BLOCKS: integer:= 3;
+constant BLOCKS: integer:= 2;
 --Number of parallel chains - effectively repetitions
 constant CHAINS : integer := 2;
 -- Mean 1
@@ -21,8 +21,12 @@ constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
 -- 1/Sd 1/(2*0.1^2)
 constant VARIANCE: std_logic_vector(PRECISION-1 downto 0) := x"4049000000000000";
 constant MEAN_Gen: std_logic_vector(PRECISION-1 downto 0):= (OTHERS => '0');
-constant STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3ff0000000000000";
 
+-- 1/2*SD^2 -- SD = 1
+constant STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3fe0000000000000";
+
+--1/2*SD^2 -- SD = 0.05
+constant STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"4068ffffffffffff";
 --
 TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(PRECISION-1 DOWNTO 0);
 
