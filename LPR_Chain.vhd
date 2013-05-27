@@ -364,7 +364,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   end process;
 
 
-  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array, mem_data_b, addrb_lpr)
+  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array, mem_addr_b_int, addrb_lpr, Mem_Data_B, Block_LPR_counter)
   begin
 
     -- Creates a latch - unsure how to fix.
@@ -390,9 +390,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
     if complete_array(BLOCKS) = '1' then
       Mem_Addr_B(Block_LPR_counter) <= addrb_LPR;
     else
-      Mem_Addr_B_Int(BLOCKS) <= Mem_Addr_B(1);
+      Mem_Addr_B(BLOCKS) <=  Mem_Addr_B_Int(BLOCKS);
       for i in 1 to BLOCKS-1 loop
-        Mem_Addr_B_Int(i) <= Mem_Addr_B(i+1);
+        Mem_Addr_B(i) <= Mem_Addr_B_Int(i);
       end loop;
     end if;
 

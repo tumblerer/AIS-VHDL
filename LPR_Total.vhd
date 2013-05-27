@@ -113,7 +113,11 @@ begin
             chain_counter_delay <= chain_counter_delay + 1;
           else
             chain_counter_delay <= 0;
-            chain_counter_lpr <= chain_counter_lpr + 1;
+            if chain_counter_lpr < CHAINS then
+              chain_counter_lpr <= chain_counter_lpr + 1;
+            else 
+              chain_counter_lpr <= 1;
+            end if;
           end if;
         end if;
       end if;
