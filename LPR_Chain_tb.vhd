@@ -27,6 +27,9 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
   		  wea_beta : in std_logic_vector(7 downto 0);
         addrb_X : in std_logic_vector(31 downto 0);
         doutb_x : out  std_logic_vector(63 downto 0);
+        x_complete: in std_logic;
+        addrb_LPR : in std_logic_vector(31 downto 0);
+        doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
         complete: out std_logic
    ) ;
     END COMPONENT;
@@ -48,7 +51,10 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
    constant clk_period : time := 10 ns;
 
    signal addr_count: integer :=0;
- 
+   signal x_complete: std_logic;
+
+   signal addrb_LPR : std_logic_vector(31 downto 0);
+   signal doutb_LPR:  std_logic_vector(PRECISION-1 downto 0);
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -63,6 +69,9 @@ BEGIN
           wea_seed => wea_seed,
           addrb_x => addrb_x,
           doutb_x => doutb_x,
+          x_complete => x_complete,
+          addrb_LPR => addrb_LPR,
+          doutb_LPR => doutb_LPR,
           complete => complete
         );
 

@@ -152,18 +152,31 @@ BEGIN
       end loop;
 
     -- If complete, write out contents of BRAM_X to file
-     addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
-      FILEIO : for i in 0 to RUNS-1 loop  
-        EACH_BRAM : for j in 0 to CHAINS-1 loop 
+
+         addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
+      FILEIO : for i in 1 to CHAINS loop  
+        EACH_BRAM : for j in 0 to RUNS-1 loop 
           wait for clk_period;
           hwrite(output_line, doutb_x);
           writeline(output_x, output_line);
-          if j = CHAINS-2 then
-            addrb_x <= std_logic_vector(to_unsigned((i+1)*8, addrb_x'length));
-          end if;
+          addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
         end loop;    
       end loop ; -- FILEIO
       x_complete <= '1';
+
+
+     -- addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
+     --  FILEIO : for i in 1 to CHAINS loop  
+     --    EACH_BRAM : for j in 0 to RUNS-1 loop 
+     --      wait for clk_period;
+     --      hwrite(output_line, doutb_x);
+     --      writeline(output_x, output_line);
+     --      if j = CHAINS-2 then
+     --        addrb_x <= std_logic_vector(to_unsigned((i+1)*8, addrb_x'length));
+     --      end if;
+     --    end loop;    
+     --  end loop ; -- FILEIO
+     --  x_complete <= '1';
 
       wait for clk_period;
 
@@ -171,7 +184,7 @@ BEGIN
       addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
         EACH_BLOCK: for j in 0 to BLOCKS-1 loop
           EACH_LPR: for k in 0 to (STEPS/BLOCKS)*RUNS-1 loop
-          addrb_LPR <= std_logic_vector(to_unsigned(i*8, addrb_LPR'length));
+          addrb_LPR <= std_logic_vector(to_unsigned(k*8, addrb_LPR'length));
           wait for clk_period;
           hwrite(output_line, doutb_LPR);
           writeline(output_lpr, output_line);
