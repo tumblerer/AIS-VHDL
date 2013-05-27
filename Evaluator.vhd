@@ -47,7 +47,7 @@ architecture Behavioral of Evaluator is
 
 	-- RNG Signal
 	signal rng_mode_norm, rng_ce_norm : std_logic;
-	signal rng_norm : std_logic_vector(PRECISION-1 downto 0);	
+	signal rng_norm, rng_norm_pre_mult : std_logic_vector(PRECISION-1 downto 0);	
 	signal s_in_norm, s_out_norm : std_logic;
 	signal rng_norm_out: std_logic_vector(16 downto 0);
 
@@ -102,9 +102,16 @@ begin
 	RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 	    a => rng_norm_out,
 	    clk => clk,
-	    result => rng_norm
+	    result => rng_norm_pre_mult
 	  );
-  
+  	
+  	MULT3: ENTITY work.LPR_Mult PORT MAP(
+          a => rng_norm_pre_mult,
+          b => STANDARDDEV_Trans,
+          clk => clk,
+          result => rng_norm
+        );
+
 	Control_sync: PROCESS
 	begin
 	WAIT UNTIL clk'EVENT AND clk='1';
