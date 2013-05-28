@@ -155,22 +155,22 @@ Control_sync: PROCESS
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
         Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1); 
-        Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE-2); --(-2) from cost of loading into pipeline
+        Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE-1); --(-2) from cost of loading into pipeline
         -- Pipe of previous LPR value
         Old_LPR(1) <= Mem_Data_B_In;
         Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1); 
-        Old_LPR_output <= Old_LPR(SMALL_PIPE-1-2); -- Seems dubious - keep eye on
+        Old_LPR_output <= Old_LPR(SMALL_PIPE-1); -- Seems dubious - keep eye on
 
         initial_counter <= initial_counter + 1;
 
-        if sample_counter < (TOTAL_PIPE+1)*BLOCKS+2 and initial_counter > TOTAL_PIPE-1 then
+        if sample_counter < TOTAL_PIPE_INCR*BLOCKS-1 and initial_counter > TOTAL_PIPE-2 then
           sample_counter <= sample_counter + 1;
         else
           sample_counter <= 0;
         end if;
 
         -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE-1 and sample_counter < RUNS then 
+        if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS then 
           Address_Counter_Wr <= Address_Counter_Wr + 8; 
           write_a <= x"FF";
         else
@@ -277,7 +277,7 @@ Control_sync: PROCESS
     begin
 
       -- Propagate activate signal
-      if initial_counter > TOTAL_PIPE+1 then
+      if initial_counter > TOTAL_PIPE then
         activate_out <= '1';
       else
         activate_out <= '0';

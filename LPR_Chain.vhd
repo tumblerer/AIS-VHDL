@@ -375,11 +375,11 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
     if counter >= 2100 AND counter < RUNS+2100 then
       X_wire(0) <= sample_output;
     else
-      if counter < 2100+TOTAL_PIPE_INCR*BLOCKS then
-        X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
-      else
+--      if counter < 2100+TOTAL_PIPE_INCR*BLOCKS then
+--        X_wire(0) <= std_logic_vector(to_unsigned(0,X_wire(0)'length)); 
+--     else
         X_wire(0) <= Loop_back_output;   
-      end if;       
+--      end if;       
     end if;
 
     complete <= complete_array(BLOCKS);

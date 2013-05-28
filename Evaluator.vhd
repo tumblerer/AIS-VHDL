@@ -37,7 +37,6 @@ architecture Behavioral of Evaluator is
 	signal Mult2Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
 
 	--PipeLine
-	constant TOTAL_PIPE : integer := 12+12+15+15+12+15+22+2; -- 105
 	signal Proposed_Sample : pipeline_type(1 to TOTAL_PIPE-12);
 	signal Old_Sample : pipeline_type(1 to TOTAL_PIPE);
 	signal Proposed_sample_out, Old_Sample_out : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
@@ -123,11 +122,11 @@ begin
 			-- Pipeline old sample incase its needed
 			Old_Sample(1) <= xState;
 			Old_Sample(2 to TOTAL_PIPE) <= Old_sample(1 to TOTAL_PIPE-1);
-			Old_Sample_Out <= Old_sample(TOTAL_PIPE);
+			Old_Sample_Out <= Old_sample(TOTAL_PIPE-1);
 			-- Shifting of proposed value to end of pipeline
 			Proposed_sample(1) <= Add1Result;
 			Proposed_sample(2 to TOTAL_PIPE-ADDER_LATENCY) <= Proposed_sample(1 to TOTAL_PIPE-1-ADDER_LATENCY);
-			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-ADDER_LATENCY);
+			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-ADDER_LATENCY-1);
 		end if;
 	end process;
 
