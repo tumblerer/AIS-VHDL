@@ -57,8 +57,8 @@ begin
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
 			 -- 0.25
-          b => --x"0000000000000000"--
-          		rng_norm,
+          b => x"0000000000000000",
+          		--rng_norm,
           clk => clk,
           result => Add1Result
         );    
@@ -126,8 +126,8 @@ begin
 			Old_Sample_Out <= Old_sample(TOTAL_PIPE);
 			-- Shifting of proposed value to end of pipeline
 			Proposed_sample(1) <= Add1Result;
-			Proposed_sample(2 to TOTAL_PIPE-12) <= Proposed_sample(1 to TOTAL_PIPE-1-12);
-			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-12);
+			Proposed_sample(2 to TOTAL_PIPE-ADDER_LATENCY) <= Proposed_sample(1 to TOTAL_PIPE-1-ADDER_LATENCY);
+			Proposed_Sample_out <= Proposed_sample(TOTAL_PIPE-ADDER_LATENCY);
 		end if;
 	end process;
 
