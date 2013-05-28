@@ -41,7 +41,9 @@ architecture Behavioral of Comparator is
 
   -- RNG Signal
   signal rng_mode_uni, rng_ce_uni : std_logic;
-  signal rng_uni, rng_uni_out, rng_uni_pos : std_logic_vector(PRECISION-1 downto 0);  
+  signal rng_uni : std_logic_vector(PRECISION-1 downto 0); 
+  signal rng_uni_pos : std_logic_vector(33 downto 0);
+  signal rng_uni_out : std_logic_vector(31 downto 0);
   signal s_in_uni, s_out_uni : std_logic;
 
   -- Counters
@@ -91,7 +93,7 @@ begin
   -- 2 cycles
   COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
       clk => clk,
-      a => rng_uni_pos,
+      a => rng_uni,
       b => Exp1Result,
       result => CompResult_reg
    );
@@ -112,7 +114,7 @@ begin
   
   -- 2048 cycles to load
 
- RNG_UNIFORM: ENTITY work.rng_n2048_r64_t5_k32_sbfbaac PORT MAP(
+ RNG_UNIFORM: ENTITY work.rng_n1024_r32_t5_k32_s1c48 PORT MAP(
     clk => clk,
     ce => rng_ce_uni,
     mode => rng_mode_uni,
@@ -121,8 +123,8 @@ begin
     rng => rng_uni_out
   );
   
-  RNG_UNI_CONV: ENTITY work.RNG_Uni_FixedtoFloat PORT MAP (
-    a => rng_uni_out,
+  RNG_UNI_CONV: ENTITY work.RNG_FixedtoFloat_34to64 PORT MAP (
+    a => rng_uni_pos,
     clk => clk,
     result => rng_uni
   );
@@ -199,7 +201,7 @@ Control_sync: PROCESS
     begin
       mult1Result_ext <= "01" & mult1result;
       Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
-      rng_uni_pos <= "0" & rng_uni(PRECISION-2 downto 0);
+      rng_uni_pos <= "00" & rng_uni_out;
       CompResult <= CompResult_reg;
 
 
@@ -216,7 +218,7 @@ Control_sync: PROCESS
             
           rng_ce_uni <= '0';
           rng_mode_uni <= '0';
-          s_in_uni <= seed;
+          s_in_uni <= '1';
           Mem_Addr_B_In <= x"00000000";
           addr_a <= x"00000000";
           data_in_a <= (others=> '0');
@@ -248,7 +250,7 @@ Control_sync: PROCESS
         when running =>
           rng_ce_uni <= '1';
           rng_mode_uni <= '0';
-          s_in_uni <= seed;
+          s_in_uni <= '1';
 
           if activate_in = '0' then
             nstate <= idle;

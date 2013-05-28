@@ -98,6 +98,7 @@ BEGIN
 
    begin		
       reset <= '1';
+      wait for 0.5*clk_period;
       wait for 100 ns;	
       
       wait for clk_period*10;
