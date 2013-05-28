@@ -45,6 +45,8 @@ architecture Behavioral of Comparator is
   signal rng_uni_pos : std_logic_vector(33 downto 0);
   signal rng_uni_out : std_logic_vector(31 downto 0);
   signal s_in_uni, s_out_uni : std_logic;
+  signal rng_uni_ext, LnResult1_ext: std_logic_vector (PRECISION-1+2 downto 0);
+  signal LnResult1: std_logic_vector(PRECISION-1 downto 0);
 
   -- Counters
   signal initial_counter : integer range 0 to (TOTAL_PIPE+1)*STEPS+RUNS+1:= 0;
@@ -79,22 +81,22 @@ begin
           result => Mult1Result
         );
 
-  -- Exp ((LprNew-LprOld)*eta)
-  -- Flopoco 2MSB are error bits
-  -- 22 cycles
-  EXP1: ENTITY work.FPExp_11_52_400 PORT MAP(
-     clk => clk, 
-     rst => reset,
-         X => mult1Result_ext,
-         R  => Exp1Result_ext
-  );
+  -- -- Exp ((LprNew-LprOld)*eta)
+  -- -- Flopoco 2MSB are error bits
+  -- -- 22 cycles
+  -- EXP1: ENTITY work.FPExp_11_52_400 PORT MAP(
+  --    clk => clk, 
+  --    rst => reset,
+  --        X => mult1Result_ext,
+  --        R  => Exp1Result_ext
+  -- );
   
   -- exp(d) > rng
   -- 2 cycles
   COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
       clk => clk,
-      a => rng_uni,
-      b => Exp1Result,
+      a => LnResult1,
+      b => Mult1Result,
       result => CompResult_reg
    );
 
@@ -129,6 +131,12 @@ begin
     result => rng_uni
   );
 
+  RNG_LN: ENTITY work.LPR_Ln PORT MAP(
+    clk => clk,
+    rst => reset,
+    X => rng_uni_ext,
+    R =>LnResult1_ext
+  );
 
 Control_sync: PROCESS
     begin
@@ -147,11 +155,11 @@ Control_sync: PROCESS
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
         Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1); 
-        Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE);
+        Proposed_LPR_output <= Proposed_LPR(SMALL_PIPE-2); --(-2) from cost of loading into pipeline
         -- Pipe of previous LPR value
         Old_LPR(1) <= Mem_Data_B_In;
         Old_LPR(2 to SMALL_PIPE) <= Old_LPR(1 to SMALL_PIPE-1); 
-        Old_LPR_output <= Old_LPR(SMALL_PIPE-1); -- Seems dubious - keep eye on
+        Old_LPR_output <= Old_LPR(SMALL_PIPE-1-2); -- Seems dubious - keep eye on
 
         initial_counter <= initial_counter + 1;
 
@@ -199,11 +207,6 @@ Control_sync: PROCESS
     State_machine: PROCESS(state,nstate, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
-      mult1Result_ext <= "01" & mult1result;
-      Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
-      rng_uni_pos <= "00" & rng_uni_out;
-      CompResult <= CompResult_reg;
-
 
       case (state) is
       
@@ -285,6 +288,17 @@ Control_sync: PROCESS
       else
         complete <= '0';
       end if;
+
+    end process;
+
+    Signal_Convert: process(mult1result, Exp1Result_ext, rng_uni, rng_uni_out, LnResult1, CompResult_reg)
+    begin
+      mult1Result_ext <= "01" & mult1result;
+      Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
+      rng_uni_ext <= "01" & rng_uni;
+      rng_uni_pos <= "00" & rng_uni_out;
+      LnResult1 <= LnResult1_ext(PRECISION-1 downto 0);
+      CompResult <= CompResult_reg;
 
     end process;
 end Behavioral;
