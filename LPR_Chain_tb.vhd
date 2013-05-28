@@ -40,12 +40,12 @@ ARCHITECTURE behavior OF LPR_Chain_tb IS
    signal reset : std_logic := '0';
    signal wea_beta : std_logic_vector(7 downto 0) := x"FF";
    signal wea_seed : std_logic_vector(7 downto 0) := x"FF";
-   signal dina_seed : std_logic_vector(63 downto 0);
-   signal dina_beta : std_logic_vector(63 downto 0);
-   signal addra_beta : std_logic_vector(31 downto 0);
-   signal addra_seed : std_logic_vector(31 downto 0);
-   signal addrb_x : std_logic_vector(31 downto 0);
-   signal doutb_x : std_logic_vector(63 downto 0);
+   signal dina_seed : std_logic_vector(63 downto 0):= (others => '0');
+   signal dina_beta : std_logic_vector(63 downto 0):= (others => '0');
+   signal addra_beta : std_logic_vector(31 downto 0):= (others => '0');
+   signal addra_seed : std_logic_vector(31 downto 0):= (others => '0');
+   signal addrb_x : std_logic_vector(31 downto 0):= (others => '0');
+   signal doutb_x : std_logic_vector(63 downto 0):= (others => '0');
    signal complete : std_logic;
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -88,7 +88,7 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    file beta_file : TEXT open READ_MODE is "beta";
-   file my_output : TEXT open WRITE_MODE is "output.out";
+   file my_output : TEXT open WRITE_MODE is "x.out";
    file seed_file : TEXT open READ_MODE is "seed";
    variable file_line: line;
    variable output_line: line;
