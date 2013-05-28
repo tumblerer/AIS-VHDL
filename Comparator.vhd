@@ -177,7 +177,7 @@ Control_sync: PROCESS
           write_a <= x"00";
         end if;
 
-        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < (TOTAL_PIPE+1)*BLOCKS+1+1 then
+        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < TOTAL_PIPE_INCR*BLOCKS-1 then
           sample_counter_rd <= sample_counter_rd + 1;
         else
           sample_counter_rd <= 0;
