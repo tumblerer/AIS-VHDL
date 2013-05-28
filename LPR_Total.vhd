@@ -128,7 +128,7 @@ begin
 
   end process;
 
-  Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter)
+  Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
 
     complete <= complete_array(CHAINS);
