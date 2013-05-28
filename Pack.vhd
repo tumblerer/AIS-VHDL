@@ -25,7 +25,7 @@ package Pack is
 	constant STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3fe0000000000000";
 
 	--1/2*SD^2 -- SD = 0.05
-	constant STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"4068ffffffffffff";
+	constant STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"3f747ae147ae147b";
 	--
 	TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(PRECISION-1 DOWNTO 0);
 

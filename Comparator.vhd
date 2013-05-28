@@ -170,15 +170,11 @@ Control_sync: PROCESS
         end if;
 
         -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS then
+        if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS then 
+          Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
         else
           write_a <= x"00";
-        end if;
-
-        --Increase address one cycle later
-        if initial_counter > TOTAL_PIPE-1 and sample_counter < RUNS+1 and sample_counter > 0 then
-            Address_Counter_Wr <= Address_Counter_Wr + 8; 
         end if;
 
         if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < TOTAL_PIPE_INCR*BLOCKS-1 then
@@ -191,7 +187,7 @@ Control_sync: PROCESS
           Address_Counter_Rd <= Address_Counter_rd + 8;
         end if;
 
-      --  Address_Counter_Wr <= Address_Counter_Wr_reg;
+        Address_Counter_Wr <= Address_Counter_Wr_reg;
       --  Address_Counter_Rd <= Address_Counter_Rd_reg;
 
       end if;
