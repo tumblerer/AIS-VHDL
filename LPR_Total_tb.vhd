@@ -51,7 +51,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    signal doutb_x : std_logic_vector(63 downto 0);
    signal complete : std_logic := '0';
    signal hold_address: integer range 0 to BLOCKS := 0;
-   signal x_complete : std_logic;
+   signal x_complete : std_logic:= '0';
    signal addrb_LPR : std_logic_vector(31 downto 0);
    signal doutb_LPR : std_logic_vector(PRECISION-1 downto 0);
    -- Clock period definitions
@@ -153,13 +153,16 @@ BEGIN
 
     -- If complete, write out contents of BRAM_X to file
 
-         addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));      
       FILEIO : for i in 1 to CHAINS loop  
-        EACH_BRAM : for j in 0 to RUNS-1 loop 
-          wait for clk_period;
+        EACH_BRAM : for j in 1 to RUNS loop 
           hwrite(output_line, doutb_x);
           writeline(output_x, output_line);
-          addrb_x <= std_logic_vector(to_unsigned(i*8, addrb_x'length));
+          if j = RUNS then
+            addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));
+          else
+            addrb_x <= std_logic_vector(to_unsigned(j*8, addrb_x'length));
+          end if;
+          wait for clk_period;
         end loop;    
       end loop ; -- FILEIO
       x_complete <= '1';
@@ -177,8 +180,6 @@ BEGIN
      --    end loop;    
      --  end loop ; -- FILEIO
      --  x_complete <= '1';
-
-      wait for clk_period;
 
       EACH_CHAIN: for i in 1 to CHAINS loop
       addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));

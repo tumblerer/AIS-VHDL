@@ -14,7 +14,7 @@ package Pack is
 	-- Blocks per chain
 	constant BLOCKS: integer:= 3;
 	--Number of parallel chains - effectively repetitions
-	constant CHAINS : integer := 2;
+	constant CHAINS : integer := 3;
 	-- Mean 1
 	constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
 	-- 1/Sd 1/(2*0.1^2)

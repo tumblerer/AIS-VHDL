@@ -55,7 +55,8 @@ end component ; -- LPR_Chain
   signal complete_array : single_wire_array;
   signal doutb_LPR_array : data_array;
   signal chain_counter_delay : integer range 0 to STEPS*RUNS := 0;
-  signal chain_counter_lpr: integer range 1 to CHAINS := 1; 
+  signal chain_counter_lpr: integer range 1 to CHAINS := 1;
+  signal chain_counter_delay_x: integer range 0 to RUNS := 0; 
   -- Counters
   signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;
 begin 
@@ -94,14 +95,22 @@ begin
         seed_counter <= CHAINS;
       end if;
 
-      if complete_array(CHAINS) = '1' then
-        if x_counter < CHAINS then
-          x_counter <= x_counter + 1;
-        else
-          x_counter <= 1;
-        end if;
+      if reset = '1' then
+        chain_counter_delay_x <= 1;
+        x_counter <= 1;
       else
-        x_counter <= CHAINS;
+        if complete_array(CHAINS) = '1' then
+          if chain_counter_delay_x < RUNS then
+            chain_counter_delay_x <= chain_counter_delay_x + 1;
+          else
+            chain_counter_delay_x <= 1;
+            if x_counter < CHAINS then
+              x_counter <= x_counter + 1;
+            else
+              x_counter <= 1;
+            end if;
+          end if;
+        end if;
       end if;
       
       if reset = '1' then
