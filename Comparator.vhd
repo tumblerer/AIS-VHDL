@@ -170,7 +170,7 @@ Control_sync: PROCESS
         end if;
 
         -- Enable and disable write enable for local BRAM
-        if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS then 
+        if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS and complete_reg = '0' then 
           Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
         else
@@ -284,10 +284,12 @@ Control_sync: PROCESS
       end if;
 
       if initial_counter > (TOTAL_PIPE+1)*STEPS+RUNS then
-        complete <= '1';
+        complete_reg <= '1';
       else
-        complete <= '0';
+        complete_reg <= '0';
       end if;
+
+      complete <= complete_reg;
 
     end process;
 
