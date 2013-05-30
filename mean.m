@@ -32,14 +32,14 @@ function mean(runs, steps, chains)
     
     for j = 1:chains
       for i = 1:runs
-        index = (b<=j*(length(lpr)/chains)) & (b> (j-1)*length(lpr)/chains) & (mod(b-1,runs)+1 == i)
+        index = (b<=j*(length(lpr)/chains)) & (b> (j-1)*length(lpr)/chains) & (mod(b-1,runs)+1 == i);
         
-        weights(i,j) = sum(lpr(index))
+        weights(i,j) = sum(lpr(index));
       end
     end 
     
     for j=1:runs
-       chain_results(j) = sum(exp(weights(:,j)))*x_num(j)/sum(exp(weights(:,j)))
+       chain_results(j) = sum(exp(weights(j,:)))*x_num(j)/sum(exp(weights(j,:)));
     end
     
     sum(chain_results)/chains
