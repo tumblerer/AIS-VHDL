@@ -60,7 +60,7 @@ architecture Behavioral of Comparator is
   signal data_in_a : std_logic_vector(PRECISION-1 downto 0):=(others => '0');
   signal addr_a : std_logic_vector (31 downto 0):=(others => '0');
 
-  signal complete_reg : std_logic;
+  signal complete_reg : std_logic:= '0';
 
 begin
 
