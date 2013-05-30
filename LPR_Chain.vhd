@@ -349,7 +349,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
     else
       if x_complete = '1' then
         if Block_LPR_delay < (STEPS/BLOCKS)*RUNS then
-          Block_LPR_counter <= Block_LPR_delay + 1;
+          Block_LPR_delay <= Block_LPR_delay + 1;
         else
           Block_LPR_delay <= 0;
           if Block_LPR_counter < BLOCKS then
