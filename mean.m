@@ -16,6 +16,8 @@ function mean(runs, steps, chains)
     
     weights = zeros(runs,chains);
     
+    mean_results = zeros(chains);
+
     for i = 1:size_x(1)
       x_num(i) = hex2num(x_in(i));
     end
@@ -38,11 +40,33 @@ function mean(runs, steps, chains)
       end
     end 
     
-    for j=1:runs
-       chain_results(j) = sum(exp(weights(j,:)))*x_num(j)/sum(exp(weights(j,:)));
+    for j=1:chains
+        for i=1:runs
+            mean_results(j) = mean_results(j)+ exp(weights(i,j))*x_num(i+runs*(j-1)));
+        end
+        mean_results(j) = mean_results(j) / sum(weights(:,j));
     end
+
+    % for j=1:chains
+    %    mean_results(j) = sum(exp(weights(:,j))*x_num(:))/sum(exp(weights(:,j)));
+    % end
     
-    sum(chain_results)/chains
+    % fprintf('Mean : %f\n', sum(mean_results)/chains);
+
+    for j=1:chains
+        for i=1:runs
+            std_dev_results(j) = std_dev_results(j)+ exp(weights(i,j))*(x_num(i+runs*(j-1))-mean_results(j))^2;
+        end
+        std_dev_results(j) = sqrt(std_dev_results(j) / sum(weights(:,j)));
+    end
+
+
+    % for j = 1:chains
+    %     std_dev_results(j) = sqrt(sum(exp(weights(:,j))*(x_num(:)-mean_results(j))^2)/sum(exp(weights(:,j))));
+    % end
+
+    fprintf('Standard deviation : %f\n', sum(std_dev_results)/chains);
+
     
     
     
