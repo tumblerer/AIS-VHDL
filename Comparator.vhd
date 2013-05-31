@@ -55,6 +55,9 @@ architecture Behavioral of Comparator is
   signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg, Address_Counter_Rd_reg: integer range 0 to 8192 :=0;
   signal sample_counter : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
+
+  signal init_write_counter : integer range 0 to RUNS := 0;
+
   --Memory signals
   signal  write_a : std_logic_vector(7 DOWNTO 0);
   signal data_in_a : std_logic_vector(PRECISION-1 downto 0):=(others => '0');
@@ -148,6 +151,7 @@ Control_sync: PROCESS
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
         load_rng_counter <= 0;
+        init_write_counter <= 0;
       elsif reset = '0' AND activate_in = '0' then
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
@@ -174,6 +178,9 @@ Control_sync: PROCESS
         if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS and complete_reg = '0' then 
           Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
+        elsif init_write_counter < RUNS then
+          init_write_counter <= init_write_counter + 1;
+           write_a <= x"FF";
         else
           write_a <= x"00";
         end if;
@@ -249,6 +256,14 @@ Control_sync: PROCESS
             
           else
             s_in_uni <= seed;
+
+            -- Load large LPROUT values into first RUN values of BRAM
+            if init_write_counter < RUNS then
+              if PRECISION = 64 then
+                data_in_a <= x"c2d6bcc41e900000";
+                addr_a <=  std_logic_vector(to_unsigned(8*init_write_counter,addr_a'length));
+              end if;
+            end if;
           end if; 
 
         when running =>
