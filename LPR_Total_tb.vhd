@@ -26,7 +26,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          dina_seed : IN  std_logic_vector(63 downto 0);
          wea_seed : IN  std_logic_vector(7 downto 0);
          addra_seed : IN  std_logic_vector(31 downto 0);
-         addrb_X : IN  std_logic_vector(31 downto 0);
+ --        addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
          x_complete: in std_logic;
          addrb_LPR : in std_logic_vector(31 downto 0);
@@ -70,7 +70,7 @@ BEGIN
           dina_seed => dina_seed,
           wea_seed => wea_seed,
           addra_seed => addra_seed,
-          addrb_X => addrb_X,
+--          addrb_X => addrb_X,
           doutb_x => doutb_x,
           x_complete => x_complete,
           addrb_LPR => addrb_LPR,
@@ -152,17 +152,11 @@ BEGIN
       end loop;
 
     -- If complete, write out contents of BRAM_X to file
-
-      FILEIO : for i in 1 to CHAINS loop  
-        EACH_BRAM : for j in 1 to RUNS loop 
+      FILEIO : for i in 1 to RUNS loop  
+        EACH_BRAM : for j in 1 to CHAINS loop 
+          wait for clk_period;
           hwrite(output_line, doutb_x);
           writeline(output_x, output_line);
-          if j = RUNS then
-            addrb_x <= std_logic_vector(to_unsigned(0, addrb_x'length));
-          else
-            addrb_x <= std_logic_vector(to_unsigned(j*8, addrb_x'length));
-          end if;
-          wait for clk_period;
         end loop;    
       end loop ; -- FILEIO
       x_complete <= '1';
