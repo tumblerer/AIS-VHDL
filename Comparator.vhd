@@ -68,16 +68,29 @@ begin
 
 -- LprNew - LprOld    
   -- 12 cycles
-  SUB1: ENTITY work.LPR_Subtract PORT MAP (
+  SUB64: if PRECISION = 64 generate
+  begin SUB1: ENTITY work.LPR_Subtract PORT MAP (
           a => LPR_In,
           b => Mem_Data_B_In,
           clk => clk,
           result => Sub1Result
         );
+  end generate;
+
+  SUB32: if PRECISION = 32 generate
+  begin SUB1: ENTITY work.LPR_Subtract PORT MAP (
+          a => LPR_In,
+          b => Mem_Data_B_In,
+          clk => clk,
+          result => Sub1Result
+        );
+  end generate;
+
 
   -- (LPRNew-LPROld) * eta
   -- 15 cycles
-  MULT1: ENTITY work.LPR_Mult PORT MAP(
+  MULT64P: if PRECISION = 64 generate
+  begin MULT1: ENTITY work.LPR_Mult PORT MAP(
           a => Sub1Result,
           b => Beta,
           clk => clk,
