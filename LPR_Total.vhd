@@ -14,7 +14,7 @@ entity LPR_Total is
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
     wea_seed : in std_logic_vector(7 downto 0);
     addra_seed : in std_logic_vector(31 downto 0);
-    addrb_X : in std_logic_vector(31 downto 0);
+--    addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
     x_complete : in std_logic;
     addrb_LPR : in std_logic_vector(31 downto 0);
@@ -59,6 +59,9 @@ end component ; -- LPR_Chain
   signal chain_counter_delay_x: integer range 0 to RUNS := 0; 
   -- Counters
   signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;
+  signal x_address_counter : integer range 0 to RUNS:=0;
+
+  signal addrb_x: std_logic_vector(31 downto 0);
 begin 
 
  Parallel_Chains: for i in 1 to CHAINS generate
@@ -96,19 +99,17 @@ begin
       end if;
 
       if reset = '1' then
-        chain_counter_delay_x <= 1;
-        x_counter <= 1;
+        x_counter <= CHAINS;
+        x_address_counter <= 0;
       else
         if complete_array(CHAINS) = '1' then
-          if chain_counter_delay_x < RUNS then
-            chain_counter_delay_x <= chain_counter_delay_x + 1;
-          else
-            chain_counter_delay_x <= 1;
-            if x_counter < CHAINS then
-              x_counter <= x_counter + 1;
-            else
-              x_counter <= 1;
+          if x_counter < CHAINS then
+            x_counter <= x_counter + 1;
+            if x_counter = CHAINS -1 then
+              x_address_counter <= x_address_counter + 1;
             end if;
+          else
+            x_counter <= 1;
           end if;
         end if;
       end if;
@@ -137,8 +138,10 @@ begin
 
   end process;
 
-  Transfer: process(complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
+  Transfer: process(x_address_counter ,complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
+
+    addrb_x <= std_logic_vector(to_unsigned(x_address_counter*8,addrb_x'length)); 
 
     complete <= complete_array(CHAINS);
 

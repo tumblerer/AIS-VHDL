@@ -25,6 +25,7 @@ entity LPR_top is
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed : in std_logic;
+           BlockID : in std_logic_vector(7 downto 0);
            complete: out std_logic
            );
 end LPR_top;
@@ -54,6 +55,7 @@ component Comparator is
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed: in std_logic;
+           BlockID: in std_logic_vector(7 downto 0);
            complete: out std_logic
       );
 end component;
@@ -90,6 +92,7 @@ end generate;
          Beta => Beta,
          activate_out => activate_out,
          seed => seed,
+         BlockID => BlockID,
          complete => complete
         );
 --end generate ; -- LPR2
