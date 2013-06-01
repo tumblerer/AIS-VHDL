@@ -52,7 +52,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    signal complete : std_logic := '0';
    signal hold_address: integer range 0 to BLOCKS := 0;
    signal x_complete : std_logic:= '0';
-   signal addrb_LPR : std_logic_vector(31 downto 0);
+   signal addrb_LPR : std_logic_vector(31 downto 0):=(others => '0');
    signal doutb_LPR : std_logic_vector(PRECISION-1 downto 0);
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -184,11 +184,15 @@ BEGIN
       EACH_CHAIN: for i in 1 to CHAINS loop
       addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
         EACH_BLOCK: for j in 0 to BLOCKS-1 loop
-          EACH_LPR: for k in 0 to (STEPS/BLOCKS)*RUNS-1 loop
-          addrb_LPR <= std_logic_vector(to_unsigned(k*8, addrb_LPR'length));
-          wait for clk_period;
+          EACH_LPR: for k in 1 to (STEPS/BLOCKS)*RUNS loop
           hwrite(output_line, doutb_LPR);
           writeline(output_lpr, output_line);
+          if k = (STEPS/BLOCKS)*RUNS then
+            addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
+          else
+            addrb_LPR <= std_logic_vector(to_unsigned(k*8, addrb_LPR'length));
+          end if;
+          wait for clk_period;
           end loop;
         end loop;
       end loop;
