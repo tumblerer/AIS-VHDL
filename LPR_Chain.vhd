@@ -355,7 +355,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         if Block_LPR_counter < BLOCKS then
           Block_LPR_counter <= Block_LPR_counter + 1;
           if Block_LPR_counter = BLOCKS-1 then
-            if addrb_LPR_counter < (STEPS/BLOCKS)*RUNS then
+            if addrb_LPR_counter < (STEPS/BLOCKS)*RUNS-1 then
               addrb_LPR_counter <= addrb_LPR_counter + 1;
             else
               addrb_LPR_counter <= 0;
