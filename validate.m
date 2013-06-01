@@ -18,6 +18,13 @@ function validate(runs, steps, chains)
     
     mean_results = zeros(chains);
 
+    beta_val = zeros(steps);
+
+    % Calculate needed beta values
+    for i=1:steps
+        beta_val(i) = i/steps
+    end
+
     for i = 1:size_x(1)
       x_num(i) = hex2num(x_in(i));
     end
@@ -25,6 +32,10 @@ function validate(runs, steps, chains)
     for i = 1:steps*runs*chains
         lpr(i) = hex2num(lpr_in{1}{i});
     end;
+
+    for i = 1:runs*steps
+        if (i < runs*chain_count and i > runs*chain_count-1)
+          lpr(i) = lpr(i)*beta_val(j)
 
     b=zeros(size(lpr));
     
