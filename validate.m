@@ -1,6 +1,6 @@
 % Output Mean and Standard deviation
 
-function mean(runs, steps, chains)
+function validate(runs, steps, chains)
     
     %   lpr = importdata('LPR.out');
     x_in = importdata('x.out');
