@@ -17,7 +17,7 @@ entity LPR_Total is
 --    addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
     x_complete : in std_logic;
-    addrb_LPR : in std_logic_vector(31 downto 0);
+--    addrb_LPR : in std_logic_vector(31 downto 0);
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
     complete: out std_logic
 	);
@@ -40,7 +40,7 @@ component LPR_Chain is
       addrb_X : in std_logic_vector(31 downto 0);
       doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
       x_complete : in std_logic;
-      addrb_LPR : in std_logic_vector(31 downto 0);
+--      addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic
    ) ;
@@ -78,7 +78,7 @@ begin
           addrb_x => addrb_x,
           doutb_x => doutb_x_array(i),
           x_complete => x_complete,
-          addrb_LPR => addrb_LPR,
+--          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR_array(i),
           complete => complete_array(i)
         );

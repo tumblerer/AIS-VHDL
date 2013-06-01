@@ -17,7 +17,7 @@ entity LPR_Chain is
       addrb_X : in std_logic_vector(31 downto 0);
       doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
       x_complete: in std_logic;
-      addrb_LPR : in std_logic_vector(31 downto 0);
+--      addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic
    ) ;
@@ -109,6 +109,8 @@ end component;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
   signal Block_LPR_delay : integer range 0 to (STEPS/BLOCKS)*RUNS;
 
+  signal addrb_LPR : std_logic_vector(31 downto 0);
+  signal addrb_LPR_counter : integer range 0 to (STEPS/BLOCKS)*RUNS;
 begin
 
   Gen:  entity work.Generate_Sample Port Map(
@@ -346,12 +348,19 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
    wait until clk'EVENT and clk='1';
     
     if reset = '1' then
-      Block_LPR_counter <= 1;
-      Block_LPR_delay <= 0;
+      Block_LPR_counter <= BLOCKS;
+      addrb_LPR_counter <= 0;
     else
       if x_complete = '1' then
         if Block_LPR_counter < BLOCKS then
           Block_LPR_counter <= Block_LPR_counter + 1;
+          if Block_LPR_counter = BLOCKS-1 then
+            if addrb_LPR_counter < (STEPS/BLOCKS)*RUNS then
+              addrb_LPR_counter <= addrb_LPR_counter + 1;
+            else
+              addrb_LPR_counter <= 0;
+            end if;
+          end if;
         else
           Block_LPR_counter <= 1;
         end if;
@@ -360,7 +369,8 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   end process;
 
 
-  Data_Transfer : process(reset, sample_output, doutb_beta, address_counter_beta, block_counter, counter, Loop_back_output, activate_wire, complete_array, mem_addr_b_int, addrb_lpr, Mem_Data_B, Block_LPR_counter)
+  Data_Transfer : process(reset, sample_output, addrb_LPR_counter, doutb_beta, address_counter_beta, block_counter, counter, 
+    Loop_back_output, activate_wire, complete_array, mem_addr_b_int, addrb_lpr, Mem_Data_B, Block_LPR_counter, addrb_lpr, Mem_Addr_B_Int)
   begin
 
     -- Creates a latch - unsure how to fix.
@@ -380,14 +390,21 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
     complete <= complete_array(BLOCKS);
 
-    doutb_LPR <=  Mem_Data_B(Block_LPR_counter);
+    if Block_LPR_counter < BLOCKS then
+      doutb_LPR <=  Mem_Data_B(Block_LPR_counter+1);
+    else
+      doutb_LPR <= Mem_Data_B(1);
+    end if;
+
+    addrb_lpr <= std_logic_vector(to_unsigned(8*addrb_LPR_counter,addrb_lpr'length));
 
     -- Switch to extracting LPR values from BRAMS 
     if complete_array(BLOCKS) = '1' then
-      Mem_Addr_B(Block_LPR_counter) <= addrb_LPR;
+      for i in 1 to BLOCKS loop
+        Mem_Addr_B(i) <= addrb_LPR;
+      end loop ; -- LPR_Extract
     else
-      Mem_Addr_B(BLOCKS) <=  Mem_Addr_B_Int(BLOCKS);
-      for i in 1 to BLOCKS-1 loop
+      for i in 1 to BLOCKS loop
         Mem_Addr_B(i) <= Mem_Addr_B_Int(i);
       end loop;
     end if;

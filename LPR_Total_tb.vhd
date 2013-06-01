@@ -29,7 +29,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
  --        addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
          x_complete: in std_logic;
-         addrb_LPR : in std_logic_vector(31 downto 0);
+ --        addrb_LPR : in std_logic_vector(31 downto 0);
          doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
          complete : OUT  std_logic
         );
@@ -73,7 +73,7 @@ BEGIN
 --          addrb_X => addrb_X,
           doutb_x => doutb_x,
           x_complete => x_complete,
-          addrb_LPR => addrb_LPR,
+--          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR,
           complete => complete
         );
@@ -174,18 +174,18 @@ BEGIN
      --    end loop;    
      --  end loop ; -- FILEIO
      --  x_complete <= '1';
-
+     wait for clk_period;
       EACH_CHAIN: for i in 1 to CHAINS loop
-      addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
+--      addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
         EACH_BLOCK: for j in 0 to BLOCKS-1 loop
           EACH_LPR: for k in 1 to (STEPS/BLOCKS)*RUNS loop
           hwrite(output_line, doutb_LPR);
           writeline(output_lpr, output_line);
-          if k = (STEPS/BLOCKS)*RUNS then
-            addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
-          else
-            addrb_LPR <= std_logic_vector(to_unsigned(k*8, addrb_LPR'length));
-          end if;
+          -- if k = (STEPS/BLOCKS)*RUNS then
+          --   addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
+          -- else
+          --   addrb_LPR <= std_logic_vector(to_unsigned(k*8, addrb_LPR'length));
+          -- end if;
           wait for clk_period;
           end loop;
         end loop;
