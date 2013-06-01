@@ -18,6 +18,7 @@ entity Comparator is
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            activate_out: out std_logic;
            seed: in std_logic;
+           BlockID : in std_logic_vector(7 downto 0);
            complete : out std_logic
       );
 end Comparator;
@@ -55,8 +56,6 @@ architecture Behavioral of Comparator is
   signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg, Address_Counter_Rd_reg: integer range 0 to 8192 :=0;
   signal sample_counter : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
   signal sample_counter_rd : integer range 0 to TOTAL_PIPE*BLOCKS := 0;
-
-  signal init_write_counter : integer range 0 to RUNS := 0;
 
   --Memory signals
   signal  write_a : std_logic_vector(7 DOWNTO 0);
@@ -151,11 +150,13 @@ Control_sync: PROCESS
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
         load_rng_counter <= 0;
-        init_write_counter <= 0;
       elsif reset = '0' AND activate_in = '0' then
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
         end if;
+
+        write_a <= x"00";
+
       else --activate_in = 1
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
@@ -178,12 +179,10 @@ Control_sync: PROCESS
         if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS and complete_reg = '0' then 
           Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
           write_a <= x"FF";
-        elsif init_write_counter < RUNS then
-          init_write_counter <= init_write_counter + 1;
-           write_a <= x"FF";
         else
           write_a <= x"00";
         end if;
+
 
         if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < TOTAL_PIPE_INCR*BLOCKS-1 then
           sample_counter_rd <= sample_counter_rd + 1;
@@ -191,7 +190,9 @@ Control_sync: PROCESS
           sample_counter_rd <= 0;
         end if;
 
-        if initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < RUNS then -- Time 2 too long (hence -2)
+        if BlockID = x"01" and initial_counter < TOTAL_PIPE-SMALL_PIPE-2 + TOTAL_PIPE_INCR*BLOCKS then --delay read if first block
+          Address_Counter_Rd <= 0;
+        elsif initial_counter > TOTAL_PIPE-SMALL_PIPE-2 and sample_counter_rd < RUNS then -- Time 2 too long (hence -2)
           Address_Counter_Rd <= Address_Counter_rd + 8;
         end if;
 
@@ -256,14 +257,6 @@ Control_sync: PROCESS
             
           else
             s_in_uni <= seed;
-
-            -- Load large LPROUT values into first RUN values of BRAM
-            if init_write_counter < RUNS then
-              if PRECISION = 64 then
-                data_in_a <= x"c2d6bcc41e900000";
-                addr_a <=  std_logic_vector(to_unsigned(8*init_write_counter,addr_a'length));
-              end if;
-            end if;
           end if; 
 
         when running =>
@@ -280,7 +273,7 @@ Control_sync: PROCESS
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
 
-          if CompResult_reg = "1" then
+          if CompResult_reg = "1" or (BlockID = x"01" and initial_counter < TOTAL_PIPE+RUNS) then
           -- Save to LPR address
             data_in_a <= Proposed_LPR_output;
           else

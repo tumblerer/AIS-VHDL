@@ -170,6 +170,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_Out => Mem_Addr_B(1),
            Mem_Data_B_Out =>  Mem_Data_B(1),
            seed => doutb_seed(i),
+           BlockID => std_logic_vector(to_unsigned(i,8)),
            complete => complete_array(i)
 
       ); end generate CHAIN1;
@@ -188,6 +189,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_Out => Mem_Addr_B(i+1),
            Mem_Data_B_Out =>  Mem_Data_B(i+1),
            seed => doutb_seed(i),
+           BlockID => std_logic_vector(to_unsigned(i,8)),
            complete => complete_array(i)
 
       ); end generate CHAIN2;
@@ -348,19 +350,13 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       Block_LPR_delay <= 0;
     else
       if x_complete = '1' then
-        if Block_LPR_delay < (STEPS/BLOCKS)*RUNS then
-          Block_LPR_delay <= Block_LPR_delay + 1;
+        if Block_LPR_counter < BLOCKS then
+          Block_LPR_counter <= Block_LPR_counter + 1;
         else
-          Block_LPR_delay <= 0;
-          if Block_LPR_counter < BLOCKS then
-            Block_LPR_counter <= Block_LPR_counter + 1;
-          else
-            Block_LPR_counter <= 1;
-          end if;
+          Block_LPR_counter <= 1;
         end if;
       end if;
     end if;
-
   end process;
 
 
