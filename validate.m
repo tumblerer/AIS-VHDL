@@ -19,6 +19,7 @@ function validate(runs, steps, chains)
     mean_results = zeros(chains);
 
     beta_val = zeros(steps);
+    beta_valT = lpr;
 
     % Calculate needed beta values
     for i=1:steps
@@ -33,42 +34,34 @@ function validate(runs, steps, chains)
         lpr(i) = hex2num(lpr_in{1}{i});
     end;
 
-    for i = 1:runs*steps
-        if (i < runs*chain_count and i > runs*chain_count-1)
-          lpr(i) = lpr(i)*beta_val(j)
+    for i = 1:runs*chains
+        beta_valT((i-1)*steps+1 : i* steps) = beta_val
+    end;
 
-    b=zeros(size(lpr));
-    
-    for i=1:length(b)
-        b(i)=i;
-    end
-    
-    for j = 1:chains
-      for i = 1:runs
-        index = (b<=j*(length(lpr)/chains)) & (b> (j-1)*length(lpr)/chains) & (mod(b-1,runs)+1 == i);
-        
-        weights(i,j) = sum(lpr(index));
-      end
-    end 
-    
-    for j=1:chains
-        for i=1:runs
-            mean_results(j) = mean_results(j)+ exp(weights(i,j))*x_num(i+runs*(j-1)));
+    lpr = lpr.*beta_valT;
+
+    for i = 1:chains
+        for j = 1:runs
+            for k = 1:steps-1
+                weights(i,j) = weights(i,j) + lpr(k+1+(j-1)*runs+(i-1)*chains)- lpr(k+(j-1)*runs+(i-1)*chains)
+            end
         end
-        mean_results(j) = mean_results(j) / sum(weights(:,j));
     end
 
-    % for j=1:chains
-    %    mean_results(j) = sum(exp(weights(:,j))*x_num(:))/sum(exp(weights(:,j)));
-    % end
-    
-    % fprintf('Mean : %f\n', sum(mean_results)/chains);
-
-    for j=1:chains
-        for i=1:runs
-            std_dev_results(j) = std_dev_results(j)+ exp(weights(i,j))*(x_num(i+runs*(j-1))-mean_results(j))^2;
+    for i = 1:chains
+        for j = 1:runs
+            mean_results(i) = mean_results(i) + exp(weights(i,j))*x_num(i + (j-1)*runs)
         end
-        std_dev_results(j) = sqrt(std_dev_results(j) / sum(weights(:,j)));
+        mean_results(i) = mean_results(i) / sum (exp(weight(i,:)))
+    end
+
+   fprintf('Mean : %f\n', sum(mean_results)/chains);
+
+    for i=1:chains
+        for j=1:runs
+            std_dev_results(i) = std_dev_results(i)+ exp(weights(i,j))*(x_num(i+runs*(j-1))-mean_results(i))^2;
+        end
+        std_dev_results(i) = sqrt(std_dev_results(i) / sum(exp(weights(i,:)));
     end
 
 
