@@ -109,16 +109,19 @@ begin
   
   -- exp(d) > rng
   -- 2 cycles
-  COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
+  COMP64 : if PRECISION = 64 generate
+  begin COMP1 : ENTITY work.LPR_ALessThanB PORT MAP ( 
       clk => clk,
       a => LnResult1,
       b => Mult1Result,
       result => CompResult_reg
    );
+  end generate;
 
       
   --Dual Port BRAM
   -- 2 cycle write, 2 cycle read
+  BRAM64: if PRECISION = 64 generate
   BRAM1: ENTITY work.Dual_Port_BRAM PORT MAP(
        clka => clk,
        wea => write_a,
@@ -129,6 +132,7 @@ begin
        addrb => Mem_Addr_B_Out,
        doutb => Mem_Data_B_Out
   );
+  end generate;
   
   -- 2048 cycles to load
 
@@ -141,18 +145,22 @@ begin
     rng => rng_uni_out
   );
   
+  CONV64 : if PRECISION = 64 generate begin
   RNG_UNI_CONV: ENTITY work.RNG_FixedtoFloat_34to64 PORT MAP (
     a => rng_uni_pos,
     clk => clk,
     result => rng_uni
   );
-
+  end generate;
+  
+  LN64 : if PRECISION = 64 generate begin
   RNG_LN: ENTITY work.LPR_Ln PORT MAP(
     clk => clk,
     rst => reset,
     X => rng_uni_ext,
     R =>LnResult1_ext
   );
+  end generate;
 
 Control_sync: PROCESS
     begin
