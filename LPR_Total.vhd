@@ -138,7 +138,7 @@ begin
 
   end process;
 
-  Transfer: process(x_address_counter ,complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
+  Transfer: process(x_address_counter , chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
 
     addrb_x <= std_logic_vector(to_unsigned(x_address_counter*8,addrb_x'length)); 

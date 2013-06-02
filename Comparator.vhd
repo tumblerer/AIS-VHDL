@@ -226,7 +226,7 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
+    State_machine: PROCESS(state,nstate, BlockID, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
 
@@ -295,7 +295,7 @@ Control_sync: PROCESS
       end case;
     end process;
 
-    Activate_Propagate: process(initial_counter)
+    Activate_Propagate: process(initial_counter, complete_reg)
     begin
 
       -- Propagate activate signal
@@ -315,9 +315,9 @@ Control_sync: PROCESS
 
     end process;
 
-    Signal_Convert: process(mult1result, Exp1Result_ext, rng_uni, rng_uni_out, LnResult1, CompResult_reg)
+    Signal_Convert: process(mult1result, Exp1Result_ext, rng_uni, rng_uni_out, LnResult1, CompResult_reg, LnResult1_ext)
     begin
-      mult1Result_ext <= "01" & mult1result;
+    
       Exp1Result <= Exp1Result_ext(PRECISION-1 downto 0);
       rng_uni_ext <= "01" & rng_uni;
       rng_uni_pos <= "00" & rng_uni_out;
