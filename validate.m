@@ -1,6 +1,6 @@
 % Output Mean and Standard deviation
 
-function validate(steps, runs, chains)
+function validate(steps, runs, blocks, chains)
     
     %   lpr = importdata('LPR.out');
     file_x = fopen('x.out');
@@ -24,33 +24,51 @@ function validate(steps, runs, chains)
 
     % Calculate needed beta values
     for i=1:steps
-        beta_val(i) = i/steps
+        beta_val(i) = i/steps;
+    end
+    count = 1;
+    for j= 1:chains
+        for i = 1:chains:runs*chains
+          x_num(count) = hex2num(x_in{1}{i+(j-1)});
+          count = count + 1;
+        end
     end
 
-    for i = 1:runs*chains
-      x_num(i) = hex2num(x_in{1}{i});
-    end
-   
     for i = 1:steps*runs*chains
         lpr(i) = hex2num(lpr_in{1}{i});
     end;
 
-    for i = 1:runs*chains
-        beta_valT((i-1)*steps+1 : i* steps) = beta_val;
-    end;
+    for k=1:chains
+        for i=1:steps/blocks
+            for j =1:runs
+                beta_valT(((j-1)*blocks+1) +(i-1)*blocks*runs +(k-1)*steps*runs: j*blocks + (i-1)*blocks*runs + (k-1)*steps*runs)  = beta_val((i-1)*blocks+1 : i*blocks);
+            end
+        end
+     end
 
-    lpr = lpr.*beta_valT;
+    lpr = lpr.*beta_valT
 
     for i = 1:chains
         for j = 1:runs
-            for k = 1:steps-1
-                weights(i,j) = weights(i,j) + lpr(k+1+(j-1)*steps+(i-1)*runs*steps)- lpr(k+(j-1)*steps+(i-1)*runs*steps);
-               % fprintf('Pair')
-               % lpr(k+1+(j-1)*steps+(i-1)*runs*steps)
-               % lpr(k+(j-1)*steps+(i-1)*runs*steps)
-            end
+            weights(i,j) = weights(i,j) + lpr((j-1)*blocks+1+runs*(steps-blocks)+blocks-1+(i-1)*runs*steps) - lpr((j-1)*blocks+1+(i-1)*runs*steps);
+            fprintf('Pair, %d',j)
+            lpr((j-1)*blocks+1+runs*(steps-blocks)+blocks-1+(i-1)*runs*steps)
+            lpr((j-1)*blocks+1+(i-1)*runs*steps)
         end
     end
+    
+
+
+    % for i = 1:chains
+    %     for j = 1:runs
+    %         for k = 1:steps-1
+    %             weights(i,j) = weights(i,j) + lpr(k+1+(j-1)*steps+(i-1)*runs*steps)- lpr(k+(j-1)*steps+(i-1)*runs*steps);
+    %            % fprintf('Pair')
+    %            % lpr(k+1+(j-1)*steps+(i-1)*runs*steps)
+    %            % lpr(k+(j-1)*steps+(i-1)*runs*steps)
+    %         end
+    %     end
+    % end
     weights
     for i = 1:chains
         for j = 1:runs
