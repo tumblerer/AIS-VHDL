@@ -96,7 +96,7 @@ begin
           clk => clk,
           result => Mult1Result
         );
-
+  end generate;
   -- -- Exp ((LprNew-LprOld)*eta)
   -- -- Flopoco 2MSB are error bits
   -- -- 22 cycles
