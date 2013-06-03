@@ -199,6 +199,15 @@ begin
   );
   end generate;
 
+  LN32 : if PRECISION = 32 generate begin
+  RNG_LN: ENTITY work.LPR_Ln32 PORT MAP(
+    clk => clk,
+    rst => reset,
+    X => rng_uni_ext,
+    R =>LnResult1_ext
+  );
+  end generate;
+
 Control_sync: PROCESS
     begin
     WAIT UNTIL clk'EVENT AND clk='1';
@@ -213,7 +222,7 @@ Control_sync: PROCESS
           load_rng_counter <= load_rng_counter + 1;
         end if;
 
-        write_a <= x"00";
+        write_a <= (others => '0');
 
       else --activate_in = 1
      -- LPR Value pipeline 
@@ -236,9 +245,9 @@ Control_sync: PROCESS
         -- Enable and disable write enable for local BRAM
         if initial_counter > TOTAL_PIPE-2 and sample_counter < RUNS and complete_reg = '0' then 
           Address_Counter_Wr_reg <= Address_Counter_Wr_reg + 8; 
-          write_a <= x"FF";
+          write_a <= (others => '1');
         else
-          write_a <= x"00";
+          write_a <= (others => '0');
         end if;
 
 
