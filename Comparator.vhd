@@ -3,7 +3,7 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.Pack.ALL;
-use IEEE.NUMERIC_STD.ALL;
+
 
 entity Comparator is
     Port ( clk : in  STD_LOGIC;
@@ -32,7 +32,7 @@ architecture Behavioral of Comparator is
   signal Sub1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
   signal Mult1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
   signal Exp1Result : std_logic_vector(PRECISION-1 downto 0) := (others => '0');
-  signal Mult1Result_Ext, Exp1Result_Ext : std_logic_vector (65 downto 0):= (others => '0');
+  signal Mult1Result_Ext, Exp1Result_Ext : std_logic_vector (PRECISION+1 downto 0):= (others => '0');
 
   signal CompResult_reg :std_logic_vector(0 downto 0);
 -- Pipeline
