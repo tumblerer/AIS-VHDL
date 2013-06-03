@@ -181,7 +181,15 @@ begin
     result => rng_uni
   );
   end generate;
-  
+
+  CONV64 : if PRECISION = 32 generate begin
+  RNG_UNI_CONV: ENTITY work.RNG_FixedtoFloat_34to32 PORT MAP (
+    a => rng_uni_pos,
+    clk => clk,
+    result => rng_uni
+  );
+  end generate;  
+
   LN64 : if PRECISION = 64 generate begin
   RNG_LN: ENTITY work.LPR_Ln PORT MAP(
     clk => clk,
@@ -323,6 +331,7 @@ Control_sync: PROCESS
           Mem_Addr_B_In <= std_logic_vector(to_unsigned(Address_Counter_Rd,Mem_Addr_B_In'length));
           addr_a <= std_logic_vector(to_unsigned(Address_Counter_Wr,addr_a'length));
 
+          -- Always write first elements to memory since comparing with 0
           if CompResult_reg = "1" or (BlockID = x"01" and initial_counter < TOTAL_PIPE+RUNS) then
           -- Save to LPR address
             data_in_a <= Proposed_LPR_output;
