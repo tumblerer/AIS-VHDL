@@ -62,11 +62,31 @@ begin
           clk => clk,
           result => Add1Result
         );    
+     end generate;
+     ADD32: if PRECISION = 32 generate begin
+    ADD1: ENTITY work.LPR_Add32 PORT MAP (
+          a => xState,
+			 -- 0.25
+          b => --x"0000000000000000",
+          		rng_norm,
+          clk => clk,
+          result => Add1Result
+        );    
       end generate;
+
     -- Xi - Mean
 	-- 12 cycles
 	SUB64 : if PRECISION = 64 generate begin
     SUB1: ENTITY work.LPR_Subtract PORT MAP (
+          a => Add1Result,
+          b => MEAN,
+          clk => clk,
+          result => Sub1Result
+        );
+	end generate;
+
+	SUB32 : if PRECISION = 32 generate begin
+    SUB1: ENTITY work.LPR_Subtract32 PORT MAP (
           a => Add1Result,
           b => MEAN,
           clk => clk,
@@ -83,7 +103,14 @@ begin
           result => Mult1Result
         );
 	end generate;
-
+	MULT32_1: if PRECISION = 32 generate begin
+	MULT1: ENTITY work.LPR_Mult32 PORT MAP(
+          a => Sub1Result,
+          b => Sub1Result,
+          clk => clk,
+          result => Mult1Result
+        );
+	end generate;
 		  
 	-- (Xi - Mean)^2 / 1/(Sigma^2)
 	-- 15 cycles
@@ -95,7 +122,14 @@ begin
           result => Mult2Result
         );
 	end generate;
-
+	MULT32_2: if PRECISION = 32 generate begin
+	MULT2: ENTITY work.LPR_Mult32 PORT MAP(
+          a => Mult1Result,
+          b => Variance,
+          clk => clk,
+          result => Mult2Result
+        );
+	end generate;
  	RNG_NORMAL : ENTITY work.grng_pwclt8 PORT MAP(
 		iClk => clk,
 		iCE => rng_ce_norm,
@@ -119,7 +153,15 @@ begin
           result => rng_norm
         );
   	end generate;
-	
+  	MULT32_3 : if PRECISION = 32 generate begin
+  	MULT3: ENTITY work.LPR_Mult PORT MAP(
+          a => rng_norm_pre_mult,
+          b => STANDARDDEV_Trans,
+          clk => clk,
+          result => rng_norm
+        );
+  	end generate;	
+  	
 	Control_sync: PROCESS
 	begin
 	WAIT UNTIL clk'EVENT AND clk='1';

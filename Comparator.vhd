@@ -78,7 +78,7 @@ begin
   end generate;
 
   SUB32: if PRECISION = 32 generate
-  begin SUB1: ENTITY work.LPR_Subtract PORT MAP (
+  begin SUB1: ENTITY work.LPR_Subtract32 PORT MAP (
           a => LPR_In,
           b => Mem_Data_B_In,
           clk => clk,
@@ -91,6 +91,15 @@ begin
   -- 15 cycles
   MULT64P: if PRECISION = 64 generate
   begin MULT1: ENTITY work.LPR_Mult PORT MAP(
+          a => Sub1Result,
+          b => Beta,
+          clk => clk,
+          result => Mult1Result
+        );
+  end generate;
+
+  MULT32P: if PRECISION = 32 generate
+  begin MULT1: ENTITY work.LPR_Mult32 PORT MAP(
           a => Sub1Result,
           b => Beta,
           clk => clk,
@@ -118,6 +127,14 @@ begin
    );
   end generate;
 
+  COMP32: if PRECISION = 32 generate
+  begin COMP1 : ENTITY work.LPR_ALessThanB32 PORT MAP ( 
+      clk => clk,
+      a => LnResult1,
+      b => Mult1Result,
+      result => CompResult_reg
+   );
+  end generate;
       
   --Dual Port BRAM
   -- 2 cycle write, 2 cycle read
@@ -133,7 +150,19 @@ begin
        doutb => Mem_Data_B_Out
   );
   end generate;
-  
+  BRAM32: if PRECISION = 32 generate
+  BRAM1: ENTITY work.Dual_Port_BRAM32 PORT MAP(
+       clka => clk,
+       wea => write_a,
+       addra => addr_a,
+       dina => data_in_a,
+       clkb => clk,
+       rstb => reset,
+       addrb => Mem_Addr_B_Out,
+       doutb => Mem_Data_B_Out
+  );
+  end generate;
+
   -- 2048 cycles to load
 
  RNG_UNIFORM: ENTITY work.rng_n1024_r32_t5_k32_s1c48 PORT MAP(
