@@ -53,6 +53,7 @@ architecture Behavioral of Evaluator is
 begin
 	-- RNG + Xi
 	-- 12 cycles
+	ADD64: if PRECISION = 64 generate begin
     ADD1: ENTITY work.LPR_Add PORT MAP (
           a => xState,
 			 -- 0.25
@@ -61,34 +62,39 @@ begin
           clk => clk,
           result => Add1Result
         );    
-      
+      end generate;
     -- Xi - Mean
 	-- 12 cycles
+	SUB64 : if PRECISION = 64 generate begin
     SUB1: ENTITY work.LPR_Subtract PORT MAP (
           a => Add1Result,
           b => MEAN,
           clk => clk,
           result => Sub1Result
         );
-		  
+	end generate;
 	-- (Xi - Mean)^2
 	-- 15 cycles 
+	MULT64_1: if PRECISION = 64 generate begin
 	MULT1: ENTITY work.LPR_Mult PORT MAP(
           a => Sub1Result,
           b => Sub1Result,
           clk => clk,
           result => Mult1Result
         );
+	end generate;
 
 		  
 	-- (Xi - Mean)^2 / 1/(Sigma^2)
 	-- 15 cycles
+	MULT64_2: if PRECISION = 64 generate begin
 	MULT2: ENTITY work.LPR_Mult PORT MAP(
           a => Mult1Result,
           b => Variance,
           clk => clk,
           result => Mult2Result
         );
+	end generate;
 
  	RNG_NORMAL : ENTITY work.grng_pwclt8 PORT MAP(
 		iClk => clk,
@@ -97,20 +103,23 @@ begin
 		iLoadData => s_in_norm,
 		oRes => rng_norm_out
 	); 
-
+ 	CONV64 : if PRECISION = 64 generate begin
 	RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 	    a => rng_norm_out,
 	    clk => clk,
 	    result => rng_norm_pre_mult
 	  );
-  	
+  	end generate;
+
+  	MULT64_3 : if PRECISION = 64 generate begin
   	MULT3: ENTITY work.LPR_Mult PORT MAP(
           a => rng_norm_pre_mult,
           b => STANDARDDEV_Trans,
           clk => clk,
           result => rng_norm
         );
-
+  	end generate;
+	
 	Control_sync: PROCESS
 	begin
 	WAIT UNTIL clk'EVENT AND clk='1';

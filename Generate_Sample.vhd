@@ -45,29 +45,34 @@ begin
 	); 
 
 	--Float(X)
-	RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
+  CONV64: if PRECISION = 64 generate begin
+  RNG_NORM_CONV: ENTITY work.RNG_Norm_FixedtoFloat PORT MAP (
 	    a => rng_norm_out,
 	    clk => clk,
 	    result => rng_norm
 	);
+  end generate;
 
 	-- X - Mean
 	-- 12 cycles
-    SUB1: ENTITY work.LPR_Subtract PORT MAP (
+  SUB64 : if PRECISION = 64 generate begin
+  SUB1: ENTITY work.LPR_Subtract PORT MAP (
         a => rng_norm,
         b => MEAN_Gen,
         clk => clk,
         result => Sub1Result_Gen
     );
-
+  end generate;
 	--(X-Mean)/Sd
 	-- 15 cycles
+  MULT64 : if PRECISION = 64 generate begin
   	MULT1: ENTITY work.LPR_Mult PORT MAP (
         a => Sub1Result_Gen,
         b => StandardDev_Gen,
         clk => clk,
         result => sample_output
     );
+    end generate;
 
   	Control_sync: PROCESS
   	begin
