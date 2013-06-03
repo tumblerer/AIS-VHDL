@@ -103,11 +103,9 @@ end component;
   signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
   signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
   signal block_counter : integer range 0 to BLOCKS;
-  signal block_counter_delay : integer range 0 to TOTAL_PIPE_INCR+2;
-  signal first_beta : integer range 0 to 2;
   signal address_counter_LPR : integer range 0 to 8*STEPS*RUNS;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
-  signal Block_LPR_delay : integer range 0 to (STEPS/BLOCKS)*RUNS;
+
 
   signal addrb_LPR : std_logic_vector(31 downto 0);
   signal addrb_LPR_counter : integer range 0 to (STEPS/BLOCKS)*RUNS;
@@ -247,8 +245,6 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         address_counter_beta <= 0;
         beta_counter <= 0;
         block_counter <= 1;
-        block_counter_delay <= TOTAL_PIPE_INCR+2;
-        first_beta <= 2;
         addr_a_x <= std_logic_vector(to_unsigned(0,addr_a_x'length));
         wea_x <= x"00";
       else
@@ -290,48 +286,36 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
         -- Address beta values
         -- Intitial Values
+        -- Limits steps to 500 currently
         if counter > 1500 AND counter < 1500+BLOCKS then
           address_counter_beta <= address_counter_beta + 8;
-
         end if;
 
         if counter > 1501 AND counter < 1501+BLOCKS then
           block_counter <= block_counter + 1;
         end if ;
 
-        if counter < 2100 then
-          beta_counter <= 0; 
+        if counter > 2100 + BETA_PIPE+RUNS and beta_counter < TOTAL_PIPE then
+          beta_counter <= beta_counter +1; 
         else 
-          beta_counter <= beta_counter +1;
+          beta_counter <= 0;
         end if;
 
         -- Increment beta value after a settime
         -- Changes first block after all particles have passed
-        if beta_counter = (BETA_PIPE+RUNS-2) AND first_beta = 2 then
-          block_counter_delay <= 0;
-          first_beta <= 1;
+        if counter = 2100 + BETA_PIPE+RUNS-3 then
           address_counter_beta <= address_counter_beta + 8;
         end if;
 
-        if first_beta = 1 then
-          if block_counter = BLOCKS then
-            block_counter <= 1;
-          else
-            block_counter <= block_counter + 1;
-          end if;
-          first_beta <= 0;
+        if counter = 2100 + BETA_PIPE+RUNS-2 then
+          block_counter <= 1;
         end if;
 
-        if block_counter_delay < TOTAL_PIPE_INCR and first_beta = 0 then
-          block_counter_delay <= block_counter_delay + 1;
-        end if;
-
-        if block_counter_delay = TOTAL_PIPE then
+        if beta_counter = TOTAL_PIPE-3 then
           address_counter_beta <= address_counter_beta + 8;
         end if;
 
-        if block_counter_delay = TOTAL_PIPE_INCR then
-          block_counter_delay <= 0;
+        if beta_counter = TOTAL_PIPE-2 then
           if block_counter = BLOCKS then
             block_counter <= 1;
           else
@@ -339,6 +323,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
           end if;
         end if;
 
+        beta_wire(block_counter) <= doutb_beta;
       end if;
 
   end process ; -- Control
@@ -372,9 +357,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   Data_Transfer : process(reset, sample_output, addrb_LPR_counter, doutb_beta, address_counter_beta, block_counter, counter, 
     Loop_back_output, activate_wire, complete_array, mem_addr_b_int, addrb_lpr, Mem_Data_B, Block_LPR_counter, addrb_lpr, Mem_Addr_B_Int)
   begin
-
-    -- Creates a latch - unsure how to fix.
-    beta_wire(block_counter) <= doutb_beta;
+    
     addrb_beta <= std_logic_vector(to_unsigned(address_counter_beta,addrb_beta'length));
 
     -- Produce a sample for each run
