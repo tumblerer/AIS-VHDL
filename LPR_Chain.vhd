@@ -19,7 +19,10 @@ entity LPR_Chain is
       x_complete: in std_logic;
 --      addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-      complete: out std_logic
+      complete: out std_logic;
+
+      --activate first block
+      start : in std_logic
    ) ;
 end entity ; -- LPR_Chain
 
@@ -248,9 +251,9 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         addr_a_x <= std_logic_vector(to_unsigned(0,addr_a_x'length));
         wea_x <= x"00";
       else
-
-        counter <= counter + 1;
-
+        if START = '1' then
+          counter <= counter + 1;
+        end;
         -- Activate first block
         if counter < 2100-1 then
           activate_wire(0) <='0';

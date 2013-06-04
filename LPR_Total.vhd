@@ -16,10 +16,21 @@ entity LPR_Total is
     addra_seed : in std_logic_vector(31 downto 0);
 --    addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
-    x_complete : in std_logic;
+--    x_complete : in std_logic;
 --    addrb_LPR : in std_logic_vector(31 downto 0);
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-    complete: out std_logic
+--    complete: out std_logic
+    --RIFFA SIGNALS
+    --VALID SIGNAL FOR VALID OUTPUT
+    VALID     : OUT std_logic;
+    --START SIGNAL TO START PROCESSING
+    START     : IN std_logic;
+    --RUN TIME OF THE CORE
+    RUNTIME     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    --FINISHED SIGNAL
+    FINISHED    : OUT std_logic;
+    --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
+    BUSY      : IN std_logic
 	);
 
 end entity LPR_Total;
@@ -42,7 +53,8 @@ component LPR_Chain is
       x_complete : in std_logic;
 --      addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-      complete: out std_logic
+      complete: out std_logic;
+      start : in std_logic
    ) ;
 end component ; -- LPR_Chain
 
@@ -62,6 +74,19 @@ end component ; -- LPR_Chain
   signal x_address_counter : integer range 0 to RUNS:=0;
 
   signal addrb_x: std_logic_vector(31 downto 0);
+
+  signal activate : std_logic;
+
+  -- RIFFA state machine signals
+  TYPE core_state_type IS (
+        idle,
+        setup,
+        --PROCESSING STATES
+        output_state,
+        wait_state,
+        paused_state);
+  SIGNAL core_state, core_nstate : core_state_type := idle;
+
 begin 
 
  Parallel_Chains: for i in 1 to CHAINS generate
@@ -80,7 +105,8 @@ begin
           x_complete => x_complete,
 --          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR_array(i),
-          complete => complete_array(i)
+          complete => complete_array(i),
+          start => activate
         );
   end generate;
 
