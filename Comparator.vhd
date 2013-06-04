@@ -182,7 +182,7 @@ begin
   );
   end generate;
 
-  CONV64 : if PRECISION = 32 generate begin
+  CONV32 : if PRECISION = 32 generate begin
   RNG_UNI_CONV: ENTITY work.RNG_FixedtoFloat_34to32 PORT MAP (
     a => rng_uni_pos,
     clk => clk,
