@@ -130,6 +130,7 @@ begin
           result => Mult2Result
         );
 	end generate;
+	
  	RNG_NORMAL : ENTITY work.grng_pwclt8 PORT MAP(
 		iClk => clk,
 		iCE => rng_ce_norm,
@@ -161,7 +162,7 @@ begin
           result => rng_norm
         );
   	end generate;	
-  	
+
 	Control_sync: PROCESS
 	begin
 	WAIT UNTIL clk'EVENT AND clk='1';

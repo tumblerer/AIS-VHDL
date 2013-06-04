@@ -177,4 +177,103 @@ begin
 
   end process;
 
+  
+Nstate_assignment : PROCESS (core_state, reset, output_counter, START, finished1, BUSY)
+BEGIN
+  IF (reset = '1') THEN
+    core_nstate <= idle;
+  ELSE
+    core_nstate <= core_state;
+    CASE (core_state) IS
+      WHEN idle =>
+        IF (START = '1') THEN
+          core_nstate <= setup;
+        END IF;
+      WHEN setup =>
+        core_nstate <= wait_state;
+      WHEN wait_state =>
+        IF (finished1 = '1') THEN
+          IF (BUSY = '0') THEN
+            core_nstate <= idle;
+          END IF;
+        ELSE
+          IF (unsigned(output_counter) = 0) THEN
+            IF (BUSY = '1') THEN
+              core_nstate <= paused_state;
+            ELSE
+              core_nstate <= output_state;
+            END IF;         
+          END IF;
+        END IF;
+      WHEN paused_state =>
+        IF (BUSY /= '1') THEN
+          core_nstate <= output_state;
+        END IF;
+      WHEN output_state =>
+        core_nstate <= wait_state;
+      WHEN OTHERS =>
+        core_nstate <= idle;
+    END CASE;   
+  END IF;
+END PROCESS;  
+
+State_assignment : PROCESS
+VARIABLE v_output_counter : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+BEGIN
+  WAIT UNTIL rising_edge(SYS_CLK);
+  IF (SYS_RST = '1') THEN
+    core_state <= idle;
+    output_counter <= (OTHERS => '0');
+    rOutput <= (OTHERS => '0');
+    run_time <= (OTHERS => '0');
+    finished1 <= '0';
+  ELSE
+    core_state <= core_nstate;
+    finished1 <= '0';
+    IF (core_state = setup) THEN
+      IF (unsigned(RUNTIME) <= 1) THEN
+        run_time <= std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
+      ELSE
+        run_time <= std_logic_vector(unsigned(RUNTIME) - 1); --Initialise run_time to the input RUNTIME
+      END IF;
+      --output_counter = max(1, OUTPUT_CYCLE-2)
+      IF (to_unsigned(2, C_SIMPBUS_AWIDTH) <= unsigned(OUTPUT_CYCLE)) THEN
+        v_output_counter := std_logic_vector(unsigned(OUTPUT_CYCLE) - 2);
+      ELSE
+        v_output_counter := std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
+      END IF;
+      
+      output_counter <= v_output_counter;
+    END IF;
+    
+    IF (core_state = wait_state) THEN
+    --Wait in this state until the counter has reached desired value.
+      IF (unsigned(output_counter) = 0) THEN
+        output_counter <= v_output_counter;
+      ELSE
+        output_counter <= std_logic_vector(unsigned(output_counter) - 1);
+      END IF;
+    END IF;
+    
+    IF (core_nstate = output_state) THEN
+    --Output is simply a counter
+      rOutput <= std_logic_vector(unsigned(rOutput) + 1);
+    END IF;
+    
+    IF (core_state /= idle AND core_state /= setup AND core_state /= paused_state) THEN
+    --Only keep track of run_time when the state is not any of idle, setup or paused states
+      IF (unsigned(run_time) /= 0) THEN
+        run_time <= std_logic_vector(unsigned(run_time) - 1);
+      END IF;
+      
+    --Only check for run_time while in the processing states
+      IF (unsigned(run_time) = 0) THEN
+        finished1 <= '1';
+      ELSE
+        finished1 <= '0';
+      END IF;     
+    END IF;
+  END IF;
+END PROCESS;
+
 end architecture;

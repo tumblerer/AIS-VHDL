@@ -253,7 +253,8 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       else
         if START = '1' then
           counter <= counter + 1;
-        end;
+        end if;
+        
         -- Activate first block
         if counter < 2100-1 then
           activate_wire(0) <='0';
