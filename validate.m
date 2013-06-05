@@ -46,14 +46,11 @@ function validate(steps, runs, blocks, chains)
         end
      end
 
-    lpr = lpr.*beta_valT
+    lpr = lpr.*beta_valT;
 
     for i = 1:chains
         for j = 1:runs
             weights(i,j) = weights(i,j) + lpr((j-1)*blocks+1+runs*(steps-blocks)+blocks-1+(i-1)*runs*steps) - lpr((j-1)*blocks+1+(i-1)*runs*steps);
-            fprintf('Pair, %d',j)
-            lpr((j-1)*blocks+1+runs*(steps-blocks)+blocks-1+(i-1)*runs*steps)
-            lpr((j-1)*blocks+1+(i-1)*runs*steps)
         end
     end
     
@@ -70,6 +67,7 @@ function validate(steps, runs, blocks, chains)
     %     end
     % end
     weights
+    x_num
     for i = 1:chains
         for j = 1:runs
             mean_results(i) = mean_results(i) + exp(weights(i,j))*x_num(j + (i-1)*runs);
@@ -92,7 +90,7 @@ function validate(steps, runs, blocks, chains)
     % end
 
     fprintf('Standard deviation : %f\n', sum(std_dev_results)/chains);
-	x_num
+	
     
     
     
