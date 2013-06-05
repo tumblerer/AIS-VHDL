@@ -41,7 +41,15 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
           --FINISHED SIGNAL
           FINISHED    : OUT std_logic;
           --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
-          BUSY      : IN std_logic
+          BUSY      : IN std_logic;
+              -- Run Parameters
+          steps_slv : in std_logic_vector(31 downto 0);
+          runs_slv : in std_logic_vector(31 downto 0);
+          mean : in std_logic_vector(PRECISION-1 downto 0);
+          variance : in std_logic_vector(PRECISION-1 downto 0);
+          mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+          standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
+          standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
         );
     END COMPONENT;
     
@@ -101,25 +109,24 @@ BEGIN
           clk => clk,
           reset => reset,
           dina_beta => dina_beta,
---          addra_beta => addra_beta,
           wea_beta => wea_beta,
           dina_seed => dina_seed,
           wea_seed => wea_seed,
           addra_seed => addra_seed,
---          addrb_X => addrb_X,
           doutb_x => doutb_x,
           x_complete => x_complete,
---          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR,
           complete => complete,
+          --RIFFA signals
           valid => valid,
           start => start,
           runtime => runtime,
           FINISHED => FINISHED,
-          BUSY => BUSY
+          BUSY => BUSY,
           --Parameters
-          steps => steps,
-          runs => runs,
+          steps_slv => steps,
+          runs_slv => runs,
+          mean => mean,
           variance => variance,
           standarddev_Trans => standarddev_Trans,
           mean_gen => mean_gen,
@@ -201,7 +208,7 @@ BEGIN
       end loop;
 
     -- If complete, write out contents of BRAM_X to file
-      FILEIO : for i in 1 to RUNS loop  
+      FILEIO : for i in 1 to to_integer(unsigned(RUNS)) loop  
         EACH_BRAM : for j in 1 to CHAINS loop 
           wait for clk_period;
           hwrite(output_line, doutb_x);
@@ -227,7 +234,7 @@ BEGIN
       EACH_CHAIN: for i in 1 to CHAINS loop
 --      addrb_LPR <= std_logic_vector(to_unsigned(0, addrb_LPR'length));
         EACH_BLOCK: for j in 0 to BLOCKS-1 loop
-          EACH_LPR: for k in 1 to (STEPS/BLOCKS)*RUNS loop
+          EACH_LPR: for k in 1 to (to_integer(unsigned(STEPS))/BLOCKS)*to_integer(unsigned(RUNS)) loop
           hwrite(output_line, doutb_LPR);
           writeline(output_lpr, output_line);
           -- if k = (STEPS/BLOCKS)*RUNS then
