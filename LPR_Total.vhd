@@ -96,7 +96,7 @@ end component ; -- LPR_Chain
   signal runs : integer range 1 to MAX_RUNS;
 
   SIGNAL run_time : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
-  signal activate : std_logic;
+  signal start_core : std_logic;
 
   signal finished1 : std_logic;
 
@@ -133,7 +133,7 @@ begin
 --          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR_array(i),
           complete => complete_array(i),
-          start => activate,
+          start_core => start,
           --Parameters
           steps => steps,
           runs => runs,

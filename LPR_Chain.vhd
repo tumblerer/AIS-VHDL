@@ -21,8 +21,8 @@ entity LPR_Chain is
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic;
 
-      --activate first block
-      start : in std_logic;
+      --start loading RNGs
+      start_core : in std_logic;
 
       -- Run Parameters
       steps : in integer range 1 to MAX_STEPS;
@@ -51,6 +51,7 @@ component LPR_top is
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed : in std_logic;
+           start_core : in std_logic;
           -- Run Parameters
           steps : in integer range 1 to MAX_STEPS;
           runs : in integer range  1 to MAX_RUNS;
@@ -127,6 +128,8 @@ end component;
   signal address_counter_LPR : integer range 0 to 8*STEPS*RUNS;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
 
+  TYPE state_type is (idle, running);
+  signal state, nstate : state_type;
 
   signal addrb_LPR : std_logic_vector(31 downto 0);
   signal addrb_LPR_counter : integer range 0 to (STEPS/BLOCKS)*RUNS;
@@ -193,6 +196,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_Out => Mem_Addr_B(1),
            Mem_Data_B_Out =>  Mem_Data_B(1),
            seed => doutb_seed(i),
+           start_core => start_core,
            BlockID => std_logic_vector(to_unsigned(i,8)),
            complete => complete_array(i),
            steps => steps,
@@ -217,6 +221,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Addr_B_Out => Mem_Addr_B(i+1),
            Mem_Data_B_Out =>  Mem_Data_B(i+1),
            seed => doutb_seed(i),
+           start_core => start_core,
            BlockID => std_logic_vector(to_unsigned(i,8)),
            complete => complete_array(i),
            steps => steps,
@@ -265,6 +270,31 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
     end process;
   end generate;
 
+  State_Machine_clk: PROCESS
+  begin
+  WAIT UNTIL clk'EVENT AND clk='1';
+    if reset='1' then
+      state<= idle;
+    else
+      state<= nstate;
+    end if;
+  end process State_Machine_clk; 
+
+  State_Machine : PROCESS(state, start_core)
+  begin
+    case( state ) is
+    
+      when IDLE =>
+        if start_core = '1' then
+          nstate <= running;
+        else
+          nstate <= idle;
+        end if;
+      when running =>
+        nstate <= running;
+    end case ;
+  end process ;
+
 
   Control : process
   begin
@@ -280,13 +310,12 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
         block_counter <= 1;
         addr_a_x <= std_logic_vector(to_unsigned(0,addr_a_x'length));
         wea_x <= x"00";
-      else
-        if START = '1' then
+      elsif state = running then
+
           counter <= counter + 1;
-        end if;
         
         -- Activate first block
-        if counter < 2100-1 then
+        if counter < 2100-2 then
           activate_wire(0) <='0';
         else 
          activate_wire(0) <= '1';

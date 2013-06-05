@@ -18,6 +18,7 @@ entity Comparator is
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            activate_out: out std_logic;
            seed: in std_logic;
+           start_core : in std_logic;
            BlockID : in std_logic_vector(7 downto 0);
            complete : out std_logic;
            -- Run Parameters
@@ -220,14 +221,14 @@ Control_sync: PROCESS
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
         load_rng_counter <= 0;
-      elsif reset = '0' AND activate_in = '0' then
+      elsif state = load_rng then
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
         end if;
 
         write_a <= (others => '0');
 
-      else --activate_in = 1
+      elsif state = running then --activate_in = 1
      -- LPR Value pipeline 
         Proposed_LPR(1) <= LPR_In;
         Proposed_LPR(2 to SMALL_PIPE) <= Proposed_LPR(1 to SMALL_PIPE-1); 
@@ -283,19 +284,20 @@ Control_sync: PROCESS
       end if;
     end process State_Machine_clk;  
     
-    State_machine: PROCESS(state,nstate, BlockID, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
+    State_machine: PROCESS(state,nstate, BlockID, start_core, initial_counter, activate_in, mult1result, Proposed_LPR_output, Old_LPR_output,CompResult_reg, Exp1Result_Ext,rng_uni,load_rng_counter,seed,Address_Counter_Wr,Address_Counter_Rd)
     
     begin
 
       case (state) is
       
         when idle =>
-          if load_rng_counter < 2048 then
+
+          if start_core = '1' and load_rng_counter < 2048 then
             nstate <= load_rng;
-          elsif activate_in = '0' then
-            nstate <= idle;
-          else
+          elsif activate_in = '1' then
             nstate <= running;
+          else
+            nstate <= idle;
           end if;
             
           rng_ce_uni <= '0';
@@ -357,7 +359,7 @@ Control_sync: PROCESS
     begin
 
       -- Propagate activate signal
-      if initial_counter > TOTAL_PIPE then
+      if initial_counter > TOTAL_PIPE-1 then
         activate_out <= '1';
       else
         activate_out <= '0';

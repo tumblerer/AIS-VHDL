@@ -25,6 +25,7 @@ entity LPR_top is
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed : in std_logic;
+           start_core : in std_logic;
            BlockID : in std_logic_vector(7 downto 0);
            complete: out std_logic;
           -- Run Parameters
@@ -108,6 +109,7 @@ end generate;
          Beta => Beta,
          activate_out => activate_out,
          seed => seed,
+         start_core => start_core,
          BlockID => BlockID,
          complete => complete,
          steps => steps,
