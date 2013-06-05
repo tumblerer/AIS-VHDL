@@ -8,24 +8,26 @@ package Pack is
 	constant PRECISION: integer := 64; -- Overall precision
 
 	-- Paramaters (again, generics?)
-	constant STEPS: integer := 20;
+	constant Const_STEPS: integer := 20;
+	constant MAX_STEPS : integer :=1000;
 	-- How many states
-	constant RUNS: integer := 10;
+	constant Const_RUNS: integer := 10;
+	constant MAX_RUNS : integer := 200;
 	-- Blocks per chain
 	constant BLOCKS: integer:= 2;
 	--Number of parallel chains - effectively repetitions
 	constant CHAINS : integer := 2;
 	-- Mean 1
-	constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
+--	constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
 	-- 1/Sd 1/(2*0.1^2)
-	constant VARIANCE: std_logic_vector(PRECISION-1 downto 0) := x"4049000000000000";
-	constant MEAN_Gen: std_logic_vector(PRECISION-1 downto 0):= (OTHERS => '0');
+--	constant VARIANCE: std_logic_vector(PRECISION-1 downto 0) := x"4049000000000000";
+--	constant MEAN_Gen: std_logic_vector(PRECISION-1 downto 0):= (OTHERS => '0');
 
 	-- 1/2*SD^2 -- SD = 1
-	constant STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3fe0000000000000";
+--	constant STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3fe0000000000000";
 
 	--1/2*SD^2 -- SD = 0.05
-	constant STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"3f747ae147ae147b";
+--	constant STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"3f747ae147ae147b";
 	--
 	TYPE pipeline_type IS ARRAY(natural RANGE <>) OF std_logic_vector(PRECISION-1 DOWNTO 0);
 

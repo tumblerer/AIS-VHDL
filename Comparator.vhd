@@ -19,7 +19,10 @@ entity Comparator is
            activate_out: out std_logic;
            seed: in std_logic;
            BlockID : in std_logic_vector(7 downto 0);
-           complete : out std_logic
+           complete : out std_logic;
+           -- Run Parameters
+           steps : in integer range 1 to MAX_STEPS;
+           runs : in integer range  1 to MAX_RUNS
       );
 end Comparator;
 

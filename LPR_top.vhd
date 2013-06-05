@@ -26,7 +26,13 @@ entity LPR_top is
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed : in std_logic;
            BlockID : in std_logic_vector(7 downto 0);
-           complete: out std_logic
+           complete: out std_logic;
+          -- Run Parameters
+          steps : in integer range 1 to MAX_STEPS;
+          runs : in integer range  1 to MAX_RUNS;
+          mean : in std_logic_vector(PRECISION-1 downto 0);
+          variance : in std_logic_vector(PRECISION-1 downto 0);
+          standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
            );
 end LPR_top;
 
@@ -39,7 +45,11 @@ component Evaluator is
            Comp_In : in std_logic_vector(0 downto 0);
            Proposed_LPR : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            x_out : out std_logic_vector(PRECISION-1 downto 0);
-           seed: in std_logic
+           seed: in std_logic;
+           -- Run Parameters
+           mean : in std_logic_vector(PRECISION-1 downto 0);
+           variance : in std_logic_vector(PRECISION-1 downto 0);
+           standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
     );
 end component;
 
@@ -56,7 +66,10 @@ component Comparator is
            Beta : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            seed: in std_logic;
            BlockID: in std_logic_vector(7 downto 0);
-           complete: out std_logic
+           complete: out std_logic;
+           -- Run Parameters
+           steps : in integer range 1 to MAX_STEPS;
+           runs : in integer range  1 to MAX_RUNS
       );
 end component;
   
@@ -73,7 +86,10 @@ LPR1: for i in 1 to VARS generate
           Comp_In => Comp_In,
           Proposed_LPR => Proposed_LPR,
           x_out => x_out,
-          seed => seed
+          seed => seed,
+          mean => mean,
+          variance => variance,
+          standarddev_Trans => standarddev_Trans
       );
 
 end generate; 
@@ -93,7 +109,9 @@ end generate;
          activate_out => activate_out,
          seed => seed,
          BlockID => BlockID,
-         complete => complete
+         complete => complete,
+         steps => steps,
+         runs => runs
         );
 --end generate ; -- LPR2
 

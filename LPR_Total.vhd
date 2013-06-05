@@ -9,15 +9,12 @@ entity LPR_Total is
 		clk: in std_logic;
 		reset : in std_logic;
     dina_beta : in std_logic_vector(PRECISION-1 downto 0);
---    addra_beta : in std_logic_vector(31 downto 0);
     wea_beta : in std_logic_vector(7 downto 0);
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
     wea_seed : in std_logic_vector(7 downto 0);
     addra_seed : in std_logic_vector(31 downto 0);
---    addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
     x_complete : in std_logic;
---    addrb_LPR : in std_logic_vector(31 downto 0);
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
     complete: out std_logic;
     --RIFFA SIGNALS
@@ -30,7 +27,16 @@ entity LPR_Total is
     --FINISHED SIGNAL
     FINISHED    : OUT std_logic;
     --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
-    BUSY      : IN std_logic
+    BUSY      : IN std_logic;
+
+    -- Run Parameters
+    steps_slv : in std_logic_vector(31 downto 0);
+    runs_slv : in std_logic_vector(31 downto 0);
+    mean : in std_logic_vector(PRECISION-1 downto 0);
+    variance : in std_logic_vector(PRECISION-1 downto 0);
+    mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+    standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
+    standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
 	);
 
 end entity LPR_Total;
@@ -54,7 +60,16 @@ component LPR_Chain is
 --      addrb_LPR : in std_logic_vector(31 downto 0);
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic;
-      start : in std_logic
+      start : in std_logic;
+      -- Run Parameters
+      steps : in integer range 1 to MAX_STEPS;
+      runs : in integer range  1 to MAX_RUNS;
+      mean : in std_logic_vector(PRECISION-1 downto 0);
+      variance : in std_logic_vector(PRECISION-1 downto 0);
+      mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+      standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
+      standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
+
    ) ;
 end component ; -- LPR_Chain
 
@@ -67,20 +82,24 @@ end component ; -- LPR_Chain
   signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
   signal doutb_LPR_array : data_array;
-  signal chain_counter_delay : integer range 0 to STEPS*RUNS := 0;
+  signal chain_counter_delay : integer range 0 to MAX_STEPS*MAX_RUNS := 0;
   signal chain_counter_lpr: integer range 1 to CHAINS := 1;
-  signal chain_counter_delay_x: integer range 0 to RUNS := 0; 
+  signal chain_counter_delay_x: integer range 0 to MAX_RUNS := 0; 
   -- Counters
-  signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;
-  signal x_address_counter : integer range 0 to RUNS:=0;
-  signal beta_addr_counter : integer range 0 to STEPS := 0;
+  signal seed_counter, x_counter : integer range 1 to MAX_RUNS*MAX_STEPS*8;
+  signal x_address_counter : integer range 0 to MAX_RUNS:=0;
+  signal beta_addr_counter : integer range 0 to MAX_STEPS := 0;
   signal addrb_x: std_logic_vector(31 downto 0);
 
+  --Conversion from slv to integer
+  signal steps : integer range 1 to MAX_STEPS;
+  signal runs : integer range 1 to MAX_RUNS;
 
   SIGNAL run_time : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
   signal activate : std_logic;
 
   signal finished1 : std_logic;
+
   -- RIFFA state machine signals
   TYPE core_state_type IS (
         idle,
@@ -92,6 +111,10 @@ end component ; -- LPR_Chain
   SIGNAL core_state, core_nstate : core_state_type := idle;
 
 begin 
+
+  -- Convert input signal to integers
+  steps <= to_integer(unsigned(steps_slv));
+  runs <= to_integer(unsigned(runs_slv));
 
  Parallel_Chains: for i in 1 to CHAINS generate
 
@@ -110,7 +133,15 @@ begin
 --          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR_array(i),
           complete => complete_array(i),
-          start => activate
+          start => activate,
+          --Parameters
+          steps => steps,
+          runs => runs,
+          mean => mean,
+          variance => variance,
+          standarddev_Trans => standarddev_Trans,
+          mean_gen => mean_gen,
+          standarddev_Gen => standarddev_Gen          
         );
   end generate;
 

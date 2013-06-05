@@ -14,7 +14,10 @@ entity Generate_Sample is
 				reset : in std_logic;
 				activate: in std_logic;
         seed : in std_logic;
-				sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0)
+				sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+        -- Run Parameters
+        mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+        standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0)
 	); 
 
 end Generate_Sample;

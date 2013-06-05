@@ -56,7 +56,23 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    signal addra_seed : std_logic_vector(31 downto 0) := (others => '0');
    signal addrb_X : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
+  -- Mean 1
+   signal MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
+  -- 1/Sd 1/(2*0.1^2)
+   signal VARIANCE: std_logic_vector(PRECISION-1 downto 0) := x"4049000000000000";
+   signal MEAN_Gen: std_logic_vector(PRECISION-1 downto 0):= (OTHERS => '0');
+
+  -- 1/2*SD^2 -- SD = 1
+   signal STANDARDDEV_Gen :std_logic_vector(PRECISION-1 downto 0):=x"3fe0000000000000";
+
+  --1/2*SD^2 -- SD = 0.05
+    signal STANDARDDEV_Trans : std_logic_vector(PRECISION-1 downto 0):=x"3f747ae147ae147b";
+
+    signal steps : std_logic_vector(32-1 downto 0):= std_logic_vector(to_unsigned(const_steps,32));
+ 	  signal runs : std_logic_vector(32-1 downto 0):= std_logic_vector(to_unsigned(const_runs, 32));
+  
+
+  --Outputs
    signal doutb_x : std_logic_vector(63 downto 0);
    signal complete : std_logic := '0';
    signal hold_address: integer range 0 to BLOCKS := 0;
@@ -101,6 +117,13 @@ BEGIN
           runtime => runtime,
           FINISHED => FINISHED,
           BUSY => BUSY
+          --Parameters
+          steps => steps,
+          runs => runs,
+          variance => variance,
+          standarddev_Trans => standarddev_Trans,
+          mean_gen => mean_gen,
+          standarddev_Gen => standarddev_Gen    
         );
 
    -- Clock process definitions

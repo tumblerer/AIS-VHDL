@@ -20,7 +20,13 @@ entity Evaluator is
            Comp_In : in std_logic_vector(0 downto 0);
            Proposed_LPR : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            x_out : out std_logic_vector(PRECISION-1 downto 0);
-           seed : in  std_logic
+           seed : in  std_logic;
+
+            -- Run Parameters
+		    mean : in std_logic_vector(PRECISION-1 downto 0);
+		    variance : in std_logic_vector(PRECISION-1 downto 0);
+		    standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
+
     );
 end Evaluator;
 

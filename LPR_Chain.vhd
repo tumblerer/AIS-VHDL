@@ -22,7 +22,16 @@ entity LPR_Chain is
       complete: out std_logic;
 
       --activate first block
-      start : in std_logic
+      start : in std_logic;
+
+      -- Run Parameters
+      steps : in integer range 1 to MAX_STEPS;
+      runs : in integer range  1 to MAX_RUNS;
+      mean : in std_logic_vector(PRECISION-1 downto 0);
+      variance : in std_logic_vector(PRECISION-1 downto 0);
+      mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+      standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
+      standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
    ) ;
 end entity ; -- LPR_Chain
 
@@ -41,7 +50,13 @@ component LPR_top is
            Mem_Data_B_In : in  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            Mem_Addr_B_Out : in  STD_LOGIC_VECTOR (31 downto 0);
            Mem_Data_B_Out : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
-           seed : in std_logic
+           seed : in std_logic;
+          -- Run Parameters
+          steps : in integer range 1 to MAX_STEPS;
+          runs : in integer range  1 to MAX_RUNS;
+          mean : in std_logic_vector(PRECISION-1 downto 0);
+          variance : in std_logic_vector(PRECISION-1 downto 0);
+          standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
            );
 end component;
 
@@ -51,7 +66,10 @@ component Generate_Sample is
         reset : in std_logic;
         activate: in std_logic;
         seed : in std_logic;
-        sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0)
+        sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+        --Run Parameters
+        mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+        standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0)
   ); 
 
 end component;
@@ -119,7 +137,9 @@ begin
           reset => reset,
           activate => activate_gen,
           seed => doutb_seed(0), 
-          sample_output => sample_output
+          sample_output => sample_output,
+          mean_gen => mean_gen,
+          standarddev_Gen => standarddev_Gen
         );
 
   -- BRAM for all the final X states found
@@ -174,7 +194,12 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Data_B_Out =>  Mem_Data_B(1),
            seed => doutb_seed(i),
            BlockID => std_logic_vector(to_unsigned(i,8)),
-           complete => complete_array(i)
+           complete => complete_array(i),
+           steps => steps,
+           runs => runs,
+           mean => mean,
+           variance => variance,
+           standarddev_Trans => standarddev_Trans
 
       ); end generate CHAIN1;
 
@@ -193,7 +218,12 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
            Mem_Data_B_Out =>  Mem_Data_B(i+1),
            seed => doutb_seed(i),
            BlockID => std_logic_vector(to_unsigned(i,8)),
-           complete => complete_array(i)
+           complete => complete_array(i),
+           steps => steps,
+           runs => runs,
+           mean => mean,
+           variance => variance,
+           standarddev_Trans => standarddev_Trans
 
       ); end generate CHAIN2;
   end generate;
