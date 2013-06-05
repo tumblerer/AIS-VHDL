@@ -9,17 +9,17 @@ entity LPR_Total is
 		clk: in std_logic;
 		reset : in std_logic;
     dina_beta : in std_logic_vector(PRECISION-1 downto 0);
-    addra_beta : in std_logic_vector(31 downto 0);
+--    addra_beta : in std_logic_vector(31 downto 0);
     wea_beta : in std_logic_vector(7 downto 0);
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
     wea_seed : in std_logic_vector(7 downto 0);
     addra_seed : in std_logic_vector(31 downto 0);
 --    addrb_X : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
---    x_complete : in std_logic;
+    x_complete : in std_logic;
 --    addrb_LPR : in std_logic_vector(31 downto 0);
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
---    complete: out std_logic
+    complete: out std_logic;
     --RIFFA SIGNALS
     --VALID SIGNAL FOR VALID OUTPUT
     VALID     : OUT std_logic;
@@ -63,6 +63,7 @@ end component ; -- LPR_Chain
   type single_wire_array is array(CHAINS downto 1) of std_logic;
 
   signal addra_seed_array , addrb_x_array: address_array;
+  signal addra_beta :std_logic_vector( 31 downto 0);
   signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
   signal doutb_LPR_array : data_array;
@@ -72,11 +73,14 @@ end component ; -- LPR_Chain
   -- Counters
   signal seed_counter, x_counter : integer range 1 to RUNS*STEPS*8;
   signal x_address_counter : integer range 0 to RUNS:=0;
-
+  signal beta_addr_counter : integer range 0 to STEPS := 0;
   signal addrb_x: std_logic_vector(31 downto 0);
 
+
+  SIGNAL run_time : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
   signal activate : std_logic;
 
+  signal finished1 : std_logic;
   -- RIFFA state machine signals
   TYPE core_state_type IS (
         idle,
@@ -164,21 +168,45 @@ begin
 
   end process;
 
-  Transfer: process(x_address_counter , chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
+  Write_beta: process
+  begin
+    WAIT until clk'EVENT and clk= '1';
+      if reset = '1' then
+        beta_addr_counter <= 0;
+      else
+        if wea_beta = x"FF" then
+          beta_addr_counter <= beta_addr_counter + 1;
+          addra_beta <= std_logic_vector(to_unsigned(beta_addr_counter*(PRECISION/8),addra_beta'length));
+
+        end if;
+      end if;
+
+  end process ;
+  
+
+  Transfer: process(x_address_counter , beta_addr_counter, chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
 
-    addrb_x <= std_logic_vector(to_unsigned(x_address_counter*8,addrb_x'length)); 
+    addrb_x <= std_logic_vector(to_unsigned(x_address_counter*(PRECISION/8),addrb_x'length)); 
 
     complete <= complete_array(CHAINS);
 
     doutb_x <= doutb_x_array(x_counter);
 
     doutb_LPR <= doutb_LPR_array(chain_counter_lpr);
-
+  
   end process;
 
+Combinatorial_Assignments : PROCESS (core_state)
+BEGIN
+  IF (core_state = output_state) THEN
+    VALID <= '1';
+  ELSE
+    VALID <= '0';
+  END IF;
+END PROCESS;
   
-Nstate_assignment : PROCESS (core_state, reset, output_counter, START, finished1, BUSY)
+Nstate_assignment : PROCESS (core_state, reset, START, finished1, BUSY)
 BEGIN
   IF (reset = '1') THEN
     core_nstate <= idle;
@@ -197,7 +225,7 @@ BEGIN
             core_nstate <= idle;
           END IF;
         ELSE
-          IF (unsigned(output_counter) = 0) THEN
+          IF complete_array(CHAINS) = '1' THEN
             IF (BUSY = '1') THEN
               core_nstate <= paused_state;
             ELSE
@@ -218,13 +246,11 @@ BEGIN
 END PROCESS;  
 
 State_assignment : PROCESS
-VARIABLE v_output_counter : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 BEGIN
-  WAIT UNTIL rising_edge(SYS_CLK);
-  IF (SYS_RST = '1') THEN
+  WAIT UNTIL rising_edge(clk);
+  IF (reset = '1') THEN
     core_state <= idle;
-    output_counter <= (OTHERS => '0');
-    rOutput <= (OTHERS => '0');
+--    rOutput <= (OTHERS => '0');
     run_time <= (OTHERS => '0');
     finished1 <= '0';
   ELSE
@@ -235,29 +261,16 @@ BEGIN
         run_time <= std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
       ELSE
         run_time <= std_logic_vector(unsigned(RUNTIME) - 1); --Initialise run_time to the input RUNTIME
-      END IF;
-      --output_counter = max(1, OUTPUT_CYCLE-2)
-      IF (to_unsigned(2, C_SIMPBUS_AWIDTH) <= unsigned(OUTPUT_CYCLE)) THEN
-        v_output_counter := std_logic_vector(unsigned(OUTPUT_CYCLE) - 2);
-      ELSE
-        v_output_counter := std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
-      END IF;
-      
-      output_counter <= v_output_counter;
+      END IF;      
+
     END IF;
     
     IF (core_state = wait_state) THEN
-    --Wait in this state until the counter has reached desired value.
-      IF (unsigned(output_counter) = 0) THEN
-        output_counter <= v_output_counter;
-      ELSE
-        output_counter <= std_logic_vector(unsigned(output_counter) - 1);
-      END IF;
     END IF;
     
     IF (core_nstate = output_state) THEN
     --Output is simply a counter
-      rOutput <= std_logic_vector(unsigned(rOutput) + 1);
+--      rOutput <= std_logic_vector(unsigned(rOutput) + 1);
     END IF;
     
     IF (core_state /= idle AND core_state /= setup AND core_state /= paused_state) THEN

@@ -21,7 +21,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          clk : IN  std_logic;
          reset : IN  std_logic;
          dina_beta : IN  std_logic_vector(63 downto 0);
-         addra_beta : IN  std_logic_vector(31 downto 0);
+--         addra_beta : IN  std_logic_vector(31 downto 0);
          wea_beta : IN  std_logic_vector(7 downto 0);
          dina_seed : IN  std_logic_vector(63 downto 0);
          wea_seed : IN  std_logic_vector(7 downto 0);
@@ -31,7 +31,17 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          x_complete: in std_logic;
  --        addrb_LPR : in std_logic_vector(31 downto 0);
          doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-         complete : OUT  std_logic
+         complete : OUT  std_logic;
+             --VALID SIGNAL FOR VALID OUTPUT
+          VALID     : OUT std_logic;
+          --START SIGNAL TO START PROCESSING
+          START     : IN std_logic;
+          --RUN TIME OF THE CORE
+          RUNTIME     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+          --FINISHED SIGNAL
+          FINISHED    : OUT std_logic;
+          --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
+          BUSY      : IN std_logic
         );
     END COMPONENT;
     
@@ -40,7 +50,6 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
    signal dina_beta : std_logic_vector(63 downto 0) := (others => '0');
-   signal addra_beta : std_logic_vector(31 downto 0) := (others => '0');
    signal wea_beta : std_logic_vector(7 downto 0) := (others => '0');
    signal dina_seed : std_logic_vector(63 downto 0) := (others => '0');
    signal wea_seed : std_logic_vector(7 downto 0) := (others => '0');
@@ -57,6 +66,17 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    -- Clock period definitions
    constant clk_period : time := 10 ns;
   
+  --RIFFA
+  signal  VALID     : std_logic:='0';
+  --START SIGNAL TO START PROCESSING
+   signal START     : std_logic:='0';
+  --RUN TIME OF THE CORE
+   signal RUNTIME     : std_logic_vector(32- 1 DOWNTO 0):=(others=> '0');
+  --FINISHED SIGNAL
+   signal FINISHED    :  std_logic:='0';
+  --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
+   signal BUSY      : std_logic:='0';
+
   signal addr_count: integer :=0;
 BEGIN
  
@@ -65,7 +85,7 @@ BEGIN
           clk => clk,
           reset => reset,
           dina_beta => dina_beta,
-          addra_beta => addra_beta,
+--          addra_beta => addra_beta,
           wea_beta => wea_beta,
           dina_seed => dina_seed,
           wea_seed => wea_seed,
@@ -75,7 +95,12 @@ BEGIN
           x_complete => x_complete,
 --          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR,
-          complete => complete
+          complete => complete,
+          valid => valid,
+          start => start,
+          runtime => runtime,
+          FINISHED => FINISHED,
+          BUSY => BUSY
         );
 
    -- Clock process definitions
@@ -105,20 +130,19 @@ BEGIN
       wait for 0.5*clk_period;
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
+      reset <= '0';
       wait for clk_period*10;
-      addra_beta <= (OTHERS => '0');
       
       -- Read Beta values into BRAM_Beta
       addr_count <= 0;
       wea_beta <= x"FF";
-      wait for clk_period;
+--      wait for clk_period;
       while not endfile(beta_file) loop
         readline(beta_file, file_line);
         hread(file_line, temp_beta);
         dina_beta <= temp_beta;
-        addr_count <= addr_count + 8;
-        addra_beta <= std_logic_vector(to_unsigned(addr_count,addra_beta'length));
+--        addr_count <= addr_count + 8;
+--        addra_beta <= std_logic_vector(to_unsigned(addr_count,addra_beta'length));
         wait for clk_period;
       end loop;
       wait for clk_period;
@@ -144,7 +168,9 @@ BEGIN
       wait for clk_period;
       wea_seed <= x"00";
 
-      reset <= '0';
+      start <= '1';
+      wait for clk_period;
+      start <= '0';
 
       wait for clk_period*100;
       while complete = '0' loop

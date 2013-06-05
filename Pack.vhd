@@ -8,13 +8,13 @@ package Pack is
 	constant PRECISION: integer := 64; -- Overall precision
 
 	-- Paramaters (again, generics?)
-	constant STEPS: integer := 6;
+	constant STEPS: integer := 20;
 	-- How many states
-	constant RUNS: integer := 3;
+	constant RUNS: integer := 10;
 	-- Blocks per chain
-	constant BLOCKS: integer:= 3;
+	constant BLOCKS: integer:= 2;
 	--Number of parallel chains - effectively repetitions
-	constant CHAINS : integer := 3;
+	constant CHAINS : integer := 2;
 	-- Mean 1
 	constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
 	-- 1/Sd 1/(2*0.1^2)
@@ -35,5 +35,7 @@ package Pack is
 	constant TOTAL_PIPE_INCR : integer := TOTAL_PIPE+1;
 	constant ADDER_LATENCY : integer := 12;
 
+
+	constant c_simpbus_awidth : integer := 32;
  
 end Pack;
