@@ -12,7 +12,7 @@ entity LPR_Total is
     wea_beta : in std_logic_vector(7 downto 0);
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
     wea_seed : in std_logic_vector(7 downto 0);
-    addra_seed : in std_logic_vector(31 downto 0);
+   -- addra_seed : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
     x_complete : in std_logic;
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
@@ -78,6 +78,7 @@ end component ; -- LPR_Chain
   type single_wire_array is array(CHAINS downto 1) of std_logic;
 
   signal addra_seed_array , addrb_x_array: address_array;
+  signal addra_seed : std_logic_vector(31 downto 0);
   signal addra_beta :std_logic_vector( 31 downto 0);
   signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
@@ -87,6 +88,7 @@ end component ; -- LPR_Chain
   signal chain_counter_delay_x: integer range 0 to MAX_RUNS := 0; 
   -- Counters
   signal seed_counter, x_counter : integer range 1 to MAX_RUNS*MAX_STEPS*8;
+  signal seed_addr_counter : integer range 0 to 1024*BLOCKS;
   signal x_address_counter : integer range 0 to MAX_RUNS:=0;
   signal beta_addr_counter : integer range 0 to MAX_STEPS := 0;
   signal addrb_x: std_logic_vector(31 downto 0);
@@ -149,16 +151,26 @@ Load: Process
 begin
   wait until clk'EVENT and clk='1';
 
-      if wea_seed = x"FF" then
-        if seed_counter < CHAINS then
-          seed_counter <= seed_counter + 1;
-        else
-          seed_counter <= 1;
-        end if;
+      -- Load seed memory with seed from seed file
+      if reset = '1' then
+        seed_addr_counter <= 0;
+        seed_counter <= 1;
       else
-        seed_counter <= CHAINS;
+        if wea_seed = x"FF" then
+          if seed_counter < CHAINS then
+            seed_counter <= seed_counter + 1;
+            if seed_counter = CHAINS-1 then
+              seed_addr_counter <= seed_addr_counter + 1;
+            end if;
+          else
+            seed_counter <= 1;
+          end if;
+        else
+          seed_counter <= CHAINS;
+        end if;
       end if;
 
+      -- Read X values of chains
       if reset = '1' then
         x_counter <= CHAINS;
         x_address_counter <= 0;
@@ -175,6 +187,7 @@ begin
         end if;
       end if;
       
+      --Read LPR values
       if reset = '1' then
         chain_counter_lpr <= 1;
         chain_counter_delay<= 0;
@@ -195,7 +208,7 @@ begin
     
 
     dina_seed_array(seed_counter) <= dina_seed;
-    addra_seed_array(seed_counter) <= addra_seed;
+    addra_seed_array(seed_counter) <= std_logic_vector(to_unsigned(seed_addr_counter*PRECISION/8,32));
 
   end process;
 

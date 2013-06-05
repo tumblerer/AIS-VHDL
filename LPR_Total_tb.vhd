@@ -25,7 +25,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          wea_beta : IN  std_logic_vector(7 downto 0);
          dina_seed : IN  std_logic_vector(63 downto 0);
          wea_seed : IN  std_logic_vector(7 downto 0);
-         addra_seed : IN  std_logic_vector(31 downto 0);
+--         addra_seed : IN  std_logic_vector(31 downto 0);
  --        addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
          x_complete: in std_logic;
@@ -112,7 +112,7 @@ BEGIN
           wea_beta => wea_beta,
           dina_seed => dina_seed,
           wea_seed => wea_seed,
-          addra_seed => addra_seed,
+ --         addra_seed => addra_seed,
           doutb_x => doutb_x,
           x_complete => x_complete,
           doutb_LPR => doutb_LPR,
