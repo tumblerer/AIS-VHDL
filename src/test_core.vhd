@@ -105,8 +105,8 @@ ARCHITECTURE synth OF test_core IS
     begin
 
     core : LPR_Total Port Map (
-		clk => clk,
-        reset => reset,
+		clk => SYS_CLK,
+        reset => SYS_RST,
         dina_beta => dina_beta,
         dina_seed => dina_seed,
         doutb_x => doutb_x,
