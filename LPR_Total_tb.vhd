@@ -21,17 +21,10 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          clk : IN  std_logic;
          reset : IN  std_logic;
          dina_beta : IN  std_logic_vector(63 downto 0);
---         addra_beta : IN  std_logic_vector(31 downto 0);
---         wea_beta : IN  std_logic_vector(7 downto 0);
          dina_seed : IN  std_logic_vector(63 downto 0);
---         wea_seed : IN  std_logic_vector(7 downto 0);
---         addra_seed : IN  std_logic_vector(31 downto 0);
- --        addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
---         x_complete: in std_logic;
- --        addrb_LPR : in std_logic_vector(31 downto 0);
          doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-         complete : OUT  std_logic;
+ --        complete : OUT  std_logic;
              --VALID SIGNAL FOR VALID OUTPUT
           VALID     : OUT std_logic;
           --START SIGNAL TO START PROCESSING
@@ -109,11 +102,9 @@ BEGIN
           reset => reset,
           dina_beta => dina_beta,
           dina_seed => dina_seed,
- --         addra_seed => addra_seed,
           doutb_x => doutb_x,
- --         x_complete => x_complete,
           doutb_LPR => doutb_LPR,
-          complete => complete,
+--          complete => complete,
           --RIFFA signals
           valid => valid,
           start => start,
@@ -192,10 +183,10 @@ BEGIN
 
 
 
-      wait for clk_period*100;
-      while complete = '0' loop
-        wait for clk_period;
-      end loop;
+      -- wait for clk_period*100;
+      -- while complete = '0' loop
+      --   wait for clk_period;
+      -- end loop;
 
     -- If complete, write out contents of BRAM_X to file
       --wait for 2*clk_period;
@@ -246,7 +237,7 @@ BEGIN
 --       end loop;
 
       wait for clk_period;
-      assert complete = '0'
+      assert FINISHED = '0'
         report "SUCCESS: Simulation stopped at completion"
         severity FAILURE;
 

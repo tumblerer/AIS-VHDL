@@ -13,7 +13,7 @@ entity LPR_Total is
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
 --    x_complete : in std_logic;
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-    complete: out std_logic;
+--    complete: out std_logic;
     --RIFFA SIGNALS
     --VALID SIGNAL FOR VALID OUTPUT
     VALID     : OUT std_logic;
@@ -251,7 +251,7 @@ begin
 
     addrb_x <= std_logic_vector(to_unsigned(x_address_counter*(PRECISION/8),addrb_x'length)); 
 
-    complete <= complete_array(CHAINS);
+   -- complete <= complete_array(CHAINS);
 
     doutb_x <= doutb_x_array(x_counter);
 
@@ -373,11 +373,11 @@ BEGIN
     
     IF (core_state /= idle and core_state /= beta_init and core_state /= seed_init AND core_state /= setup AND core_state /= paused_state) THEN
     --Only keep track of run_time when the state is not any of idle, setup or paused states
-      -- if chain_counter_lpr = CHAINS and chain_counter_delay = STEPS*RUNS  then
-      --   finished1 <= '1';
-      -- else 
-      --   finished1 <= '0';
-      -- end if ;
+      if chain_counter_lpr = CHAINS and chain_counter_delay = STEPS*RUNS  then
+        finished1 <= '1';
+      else 
+        finished1 <= '0';
+      end if ;
 
     --   IF (unsigned(run_time) /= 0) THEN
     --     run_time <= std_logic_vector(unsigned(run_time) - 1);
