@@ -23,7 +23,8 @@ entity LPR_Chain is
 
       --start loading RNGs
       start_core : in std_logic;
-
+      valid : in std_logic;
+      busy : in std_logic;
       -- Run Parameters
       steps : in integer range 1 to MAX_STEPS;
       runs : in integer range  1 to MAX_RUNS;
@@ -400,7 +401,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
       Block_LPR_counter <= BLOCKS;
       addrb_LPR_counter <= 0;
     else
-      if x_complete = '1' then
+      if x_complete = '1' and valid = '0' and busy = '0' then
         if Block_LPR_counter < BLOCKS then
           Block_LPR_counter <= Block_LPR_counter + 1;
           if Block_LPR_counter = BLOCKS-1 then

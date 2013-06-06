@@ -11,7 +11,7 @@ entity LPR_Total is
     dina_beta : in std_logic_vector(PRECISION-1 downto 0);
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
-    x_complete : in std_logic;
+--    x_complete : in std_logic;
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
     complete: out std_logic;
     --RIFFA SIGNALS
@@ -58,6 +58,8 @@ component LPR_Chain is
       doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
       complete: out std_logic;
       start : in std_logic;
+      valid : in std_logic;
+      busy : in std_logic;
       -- Run Parameters
       steps : in integer range 1 to MAX_STEPS;
       runs : in integer range  1 to MAX_RUNS;
@@ -75,7 +77,7 @@ end component ; -- LPR_Chain
   type single_wire_array is array(CHAINS downto 1) of std_logic;
 
   signal addra_seed_array , addrb_x_array: address_array;
-  signal addra_seed : std_logic_vector(31 downto 0);
+  --signal addra_seed : std_logic_vector(31 downto 0);
   signal addra_beta :std_logic_vector( 31 downto 0);
   signal dina_seed_array , doutb_x_array: data_array;
   signal complete_array : single_wire_array;
@@ -102,6 +104,8 @@ end component ; -- LPR_Chain
   signal start_core : std_logic;
 
   signal finished1 : std_logic;
+  signal x_complete, x_complete_r: std_logic;
+  signal valid_r: std_logic;
 
   -- RIFFA state machine signals
   TYPE core_state_type IS (
@@ -109,7 +113,6 @@ end component ; -- LPR_Chain
         setup,
         beta_init,
         seed_init,
-        start_state,
         --PROCESSING STATES
         output_state,
         wait_state,
@@ -140,6 +143,8 @@ begin
           doutb_LPR => doutb_LPR_array(i),
           complete => complete_array(i),
           start_core => start_core,
+          valid => valid_r,
+          busy => busy,
           --Parameters
           steps => steps,
           runs => runs,
@@ -179,7 +184,7 @@ begin
         x_counter <= CHAINS;
         x_address_counter <= 0;
       else
-        if complete_array(CHAINS) = '1' then
+        if complete_array(CHAINS) = '1' and valid_r = '0' and busy = '0' then
           if x_counter < CHAINS then
             x_counter <= x_counter + 1;
             if x_counter = CHAINS -1 then
@@ -196,7 +201,7 @@ begin
         chain_counter_lpr <= 1;
         chain_counter_delay<= 0;
       else
-        if x_complete = '1' then
+        if x_complete = '1' and valid_r = '0' and busy = '0' then
           if chain_counter_delay < STEPS*RUNS then
             chain_counter_delay <= chain_counter_delay + 1;
           else
@@ -232,8 +237,17 @@ begin
   end process ;
   
 
-  Transfer: process(finished1, x_address_counter , beta_addr_counter, chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
+  Transfer: process(finished1, valid_r, x_address_counter , x_counter, beta_addr_counter, chain_counter_lpr, complete_array, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
+
+    --Signal that x has finished transferring
+    if x_counter = CHAINS and x_address_counter = runs then
+      x_complete_r <= '1';   
+    else
+      x_complete_r <= '0';  
+    end if ;
+
+    valid <= valid_r;
 
     addrb_x <= std_logic_vector(to_unsigned(x_address_counter*(PRECISION/8),addrb_x'length)); 
 
@@ -249,13 +263,13 @@ begin
 Combinatorial_Assignments : PROCESS (core_state)
 BEGIN
   IF (core_state = output_state) THEN
-    VALID <= '1';
+    VALID_r <= '1';
   ELSE
-    VALID <= '0';
+    VALID_r <= '0';
   END IF;
 END PROCESS;
   
-Nstate_assignment : PROCESS (core_state, reset, START, finished1, BUSY, beta_addr_counter, seed_counter, seed_addr_counter)
+Nstate_assignment : PROCESS (core_state, reset, START, complete_array, finished1, BUSY, beta_addr_counter, seed_counter, seed_addr_counter)
 BEGIN
   IF (reset = '1') THEN
     core_nstate <= idle;
@@ -273,8 +287,8 @@ BEGIN
         end if ;
 
       WHEN seed_init =>
-        if seed_addr_counter = 1024*BLOCKS and seed_counter = CHAINS then
-          core_nstate <= start_state;
+        if seed_addr_counter = 1024 and seed_counter = CHAINS then
+          core_nstate <= setup;
         end if;
 
       WHEN setup =>
@@ -317,6 +331,7 @@ BEGIN
     finished1 <= '0';
     wea_beta <= (others => '0');
     wea_seed <= (others => '0');
+    x_complete <= '0';
   ELSE
     core_state <= core_nstate;
     finished1 <= '0';
@@ -349,22 +364,31 @@ BEGIN
     END IF;
     
     IF (core_nstate = output_state) THEN
+      if x_complete_r = '1' then
+        x_complete <= '1';
+      end if;
     --Output is simply a counter
 --      rOutput <= std_logic_vector(unsigned(rOutput) + 1);
     END IF;
     
-    IF (core_state /= idle AND core_state /= setup AND core_state /= paused_state) THEN
+    IF (core_state /= idle and core_state /= beta_init and core_state /= seed_init AND core_state /= setup AND core_state /= paused_state) THEN
     --Only keep track of run_time when the state is not any of idle, setup or paused states
-      IF (unsigned(run_time) /= 0) THEN
-        run_time <= std_logic_vector(unsigned(run_time) - 1);
-      END IF;
+      -- if chain_counter_lpr = CHAINS and chain_counter_delay = STEPS*RUNS  then
+      --   finished1 <= '1';
+      -- else 
+      --   finished1 <= '0';
+      -- end if ;
+
+    --   IF (unsigned(run_time) /= 0) THEN
+    --     run_time <= std_logic_vector(unsigned(run_time) - 1);
+    --   END IF;
       
-    --Only check for run_time while in the processing states
-      IF (unsigned(run_time) = 0) THEN
-        finished1 <= '1';
-      ELSE
-        finished1 <= '0';
-      END IF;     
+    -- --Only check for run_time while in the processing states
+    --   IF (unsigned(run_time) = 0) THEN
+    --     finished1 <= '1';
+    --   ELSE
+    --     finished1 <= '0';
+    --   END IF;     
     END IF;
   END IF;
 END PROCESS;
