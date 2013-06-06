@@ -140,6 +140,7 @@ begin
           reset => reset,
           activate => activate_gen,
           seed => doutb_seed(0), 
+          start_core => start_core,
           sample_output => sample_output,
           mean_gen => mean_gen,
           standarddev_Gen => standarddev_Gen
