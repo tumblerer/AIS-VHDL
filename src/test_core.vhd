@@ -32,6 +32,11 @@ ENTITY test_core IS
 		INPUT_9 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 		INPUT_10 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 		INPUT_11 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		INPUT_12 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		INPUT_13 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		INPUT_14 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		INPUT_15 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		INPUT_16 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 
 		OUTPUT			: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 		OUTPUT_2		: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
@@ -68,7 +73,6 @@ ARCHITECTURE synth OF test_core IS
 	     dina_seed : IN  std_logic_vector(63 downto 0);
 	     doutb_x : OUT  std_logic_vector(63 downto 0);
 	     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
-	     complete : OUT  std_logic;
 
 	         --VALID SIGNAL FOR VALID OUTPUT
 	     VALID     : OUT std_logic;
@@ -92,15 +96,17 @@ ARCHITECTURE synth OF test_core IS
         );
     END COMPONENT;
 
-    signal dina_seed
-    signal dina_beta
-   	signal steps_slv : in std_logic_vector(31 downto 0);
-	signal runs_slv : in std_logic_vector(31 downto 0);
-	signal mean : in std_logic_vector(PRECISION-1 downto 0);
-	signal variance : in std_logic_vector(PRECISION-1 downto 0);
-	signal mean_gen : in std_logic_vector(PRECISION-1 downto 0);
-	signal standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
-	signal standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
+    signal dina_seed : std_logic_vector(PRECISION-1 downto 0);
+    signal dina_beta: std_logic_vector(PRECISION-1 downto 0);
+    signal doutb_x: std_logic_vector(PRECISION-1 downto 0);
+    signal doutb_LPR: std_logic_vector(PRECISION-1 downto 0);
+   	signal steps_slv : std_logic_vector(31 downto 0);
+	signal runs_slv :  std_logic_vector(31 downto 0);
+	signal mean : std_logic_vector(PRECISION-1 downto 0);
+	signal variance : std_logic_vector(PRECISION-1 downto 0);
+	signal mean_gen : std_logic_vector(PRECISION-1 downto 0);
+	signal standarddev_Gen : std_logic_vector(PRECISION-1 downto 0);
+	signal standarddev_Trans : std_logic_vector(PRECISION-1 downto 0);
 
     begin
 
@@ -111,16 +117,21 @@ ARCHITECTURE synth OF test_core IS
         dina_seed => dina_seed,
         doutb_x => doutb_x,
         doutb_LPR => doutb_LPR,
-        complete => complete,
     	   --RIFFA signals
         valid => valid,
         start => start,
         runtime => runtime,
         FINISHED => FINISHED,
         BUSY => BUSY,
-
-
-    	)
+        -- Run Parameters
+        steps_slv => steps_slv,
+        runs_slv => runs_slv,
+        mean => mean,
+        variance => variance,
+        mean_gen => mean_gen,
+        standarddev_Gen => standarddev_Gen,
+        standarddev_Trans => standarddev_Trans
+	);
 
     dina_beta <= INPUT_1 & INPUT_2;
     dina_seed <= INPUT_3 & INPUT_4;

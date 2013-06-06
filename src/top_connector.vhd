@@ -371,7 +371,12 @@ BEGIN
 			INPUT_9 			=> input_buffer(8),
 			INPUT_10 			=> input_buffer(9),
 			INPUT_11 			=> input_buffer(10),
-
+			INPUT_12 			=> input_buffer(11),
+			INPUT_13 			=> input_buffer(12),
+			INPUT_14 			=> input_buffer(13),
+			INPUT_15 			=> input_buffer(14),
+			INPUT_16 			=> input_buffer(15),
+			
 			OUTPUT				=> output_buffer(0),
 			OUTPUT_2			=> output_buffer(1),
 			OUTPUT_3			=> output_buffer(2),
