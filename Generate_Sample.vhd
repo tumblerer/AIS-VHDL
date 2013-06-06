@@ -15,6 +15,7 @@ entity Generate_Sample is
 				activate: in std_logic;
         seed : in std_logic;
 				sample_output : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
+        start_core : in std_logic;
         -- Run Parameters
         mean_gen : in std_logic_vector(PRECISION-1 downto 0);
         standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0)
@@ -77,26 +78,40 @@ begin
     );
     end generate;
 
+    State_Machine_clk: PROCESS
+    begin
+    WAIT UNTIL clk'EVENT AND clk='1';
+      if reset='1' then
+        state<= idle;
+      else
+        state<= nstate;
+      end if;
+    end process State_Machine_clk;  
+
   	Control_sync: PROCESS
   	begin
   	WAIT UNTIL clk'EVENT AND clk='1';
   		if reset = '1' then
   			load_rng_counter <= 0;
-  			state <= idle;
-  		elsif reset ='0' AND activate='0' AND load_rng_counter < 128 then
-  			load_rng_counter <= load_rng_counter + 1;
-  			state <= nstate;
-  		else 
-  			state <= nstate;
+  		elsif state = load_rng then
+        if load_rng_counter < 128 then
+  			  load_rng_counter <= load_rng_counter + 1;
+  		  end if;
   	end if;
   	end process Control_sync;
 
-  	State_machine: PROCESS (state, nstate, load_rng_counter,seed)
+  	State_machine: PROCESS (state, nstate, start_core, load_rng_counter,seed)
   	begin
 
   		case(state) is
   			when idle =>
-  				nstate <= load_rng;
+          if start_core = '1' and load_rng_counter < 128 then
+  				  nstate <= load_rng;
+          elsif activate = '1' then
+            nstate <= running;
+          else 
+            nstate <= idle;
+          end if;
 				  rng_mode_norm <= '0';
   				rng_ce_norm <= '0';
 			   	s_in_norm <= seed;
@@ -109,14 +124,14 @@ begin
   				elsif load_rng_counter >= 127 then
   					rng_mode_norm <= '0';
   					nstate<= running;
-					s_in_norm <= seed;
+				  	s_in_norm <= seed;
   				else
   					s_in_norm <= seed;
   				end if;
   			when running =>
-				s_in_norm <= seed;
-				rng_ce_norm <= '1';
-				rng_mode_norm <= '0';
+  				s_in_norm <= seed;
+  				rng_ce_norm <= '1';
+  				rng_mode_norm <= '0';
   				nstate <= running;
   		end case;
   	end process State_machine;
