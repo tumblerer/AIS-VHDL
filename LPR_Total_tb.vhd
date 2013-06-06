@@ -22,9 +22,9 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          reset : IN  std_logic;
          dina_beta : IN  std_logic_vector(63 downto 0);
 --         addra_beta : IN  std_logic_vector(31 downto 0);
-         wea_beta : IN  std_logic_vector(7 downto 0);
+--         wea_beta : IN  std_logic_vector(7 downto 0);
          dina_seed : IN  std_logic_vector(63 downto 0);
-         wea_seed : IN  std_logic_vector(7 downto 0);
+--         wea_seed : IN  std_logic_vector(7 downto 0);
 --         addra_seed : IN  std_logic_vector(31 downto 0);
  --        addrb_X : IN  std_logic_vector(31 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
@@ -58,11 +58,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
    signal dina_beta : std_logic_vector(63 downto 0) := (others => '0');
-   signal wea_beta : std_logic_vector(7 downto 0) := (others => '0');
    signal dina_seed : std_logic_vector(63 downto 0) := (others => '0');
-   signal wea_seed : std_logic_vector(7 downto 0) := (others => '0');
-   signal addra_seed : std_logic_vector(31 downto 0) := (others => '0');
-   signal addrb_X : std_logic_vector(31 downto 0) := (others => '0');
 
   -- Mean 1
    signal MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
@@ -109,9 +105,7 @@ BEGIN
           clk => clk,
           reset => reset,
           dina_beta => dina_beta,
-          wea_beta => wea_beta,
           dina_seed => dina_seed,
-          wea_seed => wea_seed,
  --         addra_seed => addra_seed,
           doutb_x => doutb_x,
           x_complete => x_complete,
@@ -162,10 +156,13 @@ BEGIN
       wait for 100 ns;	
       reset <= '0';
       wait for clk_period*10;
-      
+      start <= '1';
+      wait for clk_period;
+      start <= '0';
+      wait for clk_period*2;
       -- Read Beta values into BRAM_Beta
-      addr_count <= 0;
-      wea_beta <= x"FF";
+      
+--      wea_beta <= x"FF";
 --      wait for clk_period;
       while not endfile(beta_file) loop
         readline(beta_file, file_line);
@@ -176,31 +173,21 @@ BEGIN
         wait for clk_period;
       end loop;
       wait for clk_period;
-      wea_beta <= x"00";
+ --     wea_beta <= x"00";
 
       -- Read in seed values
-      wea_seed <= x"FF"; 
-      addr_count <= 0;
+ --     wea_seed <= x"FF"; 
       wait for clk_period;
       while not endfile(seed_file) loop
         readline(seed_file, file_line);
         hread(file_line, temp_seed);
         dina_seed <= temp_seed;
-        if hold_address < CHAINS-1 then
-          hold_address <= hold_address + 1;
-        else
-          addr_count <= addr_count + 8;
-          hold_address <= 0;
-        end if;
-        addra_seed <= std_logic_vector(to_unsigned(addr_count,addra_seed'length));
         wait for clk_period;
       end loop;
       wait for clk_period;
-      wea_seed <= x"00";
+--      wea_seed <= x"00";
 
-      start <= '1';
-      wait for clk_period;
-      start <= '0';
+
 
       wait for clk_period*100;
       while complete = '0' loop

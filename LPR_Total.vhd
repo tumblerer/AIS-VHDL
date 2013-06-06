@@ -9,10 +9,7 @@ entity LPR_Total is
 		clk: in std_logic;
 		reset : in std_logic;
     dina_beta : in std_logic_vector(PRECISION-1 downto 0);
-    wea_beta : in std_logic_vector(7 downto 0);
     dina_seed : in std_logic_vector(PRECISION-1 downto 0);
-    wea_seed : in std_logic_vector(7 downto 0);
-   -- addra_seed : in std_logic_vector(31 downto 0);
     doutb_x : out  std_logic_vector(PRECISION-1 downto 0);
     x_complete : in std_logic;
     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
@@ -86,6 +83,10 @@ end component ; -- LPR_Chain
   signal chain_counter_delay : integer range 0 to MAX_STEPS*MAX_RUNS := 0;
   signal chain_counter_lpr: integer range 1 to CHAINS := 1;
   signal chain_counter_delay_x: integer range 0 to MAX_RUNS := 0; 
+
+  signal wea_seed : std_logic_vector(PRECISION/8 -1 downto 0);
+  signal wea_beta : std_logic_vector(PRECISION/8 -1 downto 0);
+
   -- Counters
   signal seed_counter, x_counter : integer range 1 to MAX_RUNS*MAX_STEPS*8;
   signal seed_addr_counter : integer range 0 to 1024*BLOCKS;
@@ -106,6 +107,9 @@ end component ; -- LPR_Chain
   TYPE core_state_type IS (
         idle,
         setup,
+        beta_init,
+        seed_init,
+        start_state,
         --PROCESSING STATES
         output_state,
         wait_state,
@@ -135,7 +139,7 @@ begin
 --          addrb_LPR => addrb_LPR,
           doutb_LPR => doutb_LPR_array(i),
           complete => complete_array(i),
-          start_core => start,
+          start_core => start_core,
           --Parameters
           steps => steps,
           runs => runs,
@@ -228,7 +232,7 @@ begin
   end process ;
   
 
-  Transfer: process(x_address_counter , beta_addr_counter, chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
+  Transfer: process(finished1, x_address_counter , beta_addr_counter, chain_counter_lpr, complete_array, addra_seed, addrb_x, doutb_x_array, dina_seed, seed_counter, x_counter, doutb_lpr_array)
   begin
 
     addrb_x <= std_logic_vector(to_unsigned(x_address_counter*(PRECISION/8),addrb_x'length)); 
@@ -238,7 +242,8 @@ begin
     doutb_x <= doutb_x_array(x_counter);
 
     doutb_LPR <= doutb_LPR_array(chain_counter_lpr);
-  
+    
+    FINISHED <= finished1;
   end process;
 
 Combinatorial_Assignments : PROCESS (core_state)
@@ -250,7 +255,7 @@ BEGIN
   END IF;
 END PROCESS;
   
-Nstate_assignment : PROCESS (core_state, reset, START, finished1, BUSY)
+Nstate_assignment : PROCESS (core_state, reset, START, finished1, BUSY, beta_addr_counter, seed_counter, seed_addr_counter)
 BEGIN
   IF (reset = '1') THEN
     core_nstate <= idle;
@@ -259,10 +264,22 @@ BEGIN
     CASE (core_state) IS
       WHEN idle =>
         IF (START = '1') THEN
-          core_nstate <= setup;
+          core_nstate <= beta_init;
         END IF;
+      
+      WHEN beta_init =>
+        if beta_addr_counter = STEPS-1 then
+          core_nstate <= seed_init;
+        end if ;
+
+      WHEN seed_init =>
+        if seed_addr_counter = 1024*BLOCKS and seed_counter = CHAINS then
+          core_nstate <= start_state;
+        end if;
+
       WHEN setup =>
         core_nstate <= wait_state;
+
       WHEN wait_state =>
         IF (finished1 = '1') THEN
           IF (BUSY = '0') THEN
@@ -277,6 +294,7 @@ BEGIN
             END IF;         
           END IF;
         END IF;
+
       WHEN paused_state =>
         IF (BUSY /= '1') THEN
           core_nstate <= output_state;
@@ -297,18 +315,36 @@ BEGIN
 --    rOutput <= (OTHERS => '0');
     run_time <= (OTHERS => '0');
     finished1 <= '0';
+    wea_beta <= (others => '0');
+    wea_seed <= (others => '0');
   ELSE
     core_state <= core_nstate;
     finished1 <= '0';
+
+    if core_state = beta_init then
+      wea_beta <= (others => '1');
+    else
+      wea_beta <= (others => '0');
+    end if;
+
+    if core_state = seed_init then
+      wea_seed <= (others => '1');
+    else
+      wea_seed <= (others => '0');
+    end if;
+
     IF (core_state = setup) THEN
       IF (unsigned(RUNTIME) <= 1) THEN
         run_time <= std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
       ELSE
         run_time <= std_logic_vector(unsigned(RUNTIME) - 1); --Initialise run_time to the input RUNTIME
       END IF;      
-
+      start_core <= '1';
+    else
+      start_core <= '0';
     END IF;
-    
+
+
     IF (core_state = wait_state) THEN
     END IF;
     
