@@ -47,6 +47,7 @@ component Evaluator is
            Proposed_LPR : out  STD_LOGIC_VECTOR (PRECISION-1 downto 0);
            x_out : out std_logic_vector(PRECISION-1 downto 0);
            seed: in std_logic;
+           start_core : in std_logic;
            -- Run Parameters
            mean : in std_logic_vector(PRECISION-1 downto 0);
            variance : in std_logic_vector(PRECISION-1 downto 0);
@@ -88,6 +89,7 @@ LPR1: for i in 1 to VARS generate
           Proposed_LPR => Proposed_LPR,
           x_out => x_out,
           seed => seed,
+          start_core => start_core,
           mean => mean,
           variance => variance,
           standarddev_Trans => standarddev_Trans
