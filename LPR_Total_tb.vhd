@@ -24,7 +24,7 @@ ARCHITECTURE behavior OF LPR_Total_tb IS
          dina_seed : IN  std_logic_vector(63 downto 0);
          doutb_x : OUT  std_logic_vector(63 downto 0);
          doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
- --        complete : OUT  std_logic;
+         x_complete : OUT  std_logic;
              --VALID SIGNAL FOR VALID OUTPUT
           VALID     : OUT std_logic;
           --START SIGNAL TO START PROCESSING
@@ -104,7 +104,7 @@ BEGIN
           dina_seed => dina_seed,
           doutb_x => doutb_x,
           doutb_LPR => doutb_LPR,
---          complete => complete,
+          x_complete => x_complete,
           --RIFFA signals
           valid => valid,
           start => start,
@@ -208,10 +208,9 @@ BEGIN
       -- end loop ; -- FILEIO
  --     x_complete <= '1';
       i <= 0;
-      wait for 2*clk_period;
       
       while i < (to_integer(unsigned(STEPS))/BLOCKS)*to_integer(unsigned(RUNS))*CHAINS*BLOCKS loop
-        if VALID = '1' then
+        if VALID = '1' and x_complete = '1' then
           i <= i +1;
           hwrite(output_line, doutb_LPR);
           writeline(output_lpr, output_line);
@@ -237,9 +236,12 @@ BEGIN
 --       end loop;
 
       wait for clk_period;
-      assert FINISHED = '0'
-        report "SUCCESS: Simulation stopped at completion"
-        severity FAILURE;
+      while true loop
+        assert FINISHED = '0'
+          report "SUCCESS: Simulation stopped at completion"
+          severity FAILURE;
+        wait for clk_period;
+      end loop;
 
    end process;
 

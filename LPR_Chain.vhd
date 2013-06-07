@@ -398,20 +398,18 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
    wait until clk'EVENT and clk='1';
     
     if reset = '1' then
-      Block_LPR_counter <= BLOCKS;
+      Block_LPR_counter <= 1;
       addrb_LPR_counter <= 0;
     else
-      if x_complete = '1' and valid = '0' and busy = '0' then
+      if x_complete = '1' and valid = '1' and busy = '0' then
         if Block_LPR_counter < BLOCKS then
           Block_LPR_counter <= Block_LPR_counter + 1;
-          if Block_LPR_counter = BLOCKS-1 then
+        else 
             if addrb_LPR_counter < (STEPS/BLOCKS)*RUNS-1 then
               addrb_LPR_counter <= addrb_LPR_counter + 1;
             else
               addrb_LPR_counter <= 0;
             end if;
-          end if;
-        else
           Block_LPR_counter <= 1;
         end if;
       end if;
