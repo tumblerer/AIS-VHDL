@@ -14,10 +14,6 @@ function input(steps, runs, mean, variance, mean_gen, standarddev_gen, standardd
 
 	% Print input variables
 	[msb,lsb] = splithex(mean);
-
-	fprintf(output, '%d\n%d\n', msb,lsb);
-
-	[msb,lsb] = splithex(mean);
 	fprintf(output, '%d\n%d\n', msb,lsb);
 
 	[msb,lsb] = splithex(variance);
@@ -42,7 +38,7 @@ function input(steps, runs, mean, variance, mean_gen, standarddev_gen, standardd
 
 	if steps < 300
 		for i = 1:(300-steps)*2
-			fprintf('0\n');
+			fprintf(output,'0\n');
 		end
 	end
 
