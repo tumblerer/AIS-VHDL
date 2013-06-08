@@ -1124,7 +1124,8 @@ begin
       when 298 => dina_beta <= INPUT_609 & INPUT_610;
       when 299 => dina_beta <= INPUT_611 & INPUT_612;
       when 300 => dina_beta <= INPUT_613 & INPUT_614;
-    
+      when others => dina_beta <= x"0000000000000000";
+
     end case ;
 
     case( seed_mem ) is
@@ -1149,7 +1150,7 @@ begin
       when 17 => dina_seed <= INPUT_649 & INPUT_650;
       when 18 => dina_seed <= INPUT_651 & INPUT_652;
       when 19 => dina_seed <= INPUT_653 & INPUT_654;
-    
+      when others => dina_seed <= x"0000000000000000";
     end case ;
   end if;
 end process;
