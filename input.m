@@ -1,6 +1,6 @@
 % Writes the input file for RIFFA
 
-function [d1,d2]=input(steps, runs, mean, variance, mean_gen, standarddev_gen, standarddev_trans, seeds)
+function input(steps, runs, mean, variance, mean_gen, standarddev_gen, standarddev_trans, seeds)
 
 	output = fopen('data.txt','w');
 
@@ -37,7 +37,7 @@ function [d1,d2]=input(steps, runs, mean, variance, mean_gen, standarddev_gen, s
     	beta_out = i/steps;
     	[msb,lsb] = splithex(beta_out);
     	fprintf('%d\n%d\n', msb, lsb);
-    	fprintf(ouput,'%d\n%d\n', msb, lsb);
+    	fprintf(output,'%d\n%d\n', msb, lsb);
 	end
 
 	if steps < 300
