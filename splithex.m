@@ -1,3 +1,5 @@
+% Converts values into DFP hex and then into decimals and splits into 32 bit chunks
+
 function [msb, lsb] = splithex(input)
 
 	input_hex = num2hex(input);
