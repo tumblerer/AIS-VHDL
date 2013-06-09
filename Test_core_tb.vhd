@@ -1386,8 +1386,8 @@ END PROCESS;
 
 tb : PROCESS
 
-   file output_x : TEXT open WRITE_MODE is "x.out";
-   file output_lpr : TEXT open WRITE_MODE is "LPR.out";
+   file output_file : TEXT open WRITE_MODE is "log.txt";
+--   file output_lpr : TEXT open WRITE_MODE is "LPR.out";
    variable output_line: line;
 
 BEGIN
@@ -1403,9 +1403,9 @@ BEGIN
     if VALID = '1' then
       i <= i +1;
       hwrite(output_line, OUTPUT);
-      writeline(output_x, output_line);
+      writeline(output_file, output_line);
       hwrite(output_line, OUTPUT_2);
-      writeline(output_x, output_line);
+      writeline(output_file, output_line);
     end if;
     wait for clk_per;
   end loop ; 
@@ -1416,9 +1416,9 @@ BEGIN
     if VALID = '1' then
       i <= i +1;
       hwrite(output_line, OUTPUT);
-      writeline(output_lpr, output_line);
+      writeline(output_file, output_line);
       hwrite(output_line, OUTPUT_2);
-      writeline(output_lpr, output_line);
+      writeline(output_file, output_line);
     end if;
     wait for clk_per;
   end loop ;
