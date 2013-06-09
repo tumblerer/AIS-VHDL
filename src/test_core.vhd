@@ -792,13 +792,7 @@ ARCHITECTURE synth OF test_core IS
 Output_Proc : process(doutb_x, doutb_LPR, x_complete)
 	begin
 
-    if x_complete = '0' then
-  	  OUTPUT_2 <= doutb_x(31 downto 0);
-  	  OUTPUT <= doutb_x(63 downto 32);
-    else
-  	  OUTPUT_2 <= doutb_LPR(31 downto 0);
-  	  OUTPUT <= doutb_LPR(63 downto 32);
-    end if;
+
 
 end process;
 
@@ -806,6 +800,15 @@ end process;
 Memory_Load: process
 begin
   wait until SYS_CLK'event and SYS_CLK ='1';
+
+    if x_complete = '0' then
+      OUTPUT_2 <= doutb_x(31 downto 0);
+      OUTPUT <= doutb_x(63 downto 32);
+    else
+      OUTPUT_2 <= doutb_LPR(31 downto 0);
+      OUTPUT <= doutb_LPR(63 downto 32);
+    end if;
+
 
   if SYS_RST = '1' then
     load_mem_en <= 0;
