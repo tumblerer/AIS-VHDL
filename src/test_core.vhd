@@ -750,6 +750,8 @@ ARCHITECTURE synth OF test_core IS
   signal load_mem_en : integer range 0 to 1;
   signal beta_mem : integer range 0 to 300;
   
+  signal steps: integer range 1 to MAX_STEPS;
+  signal runs : integer range 1 to MAX_RUNS;
         begin
 
     core : LPR_Total Port Map (
@@ -784,6 +786,9 @@ ARCHITECTURE synth OF test_core IS
     standarddev_Gen <= INPUT_9 & INPUT_10;
     standarddev_Trans <= INPUT_11 & INPUT_12;
 
+    steps <= to_integer(unsigned(steps_slv));
+    runs <= to_integer(unsigned(runs_slv));
+
 Output_Proc : process(doutb_x, doutb_LPR, x_complete)
 	begin
 
@@ -813,11 +818,14 @@ begin
     end if;
 
     if load_mem_en = 1 then
-      beta_mem <= beta_mem + 1;
-      if seed_mem < 19 then
-        seed_mem <= seed_mem + 1;
-      else
-        seed_mem <= 0;
+      if beta_mem < steps+1  then
+        beta_mem <= beta_mem + 1;
+      else 
+        if seed_mem < 20 then
+          seed_mem <= seed_mem + 1;
+        else
+          seed_mem <= 1;
+        end if;
       end if;
     end if;
 
@@ -1130,26 +1138,26 @@ begin
 
     case( seed_mem ) is
     
-      when 0 => dina_seed <= INPUT_615 & INPUT_616;
-      when 1 => dina_seed <= INPUT_617 & INPUT_618;
-      when 2 => dina_seed <= INPUT_619 & INPUT_620;
-      when 3 => dina_seed <= INPUT_621 & INPUT_622;
-      when 4 => dina_seed <= INPUT_623 & INPUT_624;
-      when 5 => dina_seed <= INPUT_625 & INPUT_626;
-      when 6 => dina_seed <= INPUT_627 & INPUT_628;
-      when 7 => dina_seed <= INPUT_629 & INPUT_630;
-      when 8 => dina_seed <= INPUT_631 & INPUT_632;
-      when 9 => dina_seed <= INPUT_633 & INPUT_634;
-      when 10 => dina_seed <= INPUT_635 & INPUT_636;
-      when 11 => dina_seed <= INPUT_637 & INPUT_638;
-      when 12 => dina_seed <= INPUT_639 & INPUT_640;
-      when 13 => dina_seed <= INPUT_641 & INPUT_642;
-      when 14 => dina_seed <= INPUT_643 & INPUT_644;
-      when 15 => dina_seed <= INPUT_645 & INPUT_646;
-      when 16 => dina_seed <= INPUT_647 & INPUT_648;
-      when 17 => dina_seed <= INPUT_649 & INPUT_650;
-      when 18 => dina_seed <= INPUT_651 & INPUT_652;
-      when 19 => dina_seed <= INPUT_653 & INPUT_654;
+      when 1 => dina_seed <= INPUT_615 & INPUT_616;
+      when 2 => dina_seed <= INPUT_617 & INPUT_618;
+      when 3 => dina_seed <= INPUT_619 & INPUT_620;
+      when 4 => dina_seed <= INPUT_621 & INPUT_622;
+      when 5 => dina_seed <= INPUT_623 & INPUT_624;
+      when 6 => dina_seed <= INPUT_625 & INPUT_626;
+      when 7 => dina_seed <= INPUT_627 & INPUT_628;
+      when 8 => dina_seed <= INPUT_629 & INPUT_630;
+      when 9 => dina_seed <= INPUT_631 & INPUT_632;
+      when 10 => dina_seed <= INPUT_633 & INPUT_634;
+      when 11 => dina_seed <= INPUT_635 & INPUT_636;
+      when 12 => dina_seed <= INPUT_637 & INPUT_638;
+      when 13 => dina_seed <= INPUT_639 & INPUT_640;
+      when 14 => dina_seed <= INPUT_641 & INPUT_642;
+      when 15 => dina_seed <= INPUT_643 & INPUT_644;
+      when 16 => dina_seed <= INPUT_645 & INPUT_646;
+      when 17 => dina_seed <= INPUT_647 & INPUT_648;
+      when 18 => dina_seed <= INPUT_649 & INPUT_650;
+      when 19 => dina_seed <= INPUT_651 & INPUT_652;
+      when 20 => dina_seed <= INPUT_653 & INPUT_654;
       when others => dina_seed <= x"0000000000000000";
     end case ;
   end if;
