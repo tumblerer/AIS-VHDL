@@ -126,7 +126,6 @@ end component;
   signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
   signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
   signal block_counter : integer range 0 to BLOCKS;
-  signal address_counter_LPR : integer range 0 to 8*STEPS*RUNS;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
 
   TYPE state_type is (idle, running);
