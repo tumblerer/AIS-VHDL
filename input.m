@@ -1,6 +1,6 @@
 % Writes the input file for RIFFA
 
-function input(steps, runs, mean, variance, mean_gen, standarddev_gen, standarddev_trans)
+function input(steps, runs, mean, standarddev, mean_gen, standarddev_gen, standarddev_trans)
 
 	output = fopen('data.txt','w');
 
@@ -16,16 +16,16 @@ function input(steps, runs, mean, variance, mean_gen, standarddev_gen, standardd
 	[msb,lsb] = splithex(mean);
 	fprintf(output, '%d\n%d\n', msb,lsb);
 
-	[msb,lsb] = splithex(variance);
+	[msb,lsb] = splithex(1/(2*(standarddev^2)));
 	fprintf(output, '%d\n%d\n', msb,lsb);
 	
 	[msb,lsb] = splithex(mean_gen);
 	fprintf(output, '%d\n%d\n', msb,lsb);
 	
-	[msb,lsb] = splithex(standarddev_gen);
+	[msb,lsb] = splithex(1/(2*(standarddev_gen^2)));
 	fprintf(output, '%d\n%d\n', msb,lsb);
 	
-	[msb,lsb] = splithex(standarddev_trans);
+	[msb,lsb] = splithex(1/(2*(standarddev_trans^2)));
 	fprintf(output, '%d\n%d\n', msb,lsb);
 
 	% Print Betas
