@@ -199,7 +199,7 @@ begin
       --Read LPR values
       if reset = '1' then
         chain_counter_lpr <= 1;
-        chain_counter_delay<= 0;
+        chain_counter_delay<= 1;
       else
         if x_complete_r = '1' and valid_r = '1' and busy = '0' then
           if chain_counter_delay < STEPS*RUNS then
@@ -235,7 +235,7 @@ begin
   end process ;
   
 
-  Transfer: process(finished1, valid_r, x_address_counter , x_counter, beta_addr_counter, 
+  Transfer: process(valid_r, x_address_counter , x_counter, beta_addr_counter, 
     chain_counter_lpr, complete_array, addrb_x, doutb_x_array, dina_seed, seed_counter, x_complete_r, doutb_lpr_array)
   begin
 
@@ -251,8 +251,6 @@ begin
     doutb_x <= doutb_x_array(x_counter);
 
     doutb_LPR <= doutb_LPR_array(chain_counter_lpr);
-    
-    FINISHED <= finished1;
 
     x_complete <= x_complete_r;
 
@@ -327,6 +325,9 @@ END PROCESS;
 State_assignment : PROCESS
 BEGIN
   WAIT UNTIL rising_edge(clk);
+  
+  FINISHED <= finished1;
+  
   IF (reset = '1') THEN
     core_state <= idle;
 --    rOutput <= (OTHERS => '0');
@@ -339,8 +340,6 @@ BEGIN
 
   ELSE
     core_state <= core_nstate;
-    finished1 <= '0';
-
     if core_state = beta_init then
       wea_beta <= (others => '1');
     else
@@ -368,23 +367,21 @@ BEGIN
       if complete_array(CHAINS) = '1' then
         output_counter <= output_counter - 1;
       end if;
-    END IF;
-    
-    IF (core_nstate = output_state) THEN
-      if x_counter = CHAINS-1 and x_address_counter = runs then
+      if x_counter = 1 and x_address_counter = runs then
         x_complete_r <= '1';   
       else
         x_complete_r <= '0';  
       end if ;
+    END IF;
+    
+    IF (core_nstate = output_state) THEN
       output_counter <= 5;
     END IF;
     
     IF (core_state /= idle and core_state /= beta_init and core_state /= seed_init AND core_state /= setup AND core_state /= paused_state) THEN
     --Only keep track of run_time when the state is not any of idle, setup or paused states
-      if chain_counter_lpr = CHAINS and chain_counter_delay = STEPS*RUNS  then
+      if chain_counter_lpr = CHAINS and chain_counter_delay = STEPS*RUNS  and valid_r ='1' then
         finished1 <= '1';
-      else 
-        finished1 <= '0';
       end if ;  
     END IF;
   END IF;
