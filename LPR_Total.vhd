@@ -229,8 +229,6 @@ begin
       else
         if wea_beta = x"FF" then
           beta_addr_counter <= beta_addr_counter + 1;
-          addra_beta <= std_logic_vector(to_unsigned(beta_addr_counter*(PRECISION/8),addra_beta'length));
-
         end if;
       end if;
 
@@ -257,6 +255,9 @@ begin
     FINISHED <= finished1;
 
     x_complete <= x_complete_r;
+
+    addra_beta <= std_logic_vector(to_unsigned(beta_addr_counter*(PRECISION/8),addra_beta'length));
+
 
   end process;
 
