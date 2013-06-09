@@ -25,7 +25,7 @@ function input(steps, runs, mean, standarddev, mean_gen, standarddev_gen, standa
 	[msb,lsb] = splithex(1/(2*(standarddev_gen^2)));
 	fprintf(output, '%d\n%d\n', msb,lsb);
 	
-	[msb,lsb] = splithex(1/(2*(standarddev_trans^2)));
+	[msb,lsb] = splithex(standarddev_trans);
 	fprintf(output, '%d\n%d\n', msb,lsb);
 
 	% Print Betas
