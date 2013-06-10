@@ -145,41 +145,78 @@ begin
           mean_gen => mean_gen,
           standarddev_Gen => standarddev_Gen
         );
-
+  BRAM_141 : if Xilinx_141 = 1 generate
   -- BRAM for all the final X states found
-BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
-       clka => clk,
-       wea => wea_x,
-       addra => addr_a_x,
-       dina => dina_x,
-       clkb => clk,
-       rstb => reset,
-       addrb => addrb_x,
-       doutb => doutb_x
-  );
+    BRAM_X: ENTITY work.BlockMem_Uni PORT MAP(
+         clka => clk,
+         wea => wea_x,
+         addra => addr_a_x,
+         dina => dina_x,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_x,
+         doutb => doutb_x
+      );
 
-BRAM_BETA: ENTITY work.Dual_Port_BRAM PORT MAP(
-       clka => clk,
-       wea => wea_beta,
-       addra => addra_beta,
-       dina => dina_beta,
-       clkb => clk,
-       rstb => reset,
-       addrb => addrb_beta,
-       doutb => doutb_beta
-  );
+    BRAM_BETA: ENTITY work.BlockMem_Uni PORT MAP(
+         clka => clk,
+         wea => wea_beta,
+         addra => addra_beta,
+         dina => dina_beta,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_beta,
+         doutb => doutb_beta
+      );
 
-BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
-       clka => clk,
-       wea => wea_seed,
-       addra => addra_seed,
-       dina => dina_seed,
-       clkb => clk,
-       rstb => reset,
-       addrb => addrb_seed,
-       doutb => doutb_seed
-  );
+    BRAM_SEED: ENTITY work.BlockMem_Uni PORT MAP(
+         clka => clk,
+         wea => wea_seed,
+         addra => addra_seed,
+         dina => dina_seed,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_seed,
+         doutb => doutb_seed
+      );
+  end generate;
+  
+  BRAM_143 : if Xilinx_141 = 0 generate
+      -- BRAM for all the final X states found
+    BRAM_X: ENTITY work.Dual_Port_BRAM PORT MAP(
+         clka => clk,
+         wea => wea_x,
+         addra => addr_a_x,
+         dina => dina_x,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_x,
+         doutb => doutb_x
+      );
 
+    BRAM_BETA: ENTITY work.Dual_Port_BRAM PORT MAP(
+         clka => clk,
+         wea => wea_beta,
+         addra => addra_beta,
+         dina => dina_beta,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_beta,
+         doutb => doutb_beta
+      );
+
+    BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
+         clka => clk,
+         wea => wea_seed,
+         addra => addra_seed,
+         dina => dina_seed,
+         clkb => clk,
+         rstb => reset,
+         addrb => addrb_seed,
+         doutb => doutb_seed
+      );
+  end generate;
+  
   Chain: for i in 1 to BLOCKS generate
   begin
     -- Connect last block to the first block (memory)
