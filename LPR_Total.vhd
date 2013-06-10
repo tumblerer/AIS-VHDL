@@ -268,7 +268,7 @@ BEGIN
   END IF;
 END PROCESS;
   
-Nstate_assignment : PROCESS (core_state, reset, START, output_counter, complete_array, finished1, BUSY, beta_addr_counter, seed_counter, seed_addr_counter)
+Nstate_assignment : PROCESS (core_state, reset, steps, START, output_counter, complete_array, finished1, BUSY, beta_addr_counter, seed_counter, seed_addr_counter)
 BEGIN
   IF (reset = '1') THEN
     core_nstate <= idle;

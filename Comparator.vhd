@@ -54,7 +54,7 @@ architecture Behavioral of Comparator is
   signal LnResult1: std_logic_vector(PRECISION-1 downto 0);
 
   -- Counters
-  signal initial_counter : integer range 0 to (TOTAL_PIPE+1)*STEPS+RUNS+1:= 0;
+  signal initial_counter : integer range 0 to (TOTAL_PIPE+1)*MAX_STEPS+MAX_RUNS+1:= 0;
   signal load_rng_counter : integer range 0 to 2049 := 0;
   signal LPR_old_counter : integer range 0 to 1024 := 0;
   signal Address_Counter_Wr, Address_Counter_Rd, Address_Counter_Wr_reg, Address_Counter_Rd_reg: integer range 0 to 8192 :=0;

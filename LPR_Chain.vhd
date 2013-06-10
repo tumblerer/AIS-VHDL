@@ -102,7 +102,7 @@ end component;
 
   -- Pipeline
   -- Needs to be conditionally generated
-  signal Loop_Back_Pipe : pipeline_type (1 to STEPS*RUNS-TOTAL_PIPE_INCR*BLOCKS);
+  signal Loop_Back_Pipe : pipeline_type (1 to MAX_STEPS*MAX_RUNS-TOTAL_PIPE_INCR*BLOCKS);
   signal Loop_back_output : std_logic_vector(PRECISION-1 downto 0);
   -- Buffer between blocks to account for delay in loopback pipe
   signal X_buffer: wire_array;
@@ -120,11 +120,11 @@ end component;
   signal doutb_seed : std_logic_vector(PRECISION-1 downto 0):= (others => '0');
 
   --Counter
-  signal counter: integer range 0 to 2100+STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
-  signal address_counter_X : integer range 0 to RUNS*STEPS*8;
-  signal address_counter_beta :integer range 0 to 8*STEPS;
+  signal counter: integer range 0 to 2100+MAX_STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
+  signal address_counter_X : integer range 0 to MAX_RUNS*MAX_STEPS*8;
+  signal address_counter_beta :integer range 0 to 8*MAX_STEPS;
   signal address_counter_seed : integer range 0 to (BLOCKS+1)*8;
-  signal beta_counter : integer range 0 to STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
+  signal beta_counter : integer range 0 to MAX_STEPS*TOTAL_PIPE_INCR*BLOCKS+1;
   signal block_counter : integer range 0 to BLOCKS;
   signal Block_LPR_counter: integer range 1 to BLOCKS;
 
@@ -132,7 +132,7 @@ end component;
   signal state, nstate : state_type;
 
   signal addrb_LPR : std_logic_vector(31 downto 0);
-  signal addrb_LPR_counter : integer range 0 to (STEPS/BLOCKS)*RUNS;
+  signal addrb_LPR_counter : integer range 0 to (MAX_STEPS/BLOCKS)*MAX_RUNS;
 begin
 
   Gen:  entity work.Generate_Sample Port Map(
@@ -239,25 +239,25 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
 
 
   -- Generate Loop_Back SR if needed
-  Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS < RUNS) generate
-  begin
-    Loop_Pipe: process
-    begin
-       wait until clk'EVENT AND clk='1';
-          Loop_Back_Pipe(1) <= X_wire(BLOCKS);
-          Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
-          Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
-    end process; 
-  end generate;
+  -- Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS < RUNS) generate
+  -- begin
+  --   Loop_Pipe: process
+  --   begin
+  --      wait until clk'EVENT AND clk='1';
+  --         Loop_Back_Pipe(1) <= X_wire(BLOCKS);
+  --         Loop_Back_Pipe(2 to RUNS-TOTAL_PIPE_INCR*BLOCKS) <= Loop_Back_Pipe(1 to RUNS-TOTAL_PIPE_INCR*BLOCKS-1);
+  --         Loop_back_output <= Loop_Back_Pipe(RUNS-TOTAL_PIPE_INCR*BLOCKS);
+  --   end process; 
+  -- end generate;
 
-  No_Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS >= RUNS) generate
-  begin
+--  No_Loop_Back: if (TOTAL_PIPE_INCR*BLOCKS >= RUNS) generate
+--  begin
     No_Loop: process
     begin
        wait until clk'EVENT AND clk='1';
         Loop_back_output <= X_wire(BLOCKS);
     end process; 
-  end generate;
+--  end generate;
 
 
   -- Generate X_buffers if needed
