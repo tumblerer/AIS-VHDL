@@ -9,7 +9,7 @@ USE std.textio.ALL;
 use ieee.std_logic_textio.all;
 use work.Pack.all;
 
-
+ 
 ENTITY test_core_test_bench IS
 
 END ENTITY test_core_test_bench;
