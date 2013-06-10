@@ -8,15 +8,15 @@ package Pack is
 	constant PRECISION: integer := 64; -- Overall precision
 
 	-- Paramaters (again, generics?)
-	constant Const_STEPS: integer := 20;
-	constant MAX_STEPS : integer :=1000;
+	constant Const_STEPS: integer := 6;
+	constant MAX_STEPS : integer :=300;
 	-- How many states
 	constant Const_RUNS: integer := 10;
 	constant MAX_RUNS : integer := 200;
 	-- Blocks per chain
 	constant BLOCKS: integer:= 2;
 	--Number of parallel chains - effectively repetitions
-	constant CHAINS : integer := 2;
+	constant CHAINS : integer := 3;
 	-- Mean 1
 --	constant MEAN: std_logic_vector(PRECISION-1 downto 0) := x"3ff0000000000000";
 	-- 1/Sd 1/(2*0.1^2)
