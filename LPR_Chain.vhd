@@ -102,7 +102,7 @@ end component;
 
   -- Pipeline
   -- Needs to be conditionally generated
-  signal Loop_Back_Pipe : pipeline_type (1 to MAX_STEPS*MAX_RUNS-TOTAL_PIPE_INCR*BLOCKS);
+  --signal Loop_Back_Pipe : pipeline_type (1 to MAX_STEPS*MAX_RUNS-TOTAL_PIPE_INCR*BLOCKS);
   signal Loop_back_output : std_logic_vector(PRECISION-1 downto 0);
   -- Buffer between blocks to account for delay in loopback pipe
   signal X_buffer: wire_array;
