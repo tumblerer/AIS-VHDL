@@ -109,6 +109,8 @@ end component ; -- LPR_Chain
 
   signal output_counter : integer range 0 to 5;
 
+  signal internal_reset : std_logic := '0';
+
   -- RIFFA state machine signals
   TYPE core_state_type IS (
         idle,
@@ -131,7 +133,7 @@ begin
 
   begin Chain: entity work.LPR_Chain PORT MAP (
           clk => clk,
-          reset => reset,
+          reset => internal_reset,
           addra_seed => addra_seed_array(i),
           addra_beta => addra_beta,
           dina_beta => dina_beta,
@@ -163,7 +165,7 @@ begin
   wait until clk'EVENT and clk='1';
 
       -- Load seed memory with seed from seed file
-      if reset = '1' then
+      if reset = '1' or core_state = idle then
         seed_addr_counter <= 0;
         seed_counter <= 1;
       else
@@ -182,7 +184,7 @@ begin
       end if;
 
       -- Read X values of chains
-      if reset = '1' then
+      if reset = '1' or core_state = idle then
         x_counter <= 1;
         x_address_counter <= 0;
       else
@@ -197,7 +199,7 @@ begin
       end if;
       
       --Read LPR values
-      if reset = '1' then
+      if reset = '1' or core_state = idle then
         chain_counter_lpr <= 1;
         chain_counter_delay<= 1;
       else
@@ -224,7 +226,7 @@ begin
   Write_beta: process
   begin
     WAIT until clk'EVENT and clk= '1';
-      if reset = '1' then
+      if reset = '1' or core_state = idle then
         beta_addr_counter <= 0;
       else
         if wea_beta = x"FF" then
@@ -337,9 +339,22 @@ BEGIN
     wea_seed <= (others => '0');
     output_counter <= 5;
     x_complete_r <= '0';
-
+    internal_reset <= '1';
   ELSE
     core_state <= core_nstate;
+
+    if core_state = idle then
+      run_time <= (OTHERS => '0');
+      finished1 <= '0';
+      wea_beta <= (others => '0');
+      wea_seed <= (others => '0');
+      output_counter <= 5;
+      x_complete_r <= '0';
+      internal_reset <= '1';
+    else
+      internal_reset <= '0';
+    end if;
+
     if core_state = beta_init then
       wea_beta <= (others => '1');
     else
