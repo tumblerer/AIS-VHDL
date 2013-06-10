@@ -142,30 +142,58 @@ begin
       
   --Dual Port BRAM
   -- 2 cycle write, 2 cycle read
-  BRAM64: if PRECISION = 64 generate
-  BRAM1: ENTITY work.Dual_Port_BRAM PORT MAP(
-       clka => clk,
-       wea => write_a,
-       addra => addr_a,
-       dina => data_in_a,
-       clkb => clk,
-       rstb => reset,
-       addrb => Mem_Addr_B_Out,
-       doutb => Mem_Data_B_Out
-  );
-  end generate;
-  BRAM32: if PRECISION = 32 generate
-  BRAM1: ENTITY work.Dual_Port_BRAM32 PORT MAP(
-       clka => clk,
-       wea => write_a,
-       addra => addr_a,
-       dina => data_in_a,
-       clkb => clk,
-       rstb => reset,
-       addrb => Mem_Addr_B_Out,
-       doutb => Mem_Data_B_Out
-  );
-  end generate;
+	BRAM_141 : if Xilinx_141 = 1 generate
+	BRAM64: if PRECISION = 64 generate
+	  BRAM1: ENTITY work.BlockMem_Uni PORT MAP(
+		   clka => clk,
+		   wea => write_a,
+		   addra => addr_a,
+		   dina => data_in_a,
+		   clkb => clk,
+		   rstb => reset,
+		   addrb => Mem_Addr_B_Out,
+		   doutb => Mem_Data_B_Out
+	  );
+	  end generate;
+	  BRAM32: if PRECISION = 32 generate
+	  BRAM1: ENTITY work.BlockMem_Uni PORT MAP(
+		   clka => clk,
+		   wea => write_a,
+		   addra => addr_a,
+		   dina => data_in_a,
+		   clkb => clk,
+		   rstb => reset,
+		   addrb => Mem_Addr_B_Out,
+		   doutb => Mem_Data_B_Out
+	  );
+	end generate;
+	
+	BRAM_143 : if Xilinx_141 = 0 generate
+	  BRAM64: if PRECISION = 64 generate
+	  BRAM1: ENTITY work.Dual_Port_BRAM PORT MAP(
+		   clka => clk,
+		   wea => write_a,
+		   addra => addr_a,
+		   dina => data_in_a,
+		   clkb => clk,
+		   rstb => reset,
+		   addrb => Mem_Addr_B_Out,
+		   doutb => Mem_Data_B_Out
+	  );
+	  end generate;
+	  BRAM32: if PRECISION = 32 generate
+	  BRAM1: ENTITY work.Dual_Port_BRAM32 PORT MAP(
+		   clka => clk,
+		   wea => write_a,
+		   addra => addr_a,
+		   dina => data_in_a,
+		   clkb => clk,
+		   rstb => reset,
+		   addrb => Mem_Addr_B_Out,
+		   doutb => Mem_Data_B_Out
+	  );
+	  end generate;
+	end generate;
 
   -- 2048 cycles to load
 
