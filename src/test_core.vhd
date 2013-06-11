@@ -752,6 +752,8 @@ ARCHITECTURE synth OF test_core IS
   
   signal steps: integer range 1 to MAX_STEPS;
   signal runs : integer range 1 to MAX_RUNS;
+
+  signal finished_r : std_logic;
         begin
 
     core : LPR_Total Port Map (
@@ -766,7 +768,7 @@ ARCHITECTURE synth OF test_core IS
         valid => valid,
         start => start,
         runtime => runtime,
-        FINISHED => FINISHED,
+        FINISHED => finished_r,
         BUSY => BUSY,
         -- Run Parameters
         steps_slv => steps_slv,
@@ -789,11 +791,9 @@ ARCHITECTURE synth OF test_core IS
     steps <= to_integer(unsigned(steps_slv));
     runs <= to_integer(unsigned(runs_slv));
 
-Output_Proc : process(doutb_x, doutb_LPR, x_complete)
-	begin
-
-
-
+Transfer : process (finished_r)
+begin
+    FINISHED <= finished_r;
 end process;
 
 
@@ -810,7 +810,7 @@ begin
     end if;
 
 
-  if SYS_RST = '1' then
+  if SYS_RST = '1' or finished_r = '1' then
     load_mem_en <= 0;
     beta_mem <= 0;
     seed_mem <= 0;
