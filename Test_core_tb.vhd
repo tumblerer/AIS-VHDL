@@ -1424,7 +1424,7 @@ BEGIN
     wait for clk_per;
   end loop ;
 
-  WAIT UNTIL finished = '1';
+  --WAIT UNTIL finished = '1';
   -- wait_for(SYS_CLK,5);
   
   -- --BUSY signal test
@@ -1439,7 +1439,13 @@ BEGIN
   -- WAIT UNTIL rising_edge(FINISHED);
   -- wait_for(SYS_CLK,5);
   
-  REPORT "TEST FINISHED." SEVERITY failure;
+   while true loop
+    assert FINISHED = '0'
+      report "SUCCESS: Simulation stopped at completion"
+      severity FAILURE;
+    wait for clk_per;
+  end loop;
+
 END PROCESS;
 
 END ARCHITECTURE test_bench;
