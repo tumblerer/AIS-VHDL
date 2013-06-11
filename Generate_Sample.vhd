@@ -100,7 +100,7 @@ begin
   	end if;
   	end process Control_sync;
 
-  	State_machine: PROCESS (state, nstate, start_core, load_rng_counter,seed)
+  	State_machine: PROCESS (state, nstate, activate, start_core, load_rng_counter,seed)
   	begin
 
   		case(state) is
