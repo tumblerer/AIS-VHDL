@@ -105,7 +105,7 @@ end component ; -- LPR_Chain
 
   signal finished1 : std_logic;
   signal x_complete_r: std_logic;
-  signal valid_r: std_logic;
+  signal valid_r, valid_r1, valid_r2, valid_r3: std_logic;
 
   signal output_counter : integer range 0 to 5;
 
@@ -237,14 +237,14 @@ begin
   end process ;
   
 
-  Transfer: process(valid_r, x_address_counter , x_counter, beta_addr_counter, 
+  Transfer: process(valid_r3, x_address_counter , x_counter, beta_addr_counter, 
     chain_counter_lpr, complete_array, addrb_x, doutb_x_array, dina_seed, seed_counter, x_complete_r, doutb_lpr_array)
   begin
 
     --Signal that x has finished transferring
 
 
-    valid <= valid_r;
+    valid <= valid_r3;
 
     addrb_x <= std_logic_vector(to_unsigned(x_address_counter*(PRECISION/8),addrb_x'length)); 
 
@@ -264,9 +264,9 @@ begin
 Combinatorial_Assignments : PROCESS (core_state)
 BEGIN
   IF (core_state = output_state) THEN
-    VALID_r <= '1';
+    VALID_r3 <= '1';
   ELSE
-    VALID_r <= '0';
+    VALID_r3 <= '0';
   END IF;
 END PROCESS;
   
@@ -342,7 +342,9 @@ BEGIN
     internal_reset <= '1';
   ELSE
     core_state <= core_nstate;
-
+    valid_r2 <= valid_r3;
+    valid_r1 <= valid_r2;
+    valid_r <= valid_r1;
     if core_state = idle then
       run_time <= (OTHERS => '0');
       finished1 <= '0';
