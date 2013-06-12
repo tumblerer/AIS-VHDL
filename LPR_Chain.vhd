@@ -416,7 +416,7 @@ BRAM_SEED: ENTITY work.Dual_Port_BRAM PORT MAP(
   end process;
 
 
-  Data_Transfer : process(reset, sample_output, addrb_LPR_counter, doutb_beta, address_counter_beta, block_counter, counter, 
+  Data_Transfer : process(reset, runs, sample_output, addrb_LPR_counter, doutb_beta, address_counter_beta, block_counter, counter, 
     Loop_back_output, activate_wire, complete_array, mem_addr_b_int, addrb_lpr, Mem_Data_B, Block_LPR_counter, addrb_lpr, Mem_Addr_B_Int)
   begin
     
