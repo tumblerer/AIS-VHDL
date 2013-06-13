@@ -340,6 +340,9 @@ BEGIN
     output_counter <= 5;
     x_complete_r <= '0';
     internal_reset <= '1';
+    valid_r2 <= '0';
+    valid_r1 <= '0';
+    valid_r <= '0';
   ELSE
     core_state <= core_nstate;
     valid_r2 <= valid_r3;
@@ -353,6 +356,9 @@ BEGIN
       output_counter <= 5;
       x_complete_r <= '0';
       internal_reset <= '1';
+      valid_r2 <= '0';
+      valid_r1 <= '0';
+      valid_r <= '0';
     else
       internal_reset <= '0';
     end if;

@@ -220,7 +220,10 @@ Control_sync: PROCESS
         sample_counter <= TOTAL_PIPE;
         Address_Counter_Rd <= 0;
         Address_Counter_Wr <= 0;
+        Address_Counter_Wr_reg <= 0;
         load_rng_counter <= 0;
+        write_a <= (others => '0');
+        sample_counter_rd <= 0;
       elsif state = load_rng then
         if load_rng_counter < 2048 then
           load_rng_counter <= load_rng_counter + 1;
