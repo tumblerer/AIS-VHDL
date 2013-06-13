@@ -672,8 +672,6 @@ ENTITY test_core IS
     INPUT_650     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
     INPUT_651     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
     INPUT_652     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-    INPUT_653     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-    INPUT_654     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 
 		OUTPUT			: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 		OUTPUT_2		: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
@@ -824,7 +822,7 @@ begin
       if beta_mem < steps+1  then
         beta_mem <= beta_mem + 1;
       else 
-        if seed_mem < 20 then
+        if seed_mem < 19 then
           seed_mem <= seed_mem + 1;
         else
           seed_mem <= 1;
@@ -1160,7 +1158,6 @@ begin
       when 17 => dina_seed <= INPUT_647 & INPUT_648;
       when 18 => dina_seed <= INPUT_649 & INPUT_650;
       when 19 => dina_seed <= INPUT_651 & INPUT_652;
-      when 20 => dina_seed <= INPUT_653 & INPUT_654;
       when others => dina_seed <= x"0000000000000000";
     end case ;
   end if;

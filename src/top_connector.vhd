@@ -16,7 +16,7 @@ ENTITY top_connector IS
 			C_BRAM_ADDR_1				: std_logic_vector					:= X"00000000";
 			C_BRAM_SIZE					: integer							:= 32768;
 			C_USE_DOORBELL_RESET		: boolean							:= true;
-			C_NUM_OF_INPUTS_TO_CORE 	: integer 							:= 654;
+			C_NUM_OF_INPUTS_TO_CORE 	: integer 							:= 652;
 			C_NUM_OF_OUTPUTS_FROM_CORE  : integer 							:= 2;
 			ARGUMENT_ZERO_VAL			: std_logic_vector(31 DOWNTO 0) 	:= (OTHERS => '1'); 
 			ARGUMENT_ONE_VAL			: std_logic_vector(31 DOWNTO 0) 	:= (OTHERS => '1')
@@ -838,8 +838,6 @@ ARCHITECTURE synth OF top_connector IS
 			INPUT_650 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 			INPUT_651 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 			INPUT_652 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-			INPUT_653 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-			INPUT_654 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
 
 
 			OUTPUT			: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
@@ -1650,8 +1648,6 @@ BEGIN
 			INPUT_650 			=> input_buffer(649),
 			INPUT_651 			=> input_buffer(650),
 			INPUT_652 			=> input_buffer(651),
-			INPUT_653 			=> input_buffer(652),
-			INPUT_654 			=> input_buffer(653),
 			
 			OUTPUT				=> output_buffer(0),
 			OUTPUT_2			=> output_buffer(1),
