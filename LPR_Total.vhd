@@ -170,22 +170,16 @@ begin
         seed_counter <= 1;
       else
         if wea_seed = x"FF" then
-          if seed_counter < CHAINS then
+          if CHAINS = 1 then
+            seed_addr_counter <= seed_addr_counter + 1;
+          elsif seed_counter < CHAINS then
             seed_counter <= seed_counter + 1;
+            if seed_counter = CHAINS-1 then
+              seed_addr_counter <= seed_addr_counter + 1;
+            end if;
           else
             seed_counter <= 1;
           end if;
-          seed_addr_counter <= seed_addr_counter + 1;
-          -- if CHAINS = 1 then
-          --   seed_addr_counter <= seed_addr_counter + 1;
-          -- elsif seed_counter < CHAINS then
-          --   seed_counter <= seed_counter + 1;
-          --   if seed_counter = CHAINS-1 then
-          --     seed_addr_counter <= seed_addr_counter + 1;
-          --   end if;
-          -- else
-          --   seed_counter <= 1;
-          -- end if;
         else
           seed_counter <= CHAINS;
         end if;
@@ -296,7 +290,7 @@ BEGIN
         end if ;
 
       WHEN seed_init =>
-        if seed_addr_counter = 1024*CHAINS and seed_counter = CHAINS then
+        if seed_addr_counter = 1024 and seed_counter = CHAINS then
           core_nstate <= setup;
         end if;
 
