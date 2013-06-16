@@ -8,12 +8,43 @@ Mean : 0.879978
 Standard deviation : 0.069316
 167288000
 
+100,10,1,1
+1,0.1,0,1,0.05
+149728000
+Mean : 0.939987
+Standard deviation : 0.067545
+Mean : 1.034292
+Standard deviation : 0.037104
+Mean : 0.927585
+Standard deviation : 0.092845
+Mean : 0.988918
+Standard deviation : 0.091543
+
+100,10,1,3
+1,0.1,0,1,0.05
+279232000
+Mean : 1.040570
+Standard deviation : 0.070505
+
+
 100,10,1,5
+1,0.1,0,1,0.05
+408736000
 Mean : 0.993192
 Standard deviation : 0.055348
-408736000
+Mean : 0.985408
+Standard deviation : 0.063720
+Mean : 0.999021
+Standard deviation : 0.048584
+Mean : 0.986127
+Standard deviation : 0.082614
+Mean : 0.999021
+Standard deviation : 0.048584
+
+
 
 100,10,1,10
+1,0.1,0,1,0.05
 732496000
 Mean : 1.006107
 Standard deviation : 0.071428
@@ -21,4 +52,8 @@ Mean : 0.993640
 Standard deviation : 0.067909
 Mean : 1.003119
 Standard deviation : 0.065512
+Mean : 0.958550
+Standard deviation : 0.070733
+Mean : 1.010343
+Standard deviation : 0.073264
 
