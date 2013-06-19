@@ -43,8 +43,8 @@ function input(steps, runs, mean, standarddev, mean_gen, standarddev_gen, standa
 	end
 
 	% Print seeds
-	A = rand(20,1, 'double')
-    for i = 1:20
+	A = rand(19,1, 'double')
+    for i = 1:19
     	[msb, lsb] = splithex(A(i));
         fprintf('%d\n%d\n', msb, lsb);
         fprintf(output,'%d\n%d\n', msb, lsb);
