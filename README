@@ -1,0 +1,5 @@
+This project looks at the implementation of Annealed Importance Sampling on hardware.
+
+It uses the RIFFA project ( https://github.com/farhanrahman/riffa ) to facilitate communication between an FPGA and PC.
+
+For information on how to setup the project, have a look at the git wiki
