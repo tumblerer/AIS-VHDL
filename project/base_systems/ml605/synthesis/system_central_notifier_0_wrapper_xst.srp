@@ -1,0 +1,759 @@
+Release 14.1 - xst P.15xf (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/fr909/Desktop/chris_4/project/base_systems/ml605/synthesis/xst_temp_dir/
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "system_central_notifier_0_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/fr909/Desktop/chris_4/project/base_systems/ml605/pcores/" "/home/fr909/Desktop/riffa/riffa/pcores/" "/opt/Xilinx/14.1/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/opt/Xilinx/14.1/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc6vlx240tff1156-1
+Output File Name                   : "../implementation/system_central_notifier_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : system_central_notifier_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/chipscope_icon.v" into library central_notifier_v2_00_a
+Parsing module <chipscope_icon>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/chipscope_ila_1.v" into library central_notifier_v2_00_a
+Parsing module <chipscope_ila_1>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/chipscope_ila_128.v" into library central_notifier_v2_00_a
+Parsing module <chipscope_ila_128>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/interrupt_queue.v" into library central_notifier_v2_00_a
+Parsing module <interrupt_queue>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/initializer.v" into library central_notifier_v2_00_a
+Parsing module <initializer>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" into library central_notifier_v2_00_a
+Parsing module <reg_handler>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" into library central_notifier_v2_00_a
+Parsing module <dma_queue>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/ramb_sp_32w256d.v" into library central_notifier_v2_00_a
+Parsing module <ramb_sp_32w256d>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/ramb_sp_32w256d_v6.v" into library central_notifier_v2_00_a
+Parsing module <ramb_sp_32w256d_v6>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramd_36w32d.v" into library central_notifier_v2_00_a
+Parsing module <fifo_ramd_36w32d>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramd_36w32d_v6.v" into library central_notifier_v2_00_a
+Parsing module <fifo_ramd_36w32d_v6>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramb_32w512d.v" into library central_notifier_v2_00_a
+Parsing module <fifo_ramb_32w512d>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramb_32w512d_v6.v" into library central_notifier_v2_00_a
+Parsing module <fifo_ramb_32w512d_v6>.
+Analyzing Verilog file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/central_notifier_impl.v" into library central_notifier_v2_00_a
+Parsing module <central_notifier_impl>.
+Parsing VHDL file "/opt/Xilinx/14.1/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/proc_common_v3_00_a/hdl/vhdl/proc_common_pkg.vhd" into library proc_common_v3_00_a
+Parsing package <proc_common_pkg>.
+Parsing package body <proc_common_pkg>.
+Parsing VHDL file "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/vhdl/central_notifier.vhd" into library central_notifier_v2_00_a
+Parsing entity <central_notifier>.
+Parsing architecture <IMP> of entity <central_notifier>.
+Parsing VHDL file "/home/fr909/Desktop/chris_4/project/base_systems/ml605/hdl/system_central_notifier_0_wrapper.vhd" into library work
+Parsing entity <system_central_notifier_0_wrapper>.
+Parsing architecture <STRUCTURE> of entity <system_central_notifier_0_wrapper>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <system_central_notifier_0_wrapper> (architecture <STRUCTURE>) from library <work>.
+
+Elaborating entity <central_notifier> (architecture <IMP>) with generics from library <central_notifier_v2_00_a>.
+Going to verilog side to elaborate module central_notifier_impl
+
+Elaborating module <central_notifier_impl(C_ARCH="V6",C_SIMPBUS_AWIDTH=32,C_SIMPBUS_DWIDTH=32,C_NUM_CHANNELS=1,C_INIT_BUS=0,C_DMA_BASE_ADDR='b10000000001000000000000000000000,C_PCIE_BASE_ADDR='b10000101110000000000000000000000,C_PCIE_IPIF2PCI_LEN=4194304)>.
+
+Elaborating module <interrupt_queue>.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/interrupt_queue.v" Line 66: Result of 32-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/interrupt_queue.v" Line 69: Result of 32-bit expression is truncated to fit in 3-bit target.
+
+Elaborating module <dma_queue(C_ARCH="V6",C_SIMPBUS_AWIDTH=32,C_SIMPBUS_DWIDTH=32,C_DMA_BASE_ADDR=32'b10000000001000000000000000000000)>.
+
+Elaborating module <fifo_ramb_32w512d_v6>.
+WARNING:HDLCompiler:1499 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramb_32w512d_v6.v" Line 39: Empty module <fifo_ramb_32w512d_v6> remains a black box.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 219: Result of 32-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 260: Result of 32-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 306: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 373: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 417: Result of 32-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 435: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 481: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" Line 520: Result of 4-bit expression is truncated to fit in 3-bit target.
+
+Elaborating module <reg_handler(C_ARCH="V6",C_SIMPBUS_AWIDTH=32,C_SIMPBUS_DWIDTH=32,C_NUM_CHANNELS=1)>.
+
+Elaborating module <ramb_sp_32w256d_v6>.
+WARNING:HDLCompiler:1499 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/ramb_sp_32w256d_v6.v" Line 39: Empty module <ramb_sp_32w256d_v6> remains a black box.
+
+Elaborating module <fifo_ramd_36w32d_v6>.
+WARNING:HDLCompiler:1499 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/fifo_ramd_36w32d_v6.v" Line 39: Empty module <fifo_ramd_36w32d_v6> remains a black box.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 460: Result of 30-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 465: Result of 30-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 483: Result of 30-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 512: Result of 30-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 517: Result of 30-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 561: Result of 32-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 565: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 569: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 628: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 681: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 686: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" Line 690: Result of 32-bit expression is truncated to fit in 8-bit target.
+
+Elaborating module <initializer(C_SIMPBUS_AWIDTH=32,C_SIMPBUS_DWIDTH=32,C_INIT_BUS=0,C_PCIE_BASE_ADDR=32'b10000101110000000000000000000000,C_PCIE_IPIF2PCI_LEN=4194304)>.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/initializer.v" Line 119: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/initializer.v" Line 120: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/initializer.v" Line 153: Result of 32-bit expression is truncated to fit in 3-bit target.
+Back to vhdl to continue elaboration
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <system_central_notifier_0_wrapper>.
+    Related source file is "/home/fr909/Desktop/chris_4/project/base_systems/ml605/hdl/system_central_notifier_0_wrapper.vhd".
+    Summary:
+	no macro.
+Unit <system_central_notifier_0_wrapper> synthesized.
+
+Synthesizing Unit <central_notifier>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/vhdl/central_notifier.vhd".
+WARNING:Xst:37 - Detected unknown constraint/property "sigis". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "sigis". This constraint/property is not supported by the current software release and will be ignored.
+        C_ARCH = "V6"
+        C_SIMPBUS_AWIDTH = 32
+        C_SIMPBUS_DWIDTH = 32
+        C_NUM_CHANNELS = 1
+        C_INIT_BUS = 0
+        C_DMA_BASE_ADDR = "10000000001000000000000000000000"
+        C_PCIE_BASE_ADDR = "10000101110000000000000000000000"
+        C_PCIE_IPIF2PCI_LEN = 4194304
+WARNING:Xst:37 - Detected unknown constraint/property "sigis". This constraint/property is not supported by the current software release and will be ignored.
+WARNING:Xst:37 - Detected unknown constraint/property "sigis". This constraint/property is not supported by the current software release and will be ignored.
+    Found 1-bit 16-to-1 multiplexer for signal <Interrupt> created at line 618.
+    Found 1-bit 16-to-1 multiplexer for signal <InterruptErr> created at line 619.
+    Found 1-bit 16-to-1 multiplexer for signal <DmaReq> created at line 625.
+    Found 32-bit 16-to-1 multiplexer for signal <DmaSrc> created at line 627.
+    Found 32-bit 16-to-1 multiplexer for signal <DmaDst> created at line 628.
+    Found 32-bit 16-to-1 multiplexer for signal <DmaLen> created at line 629.
+    Found 1-bit 16-to-1 multiplexer for signal <DmaSig> created at line 630.
+    Found 1-bit 16-to-1 multiplexer for signal <BufReq> created at line 633.
+    Found 32-bit 16-to-1 multiplexer for signal <BufReqdAddr> created at line 640.
+    Found 5-bit 16-to-1 multiplexer for signal <BufReqdSize> created at line 641.
+    Found 1-bit 16-to-1 multiplexer for signal <BufReqdRdy> created at line 642.
+    Found 1-bit 16-to-1 multiplexer for signal <BufReqdErr> created at line 643.
+    Summary:
+	inferred  12 Multiplexer(s).
+Unit <central_notifier> synthesized.
+
+Synthesizing Unit <central_notifier_impl>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/central_notifier_impl.v".
+        C_ARCH = "V6"
+        C_SIMPBUS_AWIDTH = 32
+        C_SIMPBUS_DWIDTH = 32
+        C_NUM_CHANNELS = 1
+        C_INIT_BUS = 0
+        C_DMA_BASE_ADDR = 32'b10000000001000000000000000000000
+        C_PCIE_BASE_ADDR = 32'b10000101110000000000000000000000
+        C_PCIE_IPIF2PCI_LEN = 4194304
+    Summary:
+	no macro.
+Unit <central_notifier_impl> synthesized.
+
+Synthesizing Unit <interrupt_queue>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/interrupt_queue.v".
+    Found 3-bit register for signal <rState>.
+    Found 3-bit comparator lessequal for signal <n0000> created at line 57
+    Summary:
+	inferred   3 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <interrupt_queue> synthesized.
+
+Synthesizing Unit <dma_queue>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v".
+        C_ARCH = "V6"
+        C_SIMPBUS_AWIDTH = 32
+        C_SIMPBUS_DWIDTH = 32
+        C_DMA_BASE_ADDR = 32'b10000000001000000000000000000000
+        C_DMA_SRC_OFF = 32'b00000000000000000000000000001000
+        C_DMA_DEST_OFF = 32'b00000000000000000000000000001100
+        C_DMA_LEN_OFF = 32'b00000000000000000000000000010000
+        C_DMA_RESET_OFF = 32'b00000000000000000000000000000000
+        C_DMA_CONTROL_OFF = 32'b00000000000000000000000000000100
+        C_DMA_INTR_EN_OFF = 32'b00000000000000000000000000110000
+        C_DMA_INTR_STATUS_OFF = 32'b00000000000000000000000000101100
+        C_DMA_RESET_VAL = 32'b00000000000000000000000000001010
+        C_DMA_CONTROL_VAL = 32'b11000000000000000000000000000000
+        C_DMA_INTR_EN_VAL = 32'b00000000000000000000000000000011
+        C_NUM_RETRIES = 3'b011
+INFO:Xst:3210 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" line 175: Output port <full> of the instance <v6.dmaFifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/dma_queue.v" line 175: Output port <empty> of the instance <v6.dmaFifo> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <rBusRNW>.
+    Found 1-bit register for signal <rFifoREN>.
+    Found 1-bit register for signal <rDone>.
+    Found 1-bit register for signal <rErr>.
+    Found 1-bit register for signal <rProxyDone>.
+    Found 1-bit register for signal <rProxyErr>.
+    Found 4-bit register for signal <rBusBE>.
+    Found 4-bit register for signal <rStateInit>.
+    Found 4-bit register for signal <rStateRead>.
+    Found 4-bit register for signal <rStateSend>.
+    Found 4-bit register for signal <rStateCheck>.
+    Found 4-bit register for signal <rStateProxy>.
+    Found 4-bit register for signal <rCompState>.
+    Found 4-bit register for signal <rState>.
+    Found 3-bit register for signal <rNumRetries>.
+    Found 3-bit register for signal <rNumTxrRetries>.
+    Found 32-bit register for signal <rSrc>.
+    Found 32-bit register for signal <rDst>.
+    Found 32-bit register for signal <rLen>.
+    Found 32-bit register for signal <rBusAddr>.
+    Found 32-bit register for signal <rBusData>.
+    Found 6-bit register for signal <rReq>.
+    Found 3-bit adder for signal <rNumTxrRetries[2]_GND_12_o_add_107_OUT> created at line 481.
+    Found 3-bit adder for signal <rNumRetries[2]_GND_12_o_add_114_OUT> created at line 520.
+    Found 4-bit 12-to-1 multiplexer for signal <rState[3]_GND_12_o_wide_mux_131_OUT> created at line 217.
+    Found 9-bit comparator lessequal for signal <n0034> created at line 219
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred 210 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred  84 Multiplexer(s).
+Unit <dma_queue> synthesized.
+
+Synthesizing Unit <reg_handler>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v".
+        C_ARCH = "V6"
+        C_SIMPBUS_AWIDTH = 32
+        C_SIMPBUS_DWIDTH = 32
+        C_NUM_CHANNELS = 1
+        C_BUF_REQD_TIMEOUT = 32
+WARNING:Xst:647 - Input <SIMPBUS_BE> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <DMA_QUEUE_LEN<31:30>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <BUF_REQD_ADDR<4:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" line 371: Output port <full> of the instance <v6.interruptFifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/reg_handler.v" line 381: Output port <full> of the instance <v6.dmaInfoFifo> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <rIntrClear>.
+    Found 1-bit register for signal <rRegInit>.
+    Found 1-bit register for signal <rBramWEN>.
+    Found 1-bit register for signal <rFifoDmaQWEN>.
+    Found 1-bit register for signal <rFifoDmaInfoWEN>.
+    Found 1-bit register for signal <rFifoIntrWEN>.
+    Found 1-bit register for signal <rFifoDmaInfoREN>.
+    Found 1-bit register for signal <rFifoIntrREN>.
+    Found 1-bit register for signal <rFifoTurn>.
+    Found 1-bit register for signal <rBusDone>.
+    Found 1-bit register for signal <rDmaDoneAck>.
+    Found 1-bit register for signal <rInterruptAck>.
+    Found 1-bit register for signal <rDoorbell>.
+    Found 1-bit register for signal <rDoorbellErr>.
+    Found 1-bit register for signal <rDmaReqAck>.
+    Found 1-bit register for signal <rDmaDone>.
+    Found 1-bit register for signal <rBufReqAck>.
+    Found 1-bit register for signal <rBufReqRdy>.
+    Found 1-bit register for signal <rBufReqErr>.
+    Found 1-bit register for signal <rBufReqd>.
+    Found 1-bit register for signal <rTmpSignal>.
+    Found 1-bit register for signal <rTmpErr>.
+    Found 32-bit register for signal <rIntrVect>.
+    Found 32-bit register for signal <rData>.
+    Found 3-bit register for signal <rRegInitNum>.
+    Found 8-bit register for signal <rBramAddr>.
+    Found 4-bit register for signal <rChannel>.
+    Found 4-bit register for signal <rTmpChannel>.
+    Found 5-bit register for signal <rBufReqSize>.
+    Found 5-bit register for signal <rState>.
+    Found 32-bit subtractor for signal <rData[31]_GND_15_o_sub_149_OUT> created at line 716.
+    Found 5-bit adder for signal <n0538[4:0]> created at line 561.
+    Found 8-bit adder for signal <n0513> created at line 595.
+    Found 8-bit adder for signal <n0517> created at line 614.
+    Found 6-bit adder for signal <n0516> created at line 615.
+    Found 8-bit adder for signal <n0528> created at line 634.
+    Found 8-bit adder for signal <n0527> created at line 638.
+    Found 8-bit adder for signal <rBramAddr[7]_GND_15_o_add_141_OUT> created at line 686.
+    Found 8-bit subtractor for signal <GND_15_o_GND_15_o_sub_143_OUT<7:0>> created at line 690.
+    Found 32-bit shifter logical left for signal <GND_15_o_wFifoIntrDataOut[35]_shift_left_118_OUT> created at line 596
+    Found 32-bit shifter logical left for signal <GND_15_o_BUS_0005_shift_left_129_OUT> created at line 615
+    Found 1-bit 16-to-1 multiplexer for signal <wFifoIntrDataOut[35]_rIntrVect[15]_Mux_116_o> created at line 593.
+    Found 1-bit 32-to-1 multiplexer for signal <PWR_14_o_rIntrVect[31]_Mux_126_o> created at line 612.
+    Found 32-bit comparator greater for signal <n0028> created at line 444
+    Found 32-bit comparator lessequal for signal <n0030> created at line 444
+    Summary:
+	inferred   9 Adder/Subtractor(s).
+	inferred 115 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred  87 Multiplexer(s).
+	inferred   2 Combinational logic shifter(s).
+Unit <reg_handler> synthesized.
+
+Synthesizing Unit <initializer>.
+    Related source file is "/home/fr909/Desktop/riffa/riffa/pcores/central_notifier_v2_00_a/hdl/verilog/initializer.v".
+        C_SIMPBUS_AWIDTH = 32
+        C_SIMPBUS_DWIDTH = 32
+        C_INIT_BUS = 0
+        C_PCIE_BASE_ADDR = 32'b10000101110000000000000000000000
+        C_PCIE_IPIF2PCI_LEN = 4194304
+        C_PCIE_BIER_OFF = 32'b00000000000000000000000001000100
+        C_PCIE_BCR_OFF = 32'b00000000000000000000000000110000
+        C_PCIE_IPIF2PCI_OFF = 32'b00000000000000000000000000000100
+        C_PCIE_IPIF2PCI_INC = 32'b00000000000000000000000000001000
+        C_PCIE_BIER_VAL = 32'b01111101111100000100000000000000
+        C_PCIE_BCR_VAL = 32'b00000000000000000000000100000111
+    Found 1-bit register for signal <rProxyRNW>.
+    Found 1-bit register for signal <rRegInitDone>.
+    Found 3-bit register for signal <rCompState>.
+    Found 3-bit register for signal <rState>.
+    Found 32-bit register for signal <rProxyAddr>.
+    Found 32-bit register for signal <rProxyData>.
+    Found 32-bit adder for signal <PWR_19_o_GND_19_o_add_11_OUT> created at line 162.
+    Found 3-bit 7-to-1 multiplexer for signal <rState[2]_rCompState[2]_wide_mux_23_OUT> created at line 134.
+    Found 3-bit comparator greater for signal <n0015> created at line 159
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  71 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred  17 Multiplexer(s).
+Unit <initializer> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 12
+ 3-bit adder                                           : 2
+ 32-bit adder                                          : 1
+ 32-bit subtractor                                     : 1
+ 5-bit adder                                           : 1
+ 6-bit adder                                           : 1
+ 8-bit adder                                           : 5
+ 8-bit subtractor                                      : 1
+# Registers                                            : 58
+ 1-bit register                                        : 29
+ 3-bit register                                        : 6
+ 32-bit register                                       : 9
+ 4-bit register                                        : 10
+ 5-bit register                                        : 2
+ 6-bit register                                        : 1
+ 8-bit register                                        : 1
+# Comparators                                          : 5
+ 3-bit comparator greater                              : 1
+ 3-bit comparator lessequal                            : 1
+ 32-bit comparator greater                             : 1
+ 32-bit comparator lessequal                           : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 200
+ 1-bit 16-to-1 multiplexer                             : 8
+ 1-bit 2-to-1 multiplexer                              : 31
+ 1-bit 32-to-1 multiplexer                             : 1
+ 3-bit 2-to-1 multiplexer                              : 21
+ 3-bit 7-to-1 multiplexer                              : 1
+ 32-bit 16-to-1 multiplexer                            : 4
+ 32-bit 2-to-1 multiplexer                             : 53
+ 4-bit 12-to-1 multiplexer                             : 1
+ 4-bit 2-to-1 multiplexer                              : 55
+ 5-bit 16-to-1 multiplexer                             : 1
+ 5-bit 2-to-1 multiplexer                              : 17
+ 8-bit 2-to-1 multiplexer                              : 7
+# Logic shifters                                       : 2
+ 32-bit shifter logical left                           : 2
+# Xors                                                 : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <dma_queue>.
+The following registers are absorbed into counter <rNumTxrRetries>: 1 register on signal <rNumTxrRetries>.
+Unit <dma_queue> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 11
+ 3-bit adder                                           : 1
+ 32-bit adder                                          : 1
+ 32-bit subtractor                                     : 1
+ 5-bit adder                                           : 1
+ 6-bit adder                                           : 1
+ 8-bit adder                                           : 5
+ 8-bit subtractor                                      : 1
+# Counters                                             : 1
+ 3-bit up counter                                      : 1
+# Registers                                            : 396
+ Flip-Flops                                            : 396
+# Comparators                                          : 5
+ 3-bit comparator greater                              : 1
+ 3-bit comparator lessequal                            : 1
+ 32-bit comparator greater                             : 1
+ 32-bit comparator lessequal                           : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 202
+ 1-bit 16-to-1 multiplexer                             : 8
+ 1-bit 2-to-1 multiplexer                              : 35
+ 1-bit 32-to-1 multiplexer                             : 1
+ 3-bit 2-to-1 multiplexer                              : 20
+ 3-bit 7-to-1 multiplexer                              : 1
+ 32-bit 16-to-1 multiplexer                            : 4
+ 32-bit 2-to-1 multiplexer                             : 53
+ 4-bit 12-to-1 multiplexer                             : 1
+ 4-bit 2-to-1 multiplexer                              : 54
+ 5-bit 16-to-1 multiplexer                             : 1
+ 5-bit 2-to-1 multiplexer                              : 17
+ 8-bit 2-to-1 multiplexer                              : 7
+# Logic shifters                                       : 2
+ 32-bit shifter logical left                           : 2
+# Xors                                                 : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1293 - FF/Latch <rProxyAddr_30> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_29> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_28> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_27> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_25> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_21> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_20> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_19> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_18> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_17> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_16> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_15> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_14> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_13> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_12> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_11> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_10> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_9> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_8> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_7> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_1> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rProxyAddr_0> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <rCompState_1> has a constant value of 0 in block <initializer>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <rCompState_3> has a constant value of 0 in block <dma_queue>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <rCompState_0> in Unit <initializer> is equivalent to the following FF/Latch, which will be removed : <rProxyAddr_6> 
+INFO:Xst:2261 - The FF/Latch <rProxyAddr_22> in Unit <initializer> is equivalent to the following 4 FFs/Latches, which will be removed : <rProxyAddr_23> <rProxyAddr_24> <rProxyAddr_26> <rProxyAddr_31> 
+
+Optimizing unit <system_central_notifier_0_wrapper> ...
+
+Optimizing unit <central_notifier> ...
+
+Optimizing unit <initializer> ...
+
+Optimizing unit <dma_queue> ...
+WARNING:Xst:1293 - FF/Latch <rStateRead_3> has a constant value of 0 in block <dma_queue>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <reg_handler> ...
+
+Optimizing unit <interrupt_queue> ...
+WARNING:Xst:1293 - FF/Latch <central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rNumTxrRetries_2> has a constant value of 0 in block <system_central_notifier_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rNumRetries_2> has a constant value of 0 in block <system_central_notifier_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block system_central_notifier_0_wrapper, actual ratio is 1.
+FlipFlop central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rChannel_0 has been replicated 2 time(s)
+FlipFlop central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rChannel_1 has been replicated 2 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 371
+ Flip-Flops                                            : 371
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : system_central_notifier_0_wrapper.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 1976
+#      GND                         : 1
+#      INV                         : 34
+#      LUT1                        : 2
+#      LUT2                        : 46
+#      LUT3                        : 98
+#      LUT4                        : 167
+#      LUT5                        : 189
+#      LUT6                        : 943
+#      MUXCY                       : 42
+#      MUXF7                       : 291
+#      MUXF8                       : 130
+#      VCC                         : 1
+#      XORCY                       : 32
+# FlipFlops/Latches                : 371
+#      FDC                         : 28
+#      FDCE                        : 339
+#      FDPE                        : 4
+# Others                           : 4
+#      fifo_ramb_32w512d_v6        : 1
+#      fifo_ramd_36w32d_v6         : 2
+#      ramb_sp_32w256d_v6          : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6vlx240tff1156-1 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             371  out of  301440     0%  
+ Number of Slice LUTs:                 1479  out of  150720     0%  
+    Number used as Logic:              1479  out of  150720     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   1569
+   Number with an unused Flip Flop:    1198  out of   1569    76%  
+   Number with an unused LUT:            90  out of   1569     5%  
+   Number of fully used LUT-FF pairs:   281  out of   1569    17%  
+   Number of unique control sets:        44
+
+IO Utilization: 
+ Number of IOs:                        4334
+ Number of bonded IOBs:                   0  out of    600     0%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                1  out of    416     0%  
+    Number using Block RAM only:          1
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+----------------------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                                          | Load  |
+-----------------------------------+----------------------------------------------------------------+-------+
+SYS_CLK                            | NONE(central_notifier_0/CENTRAL_NOTIFIER_I/initr/rProxyData_31)| 371   |
+-----------------------------------+----------------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -1
+
+   Minimum period: 3.726ns (Maximum Frequency: 268.384MHz)
+   Minimum input arrival time before clock: 4.991ns
+   Maximum output required time after clock: 2.812ns
+   Maximum combinational path delay: 0.000ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SYS_CLK'
+  Clock period: 3.726ns (frequency: 268.384MHz)
+  Total number of paths / destination ports: 16755 / 603
+-------------------------------------------------------------------------
+Delay:               3.726ns (Levels of Logic = 5)
+  Source:            central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_13 (FF)
+  Destination:       central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_27 (FF)
+  Source Clock:      SYS_CLK rising
+  Destination Clock: SYS_CLK rising
+
+  Data Path: central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_13 to central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_27
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             3   0.375   0.792  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_13 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_13)
+     LUT6:I0->O            2   0.068   0.784  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData[31]_GND_15_o_equal_146_o<31>1 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData[31]_GND_15_o_equal_146_o<31>)
+     LUT6:I0->O            6   0.068   0.450  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData[31]_GND_15_o_equal_146_o<31>7_1 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData[31]_GND_15_o_equal_146_o<31>7)
+     LUT6:I5->O           11   0.068   0.483  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT10041_1 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT10041)
+     LUT5:I4->O            1   0.068   0.491  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT10010_SW0 (N97)
+     LUT6:I4->O            1   0.068   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT10011 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rState[4]_rData[31]_wide_mux_170_OUT<27>)
+     FDCE:D                    0.011          central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_27
+    ----------------------------------------
+    Total                      3.726ns (0.726ns logic, 3.000ns route)
+                                       (19.5% logic, 80.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'SYS_CLK'
+  Total number of paths / destination ports: 26819 / 813
+-------------------------------------------------------------------------
+Offset:              4.991ns (Levels of Logic = 13)
+  Source:            SIMPBUS_SLV_ADDR<2> (PAD)
+  Destination:       central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_31 (FF)
+  Destination Clock: SYS_CLK rising
+
+  Data Path: SIMPBUS_SLV_ADDR<2> to central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_31
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT5:I0->O            1   0.068   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_lut<0> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_lut<0>)
+     MUXCY:S->O            1   0.290   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<0> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<0>)
+     MUXCY:CI->O           1   0.019   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<1> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<2> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<3> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<3>)
+     MUXCY:CI->O           1   0.019   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<4> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<4>)
+     MUXCY:CI->O           1   0.019   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<5> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<5>)
+     MUXCY:CI->O           7   0.220   0.815  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mcompar_SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o_cy<6> (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/SIMPBUS_ADDR[31]_GND_15_o_LessThan_17_o)
+     LUT5:I0->O            3   0.068   0.431  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/GND_15_o_SIMPBUS_ADDR[31]_AND_50_o1 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/GND_15_o_SIMPBUS_ADDR[31]_AND_50_o)
+     LUT6:I5->O           30   0.068   0.930  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT10121 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT1012)
+     LUT6:I0->O            1   0.068   0.775  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT1269_SW0 (N48)
+     LUT6:I1->O            1   0.068   0.638  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT12611 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT12610)
+     LUT6:I2->O            1   0.068   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/Mmux_rState[4]_rData[31]_wide_mux_170_OUT12612 (central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rState[4]_rData[31]_wide_mux_170_OUT<31>)
+     FDCE:D                    0.011          central_notifier_0/CENTRAL_NOTIFIER_I/regHandler/rData_31
+    ----------------------------------------
+    Total                      4.991ns (1.402ns logic, 3.589ns route)
+                                       (28.1% logic, 71.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SYS_CLK'
+  Total number of paths / destination ports: 2161 / 2066
+-------------------------------------------------------------------------
+Offset:              2.812ns (Levels of Logic = 4)
+  Source:            central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rStateInit_3 (FF)
+  Destination:       SIMPBUS_MST_START (PAD)
+  Source Clock:      SYS_CLK rising
+
+  Data Path: central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rStateInit_3 to SIMPBUS_MST_START
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            18   0.375   0.750  central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rStateInit_3 (central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/rStateInit_3)
+     LUT4:I0->O            1   0.068   0.417  central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START1 (central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START)
+     LUT6:I5->O            1   0.068   0.581  central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START2 (central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START1)
+     LUT6:I3->O            1   0.068   0.417  central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START4 (central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START3)
+     LUT6:I5->O            0   0.068   0.000  central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/SIMPBUS_START5 (SIMPBUS_MST_START)
+    ----------------------------------------
+    Total                      2.812ns (0.647ns logic, 2.165ns route)
+                                       (23.0% logic, 77.0% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Delay:               0.000ns (Levels of Logic = 0)
+  Source:            SYS_CLK (PAD)
+  Destination:       central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/v6.dmaFifo:clk (PAD)
+
+  Data Path: SYS_CLK to central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/v6.dmaFifo:clk
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    fifo_ramb_32w512d_v6:clk        0.000          central_notifier_0/CENTRAL_NOTIFIER_I/dmaQueue/v6.dmaFifo
+    ----------------------------------------
+    Total                      0.000ns (0.000ns logic, 0.000ns route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock SYS_CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+SYS_CLK        |    3.726|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 10.12 secs
+ 
+--> 
+
+
+Total memory usage is 154432 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   62 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
+

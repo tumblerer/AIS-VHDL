@@ -46,7 +46,7 @@
 #define LOG_FILE "log.txt"
 #define DEBUG 	1
 #define INFO 	1
-#define LOG	0
+#define LOG	1
 #define MAX(a,b) a > b ? a : b
 
 struct timeval start, end;
@@ -73,7 +73,7 @@ int fpeek(FILE *stream)
  * Main entry point.
  */
 int main(int argc, char* argv[]) 
-{
+{	
 	fpga_dev * fpgaDev;
 	int rtn, channel, timeout;
 	int i = 0;
@@ -91,8 +91,12 @@ int main(int argc, char* argv[])
 	FILE *fin = fopen(FILE_NAME,"r"); 
 	assert(fin != NULL);
 
+FILE *fout1
+ = fopen("test_samples.txt", "w");
+assert(fout1 != NULL);
+
 	while(!feof(fin)){
-		fscanf(fin,"%d", &c);
+		fscanf(fin,"%u", &c);
 		if(!feof(fin)){
 			senddata[i++] = c;
 		}
@@ -121,7 +125,9 @@ int main(int argc, char* argv[])
 	for(i = 0; i < DATA_POINTS; i++){
 		senddata[i] = fpga_flip_endian(senddata[i]);
 	}
-
+for(i = 0; i < DATA_POINTS; i++){
+		printf("senddata[%d] = %d\n",i,senddata[i]);
+	}
 	if ((rtn = fpga_init(&fpgaDev)) < 0) {
 		#if DEBUG == 1
 		printf("error opening fpga: %d\n", rtn);
@@ -180,6 +186,46 @@ i = DATA_POINTS - 1;
 
 		printf("gData[%d]\t= %10d, fpga_flip_endian(gData[%d])\t= %10d,	senddata[%d]\t= %10d, fpga_flip_endian(senddata[%d])\t=%10d\n",i,gData[i],i,fpga_flip_endian(gData[i]),i,senddata[i],i,fpga_flip_endian(senddata[i]));
   	printf("Done.\n");
+
+double value, value2; //*(double *)&bits;
+int k;
+// for (i = 0; i < 90000; i++){
+/*
+//while (i<=1000){
+for (k=0;k<20;k++){
+long long unsigned int v1=(fpga_flip_endian(gData[i*52+k*2+1]));
+long long unsigned int v2=(fpga_flip_endian(gData[i*52+k*2]));
+long long unsigned int a=(v2<<32)|v1;
+fprintf(fout1, "%lld\n", a);
+fprintf(fout1, "\n");
+}
+*/
+for (k=0;k<10000;k++){
+long long unsigned int v1=(fpga_flip_endian(gData[k*2+1]));
+long long unsigned int v2=(fpga_flip_endian(gData[k*2]));
+long long unsigned int a=(v1<<32)|v2;
+value=*(double *)&a;
+fprintf(fout1, "%36.32e\n", value);
+//fprintf(fout1, "\n");
+}
+      	//for (int j=0;j<4;j++){
+
+		//value=fpga_flip_endian(gData[i+1]);
+		//value=value<<32;
+		//value2=fpga_flip_endian(gData[i]);
+//long long unsigned int v1=(gData[i+1]);
+//long long unsigned int v2=(gData[i]);
+//long long unsigned int a=(v1<<32)|v2;
+//value=*(double *)&a;
+              //    fprintf(fout1, "%36.32e\n", value);
+      		
+      		//fprintf(fout1, "\n");
+      	//}
+//i=i+1;
+//       }
+ 
+fclose(fout1);
+
 #endif
 	fpga_channel_close(fpgaDev, 0);
   	fpga_free(fpgaDev);
@@ -196,6 +242,7 @@ i = DATA_POINTS - 1;
 	#if INFO == 1  
 	printf("Exiting.\n");
 	#endif
+
 	return 0;
 }
 

@@ -7,6 +7,8 @@ USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 USE IEEE.math_real.log2;
 USE IEEE.math_real.ceil;
+LIBRARY work;
+USE work.Pack.All;
 
 ENTITY test_core IS
 	GENERIC(
@@ -18,12 +20,662 @@ ENTITY test_core IS
 		SYS_RST 		: IN std_logic;
 	
 		--INPUT SIGNALS
-		INPUT_1 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-		INPUT_2 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-		INPUT_3 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-		INPUT_4 		: IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-	
+    INPUT_1     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_2     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_3     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_4     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_5     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_6     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_7     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_8     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_9     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_10    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_11    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_12    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_13    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_14    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_15    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_16    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_17    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_18    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_19    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_20    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_21    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_22    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_23    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_24    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_25    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_26    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_27    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_28    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_29    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_30    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_31    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_32    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_33    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_34    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_35    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_36    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_37    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_38    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_39    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_40    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_41    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_42    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_43    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_44    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_45    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_46    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_47    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_48    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_49    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_50    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_51    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_52    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_53    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_54    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_55    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_56    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_57    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_58    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_59    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_60    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_61    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_62    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_63    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_64    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_65    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_66    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_67    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_68    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_69    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_70    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_71    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_72    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_73    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_74    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_75    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_76    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_77    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_78    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_79    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_80    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_81    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_82    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_83    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_84    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_85    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_86    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_87    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_88    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_89    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_90    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_91    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_92    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_93    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_94    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_95    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_96    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_97    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_98    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_99    : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_100     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_101     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_102     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_103     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_104     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_105     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_106     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_107     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_108     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_109     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_110     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_111     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_112     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_113     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_114     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_115     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_116     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_117     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_118     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_119     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_120     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_121     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_122     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_123     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_124     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_125     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_126     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_127     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_128     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_129     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_130     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_131     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_132     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_133     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_134     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_135     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_136     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_137     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_138     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_139     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_140     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_141     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_142     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_143     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_144     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_145     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_146     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_147     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_148     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_149     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_150     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_151     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_152     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_153     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_154     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_155     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_156     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_157     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_158     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_159     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_160     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_161     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_162     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_163     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_164     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_165     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_166     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_167     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_168     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_169     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_170     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_171     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_172     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_173     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_174     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_175     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_176     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_177     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_178     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_179     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_180     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_181     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_182     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_183     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_184     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_185     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_186     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_187     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_188     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_189     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_190     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_191     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_192     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_193     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_194     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_195     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_196     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_197     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_198     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_199     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_200     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_201     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_202     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_203     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_204     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_205     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_206     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_207     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_208     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_209     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_210     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_211     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_212     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_213     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_214     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_215     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_216     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_217     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_218     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_219     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_220     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_221     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_222     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_223     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_224     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_225     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_226     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_227     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_228     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_229     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_230     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_231     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_232     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_233     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_234     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_235     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_236     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_237     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_238     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_239     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_240     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_241     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_242     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_243     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_244     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_245     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_246     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_247     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_248     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_249     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_250     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_251     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_252     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_253     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_254     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_255     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_256     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_257     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_258     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_259     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_260     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_261     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_262     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_263     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_264     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_265     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_266     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_267     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_268     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_269     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_270     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_271     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_272     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_273     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_274     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_275     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_276     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_277     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_278     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_279     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_280     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_281     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_282     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_283     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_284     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_285     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_286     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_287     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_288     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_289     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_290     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_291     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_292     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_293     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_294     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_295     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_296     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_297     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_298     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_299     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_300     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_301     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_302     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_303     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_304     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_305     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_306     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_307     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_308     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_309     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_310     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_311     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_312     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_313     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_314     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_315     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_316     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_317     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_318     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_319     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_320     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_321     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_322     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_323     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_324     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_325     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_326     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_327     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_328     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_329     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_330     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_331     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_332     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_333     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_334     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_335     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_336     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_337     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_338     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_339     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_340     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_341     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_342     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_343     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_344     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_345     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_346     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_347     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_348     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_349     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_350     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_351     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_352     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_353     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_354     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_355     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_356     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_357     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_358     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_359     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_360     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_361     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_362     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_363     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_364     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_365     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_366     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_367     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_368     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_369     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_370     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_371     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_372     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_373     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_374     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_375     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_376     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_377     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_378     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_379     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_380     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_381     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_382     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_383     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_384     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_385     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_386     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_387     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_388     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_389     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_390     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_391     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_392     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_393     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_394     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_395     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_396     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_397     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_398     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_399     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_400     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_401     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_402     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_403     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_404     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_405     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_406     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_407     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_408     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_409     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_410     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_411     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_412     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_413     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_414     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_415     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_416     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_417     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_418     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_419     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_420     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_421     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_422     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_423     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_424     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_425     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_426     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_427     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_428     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_429     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_430     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_431     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_432     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_433     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_434     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_435     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_436     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_437     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_438     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_439     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_440     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_441     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_442     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_443     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_444     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_445     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_446     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_447     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_448     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_449     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_450     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_451     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_452     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_453     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_454     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_455     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_456     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_457     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_458     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_459     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_460     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_461     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_462     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_463     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_464     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_465     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_466     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_467     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_468     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_469     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_470     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_471     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_472     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_473     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_474     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_475     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_476     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_477     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_478     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_479     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_480     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_481     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_482     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_483     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_484     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_485     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_486     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_487     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_488     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_489     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_490     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_491     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_492     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_493     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_494     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_495     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_496     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_497     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_498     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_499     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_500     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_501     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_502     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_503     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_504     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_505     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_506     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_507     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_508     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_509     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_510     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_511     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_512     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_513     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_514     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_515     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_516     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_517     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_518     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_519     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_520     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_521     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_522     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_523     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_524     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_525     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_526     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_527     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_528     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_529     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_530     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_531     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_532     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_533     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_534     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_535     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_536     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_537     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_538     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_539     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_540     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_541     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_542     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_543     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_544     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_545     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_546     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_547     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_548     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_549     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_550     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_551     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_552     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_553     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_554     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_555     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_556     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_557     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_558     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_559     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_560     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_561     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_562     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_563     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_564     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_565     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_566     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_567     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_568     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_569     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_570     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_571     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_572     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_573     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_574     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_575     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_576     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_577     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_578     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_579     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_580     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_581     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_582     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_583     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_584     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_585     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_586     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_587     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_588     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_589     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_590     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_591     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_592     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_593     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_594     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_595     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_596     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_597     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_598     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_599     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_600     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_601     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_602     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_603     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_604     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_605     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_606     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_607     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_608     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_609     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_610     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_611     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_612     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_613     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_614     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_615     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_616     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_617     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_618     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_619     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_620     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_621     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_622     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_623     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_624     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_625     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_626     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_627     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_628     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_629     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_630     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_631     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_632     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_633     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_634     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_635     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_636     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_637     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_638     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_639     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_640     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_641     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_642     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_643     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_644     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_645     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_646     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_647     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_648     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_649     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_650     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_651     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+    INPUT_652     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+
 		OUTPUT			: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+		OUTPUT_2		: OUT std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+
 		
 		--VALID SIGNAL FOR VALID OUTPUT
 		VALID			: OUT std_logic;
@@ -46,140 +698,473 @@ ENTITY test_core IS
 END test_core;
 
 ARCHITECTURE synth OF test_core IS
+    
+    COMPONENT LPR_Total
+    PORT(
+	     clk : IN  std_logic;
+	     reset : IN  std_logic;
+	     dina_beta : IN  std_logic_vector(63 downto 0);
+	     dina_seed : IN  std_logic_vector(63 downto 0);
+	     doutb_x : OUT  std_logic_vector(63 downto 0);
+	     doutb_LPR: out std_logic_vector(PRECISION-1 downto 0);
+       x_complete : OUT  std_logic;
+	         --VALID SIGNAL FOR VALID OUTPUT
+	     VALID     : OUT std_logic;
+	      --START SIGNAL TO START PROCESSING
+	     START     : IN std_logic;
+	      --RUN TIME OF THE CORE
+	     RUNTIME     : IN std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
+	      --FINISHED SIGNAL
+	     FINISHED    : OUT std_logic;
+	      --BUSY TO SIGNAL THE CORE TO PAUSE THE PROCESSING
+	     BUSY      : IN std_logic;
 
---Core state type and state signals
-TYPE core_state_type IS (
-				idle,
-				setup,
-				--PROCESSING STATES
-				output_state,
-				wait_state,
-				paused_state);
-SIGNAL core_state, core_nstate : core_state_type := idle;
+	          -- Run Parameters
+	     steps_slv : in std_logic_vector(31 downto 0);
+	     runs_slv : in std_logic_vector(31 downto 0);
+	     mean : in std_logic_vector(PRECISION-1 downto 0);
+	     variance : in std_logic_vector(PRECISION-1 downto 0);
+	     mean_gen : in std_logic_vector(PRECISION-1 downto 0);
+	     standarddev_Gen : in std_logic_vector(PRECISION-1 downto 0);
+	     standarddev_Trans : in std_logic_vector(PRECISION-1 downto 0)
+        );
+    END COMPONENT;
 
---Counter used to count down to output every "OUTPUT_CYCLE" cycles
-SIGNAL output_counter : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
+  signal dina_seed : std_logic_vector(PRECISION-1 downto 0);
+  signal dina_beta: std_logic_vector(PRECISION-1 downto 0);
+  signal doutb_x: std_logic_vector(PRECISION-1 downto 0);
+  signal doutb_LPR: std_logic_vector(PRECISION-1 downto 0);
+  signal steps_slv : std_logic_vector(31 downto 0);
+	signal runs_slv :  std_logic_vector(31 downto 0);
+	signal mean : std_logic_vector(PRECISION-1 downto 0);
+	signal variance : std_logic_vector(PRECISION-1 downto 0);
+	signal mean_gen : std_logic_vector(PRECISION-1 downto 0);
+	signal standarddev_Gen : std_logic_vector(PRECISION-1 downto 0);
+	signal standarddev_Trans : std_logic_vector(PRECISION-1 downto 0);
 
---Output of core currently limited to only one
-SIGNAL rOutput : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
+	signal x_complete: std_logic;
 
---Registered output run_time for input signal RUNTIME
-SIGNAL run_time : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0) := (OTHERS => '0');
+  signal seed_mem :  integer range 0 to 20;
+  signal load_mem_en : integer range 0 to 1;
+  signal beta_mem : integer range 0 to 300;
+  
+  signal steps: integer range 1 to MAX_STEPS;
+  signal runs : integer range 1 to MAX_RUNS;
 
---Registered signal to drive output signal FINISHED
-SIGNAL finished1 : std_logic := '0';
+  signal dina_beta_reg: std_logic_vector(PRECISION-1 downto 0);
 
-BEGIN
+  signal finished_r : std_logic;
+        begin
 
---Dataflow signal assignments
-OUTPUT <= rOutput;
-FINISHED <= finished1;
+    core : LPR_Total Port Map (
+		    clk => SYS_CLK,
+        reset => SYS_RST,
+        dina_beta => dina_beta,
+        dina_seed => dina_seed,
+        doutb_x => doutb_x,
+        doutb_LPR => doutb_LPR,
+        x_complete => x_complete,
+    	   --RIFFA signals
+        valid => valid,
+        start => start,
+        runtime => runtime,
+        FINISHED => finished_r,
+        BUSY => BUSY,
+        -- Run Parameters
+        steps_slv => steps_slv,
+        runs_slv => runs_slv,
+        mean => mean,
+        variance => variance,
+        mean_gen => mean_gen,
+        standarddev_Gen => standarddev_Gen,
+        standarddev_Trans => standarddev_Trans
+	);
 
-Combinatorial_Assignments : PROCESS (core_state)
-BEGIN
-	IF (core_state = output_state) THEN
-		VALID <= '1';
-	ELSE
-		VALID <= '0';
-	END IF;
-END PROCESS;
+    steps_slv <= INPUT_1;
+    runs_slv <= INPUT_2;
+    mean <= INPUT_3 & INPUT_4;
+    variance <= INPUT_5 & INPUT_6;
+    mean_gen <= INPUT_7 & INPUT_8;
+    standarddev_Gen <= INPUT_9 & INPUT_10;
+    standarddev_Trans <= INPUT_11 & INPUT_12;
 
-Nstate_assignment : PROCESS (core_state, SYS_RST, output_counter, START, finished1, BUSY)
-BEGIN
-	IF (SYS_RST = '1') THEN
-		core_nstate <= idle;
-	ELSE
-		core_nstate <= core_state;
-		CASE (core_state) IS
-			WHEN idle =>
-				IF (START = '1') THEN
-					core_nstate <= setup;
-				END IF;
-			WHEN setup =>
-				core_nstate <= wait_state;
-			WHEN wait_state =>
-				IF (finished1 = '1') THEN
-					IF (BUSY = '0') THEN
-						core_nstate <= idle;
-					END IF;
-				ELSE
-					IF (unsigned(output_counter) = 0) THEN
-						IF (BUSY = '1') THEN
-							core_nstate <= paused_state;
-						ELSE
-							core_nstate <= output_state;
-						END IF;					
-					END IF;
-				END IF;
-			WHEN paused_state =>
-				IF (BUSY /= '1') THEN
-					core_nstate <= output_state;
-				END IF;
-			WHEN output_state =>
-				core_nstate <= wait_state;
-			WHEN OTHERS =>
-				core_nstate <= idle;
-		END CASE;		
-	END IF;
-END PROCESS;
+    steps <= to_integer(unsigned(steps_slv));
+    runs <= to_integer(unsigned(runs_slv));
 
-State_assignment : PROCESS
-VARIABLE v_output_counter : std_logic_vector(C_SIMPBUS_AWIDTH - 1 DOWNTO 0);
-BEGIN
-	WAIT UNTIL rising_edge(SYS_CLK);
-	IF (SYS_RST = '1') THEN
-		core_state <= idle;
-		output_counter <= (OTHERS => '0');
-		rOutput <= (OTHERS => '0');
-		run_time <= (OTHERS => '0');
-		finished1 <= '0';
-	ELSE
-		core_state <= core_nstate;
-		finished1 <= '0';
-		IF (core_state = setup) THEN
-			IF (unsigned(RUNTIME) <= 1) THEN
-				run_time <= std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
-			ELSE
-				run_time <= std_logic_vector(unsigned(RUNTIME) - 1); --Initialise run_time to the input RUNTIME
-			END IF;
-			--output_counter = max(1, OUTPUT_CYCLE-2)
-			IF (to_unsigned(2, C_SIMPBUS_AWIDTH) <= unsigned(OUTPUT_CYCLE)) THEN
-				v_output_counter := std_logic_vector(unsigned(OUTPUT_CYCLE) - 2);
-			ELSE
-				v_output_counter := std_logic_vector(to_unsigned(1,C_SIMPBUS_AWIDTH));
-			END IF;
-			
-			output_counter <= v_output_counter;
-		END IF;
-		
-		IF (core_state = wait_state) THEN
-		--Wait in this state until the counter has reached desired value.
-			IF (unsigned(output_counter) = 0) THEN
-				output_counter <= v_output_counter;
-			ELSE
-				output_counter <= std_logic_vector(unsigned(output_counter) - 1);
-			END IF;
-		END IF;
-		
-		IF (core_nstate = output_state) THEN
-		--Output is simply a counter
-			rOutput <= std_logic_vector(unsigned(rOutput) + 1);
-		END IF;
-		
-		IF (core_state /= idle AND core_state /= setup AND core_state /= paused_state) THEN
-		--Only keep track of run_time when the state is not any of idle, setup or paused states
-			IF (unsigned(run_time) /= 0) THEN
-				run_time <= std_logic_vector(unsigned(run_time) - 1);
-			END IF;
-			
-		--Only check for run_time while in the processing states
-			IF (unsigned(run_time) = 0) THEN
-				finished1 <= '1';
-			ELSE
-				finished1 <= '0';
-			END IF;			
-		END IF;
-	END IF;
-END PROCESS;
+Transfer : process (finished_r)
+begin
+    FINISHED <= finished_r;
+end process;
+
+
+Memory_Load: process
+begin
+  wait until SYS_CLK'event and SYS_CLK ='1';
+
+    if x_complete = '0' then
+      OUTPUT_2 <= doutb_x(31 downto 0);
+      OUTPUT <= doutb_x(63 downto 32);
+    else
+      OUTPUT_2 <= doutb_LPR(31 downto 0);
+      OUTPUT <= doutb_LPR(63 downto 32);
+    end if;
+
+    dina_beta <= dina_beta_reg;
+
+  if SYS_RST = '1' or finished_r = '1' then
+    load_mem_en <= 0;
+    beta_mem <= 0;
+    seed_mem <= 0;
+  else
+
+    if START ='1' then
+     load_mem_en <= 1;
+     beta_mem <= 1;
+    end if;
+
+    if load_mem_en = 1 then
+      if beta_mem < steps+1  then
+        beta_mem <= beta_mem + 1;
+      else 
+        if seed_mem < 19 then
+          seed_mem <= seed_mem + 1;
+        else
+          seed_mem <= 1;
+        end if;
+      end if;
+    end if;
+
+    case( beta_mem ) is
+    
+when 0 => dina_beta_reg <= INPUT_13 & INPUT_14;
+when 1 => dina_beta_reg <= INPUT_15 & INPUT_16;
+when 2 => dina_beta_reg <= INPUT_17 & INPUT_18;
+when 3 => dina_beta_reg <= INPUT_19 & INPUT_20;
+when 4 => dina_beta_reg <= INPUT_21 & INPUT_22;
+when 5 => dina_beta_reg <= INPUT_23 & INPUT_24;
+when 6 => dina_beta_reg <= INPUT_25 & INPUT_26;
+when 7 => dina_beta_reg <= INPUT_27 & INPUT_28;
+when 8 => dina_beta_reg <= INPUT_29 & INPUT_30;
+when 9 => dina_beta_reg <= INPUT_31 & INPUT_32;
+when 10 => dina_beta_reg <= INPUT_33 & INPUT_34;
+when 11 => dina_beta_reg <= INPUT_35 & INPUT_36;
+when 12 => dina_beta_reg <= INPUT_37 & INPUT_38;
+when 13 => dina_beta_reg <= INPUT_39 & INPUT_40;
+when 14 => dina_beta_reg <= INPUT_41 & INPUT_42;
+when 15 => dina_beta_reg <= INPUT_43 & INPUT_44;
+when 16 => dina_beta_reg <= INPUT_45 & INPUT_46;
+when 17 => dina_beta_reg <= INPUT_47 & INPUT_48;
+when 18 => dina_beta_reg <= INPUT_49 & INPUT_50;
+when 19 => dina_beta_reg <= INPUT_51 & INPUT_52;
+when 20 => dina_beta_reg <= INPUT_53 & INPUT_54;
+when 21 => dina_beta_reg <= INPUT_55 & INPUT_56;
+when 22 => dina_beta_reg <= INPUT_57 & INPUT_58;
+when 23 => dina_beta_reg <= INPUT_59 & INPUT_60;
+when 24 => dina_beta_reg <= INPUT_61 & INPUT_62;
+when 25 => dina_beta_reg <= INPUT_63 & INPUT_64;
+when 26 => dina_beta_reg <= INPUT_65 & INPUT_66;
+when 27 => dina_beta_reg <= INPUT_67 & INPUT_68;
+when 28 => dina_beta_reg <= INPUT_69 & INPUT_70;
+when 29 => dina_beta_reg <= INPUT_71 & INPUT_72;
+when 30 => dina_beta_reg <= INPUT_73 & INPUT_74;
+when 31 => dina_beta_reg <= INPUT_75 & INPUT_76;
+when 32 => dina_beta_reg <= INPUT_77 & INPUT_78;
+when 33 => dina_beta_reg <= INPUT_79 & INPUT_80;
+when 34 => dina_beta_reg <= INPUT_81 & INPUT_82;
+when 35 => dina_beta_reg <= INPUT_83 & INPUT_84;
+when 36 => dina_beta_reg <= INPUT_85 & INPUT_86;
+when 37 => dina_beta_reg <= INPUT_87 & INPUT_88;
+when 38 => dina_beta_reg <= INPUT_89 & INPUT_90;
+when 39 => dina_beta_reg <= INPUT_91 & INPUT_92;
+when 40 => dina_beta_reg <= INPUT_93 & INPUT_94;
+when 41 => dina_beta_reg <= INPUT_95 & INPUT_96;
+when 42 => dina_beta_reg <= INPUT_97 & INPUT_98;
+when 43 => dina_beta_reg <= INPUT_99 & INPUT_100;
+when 44 => dina_beta_reg <= INPUT_101 & INPUT_102;
+when 45 => dina_beta_reg <= INPUT_103 & INPUT_104;
+when 46 => dina_beta_reg <= INPUT_105 & INPUT_106;
+when 47 => dina_beta_reg <= INPUT_107 & INPUT_108;
+when 48 => dina_beta_reg <= INPUT_109 & INPUT_110;
+when 49 => dina_beta_reg <= INPUT_111 & INPUT_112;
+when 50 => dina_beta_reg <= INPUT_113 & INPUT_114;
+when 51 => dina_beta_reg <= INPUT_115 & INPUT_116;
+when 52 => dina_beta_reg <= INPUT_117 & INPUT_118;
+when 53 => dina_beta_reg <= INPUT_119 & INPUT_120;
+when 54 => dina_beta_reg <= INPUT_121 & INPUT_122;
+when 55 => dina_beta_reg <= INPUT_123 & INPUT_124;
+when 56 => dina_beta_reg <= INPUT_125 & INPUT_126;
+when 57 => dina_beta_reg <= INPUT_127 & INPUT_128;
+when 58 => dina_beta_reg <= INPUT_129 & INPUT_130;
+when 59 => dina_beta_reg <= INPUT_131 & INPUT_132;
+when 60 => dina_beta_reg <= INPUT_133 & INPUT_134;
+when 61 => dina_beta_reg <= INPUT_135 & INPUT_136;
+when 62 => dina_beta_reg <= INPUT_137 & INPUT_138;
+when 63 => dina_beta_reg <= INPUT_139 & INPUT_140;
+when 64 => dina_beta_reg <= INPUT_141 & INPUT_142;
+when 65 => dina_beta_reg <= INPUT_143 & INPUT_144;
+when 66 => dina_beta_reg <= INPUT_145 & INPUT_146;
+when 67 => dina_beta_reg <= INPUT_147 & INPUT_148;
+when 68 => dina_beta_reg <= INPUT_149 & INPUT_150;
+when 69 => dina_beta_reg <= INPUT_151 & INPUT_152;
+when 70 => dina_beta_reg <= INPUT_153 & INPUT_154;
+when 71 => dina_beta_reg <= INPUT_155 & INPUT_156;
+when 72 => dina_beta_reg <= INPUT_157 & INPUT_158;
+when 73 => dina_beta_reg <= INPUT_159 & INPUT_160;
+when 74 => dina_beta_reg <= INPUT_161 & INPUT_162;
+when 75 => dina_beta_reg <= INPUT_163 & INPUT_164;
+when 76 => dina_beta_reg <= INPUT_165 & INPUT_166;
+when 77 => dina_beta_reg <= INPUT_167 & INPUT_168;
+when 78 => dina_beta_reg <= INPUT_169 & INPUT_170;
+when 79 => dina_beta_reg <= INPUT_171 & INPUT_172;
+when 80 => dina_beta_reg <= INPUT_173 & INPUT_174;
+when 81 => dina_beta_reg <= INPUT_175 & INPUT_176;
+when 82 => dina_beta_reg <= INPUT_177 & INPUT_178;
+when 83 => dina_beta_reg <= INPUT_179 & INPUT_180;
+when 84 => dina_beta_reg <= INPUT_181 & INPUT_182;
+when 85 => dina_beta_reg <= INPUT_183 & INPUT_184;
+when 86 => dina_beta_reg <= INPUT_185 & INPUT_186;
+when 87 => dina_beta_reg <= INPUT_187 & INPUT_188;
+when 88 => dina_beta_reg <= INPUT_189 & INPUT_190;
+when 89 => dina_beta_reg <= INPUT_191 & INPUT_192;
+when 90 => dina_beta_reg <= INPUT_193 & INPUT_194;
+when 91 => dina_beta_reg <= INPUT_195 & INPUT_196;
+when 92 => dina_beta_reg <= INPUT_197 & INPUT_198;
+when 93 => dina_beta_reg <= INPUT_199 & INPUT_200;
+when 94 => dina_beta_reg <= INPUT_201 & INPUT_202;
+when 95 => dina_beta_reg <= INPUT_203 & INPUT_204;
+when 96 => dina_beta_reg <= INPUT_205 & INPUT_206;
+when 97 => dina_beta_reg <= INPUT_207 & INPUT_208;
+when 98 => dina_beta_reg <= INPUT_209 & INPUT_210;
+when 99 => dina_beta_reg <= INPUT_211 & INPUT_212;
+when 100 => dina_beta_reg <= INPUT_213 & INPUT_214;
+when 101 => dina_beta_reg <= INPUT_215 & INPUT_216;
+when 102 => dina_beta_reg <= INPUT_217 & INPUT_218;
+when 103 => dina_beta_reg <= INPUT_219 & INPUT_220;
+when 104 => dina_beta_reg <= INPUT_221 & INPUT_222;
+when 105 => dina_beta_reg <= INPUT_223 & INPUT_224;
+when 106 => dina_beta_reg <= INPUT_225 & INPUT_226;
+when 107 => dina_beta_reg <= INPUT_227 & INPUT_228;
+when 108 => dina_beta_reg <= INPUT_229 & INPUT_230;
+when 109 => dina_beta_reg <= INPUT_231 & INPUT_232;
+when 110 => dina_beta_reg <= INPUT_233 & INPUT_234;
+when 111 => dina_beta_reg <= INPUT_235 & INPUT_236;
+when 112 => dina_beta_reg <= INPUT_237 & INPUT_238;
+when 113 => dina_beta_reg <= INPUT_239 & INPUT_240;
+when 114 => dina_beta_reg <= INPUT_241 & INPUT_242;
+when 115 => dina_beta_reg <= INPUT_243 & INPUT_244;
+when 116 => dina_beta_reg <= INPUT_245 & INPUT_246;
+when 117 => dina_beta_reg <= INPUT_247 & INPUT_248;
+when 118 => dina_beta_reg <= INPUT_249 & INPUT_250;
+when 119 => dina_beta_reg <= INPUT_251 & INPUT_252;
+when 120 => dina_beta_reg <= INPUT_253 & INPUT_254;
+when 121 => dina_beta_reg <= INPUT_255 & INPUT_256;
+when 122 => dina_beta_reg <= INPUT_257 & INPUT_258;
+when 123 => dina_beta_reg <= INPUT_259 & INPUT_260;
+when 124 => dina_beta_reg <= INPUT_261 & INPUT_262;
+when 125 => dina_beta_reg <= INPUT_263 & INPUT_264;
+when 126 => dina_beta_reg <= INPUT_265 & INPUT_266;
+when 127 => dina_beta_reg <= INPUT_267 & INPUT_268;
+when 128 => dina_beta_reg <= INPUT_269 & INPUT_270;
+when 129 => dina_beta_reg <= INPUT_271 & INPUT_272;
+when 130 => dina_beta_reg <= INPUT_273 & INPUT_274;
+when 131 => dina_beta_reg <= INPUT_275 & INPUT_276;
+when 132 => dina_beta_reg <= INPUT_277 & INPUT_278;
+when 133 => dina_beta_reg <= INPUT_279 & INPUT_280;
+when 134 => dina_beta_reg <= INPUT_281 & INPUT_282;
+when 135 => dina_beta_reg <= INPUT_283 & INPUT_284;
+when 136 => dina_beta_reg <= INPUT_285 & INPUT_286;
+when 137 => dina_beta_reg <= INPUT_287 & INPUT_288;
+when 138 => dina_beta_reg <= INPUT_289 & INPUT_290;
+when 139 => dina_beta_reg <= INPUT_291 & INPUT_292;
+when 140 => dina_beta_reg <= INPUT_293 & INPUT_294;
+when 141 => dina_beta_reg <= INPUT_295 & INPUT_296;
+when 142 => dina_beta_reg <= INPUT_297 & INPUT_298;
+when 143 => dina_beta_reg <= INPUT_299 & INPUT_300;
+when 144 => dina_beta_reg <= INPUT_301 & INPUT_302;
+when 145 => dina_beta_reg <= INPUT_303 & INPUT_304;
+when 146 => dina_beta_reg <= INPUT_305 & INPUT_306;
+when 147 => dina_beta_reg <= INPUT_307 & INPUT_308;
+when 148 => dina_beta_reg <= INPUT_309 & INPUT_310;
+when 149 => dina_beta_reg <= INPUT_311 & INPUT_312;
+when 150 => dina_beta_reg <= INPUT_313 & INPUT_314;
+when 151 => dina_beta_reg <= INPUT_315 & INPUT_316;
+when 152 => dina_beta_reg <= INPUT_317 & INPUT_318;
+when 153 => dina_beta_reg <= INPUT_319 & INPUT_320;
+when 154 => dina_beta_reg <= INPUT_321 & INPUT_322;
+when 155 => dina_beta_reg <= INPUT_323 & INPUT_324;
+when 156 => dina_beta_reg <= INPUT_325 & INPUT_326;
+when 157 => dina_beta_reg <= INPUT_327 & INPUT_328;
+when 158 => dina_beta_reg <= INPUT_329 & INPUT_330;
+when 159 => dina_beta_reg <= INPUT_331 & INPUT_332;
+when 160 => dina_beta_reg <= INPUT_333 & INPUT_334;
+when 161 => dina_beta_reg <= INPUT_335 & INPUT_336;
+when 162 => dina_beta_reg <= INPUT_337 & INPUT_338;
+when 163 => dina_beta_reg <= INPUT_339 & INPUT_340;
+when 164 => dina_beta_reg <= INPUT_341 & INPUT_342;
+when 165 => dina_beta_reg <= INPUT_343 & INPUT_344;
+when 166 => dina_beta_reg <= INPUT_345 & INPUT_346;
+when 167 => dina_beta_reg <= INPUT_347 & INPUT_348;
+when 168 => dina_beta_reg <= INPUT_349 & INPUT_350;
+when 169 => dina_beta_reg <= INPUT_351 & INPUT_352;
+when 170 => dina_beta_reg <= INPUT_353 & INPUT_354;
+when 171 => dina_beta_reg <= INPUT_355 & INPUT_356;
+when 172 => dina_beta_reg <= INPUT_357 & INPUT_358;
+when 173 => dina_beta_reg <= INPUT_359 & INPUT_360;
+when 174 => dina_beta_reg <= INPUT_361 & INPUT_362;
+when 175 => dina_beta_reg <= INPUT_363 & INPUT_364;
+when 176 => dina_beta_reg <= INPUT_365 & INPUT_366;
+when 177 => dina_beta_reg <= INPUT_367 & INPUT_368;
+when 178 => dina_beta_reg <= INPUT_369 & INPUT_370;
+when 179 => dina_beta_reg <= INPUT_371 & INPUT_372;
+when 180 => dina_beta_reg <= INPUT_373 & INPUT_374;
+when 181 => dina_beta_reg <= INPUT_375 & INPUT_376;
+when 182 => dina_beta_reg <= INPUT_377 & INPUT_378;
+when 183 => dina_beta_reg <= INPUT_379 & INPUT_380;
+when 184 => dina_beta_reg <= INPUT_381 & INPUT_382;
+when 185 => dina_beta_reg <= INPUT_383 & INPUT_384;
+when 186 => dina_beta_reg <= INPUT_385 & INPUT_386;
+when 187 => dina_beta_reg <= INPUT_387 & INPUT_388;
+when 188 => dina_beta_reg <= INPUT_389 & INPUT_390;
+when 189 => dina_beta_reg <= INPUT_391 & INPUT_392;
+when 190 => dina_beta_reg <= INPUT_393 & INPUT_394;
+when 191 => dina_beta_reg <= INPUT_395 & INPUT_396;
+when 192 => dina_beta_reg <= INPUT_397 & INPUT_398;
+when 193 => dina_beta_reg <= INPUT_399 & INPUT_400;
+when 194 => dina_beta_reg <= INPUT_401 & INPUT_402;
+when 195 => dina_beta_reg <= INPUT_403 & INPUT_404;
+when 196 => dina_beta_reg <= INPUT_405 & INPUT_406;
+when 197 => dina_beta_reg <= INPUT_407 & INPUT_408;
+when 198 => dina_beta_reg <= INPUT_409 & INPUT_410;
+when 199 => dina_beta_reg <= INPUT_411 & INPUT_412;
+when 200 => dina_beta_reg <= INPUT_413 & INPUT_414;
+when 201 => dina_beta_reg <= INPUT_415 & INPUT_416;
+when 202 => dina_beta_reg <= INPUT_417 & INPUT_418;
+when 203 => dina_beta_reg <= INPUT_419 & INPUT_420;
+when 204 => dina_beta_reg <= INPUT_421 & INPUT_422;
+when 205 => dina_beta_reg <= INPUT_423 & INPUT_424;
+when 206 => dina_beta_reg <= INPUT_425 & INPUT_426;
+when 207 => dina_beta_reg <= INPUT_427 & INPUT_428;
+when 208 => dina_beta_reg <= INPUT_429 & INPUT_430;
+when 209 => dina_beta_reg <= INPUT_431 & INPUT_432;
+when 210 => dina_beta_reg <= INPUT_433 & INPUT_434;
+when 211 => dina_beta_reg <= INPUT_435 & INPUT_436;
+when 212 => dina_beta_reg <= INPUT_437 & INPUT_438;
+when 213 => dina_beta_reg <= INPUT_439 & INPUT_440;
+when 214 => dina_beta_reg <= INPUT_441 & INPUT_442;
+when 215 => dina_beta_reg <= INPUT_443 & INPUT_444;
+when 216 => dina_beta_reg <= INPUT_445 & INPUT_446;
+when 217 => dina_beta_reg <= INPUT_447 & INPUT_448;
+when 218 => dina_beta_reg <= INPUT_449 & INPUT_450;
+when 219 => dina_beta_reg <= INPUT_451 & INPUT_452;
+when 220 => dina_beta_reg <= INPUT_453 & INPUT_454;
+when 221 => dina_beta_reg <= INPUT_455 & INPUT_456;
+when 222 => dina_beta_reg <= INPUT_457 & INPUT_458;
+when 223 => dina_beta_reg <= INPUT_459 & INPUT_460;
+when 224 => dina_beta_reg <= INPUT_461 & INPUT_462;
+when 225 => dina_beta_reg <= INPUT_463 & INPUT_464;
+when 226 => dina_beta_reg <= INPUT_465 & INPUT_466;
+when 227 => dina_beta_reg <= INPUT_467 & INPUT_468;
+when 228 => dina_beta_reg <= INPUT_469 & INPUT_470;
+when 229 => dina_beta_reg <= INPUT_471 & INPUT_472;
+when 230 => dina_beta_reg <= INPUT_473 & INPUT_474;
+when 231 => dina_beta_reg <= INPUT_475 & INPUT_476;
+when 232 => dina_beta_reg <= INPUT_477 & INPUT_478;
+when 233 => dina_beta_reg <= INPUT_479 & INPUT_480;
+when 234 => dina_beta_reg <= INPUT_481 & INPUT_482;
+when 235 => dina_beta_reg <= INPUT_483 & INPUT_484;
+when 236 => dina_beta_reg <= INPUT_485 & INPUT_486;
+when 237 => dina_beta_reg <= INPUT_487 & INPUT_488;
+when 238 => dina_beta_reg <= INPUT_489 & INPUT_490;
+when 239 => dina_beta_reg <= INPUT_491 & INPUT_492;
+when 240 => dina_beta_reg <= INPUT_493 & INPUT_494;
+when 241 => dina_beta_reg <= INPUT_495 & INPUT_496;
+when 242 => dina_beta_reg <= INPUT_497 & INPUT_498;
+when 243 => dina_beta_reg <= INPUT_499 & INPUT_500;
+when 244 => dina_beta_reg <= INPUT_501 & INPUT_502;
+when 245 => dina_beta_reg <= INPUT_503 & INPUT_504;
+when 246 => dina_beta_reg <= INPUT_505 & INPUT_506;
+when 247 => dina_beta_reg <= INPUT_507 & INPUT_508;
+when 248 => dina_beta_reg <= INPUT_509 & INPUT_510;
+when 249 => dina_beta_reg <= INPUT_511 & INPUT_512;
+when 250 => dina_beta_reg <= INPUT_513 & INPUT_514;
+when 251 => dina_beta_reg <= INPUT_515 & INPUT_516;
+when 252 => dina_beta_reg <= INPUT_517 & INPUT_518;
+when 253 => dina_beta_reg <= INPUT_519 & INPUT_520;
+when 254 => dina_beta_reg <= INPUT_521 & INPUT_522;
+when 255 => dina_beta_reg <= INPUT_523 & INPUT_524;
+when 256 => dina_beta_reg <= INPUT_525 & INPUT_526;
+when 257 => dina_beta_reg <= INPUT_527 & INPUT_528;
+when 258 => dina_beta_reg <= INPUT_529 & INPUT_530;
+when 259 => dina_beta_reg <= INPUT_531 & INPUT_532;
+when 260 => dina_beta_reg <= INPUT_533 & INPUT_534;
+when 261 => dina_beta_reg <= INPUT_535 & INPUT_536;
+when 262 => dina_beta_reg <= INPUT_537 & INPUT_538;
+when 263 => dina_beta_reg <= INPUT_539 & INPUT_540;
+when 264 => dina_beta_reg <= INPUT_541 & INPUT_542;
+when 265 => dina_beta_reg <= INPUT_543 & INPUT_544;
+when 266 => dina_beta_reg <= INPUT_545 & INPUT_546;
+when 267 => dina_beta_reg <= INPUT_547 & INPUT_548;
+when 268 => dina_beta_reg <= INPUT_549 & INPUT_550;
+when 269 => dina_beta_reg <= INPUT_551 & INPUT_552;
+when 270 => dina_beta_reg <= INPUT_553 & INPUT_554;
+when 271 => dina_beta_reg <= INPUT_555 & INPUT_556;
+when 272 => dina_beta_reg <= INPUT_557 & INPUT_558;
+when 273 => dina_beta_reg <= INPUT_559 & INPUT_560;
+when 274 => dina_beta_reg <= INPUT_561 & INPUT_562;
+when 275 => dina_beta_reg <= INPUT_563 & INPUT_564;
+when 276 => dina_beta_reg <= INPUT_565 & INPUT_566;
+when 277 => dina_beta_reg <= INPUT_567 & INPUT_568;
+when 278 => dina_beta_reg <= INPUT_569 & INPUT_570;
+when 279 => dina_beta_reg <= INPUT_571 & INPUT_572;
+when 280 => dina_beta_reg <= INPUT_573 & INPUT_574;
+when 281 => dina_beta_reg <= INPUT_575 & INPUT_576;
+when 282 => dina_beta_reg <= INPUT_577 & INPUT_578;
+when 283 => dina_beta_reg <= INPUT_579 & INPUT_580;
+when 284 => dina_beta_reg <= INPUT_581 & INPUT_582;
+when 285 => dina_beta_reg <= INPUT_583 & INPUT_584;
+when 286 => dina_beta_reg <= INPUT_585 & INPUT_586;
+when 287 => dina_beta_reg <= INPUT_587 & INPUT_588;
+when 288 => dina_beta_reg <= INPUT_589 & INPUT_590;
+when 289 => dina_beta_reg <= INPUT_591 & INPUT_592;
+when 290 => dina_beta_reg <= INPUT_593 & INPUT_594;
+when 291 => dina_beta_reg <= INPUT_595 & INPUT_596;
+when 292 => dina_beta_reg <= INPUT_597 & INPUT_598;
+when 293 => dina_beta_reg <= INPUT_599 & INPUT_600;
+when 294 => dina_beta_reg <= INPUT_601 & INPUT_602;
+when 295 => dina_beta_reg <= INPUT_603 & INPUT_604;
+when 296 => dina_beta_reg <= INPUT_605 & INPUT_606;
+when 297 => dina_beta_reg <= INPUT_607 & INPUT_608;
+when 298 => dina_beta_reg <= INPUT_609 & INPUT_610;
+when 299 => dina_beta_reg <= INPUT_611 & INPUT_612;
+when 300 => dina_beta_reg <= INPUT_613 & INPUT_614;
+      when others => dina_beta <= x"0000000000000000";
+
+    end case ;
+
+    case( seed_mem ) is
+    
+      when 1 => dina_seed <= INPUT_615 & INPUT_616;
+      when 2 => dina_seed <= INPUT_617 & INPUT_618;
+      when 3 => dina_seed <= INPUT_619 & INPUT_620;
+      when 4 => dina_seed <= INPUT_621 & INPUT_622;
+      when 5 => dina_seed <= INPUT_623 & INPUT_624;
+      when 6 => dina_seed <= INPUT_625 & INPUT_626;
+      when 7 => dina_seed <= INPUT_627 & INPUT_628;
+      when 8 => dina_seed <= INPUT_629 & INPUT_630;
+      when 9 => dina_seed <= INPUT_631 & INPUT_632;
+      when 10 => dina_seed <= INPUT_633 & INPUT_634;
+      when 11 => dina_seed <= INPUT_635 & INPUT_636;
+      when 12 => dina_seed <= INPUT_637 & INPUT_638;
+      when 13 => dina_seed <= INPUT_639 & INPUT_640;
+      when 14 => dina_seed <= INPUT_641 & INPUT_642;
+      when 15 => dina_seed <= INPUT_643 & INPUT_644;
+      when 16 => dina_seed <= INPUT_645 & INPUT_646;
+      when 17 => dina_seed <= INPUT_647 & INPUT_648;
+      when 18 => dina_seed <= INPUT_649 & INPUT_650;
+      when 19 => dina_seed <= INPUT_651 & INPUT_652;
+      when others => dina_seed <= x"0000000000000000";
+    end case ;
+  end if;
+end process;
 
 END ARCHITECTURE synth;

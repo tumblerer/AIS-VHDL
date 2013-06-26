@@ -124,8 +124,8 @@ begin
       C_BRAM_ADDR_0 => X"90000000",
       C_BRAM_ADDR_1 => X"90010000",
       C_BRAM_SIZE => 65536,
-      C_NUM_OF_INPUTS_TO_CORE => 2,
-      C_NUM_OF_OUTPUTS_FROM_CORE => 1,
+      C_NUM_OF_INPUTS_TO_CORE => 652,
+      C_NUM_OF_OUTPUTS_FROM_CORE => 2,
       DOORBELL_ARGUMENT_ZERO_VAL => X"ffffffff",
       DOORBELL_ARGUMENT_ONE_VAL => X"ffffffff"
     )

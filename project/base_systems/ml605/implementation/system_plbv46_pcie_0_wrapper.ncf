@@ -1,0 +1,44 @@
+###############################################################################
+#
+# File:  plbv46_pcie_wrapper.ucf
+#
+# Use this file only with the device listed below.  Any other
+# combination is invalid.  Do not modify this file except in
+# regions designated for User constraints.
+#
+# Copyright (c) 2008 Xilinx, Inc.  All rights reserved.
+#
+###############################################################################
+
+
+
+
+################################################################################ 
+# Timing constraints
+################################################################################ 
+
+
+NET "plbv46_pcie_0/*sig_pulse_reset_n" TIG;
+NET "plbv46_pcie_0/*core_clk"    PERIOD = 4 ns;
+NET "plbv46_pcie_0/*Bridge_Clk"  PERIOD = 8 ns;
+
+
+#################################################################################
+## Clock domain crossing constraints
+#################################################################################
+#
+##         (Copy and paste in system.ucf when using asyncronously)
+#
+# NET "plbv46_pcie_0/*MPLB_Clk"      PERIOD =  <Add period constraint here>;
+# NET "plbv46_pcie_0/*SPLB_Clk"      PERIOD =  <Add period constraint here>;
+#
+# NET "plbv46_pcie_0/*SPLB_Clk"      TNM_NET = "SPLB_Clk";
+# NET "plbv46_pcie_0/*Bridge_Clk"    TNM_NET = "Bridge_Clk";
+#
+## Timing constraints between clock domain boundaries
+#
+# TIMESPEC "TS_PLB_PCIe" = FROM "SPLB_Clk" TO "Bridge_Clk" 8 ns datapathonly;
+# TIMESPEC "TS_PCIe_PLB" = FROM "Bridge_Clk" TO "SPLB_Clk" <Add period constraint here> datapathonly;
+#
+
+

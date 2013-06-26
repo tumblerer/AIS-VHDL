@@ -1,0 +1,50 @@
+Release 14.1 ngcbuild P.15xf (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: /opt/Xilinx/14.1/ISE_DS/ISE/bin/lin/unwrapped/ngcbuild -p
+xc6vlx240tff1156-1 -intstyle silent -i -sd .. system_riffa_0_wrapper.ngc
+../system_riffa_0_wrapper
+
+Reading NGO file
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/system_riffa_0_wrapper.ngc" ...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/Dual_Port_BRAM.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/RNG_FixedtoFloat_34to64.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/LPR_ALessThanB.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/LPR_Mult.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/LPR_Subtract.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/RNG_Norm_FixedtoFloat.ngc"...
+Loading design module
+"/home/fr909/Desktop/chris_4/project/base_systems/ml605/implementation/riffa_0_w
+rapper/LPR_Add.ngc"...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGCBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   0
+
+Total memory usage is 303620 kilobytes
+
+Writing NGC file "../system_riffa_0_wrapper.ngc" ...
+Total REAL time to NGCBUILD completion:  7 sec
+Total CPU time to NGCBUILD completion:   7 sec
+
+Writing NGCBUILD log file "../system_riffa_0_wrapper.blc"...

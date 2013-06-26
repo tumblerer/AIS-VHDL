@@ -1,0 +1,3 @@
+FILES
+
+Dual_Port_BRAM.ngc, LPR_Add.ngc, LPR_ALessThanB.ngc, LPR_FloattoFixed.ngc, LPR_Mult.ngc, LPR_Subtract.ngc, RNG_FixedtoFloat_32.ngc, RNG_FixedtoFloat_34to64.ngc, RNG_Norm_FixedtoFloat.ngc, RNG_Uni_FixedtoFloat.ngc

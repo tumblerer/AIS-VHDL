@@ -1135,7 +1135,7 @@ architecture STRUCTURE of system is
   signal central_notifier_0_SIMPBUS_MST_SIMPBUS_RNW : std_logic;
   signal central_notifier_0_SIMPBUS_MST_SIMPBUS_START : std_logic;
   signal central_notifier_0_SIMPBUS_MST_SIMPBUS_WDATA : std_logic_vector(0 to 31);
-  signal clk_125_0000MHz : std_logic;
+  signal clk_66_6667MHz : std_logic;
   signal mb_plb_MPLB_Rst : std_logic_vector(0 to 2);
   signal mb_plb_M_ABus : std_logic_vector(0 to 95);
   signal mb_plb_M_BE : std_logic_vector(0 to 23);
@@ -1336,7 +1336,7 @@ begin
 
   mb_plb : system_mb_plb_wrapper
     port map (
-      PLB_Clk => clk_125_0000MHz,
+      PLB_Clk => clk_66_6667MHz,
       SYS_Rst => sys_bus_reset(0),
       PLB_Rst => open,
       SPLB_Rst => mb_plb_SPLB_Rst,
@@ -1437,7 +1437,7 @@ begin
 
   proc_sys_reset_0 : system_proc_sys_reset_0_wrapper
     port map (
-      Slowest_sync_clk => clk_125_0000MHz,
+      Slowest_sync_clk => clk_66_6667MHz,
       Ext_Reset_In => sys_rst_s,
       Aux_Reset_In => PCIe_perstn,
       MB_Debug_Sys_Rst => net_gnd0,
@@ -1464,7 +1464,7 @@ begin
   clock_generator_0 : system_clock_generator_0_wrapper
     port map (
       CLKIN => CLK_S,
-      CLKOUT0 => clk_125_0000MHz,
+      CLKOUT0 => clk_66_6667MHz,
       CLKOUT1 => open,
       CLKOUT2 => open,
       CLKOUT3 => open,
@@ -1492,7 +1492,7 @@ begin
 
   plbv46_pcie_0 : system_plbv46_pcie_0_wrapper
     port map (
-      MPLB_Clk => clk_125_0000MHz,
+      MPLB_Clk => clk_66_6667MHz,
       MPLB_Rst => mb_plb_MPLB_Rst(0),
       PLB_MTimeout => mb_plb_PLB_MTimeout(0),
       PLB_MIRQ => mb_plb_PLB_MIRQ(0),
@@ -1524,7 +1524,7 @@ begin
       M_wrDBus => mb_plb_M_wrDBus(0 to 63),
       M_wrBurst => mb_plb_M_wrBurst(0),
       M_rdBurst => mb_plb_M_rdBurst(0),
-      SPLB_Clk => clk_125_0000MHz,
+      SPLB_Clk => clk_66_6667MHz,
       SPLB_Rst => mb_plb_SPLB_Rst(0),
       PLB_ABus => mb_plb_PLB_ABus,
       PLB_UABus => mb_plb_PLB_UABus,
@@ -1578,9 +1578,9 @@ begin
 
   xps_central_dma_0 : system_xps_central_dma_0_wrapper
     port map (
-      SPLB_Clk => clk_125_0000MHz,
+      SPLB_Clk => clk_66_6667MHz,
       SPLB_Rst => mb_plb_SPLB_Rst(1),
-      MPLB_Clk => clk_125_0000MHz,
+      MPLB_Clk => clk_66_6667MHz,
       MPLB_Rst => mb_plb_MPLB_Rst(1),
       SPLB_ABus => mb_plb_PLB_ABus,
       SPLB_BE => mb_plb_PLB_BE,
@@ -1657,7 +1657,7 @@ begin
 
   central_notifier_0 : system_central_notifier_0_wrapper
     port map (
-      SYS_CLK => clk_125_0000MHz,
+      SYS_CLK => clk_66_6667MHz,
       SYS_RST => sys_bus_reset(0),
       INTR_PCI => PCIe_Bridge_MSI_request_0,
       INTR_DMA => xps_central_dma_0_IP2INTC_Irpt,
@@ -2125,7 +2125,7 @@ begin
 
   xps_bram_if_cntlr_0 : system_xps_bram_if_cntlr_0_wrapper
     port map (
-      SPLB_Clk => clk_125_0000MHz,
+      SPLB_Clk => clk_66_6667MHz,
       SPLB_Rst => mb_plb_SPLB_Rst(2),
       PLB_ABus => mb_plb_PLB_ABus,
       PLB_UABus => mb_plb_PLB_UABus,
@@ -2178,7 +2178,7 @@ begin
 
   simpbus_slv_plbv46_adapter_0 : system_simpbus_slv_plbv46_adapter_0_wrapper
     port map (
-      SPLB_Clk => clk_125_0000MHz,
+      SPLB_Clk => clk_66_6667MHz,
       SPLB_Rst => mb_plb_SPLB_Rst(3),
       PLB_ABus => mb_plb_PLB_ABus,
       PLB_UABus => mb_plb_PLB_UABus,
@@ -2232,7 +2232,7 @@ begin
 
   simpbus_mst_plbv46_adapter_0 : system_simpbus_mst_plbv46_adapter_0_wrapper
     port map (
-      MPLB_Clk => clk_125_0000MHz,
+      MPLB_Clk => clk_66_6667MHz,
       MPLB_Rst => mb_plb_MPLB_Rst(2),
       M_request => mb_plb_M_request(2),
       M_priority => mb_plb_M_priority(4 to 5),
@@ -2276,7 +2276,7 @@ begin
 
   riffa_0 : system_riffa_0_wrapper
     port map (
-      SYS_CLK => clk_125_0000MHz,
+      SYS_CLK => clk_66_6667MHz,
       SYS_RST => sys_bus_reset(0),
       INTERRUPT => riffa_0_CHANNEL_INTERRUPT,
       INTERRUPT_ERR => riffa_0_CHANNEL_INTERRUPT_ERR,
@@ -2340,7 +2340,7 @@ begin
 
   xps_bram_if_cntlr_1 : system_xps_bram_if_cntlr_1_wrapper
     port map (
-      SPLB_Clk => clk_125_0000MHz,
+      SPLB_Clk => clk_66_6667MHz,
       SPLB_Rst => mb_plb_SPLB_Rst(4),
       PLB_ABus => mb_plb_PLB_ABus,
       PLB_UABus => mb_plb_PLB_UABus,

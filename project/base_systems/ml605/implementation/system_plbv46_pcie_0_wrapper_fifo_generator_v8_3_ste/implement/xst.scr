@@ -1,0 +1,13 @@
+run
+-ifmt VHDL
+-ent system_plbv46_pcie_0_wrapper_fifo_generator_v8_3_top 
+-p xc6vcx75t-ff484-2
+-ifn xst.prj
+-write_timing_constraints No
+-iobuf YES
+-max_fanout 100
+-ofn system_plbv46_pcie_0_wrapper_fifo_generator_v8_3_top 
+-ofmt NGC
+-bus_delimiter ()
+-hierarchy_separator /
+-case Maintain
